@@ -7,7 +7,7 @@ import java.util.List;
 public class ExerciseData {
     private Exercise exercise;
     private HashMap<Integer, List<Double>> exerciseData;
-    //key = set, list[0] = rep, List[1] = weigh
+    //key = set, List[0] = rep, List[1] = weigh
 
     public ExerciseData(Exercise exercise) {
         this.exercise = exercise;
