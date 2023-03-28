@@ -42,7 +42,7 @@ public class Program {
     }
 
     /**
-     * Add exercise.
+     * Add exercise. Adds an exercise to the program list.
      *
      * @param exercise the exercise
      */
