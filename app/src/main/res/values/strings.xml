@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">LiftingStack</string>
+    <string name="user_name">LiftingStack</string>
+    <string name="lifting_stack">LiftingStack</string>
+
 </resources>
