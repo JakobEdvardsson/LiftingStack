@@ -22,6 +22,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
+<<<<<<< Updated upstream
+=======
+    private void setUpMainList(){
+        for (int i = 1; i <= 20; i++){
+            exercises.add(new Exercise("Exercise " + i , "Hard exercise"));
+        }
+    }
+>>>>>>> Stashed changes
 
 
     public void toast(View v) {
