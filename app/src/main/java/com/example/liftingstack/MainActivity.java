@@ -39,12 +39,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
+
     private void setUpMainList(){
         for (int i = 1; i <= 20; i++){
-            exercises.add(new Exercise("Workout " + i , "Hard exercise"));
+            exercises.add(new Exercise("Exercise " + i , "Hard exercise"));
         }
     }
-
 
     public void toast(View v) {
         Toast.makeText(this, "Toast", Toast.LENGTH_SHORT).show();
