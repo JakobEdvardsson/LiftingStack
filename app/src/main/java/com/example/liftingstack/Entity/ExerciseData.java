@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * The type Exercise data.
+ * The type Exercise data.erciseInstructions e
  * This class is data for the exercise object such as the number of reps and weight for each set.
  */
 public class ExerciseData {
@@ -37,12 +37,12 @@ public class ExerciseData {
      *
      * @param set   the set
      * @param rep   the rep
-     * @param weigh the weigh
+     * @param weight the weight
      */
-    public void addExcerciseData(int set, double rep, double weigh) {
+    public void addExcerciseData(int set, double rep, double weight) {
         List<Double> data = new ArrayList<>();
         data.add(rep);
-        data.add(weigh);
+        data.add(weight);
         exerciseData.put(set, data);
     }
 

@@ -1,7 +1,7 @@
 # LiftingStack
 [<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png" alt= “” width="300">](https://github.com/JakobEdvardsson/LiftingStack)
 
-Lifting Stack is an Android app that helps you keep track of your weightlifting progress. It is a simple app that allows you to create workout programs, add exercises and log your progress. The app is built with Java and XML.
+Lifting Stack is an Android app that helps you keep track of your weightlifting progress. It is a simple app that allows you to create workoutData programs, add exercises and log your progress. The app is built with Java and XML.
 
 For links to the source code on GitHub, click the following link: [GitHub repository](https://github.com/JakobEdvardsson/LiftingStack)
 

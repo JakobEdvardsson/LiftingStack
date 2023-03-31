@@ -1,35 +1,45 @@
+/*
 package com.example.liftingstack.Controller;
 
-import com.example.liftingstack.Entity.Workout;
+import com.example.liftingstack.Entity.WorkoutData;
 
+*/
 /**
  * The type Workout controller.
- */
-public class WorkoutController {
-    private Workout workout;
+ *//*
 
-    /**
+public class WorkoutController {
+    private WorkoutData workoutData;
+
+    */
+/**
      * Create workout.
-     */
+     *//*
+
     public void createWorkout() {
-        workout = new Workout();
+        workoutData = new WorkoutData();
     }
 
-    /**
+    */
+/**
      * Add workout comment.
      *
      * @param comment the comment
-     */
+     *//*
+
     public void addWorkoutComment(String comment) {
-        workout.setComment(comment);
+        workoutData.setComment(comment);
     }
 
-    /**
+    */
+/**
      * Gets workout.
      *
      * @return the workout
-     */
-    public Workout getWorkout() {
-        return workout;
+     *//*
+
+    public WorkoutData getWorkout() {
+        return workoutData;
     }
 }
+*/

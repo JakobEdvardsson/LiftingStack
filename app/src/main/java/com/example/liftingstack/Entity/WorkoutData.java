@@ -7,7 +7,7 @@ import java.util.List;
  * The type Workout.
  * This class is used to store exerciseData for a specific workout.
  */
-public class Workout {
+public class WorkoutData {
     private List<ExerciseData> completedWorkouts;
     private ZonedDateTime workoutTime;
     private String comment;
@@ -15,7 +15,8 @@ public class Workout {
     /**
      * Instantiates a new Workout.
      */
-    public Workout() {
+    public WorkoutData(String comment) {
+        this.comment = comment;
         this.workoutTime =  ZonedDateTime.now();
     }
 
@@ -37,14 +38,6 @@ public class Workout {
         this.completedWorkouts = completedWorkouts;
     }
 
-    /**
-     * Add completed workouts.
-     *
-     * @param completedExercise the completed exercise
-     */
-    public void addCompletedWorkouts(ExerciseData completedExercise) {
-        this.completedWorkouts.add(completedExercise);
-    }
 
     /**
      * Gets workout time.

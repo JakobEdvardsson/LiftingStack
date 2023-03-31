@@ -8,41 +8,41 @@ import java.util.List;
  * This class is used to store a list of workouts.
  */
 public class WorkoutHistory {
-    private List<Workout> workouts = new ArrayList<>();
+    private List<WorkoutData> workoutData = new ArrayList<>();
 
     /**
      * Gets workouts.
      *
      * @return the workouts
      */
-    public List<Workout> getWorkouts() {
-        return workouts;
+    public List<WorkoutData> getWorkouts() {
+        return workoutData;
     }
 
     /**
      * Add exercise data to list.
      *
-     * @param workout the workout
+     * @param workoutData the workout
      */
-    public void addExerciseDataToList(Workout workout) {
-        workouts.add(workout);
+    public void addWorkoutDataToList(WorkoutData workoutData) {
+        this.workoutData.add(workoutData);
     }
 
     /**
      * Remove exercise data from list.
      *
-     * @param workout the workout
+     * @param workoutData the workout
      */
-    public void removeExerciseDataFromList(Workout workout) {
-        workouts.remove(workout);
+    public void removeWorkoutDataFromList(WorkoutData workoutData) {
+        this.workoutData.remove(workoutData);
     }
 
     /**
      * Sets workouts.
      *
-     * @param workouts the workouts
+     * @param workoutData the workouts
      */
-    public void setWorkouts(List<Workout> workouts) {
-        this.workouts = workouts;
+    public void setWorkouts(List<WorkoutData> workoutData) {
+        this.workoutData = workoutData;
     }
 }
