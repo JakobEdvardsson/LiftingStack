@@ -14,7 +14,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        findViewById(R.id.usernameTextView);
+        usernameTextView = findViewById(R.id.usernameTextView);
         usernameTextView.setText(username);
     }
 }
