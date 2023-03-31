@@ -9,14 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.liftingstack.Entity.Exercise;
+import com.example.liftingstack.Entity.ExerciseInstructions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Exercise> exercises = new ArrayList<>();
+    private List<ExerciseInstructions> exerciseInstructions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         //This code is for the recycler view
         RecyclerView recyclerView = findViewById(R.id.listProgramExercise);
         setUpMainList();
-        MainRecyclerViewAdapter adapter = new MainRecyclerViewAdapter(this, exercises);
+        MainRecyclerViewAdapter adapter = new MainRecyclerViewAdapter(this, exerciseInstructions);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpMainList(){
         for (int i = 1; i <= 20; i++){
-            exercises.add(new Exercise("Exercise " + i , "Hard exercise"));
+            exerciseInstructions.add(new ExerciseInstructions("Exercise " + i , "Hard exercise"));
         }
     }
 

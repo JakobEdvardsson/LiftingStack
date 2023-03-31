@@ -10,17 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.liftingstack.Entity.Exercise;
+import com.example.liftingstack.Entity.ExerciseInstructions;
 
 import java.util.List;
 
 public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>{
     private Context context;
-    private List<Exercise> exercises;
+    private List<ExerciseInstructions> exerciseInstructions;
 
-    public MainRecyclerViewAdapter(Context context, List<Exercise> exercises) {
+    public MainRecyclerViewAdapter(Context context, List<ExerciseInstructions> exerciseInstructions) {
         this.context = context;
-        this.exercises = exercises;
+        this.exerciseInstructions = exerciseInstructions;
     }
 
     @NonNull
@@ -34,12 +34,12 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull MainRecyclerViewAdapter.ViewHolder holder, int position) {
         //holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
-        holder.textView.setText(exercises.get(position).getName());
+        holder.textView.setText(exerciseInstructions.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return exercises.size();
+        return exerciseInstructions.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;

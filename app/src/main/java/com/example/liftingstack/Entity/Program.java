@@ -9,7 +9,7 @@ import java.util.List;
 public class Program {
     private String name;
     private String description;
-    private List<Exercise> exercises;
+    private List<ExerciseInstructions> exerciseInstructions;
 
     /**
      * Instantiates a new Program.
@@ -20,7 +20,7 @@ public class Program {
     public Program(String name, String description) {
         this.name = name;
         this.description = description;
-        exercises = new ArrayList<>();
+        exerciseInstructions = new ArrayList<>();
     }
 
     /**
@@ -28,26 +28,26 @@ public class Program {
      *
      * @return the exercises
      */
-    public List<Exercise> getExercises() {
-        return exercises;
+    public List<ExerciseInstructions> getExercises() {
+        return exerciseInstructions;
     }
 
     /**
      * Sets exercises.
      *
-     * @param exercises the exercises
+     * @param exerciseInstructions the exercises
      */
-    public void setExercises(List<Exercise> exercises) {
-        this.exercises = exercises;
+    public void setExercises(List<ExerciseInstructions> exerciseInstructions) {
+        this.exerciseInstructions = exerciseInstructions;
     }
 
     /**
      * Add exercise. Adds an exercise to the program list.
      *
-     * @param exercise the exercise
+     * @param exerciseInstructions the exercise
      */
-    public void addExercise(Exercise exercise) {
-        exercises.add(exercise);
+    public void addExercise(ExerciseInstructions exerciseInstructions) {
+        this.exerciseInstructions.add(exerciseInstructions);
     }
 
     /**

@@ -4,7 +4,7 @@ package com.example.liftingstack.Entity;
  * The type Exercise.
  * This class is a specific exercise such as Bench Press or Squats.
  */
-public class Exercise {
+public class ExerciseInstructions {
     private String name;
     private String description;
     //Text / Video
@@ -15,7 +15,7 @@ public class Exercise {
      * @param name        the name
      * @param description the description
      */
-    public Exercise(String name, String description) {
+    public ExerciseInstructions(String name, String description) {
         this.name = name;
         this.description = description;
     }
