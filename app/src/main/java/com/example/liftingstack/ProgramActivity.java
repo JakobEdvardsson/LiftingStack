@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.liftingstack.Entity.Exercise;
 import com.example.liftingstack.Entity.Program;
 
 import java.util.ArrayList;
