@@ -49,9 +49,7 @@ public class MainActivity extends AppCompatActivity
             exerciseInstructions.add(new ExerciseInstructions("Exercise " + i , "Hard exercise"));
         }
     }
-
-    public void toast(View v) {
-
+    
 
     public void launchPrograms(View v){
         Intent intent = new Intent(this, ProgramActivity.class);
