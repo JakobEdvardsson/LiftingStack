@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.Entity.Program;
@@ -28,7 +30,11 @@ public class ExerciseActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
-
+    public void goBack(View v)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
     private void setUpExerciseList()
     {
         for (int i = 1; i <= 20; i++)
