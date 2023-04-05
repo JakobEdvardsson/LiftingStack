@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.view.View;
+
+
 import android.os.Bundle;
 
-import com.example.liftingstack.Entity.Exercise;
 import com.example.liftingstack.Entity.Program;
 
 import java.util.ArrayList;
@@ -28,6 +31,12 @@ public class ProgramActivity extends AppCompatActivity
         recyclerView.setAdapter(programAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+
+    public void goBack(View v)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     private void setUpProgramsList()
