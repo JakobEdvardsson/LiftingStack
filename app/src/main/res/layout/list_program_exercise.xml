@@ -31,7 +31,7 @@
                 app:srcCompat="@drawable/dumbbell_icon" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/programName"
                 android:layout_width="238dp"
                 android:layout_height="43dp"
                 android:autoText="false"

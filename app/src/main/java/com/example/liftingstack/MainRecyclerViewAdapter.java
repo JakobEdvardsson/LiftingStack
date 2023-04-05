@@ -47,7 +47,7 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
-            textView = itemView.findViewById(R.id.textView);
+            textView = itemView.findViewById(R.id.programName);
         }
     }
 }

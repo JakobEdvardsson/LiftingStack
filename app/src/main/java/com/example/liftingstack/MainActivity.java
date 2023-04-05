@@ -14,12 +14,14 @@ import com.example.liftingstack.Entity.Exercise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     private List<Exercise> exercises = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -31,22 +33,33 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-    public void launchSettings(View v){
+    public void launchSettings(View v)
+    {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
-    public void launchProfile(View v){
+    public void launchProfile(View v)
+    {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
-    private void setUpMainList(){
-        for (int i = 1; i <= 20; i++){
+    private void setUpMainList()
+    {
+        for (int i = 1; i <= 20; i++)
+        {
             exercises.add(new Exercise("Workout " + i , "Hard exercise"));
         }
     }
 
+    public void launchPrograms(View v)
+    {
+        Intent intent = new Intent(this, ProgramActivity.class);
+        startActivity(intent);
+    }
 
-    public void toast(View v) {
+
+    public void toast(View v)
+    {
         Toast.makeText(this, "Toast", Toast.LENGTH_SHORT).show();
     }
 }
