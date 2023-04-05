@@ -15,6 +15,9 @@
             android:name=".ExerciseActivity"
             android:exported="false" />
         <activity
+            android:name=".CreateCustomExerciseActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProgramActivity"
             android:exported="false" />
         <activity
