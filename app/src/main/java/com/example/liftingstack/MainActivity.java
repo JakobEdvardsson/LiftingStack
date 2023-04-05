@@ -17,21 +17,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
 {
 
-    private List<ExerciseInstructions> exerciseInstructions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        //This code is for the recycler view
-        RecyclerView recyclerView = findViewById(R.id.listProgramExercise);
-        setUpMainList();
-        MainRecyclerViewAdapter adapter = new MainRecyclerViewAdapter(this, exerciseInstructions);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
     public void launchSettings(View v)
     {
@@ -44,20 +35,14 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    private void setUpMainList(){
-        for (int i = 1; i <= 20; i++){
-            exerciseInstructions.add(new ExerciseInstructions("Exercise " + i , "Hard exercise"));
-        }
-    }
-
 
     public void launchPrograms(View v){
         Intent intent = new Intent(this, ProgramActivity.class);
         startActivity(intent);
     }
 
-
-    public void toast(View v){
-        Toast.makeText(this, "Toast", Toast.LENGTH_SHORT).show();
+    public void launchExercises(View v){
+        Intent intent = new Intent(this, ExerciseActivity.class);
+        startActivity(intent);
     }
 }
