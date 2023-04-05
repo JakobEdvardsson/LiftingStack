@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.Entity.Program;
@@ -35,5 +37,9 @@ public class ExerciseActivity extends AppCompatActivity {
         {
             exerciseInstructions.add(new ExerciseInstructions("Exercise " + i , "Hard exercise"));
         }
+    }
+    public void launchCreateCustomExercise(View v){
+        Intent intent = new Intent(this, CreateCustomExerciseActivity.class);
+        startActivity(intent);
     }
 }

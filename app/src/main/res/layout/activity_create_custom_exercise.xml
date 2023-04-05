@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateCustomExerciseActivity">
@@ -12,10 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Name of exercise:"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="20dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/customExerciseNameInput"
@@ -34,10 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Desription:"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customExerciseNameInput"
-        android:textSize="20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/customExerciseNameInput" />
 
     <EditText
         android:id="@+id/customExerciseDescriptionInput"
@@ -49,4 +50,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/askCustomExerciseDescription" />
+
+    <Button
+        android:id="@+id/addCustomExercisePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add picture"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="502dp" />
+
+    <Button
+        android:id="@+id/saveCustomExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:onClick="saveCustomExercise"
+        android:text="Save"
+        tools:layout_editor_absoluteX="281dp"
+        tools:layout_editor_absoluteY="650dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
