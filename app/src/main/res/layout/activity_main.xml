@@ -6,73 +6,112 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/usernameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LiftingStack"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
-
     <Button
         android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="188dp"
+        android:layout_height="85dp"
         android:onClick="launchExercises"
         android:text="Exercises"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.773"
+        app:layout_constraintHorizontal_bias="0.928"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintVertical_bias="0.164" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="188dp"
+        android:layout_height="85dp"
         android:onClick="launchPrograms"
         android:text="Programs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.208"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
+        app:layout_constraintVertical_bias="0.165" />
 
     <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/button_settings"
+        android:layout_width="80dp"
+        android:layout_height="65dp"
         android:onClick="launchSettings"
-        android:text="Settings"
+        android:text="SETTINGS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="75dp"
-        android:layout_height="73dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:adjustViewBounds="false"
         android:background="@color/purple_500"
         android:contentDescription="profile icon"
         android:onClick="launchProfile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022"
+        app:layout_constraintVertical_bias="0.00"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
+    <Button
+        android:id="@+id/button_home"
+        android:layout_width="80dp"
+        android:layout_height="65dp"
+
+        android:text="HOME"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_graf"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_graf"
+        android:layout_width="80dp"
+        android:layout_height="65dp"
+        android:text="Graf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_add"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_home" />
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="80dp"
+        android:layout_height="65dp"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_stats"
+        android:layout_width="80dp"
+        android:layout_height="65dp"
+
+        android:text="STATS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_settings"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_add" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="151dp"
+        android:layout_height="162dp"
+        android:text="1. Insert LiftingStack Logo (den ska vara ovanför trädet) \n
+        \n 2. Insert Hello User \n
+        \n 3. Nedan ska trädet vara (under loggan)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
