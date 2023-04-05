@@ -19,7 +19,7 @@ import java.util.List;
 public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder> {
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
     private Context context;
-    private List<ExerciseInstructions> exerciseInstructions = new ArrayList<>();
+    private List<ExerciseInstructions> exerciseInstructions;
 
     public ExerciseRecyclerViewAdapter(Context context, List<ExerciseInstructions> exerciseInstructions, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
         this.context = context;
@@ -32,7 +32,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     @Override
     public ExerciseRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.list_programs, parent, false);
+        View view = inflater.inflate(R.layout.list_exercises, parent, false);
         return new ExerciseRecyclerViewAdapter.ViewHolder(view, exerciseRecyclerViewInterface);
     }
 
