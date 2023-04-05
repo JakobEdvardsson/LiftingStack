@@ -55,18 +55,25 @@
         android:id="@+id/addCustomExercisePicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Add picture"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="502dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customExerciseDescriptionInput" />
 
     <Button
         android:id="@+id/saveCustomExercise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:onClick="saveCustomExercise"
         android:text="Save"
-        tools:layout_editor_absoluteX="281dp"
-        tools:layout_editor_absoluteY="650dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCustomExercisePicture" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
