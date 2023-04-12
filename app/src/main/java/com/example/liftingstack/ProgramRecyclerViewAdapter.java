@@ -23,13 +23,13 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
     private Context context;
     private List<Program> programs = new ArrayList<>();
     private final RecyclerViewInterface recyclerViewInterface;
+    private ProgramRecyclerViewAdapter adapter;
 
     public ProgramRecyclerViewAdapter(Context context, List<Program> programs, RecyclerViewInterface recyclerViewInterface)
     {
         this.context = context;
         this.programs = programs;
         this.recyclerViewInterface = recyclerViewInterface;
-
     }
 
     @NonNull
@@ -53,6 +53,9 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
             public void onClick(View view)
             {
                 recyclerViewInterface.onItemClick(programs.get(position));
+
+                View cardView = (CardView) view.findViewById(R.id.cardViewProgram);
+
 
                 View editView = (ImageView) view.findViewById(R.id.imageViewEdit);
                 recyclerViewInterface.makeVisible(editView);
@@ -86,10 +89,13 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView programNameTextView;
-        TextView programDescriptionTextView;
-        ImageView imageView;
-        CardView cardView;
+        private TextView programNameTextView;
+        private TextView programDescriptionTextView;
+        private ImageView imageView;
+        private CardView cardView;
+        private ProgramRecyclerViewAdapter adapter;
+        private ImageView deleteView;
+
 
         public ViewHolder(@NonNull View itemView)
         {
@@ -98,7 +104,6 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
             programDescriptionTextView = itemView.findViewById(R.id.programDescription);
             imageView = itemView.findViewById(R.id.programImage);
             cardView = itemView.findViewById(R.id.cardViewProgram);
-
         }
     }
 }

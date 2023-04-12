@@ -23,6 +23,7 @@ import java.util.List;
 public class ProgramActivity extends AppCompatActivity implements RecyclerViewInterface
 {
     private List<Program> programs = new ArrayList<>();
+    ProgramRecyclerViewAdapter programAdapter;
     private ImageView editView;
     private ImageView confirmView;
     private ImageView deleteView;
@@ -30,6 +31,9 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
     private ImageView addIcon;
     private TextView addDescription;
     private ImageView undoView;
+    private Program selectedProgram = null;
+    private Program programToAdd = new Program("Rygg", "Tungt");
+    private int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,9 +43,22 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
 
         RecyclerView recyclerView = findViewById(R.id.listPrograms);
         setUpProgramsList();
-        ProgramRecyclerViewAdapter programAdapter = new ProgramRecyclerViewAdapter(this, programs, this);
+        programAdapter = new ProgramRecyclerViewAdapter(this, programs, this);
         recyclerView.setAdapter(programAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        findViewById(R.id.addIcon).setOnClickListener(view ->
+        {
+            programs.add(programToAdd);
+            counter++;
+            programAdapter.notifyItemInserted(programs.size() - 1);
+        });
+
+        findViewById(R.id.imageViewDelete).setOnClickListener(view ->
+        {
+            programs.remove(programs.indexOf(selectedProgram));
+            programAdapter.notifyItemRemoved((programs.indexOf(selectedProgram)));
+        });
     }
 
     public void goBack(View v)
@@ -58,7 +75,6 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
         }
     }
 
-
     public void makeVisible(View view)
     {
         editView = findViewById(R.id.imageViewEdit);
@@ -66,14 +82,13 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
 
         confirmView = findViewById(R.id.imageViewConfirm);
         confirmView.setVisibility(View.VISIBLE);
-
         confirmView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(ProgramActivity.this, SelectedProgramActivity.class);
-                //intent.putExtra("KEY_SENDER", );
+                intent.putExtra("KEY_SENDER", selectedProgram);
                 startActivity(intent);
             }
         });
@@ -81,9 +96,9 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
         deleteView = findViewById(R.id.imageViewDelete);
         deleteView.setVisibility(View.VISIBLE);
 
+
         undoView = findViewById(R.id.cancelImageView);
         undoView.setVisibility(View.VISIBLE);
-
 
         undoView.setOnClickListener(new View.OnClickListener()
         {
@@ -103,6 +118,11 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
         });
     }
 
+    public void deleteProgram(View view)
+    {
+
+    }
+
     @Override
     public void makeInvisible(View view)
     {
@@ -119,6 +139,7 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
     @Override
     public void onItemClick(Program program)
     {
+        this.selectedProgram = program;
         System.out.println(program.getName());
     }
 }

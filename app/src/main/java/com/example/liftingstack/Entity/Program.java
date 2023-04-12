@@ -1,12 +1,17 @@
 package com.example.liftingstack.Entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The type Program.
  */
-public class Program {
+public class Program implements Parcelable {
     private String name;
     private String description;
     private List<ExerciseInstructions> exerciseInstructions;
@@ -22,6 +27,23 @@ public class Program {
         this.description = description;
         exerciseInstructions = new ArrayList<>();
     }
+
+    protected Program(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<Program> CREATOR = new Creator<Program>() {
+        @Override
+        public Program createFromParcel(Parcel in) {
+            return new Program(in);
+        }
+
+        @Override
+        public Program[] newArray(int size) {
+            return new Program[size];
+        }
+    };
 
     /**
      * Gets exercises.
@@ -86,4 +108,14 @@ public class Program {
         this.description = description;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(description);
+    }
 }
