@@ -1,10 +1,15 @@
 package com.example.liftingstack.Entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 /**
  * The type Exercise.
  * This class is a specific exercise such as Bench Press or Squats.
  */
-public class ExerciseInstructions {
+public class ExerciseInstructions implements Parcelable {
     private String name;
     private String description;
     //Text / Video
@@ -20,12 +25,29 @@ public class ExerciseInstructions {
         this.description = description;
     }
 
+    protected ExerciseInstructions(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<ExerciseInstructions> CREATOR = new Creator<ExerciseInstructions>() {
+        @Override
+        public ExerciseInstructions createFromParcel(Parcel in) {
+            return new ExerciseInstructions(in);
+        }
+
+        @Override
+        public ExerciseInstructions[] newArray(int size) {
+            return new ExerciseInstructions[size];
+        }
+    };
+
     /**
      * Gets name.
      *
      * @return the name
      */
-    public String getName() {
+    public String getExerciseName() {
         return name;
     }
 
@@ -34,7 +56,7 @@ public class ExerciseInstructions {
      *
      * @param name the name
      */
-    public void setName(String name) {
+    public void setExerciseName(String name) {
         this.name = name;
     }
 
@@ -43,7 +65,7 @@ public class ExerciseInstructions {
      *
      * @return the description
      */
-    public String getDescription() {
+    public String getExerciseDescription() {
         return description;
     }
 
@@ -52,7 +74,18 @@ public class ExerciseInstructions {
      *
      * @param description the description
      */
-    public void setDescription(String description) {
+    public void setExerciseDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(description);
     }
 }

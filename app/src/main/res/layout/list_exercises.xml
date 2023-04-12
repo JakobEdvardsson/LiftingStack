@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="375dp"
             android:layout_height="match_parent"
-            android:background="#5C0510"
+            android:background="#2196F3"
             android:textAlignment="center">
 
             <TextView

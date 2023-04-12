@@ -13,9 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
-import com.example.liftingstack.Entity.Program;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder> {
@@ -40,8 +38,8 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.programNameTextView.setText(exerciseInstructions.get(position).getName());
-        holder.programDescriptionTextView.setText(exerciseInstructions.get(position).getDescription());
+        holder.programNameTextView.setText(exerciseInstructions.get(position).getExerciseName());
+        holder.programDescriptionTextView.setText(exerciseInstructions.get(position).getExerciseDescription());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
