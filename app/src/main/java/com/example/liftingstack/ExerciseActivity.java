@@ -39,7 +39,12 @@ public class ExerciseActivity extends AppCompatActivity {
         }
     }
     public void launchCreateCustomExercise(View v){
-        Intent intent = new Intent(this, CreateCustomExerciseActivity.class);
+        Intent intent = new Intent(this, TestReadWrite.class);
+        startActivity(intent);
+    }
+
+    public void launchTestReadWrite(View v){
+        Intent intent = new Intent(this, TestReadWrite.class);
         startActivity(intent);
     }
 }
