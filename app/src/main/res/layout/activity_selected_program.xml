@@ -4,4 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelectedProgramActivity"/>
+    tools:context=".SelectedProgramActivity">
+
+    <TextView
+        android:id="@+id/selectedProgramText"
+        android:layout_width="183dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="80dp"
+        android:text="Program"
+        android:textColor="#03A9F4"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

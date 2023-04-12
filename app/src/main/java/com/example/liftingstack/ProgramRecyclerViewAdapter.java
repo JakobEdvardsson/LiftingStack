@@ -53,7 +53,6 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
             public void onClick(View view)
             {
                 recyclerViewInterface.onItemClick(programs.get(position));
-                System.out.println(position);
 
                 View editView = (ImageView) view.findViewById(R.id.imageViewEdit);
                 recyclerViewInterface.makeVisible(editView);
@@ -91,7 +90,6 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
         TextView programDescriptionTextView;
         ImageView imageView;
         CardView cardView;
-
 
         public ViewHolder(@NonNull View itemView)
         {

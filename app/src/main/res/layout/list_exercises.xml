@@ -7,6 +7,7 @@
     android:textAlignment="center">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewExercise"
         android:layout_width="375dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -22,7 +23,6 @@
             android:layout_width="375dp"
             android:layout_height="match_parent"
             android:background="#5C0510"
-            android:clickable="true"
             android:textAlignment="center">
 
             <TextView

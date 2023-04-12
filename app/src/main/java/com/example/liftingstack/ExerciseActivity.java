@@ -45,8 +45,8 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
     }
 
     @Override
-    public void onExerciseClick(int position) {
-        System.out.println("XXXXXXXXXXXXXXXX " + position);
+    public void onExerciseClick(ExerciseInstructions exerciseInstructions) {
+        System.out.println("XXXXXXXXXXXXXXXX " + exerciseInstructions);
         Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
     }
 }

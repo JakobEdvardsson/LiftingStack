@@ -23,15 +23,13 @@ import java.util.List;
 public class ProgramActivity extends AppCompatActivity implements RecyclerViewInterface
 {
     private List<Program> programs = new ArrayList<>();
-    ImageView editView;
-    ImageView confirmView;
-    ImageView deleteView;
-    Button backButton;
-    ImageView addIcon;
-    TextView addDescription;
-    ImageView undoView;
-    CardView cardView;
-
+    private ImageView editView;
+    private ImageView confirmView;
+    private ImageView deleteView;
+    private Button backButton;
+    private ImageView addIcon;
+    private TextView addDescription;
+    private ImageView undoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,6 +58,7 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
         }
     }
 
+
     public void makeVisible(View view)
     {
         editView = findViewById(R.id.imageViewEdit);
@@ -74,6 +73,7 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
             public void onClick(View view)
             {
                 Intent intent = new Intent(ProgramActivity.this, SelectedProgramActivity.class);
+                //intent.putExtra("KEY_SENDER", );
                 startActivity(intent);
             }
         });
@@ -119,9 +119,6 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
     @Override
     public void onItemClick(Program program)
     {
-        //Intent intent = new Intent(this, SelectedProgramActivity.class);
-        //startActivity(intent);
-        //Toast.makeText(getApplicationContext(),"HejEHjehe",Toast.LENGTH_SHORT).show();
-
+        System.out.println(program.getName());
     }
 }

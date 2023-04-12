@@ -1,5 +1,6 @@
 package com.example.liftingstack;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
@@ -33,13 +35,21 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     public ExerciseRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_exercises, parent, false);
-        return new ExerciseRecyclerViewAdapter.ViewHolder(view, exerciseRecyclerViewInterface);
+        return new ExerciseRecyclerViewAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExerciseRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ExerciseRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.programNameTextView.setText(exerciseInstructions.get(position).getName());
         holder.programDescriptionTextView.setText(exerciseInstructions.get(position).getDescription());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                exerciseRecyclerViewInterface.onExerciseClick(exerciseInstructions.get(position));
+                System.out.println(position);
+            }
+        });
     }
 
     @Override
@@ -51,23 +61,14 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         TextView programNameTextView;
         TextView programDescriptionTextView;
         ImageView imageView;
+        CardView cardView;
 
-        public ViewHolder(@NonNull View itemView, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             programNameTextView = itemView.findViewById(R.id.programName);
             programDescriptionTextView = itemView.findViewById(R.id.programDescription);
             imageView = itemView.findViewById(R.id.programImage);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (exerciseRecyclerViewInterface != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            exerciseRecyclerViewInterface.onExerciseClick(position);
-                        }
-                    }
-                }
-            });
+            cardView = itemView.findViewById(R.id.cardViewExercise);
         }
     }
 }
