@@ -1,10 +1,12 @@
 package com.example.liftingstack;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 
 import android.os.Bundle;
@@ -28,6 +30,7 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
     ImageView addIcon;
     TextView addDescription;
     ImageView undoView;
+    CardView cardView;
 
 
     @Override
@@ -41,9 +44,6 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
         ProgramRecyclerViewAdapter programAdapter = new ProgramRecyclerViewAdapter(this, programs, this);
         recyclerView.setAdapter(programAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
     }
 
     public void goBack(View v)
@@ -67,6 +67,16 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
 
         confirmView = findViewById(R.id.imageViewConfirm);
         confirmView.setVisibility(View.VISIBLE);
+
+        confirmView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(ProgramActivity.this, SelectedProgramActivity.class);
+                startActivity(intent);
+            }
+        });
 
         deleteView = findViewById(R.id.imageViewDelete);
         deleteView.setVisibility(View.VISIBLE);

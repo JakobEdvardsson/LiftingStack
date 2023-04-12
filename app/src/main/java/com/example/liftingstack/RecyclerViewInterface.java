@@ -13,4 +13,5 @@ public interface RecyclerViewInterface
     void makeVisible(View view);
 
     void makeInvisible(View view);
+
 }
