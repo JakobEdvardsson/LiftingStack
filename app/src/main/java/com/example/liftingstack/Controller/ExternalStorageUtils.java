@@ -1,6 +1,6 @@
 package com.example.liftingstack.Controller;
 
-public class StorageUtils {
+public class ExternalStorageUtils {
 /*    Måste läggas till i manifest ifall vi ska ha permission att läsa och skriva till external storage
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
