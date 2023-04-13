@@ -19,11 +19,11 @@ public class AllExerciseInstructions {
     }
     public void addExerciseInstructions(ExerciseInstructions exerciseInstructions)
     {
-        for (ExerciseInstructions e : exercisesInstructionsList)
+     /*   for (ExerciseInstructions e : exercisesInstructionsList)
         {
             if (e.getExerciseName().equals(exerciseInstructions.getExerciseName()))
                 return;
-        }
+        }*/
         exercisesInstructionsList.add(exerciseInstructions);
     }
 }

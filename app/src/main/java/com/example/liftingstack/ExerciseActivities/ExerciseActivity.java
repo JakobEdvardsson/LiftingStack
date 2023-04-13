@@ -21,6 +21,8 @@ import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.MainActivity;
 import com.example.liftingstack.R;
 
+import java.util.Objects;
+
 public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyclerViewInterface {
 
     //private List<ExerciseInstructions> exerciseInstructions = new ArrayList<>();
@@ -31,7 +33,6 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
-                @SuppressLint("NotifyDataSetChanged")
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     Log.d(TAG, "onActivityResult: ");
@@ -45,7 +46,8 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
                             currentExerciseInstructions.setExerciseName(exerciseName);
                             currentExerciseInstructions.setExerciseDescription(exerciseDescription);
 
-                            recyclerView.getAdapter().notifyDataSetChanged();
+
+                            Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(allExerciseInstructions.getExercisesInstructionsList().indexOf(currentExerciseInstructions));
 
                         }
                     }
@@ -63,6 +65,20 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
         ExerciseRecyclerViewAdapter exerciseAdapter = new ExerciseRecyclerViewAdapter(this, allExerciseInstructions.getExercisesInstructionsList(), this);
         recyclerView.setAdapter(exerciseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        findViewById(R.id.addIcon).setOnClickListener(view ->
+        {
+
+            currentExerciseInstructions = new ExerciseInstructions("New Exercise", "New Description");
+            allExerciseInstructions.addExerciseInstructions(currentExerciseInstructions);
+
+            Intent intent = new Intent(this, ExerciseInstructionsPage.class);
+            intent.putExtra("Exercise", currentExerciseInstructions);
+            activityResultLauncher.launch(intent);
+
+            exerciseAdapter.notifyItemInserted(allExerciseInstructions.getExercisesInstructionsList().size() - 1);
+            recyclerView.scrollToPosition(allExerciseInstructions.getExercisesInstructionsList().size() - 1);
+        });
 
     }
 
