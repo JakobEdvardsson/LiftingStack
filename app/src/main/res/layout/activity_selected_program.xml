@@ -6,25 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".ProgramsActivities.SelectedProgramActivity">
 
-    <TextView
-        android:id="@+id/selectedProgramText"
-        android:layout_width="264dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="40dp"
-        android:text="Program"
-        android:textColor="#03A9F4"
-        android:textSize="40sp"
+    <EditText
+        android:id="@+id/selectedProgramName"
+        android:layout_width="244dp"
+        android:layout_height="58dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Program name"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.377"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.077" />
 
-    <TextView
+    <EditText
         android:id="@+id/selectedProgramDescription"
-        android:layout_width="147dp"
-        android:layout_height="145dp"
-        android:text="TextView"
+        android:layout_width="285dp"
+        android:layout_height="151dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="Program Description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedProgramText" />
+        app:layout_constraintTop_toBottomOf="@+id/selectedProgramName"
+        app:layout_constraintVertical_bias="0.104" />
+
+    <Button
+        android:id="@+id/selectedProgramSaveBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:onClick="saveOnClick"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

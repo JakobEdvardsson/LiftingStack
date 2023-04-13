@@ -35,20 +35,6 @@
         app:layout_constraintVertical_bias="0.395"
         tools:itemCount="14" />
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="115dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="goBack"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listPrograms"
-        app:layout_constraintVertical_bias="0.5" />
-
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="107dp"
@@ -62,66 +48,14 @@
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/dumbbell_icon" />
 
-    <TextView
-        android:id="@+id/addDescriptionText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="monospace"
-        android:text="Add program"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listPrograms"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/imageViewConfirm"
-        android:layout_width="63dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="188dp"
-        android:layout_marginEnd="50dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewEdit"
-        app:layout_constraintTop_toBottomOf="@+id/listPrograms"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/baseline_check_circle_24" />
-
-    <ImageView
-        android:id="@+id/imageViewEdit"
-        android:layout_width="63dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="50dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listPrograms"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/baseline_edit_24" />
-
     <ImageView
         android:id="@+id/addIcon"
         android:layout_width="63dp"
         android:layout_height="54dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addDescriptionText"
-        app:layout_constraintStart_toEndOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listPrograms"
         app:srcCompat="@drawable/baseline_add_circle_24" />
 
-    <ImageView
-        android:id="@+id/cancelImageView"
-        android:layout_width="71dp"
-        android:layout_height="51dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/listPrograms"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_cancel_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>
