@@ -1,4 +1,4 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ProgramsActivities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +13,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.MainActivity;
+import com.example.liftingstack.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgramActivity extends AppCompatActivity implements RecyclerViewInterface
+public class ProgramActivity extends AppCompatActivity implements ProgramRecyclerViewInterface
 {
     private List<Program> programs = new ArrayList<>();
 

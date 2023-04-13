@@ -1,4 +1,4 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ExerciseActivities;
 
 import android.view.View;
 

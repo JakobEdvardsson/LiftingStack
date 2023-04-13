@@ -1,11 +1,10 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ExerciseActivities;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,14 +15,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.ExerciseInstructions;
-import com.example.liftingstack.Entity.Program;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.liftingstack.MainActivity;
+import com.example.liftingstack.R;
 
 public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyclerViewInterface {
 

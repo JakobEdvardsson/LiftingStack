@@ -1,4 +1,4 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ProgramsActivities;
 
 
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.example.liftingstack.Entity.Program;
 
-public interface RecyclerViewInterface
+public interface ProgramRecyclerViewInterface
 {
     void onItemClick(Program program);
 

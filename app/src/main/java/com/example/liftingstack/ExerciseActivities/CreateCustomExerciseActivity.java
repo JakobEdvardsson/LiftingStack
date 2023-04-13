@@ -1,8 +1,10 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ExerciseActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.liftingstack.R;
 
 public class CreateCustomExerciseActivity extends AppCompatActivity {
 

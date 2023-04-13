@@ -1,4 +1,4 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ProgramsActivities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +22,13 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
 {
     private Context context;
     private List<Program> programs = new ArrayList<>();
-    private final RecyclerViewInterface recyclerViewInterface;
+    private final ProgramRecyclerViewInterface programRecyclerViewInterface;
 
-    public ProgramRecyclerViewAdapter(Context context, List<Program> programs, RecyclerViewInterface recyclerViewInterface)
+    public ProgramRecyclerViewAdapter(Context context, List<Program> programs, ProgramRecyclerViewInterface programRecyclerViewInterface)
     {
         this.context = context;
         this.programs = programs;
-        this.recyclerViewInterface = recyclerViewInterface;
+        this.programRecyclerViewInterface = programRecyclerViewInterface;
     }
 
     @NonNull
@@ -50,20 +51,20 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
             @Override
             public void onClick(View view)
             {
-                recyclerViewInterface.onItemClick(programs.get(holder.getAdapterPosition()));
+                programRecyclerViewInterface.onItemClick(programs.get(holder.getAdapterPosition()));
                 System.out.println(position + "PRVA");
 
                 View editView = (ImageView) view.findViewById(R.id.imageViewEdit);
-                recyclerViewInterface.makeVisible(editView);
+                programRecyclerViewInterface.makeVisible(editView);
 
                 View confirmView = (ImageView) view.findViewById(R.id.imageViewConfirm);
-                recyclerViewInterface.makeVisible(confirmView);
+                programRecyclerViewInterface.makeVisible(confirmView);
 
                 View undoView = (ImageView) view.findViewById(R.id.cancelImageView);
-                recyclerViewInterface.makeVisible(undoView);
+                programRecyclerViewInterface.makeVisible(undoView);
 
                 View backButton = (Button) view.findViewById(R.id.backButton);
-                recyclerViewInterface.makeInvisible(backButton);
+                programRecyclerViewInterface.makeInvisible(backButton);
 
                 //View addDescriptionText = (TextView) view.findViewById(R.id.addDescriptionText);
                 //recyclerViewInterface.makeInvisible(addDescriptionText);

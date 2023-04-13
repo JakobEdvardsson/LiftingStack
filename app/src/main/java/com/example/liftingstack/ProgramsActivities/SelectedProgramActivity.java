@@ -1,4 +1,4 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ProgramsActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.R;
 
 import java.util.ArrayList;
 import java.util.List;

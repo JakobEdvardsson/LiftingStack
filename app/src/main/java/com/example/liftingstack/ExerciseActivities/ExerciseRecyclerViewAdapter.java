@@ -1,4 +1,4 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ExerciseActivities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.R;
 
 import java.util.List;
 

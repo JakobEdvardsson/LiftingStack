@@ -1,4 +1,4 @@
-package com.example.liftingstack;
+package com.example.liftingstack.ExerciseActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.R;
 
 public class ExerciseInstructionsPage extends AppCompatActivity {
 
