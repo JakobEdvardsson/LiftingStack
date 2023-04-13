@@ -1,19 +1,16 @@
 package com.example.liftingstack;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.View;
-
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.liftingstack.Entity.Program;
 
@@ -23,13 +20,24 @@ import java.util.List;
 public class ProgramActivity extends AppCompatActivity implements RecyclerViewInterface
 {
     private List<Program> programs = new ArrayList<>();
+
+    private ProgramRecyclerViewAdapter programAdapter;
+
     private ImageView editView;
     private ImageView confirmView;
-    private ImageView deleteView;
     private Button backButton;
-    private ImageView addIcon;
     private TextView addDescription;
     private ImageView undoView;
+
+    private Program selectedProgram = null;
+    private Program programToAdd = new Program("Rygg", "Tungt");
+
+    private AlertDialog.Builder dialogBuilder;
+    private AlertDialog dialog;
+    private EditText popupProgramName;
+    private EditText popupProgramDescription;
+    private Button saveButton;
+    private Button cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,9 +47,15 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
 
         RecyclerView recyclerView = findViewById(R.id.listPrograms);
         setUpProgramsList();
-        ProgramRecyclerViewAdapter programAdapter = new ProgramRecyclerViewAdapter(this, programs, this);
+        programAdapter = new ProgramRecyclerViewAdapter(this, programs, this);
         recyclerView.setAdapter(programAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        findViewById(R.id.addIcon).setOnClickListener(view ->
+        {
+            programs.add(programToAdd);
+            programAdapter.notifyItemInserted(programs.size() - 1);
+        });
     }
 
     public void goBack(View v)
@@ -58,7 +72,6 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
         }
     }
 
-
     public void makeVisible(View view)
     {
         editView = findViewById(R.id.imageViewEdit);
@@ -66,24 +79,19 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
 
         confirmView = findViewById(R.id.imageViewConfirm);
         confirmView.setVisibility(View.VISIBLE);
-
         confirmView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(ProgramActivity.this, SelectedProgramActivity.class);
-                //intent.putExtra("KEY_SENDER", );
+                intent.putExtra("KEY_SENDER", selectedProgram);
                 startActivity(intent);
             }
         });
 
-        deleteView = findViewById(R.id.imageViewDelete);
-        deleteView.setVisibility(View.VISIBLE);
-
         undoView = findViewById(R.id.cancelImageView);
         undoView.setVisibility(View.VISIBLE);
-
 
         undoView.setOnClickListener(new View.OnClickListener()
         {
@@ -92,12 +100,10 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
             public void onClick(View view)
             {
                 backButton.setVisibility(View.VISIBLE);
-                addIcon.setVisibility(View.VISIBLE);
                 addDescription.setVisibility(View.VISIBLE);
 
                 editView.setVisibility(View.INVISIBLE);
                 confirmView.setVisibility(View.INVISIBLE);
-                deleteView.setVisibility(View.INVISIBLE);
                 undoView.setVisibility(View.INVISIBLE);
             }
         });
@@ -109,16 +115,20 @@ public class ProgramActivity extends AppCompatActivity implements RecyclerViewIn
         backButton = findViewById(R.id.backButton);
         backButton.setVisibility(View.INVISIBLE);
 
-        addIcon = findViewById(R.id.addIcon);
-        addIcon.setVisibility(View.INVISIBLE);
-
         addDescription = findViewById(R.id.addDescriptionText);
         addDescription.setVisibility(View.INVISIBLE);
+    }
+
+    public void editProgramPopup()
+    {
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View editPopup = getLayoutInflater().inflate(R.layout.program_edit_popup, null);
     }
 
     @Override
     public void onItemClick(Program program)
     {
+        this.selectedProgram = program;
         System.out.println(program.getName());
     }
 }

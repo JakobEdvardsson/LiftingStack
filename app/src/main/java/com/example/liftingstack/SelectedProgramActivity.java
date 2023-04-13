@@ -18,7 +18,7 @@ import java.util.List;
 public class SelectedProgramActivity extends AppCompatActivity
 {
     private TextView programName;
-    private List<Program> programs = new ArrayList<>();
+    private TextView programDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,11 +26,12 @@ public class SelectedProgramActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_program);
 
-    }
+        Program program = getIntent().getParcelableExtra("KEY_SENDER");
+        programName = (TextView) findViewById(R.id.selectedProgramText);
+        programDescription = (TextView) findViewById(R.id.selectedProgramDescription);
 
-    public void displayProgramName(View view)
-    {
-        programName = findViewById(R.id.selectedProgramText);
-        //programName.setText(programs.get());
+
+        programName.setText(program.getName());
+        programDescription.setText(program.getDescription());
     }
 }

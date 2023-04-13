@@ -8,13 +8,23 @@
 
     <TextView
         android:id="@+id/selectedProgramText"
-        android:layout_width="183dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="80dp"
+        android:layout_width="264dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="40dp"
         android:text="Program"
         android:textColor="#03A9F4"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/selectedProgramDescription"
+        android:layout_width="147dp"
+        android:layout_height="145dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectedProgramText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
