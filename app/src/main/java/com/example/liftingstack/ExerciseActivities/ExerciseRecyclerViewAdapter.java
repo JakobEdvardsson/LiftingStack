@@ -46,7 +46,6 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             @Override
             public void onClick(View view) {
                 exerciseRecyclerViewInterface.onExerciseClick(exerciseInstructions.get(position));
-                System.out.println(position);
             }
         });
     }

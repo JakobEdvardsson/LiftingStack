@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +39,6 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
                         Intent data = result.getData();
                         if (data != null) {
                             String exerciseName = data.getStringExtra("exerciseName");
-                            //Toast.makeText(getApplicationContext(), "Exercise saved" + exerciseName, Toast.LENGTH_SHORT).show();
 
                             String exerciseDescription = data.getStringExtra("exerciseDescription");
                             currentExerciseInstructions.setExerciseName(exerciseName);
@@ -95,8 +93,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
     @Override
     public void onExerciseClick(ExerciseInstructions exerciseInstructions) {
-        //System.out.println("XXXXXXXXXXXXXXXX " + exerciseInstructions);
-        //Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
+
         currentExerciseInstructions = exerciseInstructions;
         Intent intent = new Intent(this, ExerciseInstructionsPage.class);
         intent.putExtra("Exercise", exerciseInstructions);
