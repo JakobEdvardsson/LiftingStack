@@ -51,8 +51,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="85dp"
-        android:layout_height="32dp"
+        android:layout_width="107dp"
+        android:layout_height="28dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
@@ -78,21 +78,23 @@
 
     <ImageView
         android:id="@+id/imageViewConfirm"
-        android:layout_width="51dp"
-        android:layout_height="41dp"
+        android:layout_width="63dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginEnd="50dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewDelete"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewEdit"
         app:layout_constraintTop_toBottomOf="@+id/listPrograms"
+        app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/baseline_check_circle_24" />
 
     <ImageView
         android:id="@+id/imageViewEdit"
-        android:layout_width="51dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="36dp"
+        android:layout_width="63dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="50dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,21 +103,9 @@
         app:srcCompat="@drawable/baseline_edit_24" />
 
     <ImageView
-        android:id="@+id/imageViewDelete"
-        android:layout_width="61dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="40dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listPrograms"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@drawable/baseline_delete_24" />
-
-    <ImageView
         android:id="@+id/addIcon"
-        android:layout_width="55dp"
-        android:layout_height="48dp"
+        android:layout_width="63dp"
+        android:layout_height="54dp"
         android:layout_marginStart="55dp"
         android:layout_marginEnd="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,8 +120,8 @@
         android:layout_height="51dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/listPrograms"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_cancel_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

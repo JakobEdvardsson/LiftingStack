@@ -2,7 +2,6 @@ package com.example.liftingstack;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,6 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
     private Context context;
     private List<Program> programs = new ArrayList<>();
     private final RecyclerViewInterface recyclerViewInterface;
-    private ProgramRecyclerViewAdapter adapter;
 
     public ProgramRecyclerViewAdapter(Context context, List<Program> programs, RecyclerViewInterface recyclerViewInterface)
     {
@@ -34,11 +32,11 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
 
     @NonNull
     @Override
-    public ProgramRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_programs, parent, false);
-        return new ProgramRecyclerViewAdapter.ViewHolder(view);
+        return new ViewHolder(view).linkAdapter(this);
     }
 
     @Override
@@ -52,10 +50,8 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
             @Override
             public void onClick(View view)
             {
-                recyclerViewInterface.onItemClick(programs.get(position));
-
-                View cardView = (CardView) view.findViewById(R.id.cardViewProgram);
-
+                recyclerViewInterface.onItemClick(programs.get(holder.getAdapterPosition()));
+                System.out.println(position + "PRVA");
 
                 View editView = (ImageView) view.findViewById(R.id.imageViewEdit);
                 recyclerViewInterface.makeVisible(editView);
@@ -63,20 +59,14 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
                 View confirmView = (ImageView) view.findViewById(R.id.imageViewConfirm);
                 recyclerViewInterface.makeVisible(confirmView);
 
-                View deleteView = (ImageView) view.findViewById(R.id.imageViewDelete);
-                recyclerViewInterface.makeVisible(deleteView);
-
                 View undoView = (ImageView) view.findViewById(R.id.cancelImageView);
                 recyclerViewInterface.makeVisible(undoView);
 
                 View backButton = (Button) view.findViewById(R.id.backButton);
                 recyclerViewInterface.makeInvisible(backButton);
 
-                View imageViewAdd = (ImageView) view.findViewById(R.id.addIcon);
-                recyclerViewInterface.makeInvisible(imageViewAdd);
-
-                View addDescriptionText = (TextView) view.findViewById(R.id.addDescriptionText);
-                recyclerViewInterface.makeInvisible(addDescriptionText);
+                //View addDescriptionText = (TextView) view.findViewById(R.id.addDescriptionText);
+                //recyclerViewInterface.makeInvisible(addDescriptionText);
             }
         });
     }
@@ -91,10 +81,9 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
     {
         private TextView programNameTextView;
         private TextView programDescriptionTextView;
-        private ImageView imageView;
         private CardView cardView;
         private ProgramRecyclerViewAdapter adapter;
-        private ImageView deleteView;
+
 
 
         public ViewHolder(@NonNull View itemView)
@@ -102,8 +91,19 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
             super(itemView);
             programNameTextView = itemView.findViewById(R.id.programName);
             programDescriptionTextView = itemView.findViewById(R.id.programDescription);
-            imageView = itemView.findViewById(R.id.programImage);
             cardView = itemView.findViewById(R.id.cardViewProgram);
+
+            itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view ->
+            {
+                adapter.programs.remove(getAdapterPosition());
+                adapter.notifyItemRemoved(getAdapterPosition());
+            });
+        }
+
+        public ViewHolder linkAdapter(ProgramRecyclerViewAdapter adapter)
+        {
+            this.adapter = adapter;
+            return this;
         }
     }
 }

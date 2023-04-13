@@ -14,7 +14,7 @@ import com.example.liftingstack.Entity.ExerciseInstructions;
 
 import java.util.List;
 
-public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>{
+/*public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>{
     private Context context;
     private List<ExerciseInstructions> exerciseInstructions;
 
@@ -50,4 +50,4 @@ public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerVi
             textView = itemView.findViewById(R.id.programName);
         }
     }
-}
+}*/
