@@ -11,8 +11,6 @@ import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 
 public class MainActivity extends AppCompatActivity
 {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
-
 
     public void launchPrograms(View v){
         Intent intent = new Intent(this, ProgramActivity.class);

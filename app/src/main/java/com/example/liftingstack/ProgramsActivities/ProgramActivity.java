@@ -14,9 +14,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.os.Bundle;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.Entity.Program;
-import com.example.liftingstack.ExerciseActivities.ExerciseInstructionsPage;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
     private List<Program> programs = new ArrayList<>();
     private ProgramRecyclerViewAdapter programAdapter;
     private Program selectedProgram = null;
-    private Program programToAdd;
     private RecyclerView recyclerView;
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
@@ -44,14 +41,12 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
                         Intent data = result.getData();
                         if (data != null)
                         {
-                            selectedProgram = new Program("", "");
                             String programName = data.getStringExtra("programName");
                             String programDescription = data.getStringExtra("programDescription");
                             selectedProgram.setName(programName);
                             selectedProgram.setDescription(programDescription);
 
                             Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(programs.indexOf(selectedProgram));
-
                         }
                     }
                 }
@@ -72,29 +67,15 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
 
         findViewById(R.id.addIcon).setOnClickListener(view ->
         {
-            programToAdd = new Program("", "");
-            programs.add(programToAdd);
+            selectedProgram = new Program("New Program", "New Description");
+            programs.add(selectedProgram);
 
             Intent intent = new Intent(this, SelectedProgramActivity.class);
-            intent.putExtra("Program", programToAdd);
+            intent.putExtra("Program", selectedProgram);
             activityResultLauncher.launch(intent);
             programAdapter.notifyItemInserted(programs.size() - 1);
             recyclerView.scrollToPosition(programs.size() - 1);
         });
-
-        /*findViewById(R.id.addIcon).setOnClickListener(view ->
-        {
-
-            currentExerciseInstructions = new ExerciseInstructions("New Exercise", "New Description");
-            allExerciseInstructions.addExerciseInstructions(currentExerciseInstructions);
-
-            Intent intent = new Intent(this, ExerciseInstructionsPage.class);
-            intent.putExtra("Exercise", currentExerciseInstructions);
-            activityResultLauncher.launch(intent);
-
-            exerciseAdapter.notifyItemInserted(allExerciseInstructions.getExercisesInstructionsList().size() - 1);
-            recyclerView.scrollToPosition(allExerciseInstructions.getExercisesInstructionsList().size() - 1);
-        });*/
     }
 
     private void setUpProgramsList()
