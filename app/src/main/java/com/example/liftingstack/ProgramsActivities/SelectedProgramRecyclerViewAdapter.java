@@ -37,7 +37,7 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_selected_program, parent, false);
-        return new SelectedProgramRecyclerViewAdapter.ViewHolder(view);
+        return new ViewHolder(view).linkAdapter(this);
     }
 
     @Override
@@ -63,12 +63,32 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
         private TextView exerciseNameTextView;
         private TextView exerciseDescriptionTextView;
         private CardView cardView;
+        private SelectedProgramRecyclerViewAdapter adapter;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             exerciseNameTextView = itemView.findViewById(R.id.exerciseNameSelectedProgram);
             exerciseDescriptionTextView = itemView.findViewById(R.id.exerciseDescriptionSelectedProgram);
             cardView = itemView.findViewById(R.id.selectedProgramCardView);
+
+            itemView.findViewById(R.id.deleteIconSelectedProgram).setOnClickListener(view ->
+            {
+                try
+                {
+                    adapter.exercises.remove(getAdapterPosition());
+                    adapter.notifyItemRemoved(getAdapterPosition());
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Tried deleting too fast" + e);
+                }
+            });
+        }
+
+        public ViewHolder linkAdapter(SelectedProgramRecyclerViewAdapter adapter)
+        {
+            this.adapter = adapter;
+            return this;
         }
     }
 }
