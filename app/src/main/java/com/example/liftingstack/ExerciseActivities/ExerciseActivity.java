@@ -77,7 +77,6 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
             exerciseAdapter.notifyItemInserted(allExerciseInstructions.getExercisesInstructionsList().size() - 1);
             recyclerView.scrollToPosition(allExerciseInstructions.getExercisesInstructionsList().size() - 1);
         });
-
     }
 
     public void goBack(View v) {

@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.ProgramsActivities.ProgramRecyclerViewAdapter;
 import com.example.liftingstack.R;
 
 import java.util.List;
@@ -34,18 +35,19 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     public ExerciseRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_exercises, parent, false);
-        return new ExerciseRecyclerViewAdapter.ViewHolder(view);
+        //return new ExerciseRecyclerViewAdapter.ViewHolder(view);
+        return new ExerciseRecyclerViewAdapter.ViewHolder(view).linkAdapter(this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExerciseRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ExerciseRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.programNameTextView.setText(exerciseInstructions.get(position).getExerciseName());
         holder.programDescriptionTextView.setText(exerciseInstructions.get(position).getExerciseDescription());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                exerciseRecyclerViewInterface.onExerciseClick(exerciseInstructions.get(position));
+                exerciseRecyclerViewInterface.onExerciseClick(exerciseInstructions.get(holder.getAdapterPosition()));
             }
         });
     }
@@ -60,6 +62,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
         TextView programDescriptionTextView;
         ImageView imageView;
         CardView cardView;
+        ExerciseRecyclerViewAdapter adapter;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,6 +70,24 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             programDescriptionTextView = itemView.findViewById(R.id.programDescription);
             imageView = itemView.findViewById(R.id.programImage);
             cardView = itemView.findViewById(R.id.cardViewExercise);
+
+
+            itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view ->
+            {
+                try {
+                    adapter.exerciseInstructions.remove(getAdapterPosition());
+                    adapter.notifyItemRemoved(getAdapterPosition());
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+
+            });
+
+        }
+        public ViewHolder linkAdapter(ExerciseRecyclerViewAdapter adapter)
+        {
+            this.adapter = adapter;
+            return this;
         }
     }
 }
