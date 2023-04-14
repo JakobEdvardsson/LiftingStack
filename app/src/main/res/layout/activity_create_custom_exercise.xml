@@ -52,17 +52,17 @@
         app:layout_constraintTop_toBottomOf="@+id/askCustomExerciseDescription" />
 
     <Button
-        android:id="@+id/addPicture"
+        android:id="@+id/selectImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Add picture"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="312dp"
+        android:layout_marginEnd="181dp"
+        android:text="select image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customExerciseDescriptionInput"
-        app:layout_constraintVertical_bias="0.077" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/saveCustomExercise"
@@ -80,13 +80,27 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
-        android:id="@+id/displayImageView5"
+        android:id="@+id/displayImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginEnd="167dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPicture"
+        app:layout_constraintTop_toBottomOf="@+id/selectImageButton"
         app:srcCompat="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/loadExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:onClick="loadExercise"
+        android:text="Load"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toEndOf="@+id/selectImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/customExerciseDescriptionInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

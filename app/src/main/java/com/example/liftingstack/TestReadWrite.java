@@ -77,7 +77,6 @@ public class TestReadWrite extends AppCompatActivity {
                         catch (IOException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
             });
