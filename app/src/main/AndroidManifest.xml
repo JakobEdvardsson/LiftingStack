@@ -16,6 +16,7 @@
             android:exported="false" />
         <activity
             android:name=".ProgramsActivities.SelectedProgramActivity"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".ExerciseActivities.ExerciseActivity"
