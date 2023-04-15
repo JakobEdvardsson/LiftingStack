@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context=".Entity.BarChart">
+    tools:context=".Entity.BarChartCount">
 
     <com.github.mikephil.charting.charts.BarChart
         android:id= "@+id/barChart"
