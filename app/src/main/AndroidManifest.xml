@@ -11,9 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LiftingStack"
         tools:targetApi="31">
-        <activity
+        <android:HEAD
             android:name=".ExerciseActivities.ExerciseInstructionsPage"
-            android:exported="false" />
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".ProgramsActivities.SelectedProgramActivity"
             android:exported="false" />
@@ -28,9 +30,6 @@
             android:exported="false" />
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
