@@ -51,11 +51,11 @@ public class ExerciseGraph extends AppCompatActivity {
 
         set1.setFillAlpha(110);
 
-        set1.setColor(Color.rgb(0,255,255)); // change to a nice blue/green shade later
+        set1.setColor(Color.rgb(127,255,212)); // change to a nice blue/green shade later
         set1.setLineWidth(3f); // makes the lines a bit thicker
         set1.setValueTextSize(10f); // size of the text showing values in chart
         set1.setValueTextColor(Color.rgb(160,160,160));
-        set1.setCircleColor(Color.rgb(0,255,255)); // might need to change later
+        set1.setCircleColor(Color.rgb(127,255,212)); // might need to change later
         set1.setCircleRadius(5f); // might need to change later
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
