@@ -31,7 +31,6 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
 
         EditText exerciseName = findViewById(R.id.ExerciseName);
         EditText exerciseDescription = findViewById(R.id.ExerciseDescription);
-        Toast.makeText(getApplicationContext(), exerciseName.getText(), Toast.LENGTH_SHORT).show();
 
         Intent resultIntent = new Intent();
         resultIntent.putExtra("exerciseName", exerciseName.getText().toString());
