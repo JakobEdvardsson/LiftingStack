@@ -15,12 +15,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +34,7 @@ import com.example.liftingstack.Entity.ExerciseInstructions;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -51,6 +54,8 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     ImageView displayImageView;
 
     Button selectImageButton, saveButton, loadButton;
+
+    String imgString;
 
 
     @Override
@@ -75,10 +80,26 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     }
 
     public void saveCustomExercise(View v) {
+        ExerciseInstructions customExercise;
         String customExerciseName = customExerciseNameInput.getText().toString();
         String customExerciseDescription = customExerciseDescriptionInput.getText().toString();
+        Bitmap bitmapImage = displayImageView.getDrawingCache();
         System.out.println(customExerciseName);
-        ExerciseInstructions customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription);
+        if(bitmapImage == null){
+            System.out.println("No image selected");
+            customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription);
+
+        }
+        else{
+            System.out.println("Image selected");
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte []imgByte = baos.toByteArray();
+
+            imgString = Base64.encodeToString(imgByte, Base64.DEFAULT);
+            customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription, imgString);
+
+        }
         String json = convertObjectToJson(customExercise);
         System.out.println(getFilesDir());
 

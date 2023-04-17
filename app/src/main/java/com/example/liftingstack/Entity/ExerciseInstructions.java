@@ -1,5 +1,7 @@
 package com.example.liftingstack.Entity;
 
+import android.graphics.Bitmap;
+
 /**
  * The type Exercise.
  * This class is a specific exercise such as Bench Press or Squats.
@@ -7,6 +9,8 @@ package com.example.liftingstack.Entity;
 public class ExerciseInstructions {
     private String name;
     private String description;
+
+    private String image;
     //Text / Video
 
     /**
@@ -19,6 +23,12 @@ public class ExerciseInstructions {
         this.name = name;
         this.description = description;
     }
+    public ExerciseInstructions(String name, String description, String image) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
+    }
+
 
     /**
      * Gets name.
