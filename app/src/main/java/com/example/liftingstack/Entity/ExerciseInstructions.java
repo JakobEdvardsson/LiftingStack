@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import android.graphics.Bitmap;
 
 /**
  * The type Exercise.
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 public class ExerciseInstructions implements Parcelable {
     private String name;
     private String description;
+
+    private String image;
     //Text / Video
 
     /**
@@ -24,6 +27,12 @@ public class ExerciseInstructions implements Parcelable {
         this.name = name;
         this.description = description;
     }
+    public ExerciseInstructions(String name, String description, String image) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
+    }
+
 
     protected ExerciseInstructions(Parcel in) {
         name = in.readString();

@@ -1,10 +1,24 @@
 package com.example.liftingstack;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Controller.ExerciseInstructionController;
 import com.example.liftingstack.Entity.ExerciseInstructions;
@@ -13,6 +27,7 @@ import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 
 public class MainActivity extends AppCompatActivity {
     private ExerciseInstructionController exerciseInstructionController;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,4 +58,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ExerciseActivity.class);
         startActivity(intent);
     }
+
 }
