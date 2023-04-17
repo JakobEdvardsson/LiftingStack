@@ -6,12 +6,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.liftingstack.Entity.BarChartCount;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 
 public class MainActivity extends AppCompatActivity
 {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity
 
     public void launchExercises(View v){
         Intent intent = new Intent(this, ExerciseActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchStats(View v){
+        Intent intent = new Intent(this, BarChartCount.class);
         startActivity(intent);
     }
 }
