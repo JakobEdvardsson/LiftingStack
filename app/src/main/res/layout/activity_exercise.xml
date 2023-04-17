@@ -71,15 +71,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/dumbbell_icon" />
 
-    <Button
-        android:id="@+id/launchCreateCustomExerciseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:onClick="launchCreateCustomExercise"
-        android:text="Create new exercise"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

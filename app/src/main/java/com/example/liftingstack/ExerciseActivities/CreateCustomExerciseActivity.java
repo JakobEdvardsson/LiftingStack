@@ -42,8 +42,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 
@@ -102,8 +102,8 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription, imgString);
 
         }
-        String json = convertObjectToJson(customExercise);
-        System.out.println(getFilesDir());
+        //String json = convertObjectToJson(customExercise);
+        //System.out.println(getFilesDir());
 
         try {
             File file = new File(this.getFilesDir(), "Test");
@@ -113,7 +113,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(json);
+            //bufferedWriter.write(json);
             bufferedWriter.close();
             System.out.println("File saved");
         } catch (IOException e) {
@@ -145,20 +145,20 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
     }
 
-    public String convertObjectToJson(Object object) {
-        Gson gson = new Gson();
+ /*   public String convertObjectToJson(Object object) {
+        *//*Gson gson = new Gson();
         String json = gson.toJson(object);
         System.out.println(json);
-        return json;
-    }
+        return json;*//*
+    }*/
 
     public void convertJsonToObject(String json) {
-        Gson gson = new Gson();
+        /*Gson gson = new Gson();
         ExerciseInstructions exerciseInstructions = gson.fromJson(json, ExerciseInstructions.class);
         System.out.println(json);
         //visa texten i gui -- ta bort senare
         customExerciseNameInput.setText(exerciseInstructions.getName());
-        customExerciseDescriptionInput.setText(exerciseInstructions.getDescription());
+        customExerciseDescriptionInput.setText(exerciseInstructions.getDescription());*/
     }
 
     private void imageChooser() {
