@@ -82,44 +82,39 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         String json = convertObjectToJson(customExercise);
         System.out.println(getFilesDir());
 
-    try{
-        File file = new File(this.getFilesDir(), "Test");
-        FileWriter fileWriter = new FileWriter(file);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(json);
-        bufferedWriter.close();
-        System.out.println("File saved");
-    } catch(IOException e) {
-        e.printStackTrace();
+        try {
+            File file = new File(this.getFilesDir(), "Test");
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+            System.out.println("File saved");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
-
-
-}
 
 
     public void loadExercise(View v) {
-        File file = new File(this.getFilesDir(),"Test");
-        try{
-        FileReader fileReader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = bufferedReader.readLine();
-        while (line != null){
-            stringBuilder.append(line).append("\n");
-            line = bufferedReader.readLine();
+        File file = new File(this.getFilesDir(), "Test");
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            StringBuilder stringBuilder = new StringBuilder();
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                stringBuilder.append(line).append("\n");
+                line = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+            String response = stringBuilder.toString();
+            convertJsonToObject(response);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        bufferedReader.close();
-// This response will have Json Format String
-        String response = stringBuilder.toString();
-        Gson gson = new Gson();
-        ExerciseInstructions exerciseInstructions = gson.fromJson(response, ExerciseInstructions.class);
-            System.out.println(response);
-            //set the textviews with loaded data -- ta bort senare
-            customExerciseNameInput.setText(exerciseInstructions.getName());
-            customExerciseDescriptionInput.setText(exerciseInstructions.getDescription());
-    } catch(IOException e) {
-        e.printStackTrace();
-    }
+
     }
 
     public String convertObjectToJson(Object object) {
@@ -130,7 +125,12 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     }
 
     public void convertJsonToObject(String json) {
-
+        Gson gson = new Gson();
+        ExerciseInstructions exerciseInstructions = gson.fromJson(json, ExerciseInstructions.class);
+        System.out.println(json);
+        //visa texten i gui -- ta bort senare
+        customExerciseNameInput.setText(exerciseInstructions.getName());
+        customExerciseDescriptionInput.setText(exerciseInstructions.getDescription());
     }
 
     private void imageChooser() {
