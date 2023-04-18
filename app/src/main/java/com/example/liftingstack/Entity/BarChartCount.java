@@ -24,15 +24,19 @@ public class BarChartCount extends AppCompatActivity {
         BarChart barChart = findViewById(R.id.barChart);
 
         ArrayList<BarEntry> bar = new ArrayList<>();
-        bar.add(new BarEntry(2023-1, 10));
-        bar.add(new BarEntry(2023-2, 11));
-        bar.add(new BarEntry(2023-3, 12));
-        bar.add(new BarEntry(2023-4, 13));
-        bar.add(new BarEntry(2023-5, 5));
-        bar.add(new BarEntry(2023-6, 6));
-        bar.add(new BarEntry(2023-7, 7));
-        bar.add(new BarEntry(2023-8, 8));
-        //ändra ev x - axel (från 2023-1 till 1, eller skriv det på etta annat sätt)
+        bar.add(new BarEntry(1, 10));
+        bar.add(new BarEntry(2, 2));
+        bar.add(new BarEntry(3, 5));
+        bar.add(new BarEntry(4, 13));
+        bar.add(new BarEntry(5, 0));
+        bar.add(new BarEntry(6, 0));
+        bar.add(new BarEntry(7, 0));
+        bar.add(new BarEntry(8, 0));
+        bar.add(new BarEntry(9, 0));
+        bar.add(new BarEntry(10, 0));
+        bar.add(new BarEntry(11, 0));
+        bar.add(new BarEntry(12, 0));
+        //ändra ev x - axel (från 2023-1 till 2023.1 eller 1, eller skriv det på etta annat sätt)
 
         BarDataSet barDataSet = new BarDataSet(bar, "Number of training sessions");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
