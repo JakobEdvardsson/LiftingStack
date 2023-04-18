@@ -20,7 +20,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_instructions_page);
 
         ExerciseInstructions exerciseInstructions = getIntent().getParcelableExtra("Exercise");
-        TextView exerciseName = findViewById(R.id.ExerciseName);
+        TextView exerciseName = findViewById(R.id.selectedProgramName);
         exerciseName.setText(exerciseInstructions.getExerciseName());
 
         EditText exerciseDescription = findViewById(R.id.ExerciseDescription);
@@ -29,7 +29,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
 
     public void onSaveClick(View v) {
 
-        EditText exerciseName = findViewById(R.id.ExerciseName);
+        EditText exerciseName = findViewById(R.id.selectedProgramName);
         EditText exerciseDescription = findViewById(R.id.ExerciseDescription);
 
         Intent resultIntent = new Intent();

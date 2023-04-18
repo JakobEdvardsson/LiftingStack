@@ -5,8 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -52,22 +50,6 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
             public void onClick(View view)
             {
                 programRecyclerViewInterface.onItemClick(programs.get(holder.getAdapterPosition()));
-                System.out.println(position + "PRVA");
-
-                View editView = (ImageView) view.findViewById(R.id.imageViewEdit);
-                programRecyclerViewInterface.makeVisible(editView);
-
-                View confirmView = (ImageView) view.findViewById(R.id.imageViewConfirm);
-                programRecyclerViewInterface.makeVisible(confirmView);
-
-                View undoView = (ImageView) view.findViewById(R.id.cancelImageView);
-                programRecyclerViewInterface.makeVisible(undoView);
-
-                View backButton = (Button) view.findViewById(R.id.backButton);
-                programRecyclerViewInterface.makeInvisible(backButton);
-
-                //View addDescriptionText = (TextView) view.findViewById(R.id.addDescriptionText);
-                //recyclerViewInterface.makeInvisible(addDescriptionText);
             }
         });
     }
@@ -85,19 +67,24 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
         private CardView cardView;
         private ProgramRecyclerViewAdapter adapter;
 
-
-
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            programNameTextView = itemView.findViewById(R.id.programName);
+            programNameTextView = itemView.findViewById(R.id.exerciseNameSelectedProgram);
             programDescriptionTextView = itemView.findViewById(R.id.programDescription);
             cardView = itemView.findViewById(R.id.cardViewProgram);
 
             itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view ->
             {
-                adapter.programs.remove(getAdapterPosition());
-                adapter.notifyItemRemoved(getAdapterPosition());
+                try
+                {
+                    adapter.programs.remove(getAdapterPosition());
+                    adapter.notifyItemRemoved(getAdapterPosition());
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Tried deleting too fast" + e);
+                }
             });
         }
 

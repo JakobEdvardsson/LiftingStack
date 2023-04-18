@@ -28,7 +28,6 @@ import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 public class MainActivity extends AppCompatActivity {
     private ExerciseInstructionController exerciseInstructionController;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void launchPrograms(View v) {
+    public void launchPrograms(View v){
         Intent intent = new Intent(this, ProgramActivity.class);
         startActivity(intent);
     }

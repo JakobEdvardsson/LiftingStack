@@ -10,8 +10,4 @@ public interface ProgramRecyclerViewInterface
 {
     void onItemClick(Program program);
 
-    void makeVisible(View view);
-
-    void makeInvisible(View view);
-
 }
