@@ -1,6 +1,5 @@
 package com.example.liftingstack.ExerciseActivities;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
-import com.example.liftingstack.ProgramsActivities.ProgramRecyclerViewAdapter;
 import com.example.liftingstack.R;
 
 import java.util.List;
@@ -23,19 +21,18 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     private Context context;
     private List<ExerciseInstructions> exerciseInstructions;
 
-    public ExerciseRecyclerViewAdapter(Context context, List<ExerciseInstructions> exerciseInstructions, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
+    public ExerciseRecyclerViewAdapter(
+            Context context, List<ExerciseInstructions> exerciseInstructions,
+            ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
         this.context = context;
         this.exerciseInstructions = exerciseInstructions;
         this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;
     }
-
-
     @NonNull
     @Override
     public ExerciseRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_exercises, parent, false);
-        //return new ExerciseRecyclerViewAdapter.ViewHolder(view);
         return new ExerciseRecyclerViewAdapter.ViewHolder(view).linkAdapter(this);
     }
 
@@ -51,7 +48,6 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return exerciseInstructions.size();
@@ -71,21 +67,16 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             imageView = itemView.findViewById(R.id.programImage);
             cardView = itemView.findViewById(R.id.cardViewExercise);
 
-
-            itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view ->
-            {
+            itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view -> {
                 try {
                     adapter.exerciseInstructions.remove(getAdapterPosition());
                     adapter.notifyItemRemoved(getAdapterPosition());
-                }catch(Exception e){
+                } catch (Exception e) {
                     System.out.println(e);
                 }
-
             });
-
         }
-        public ViewHolder linkAdapter(ExerciseRecyclerViewAdapter adapter)
-        {
+        public ViewHolder linkAdapter(ExerciseRecyclerViewAdapter adapter) {
             this.adapter = adapter;
             return this;
         }
