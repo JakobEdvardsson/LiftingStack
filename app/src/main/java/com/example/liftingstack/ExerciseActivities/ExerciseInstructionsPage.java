@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.R;
 
 public class ExerciseInstructionsPage extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

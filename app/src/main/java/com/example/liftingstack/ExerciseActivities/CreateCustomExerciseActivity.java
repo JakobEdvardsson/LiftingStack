@@ -2,33 +2,19 @@ package com.example.liftingstack.ExerciseActivities;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.session.PlaybackState;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
 
@@ -36,16 +22,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 //import com.google.gson.Gson;
 //import com.google.gson.GsonBuilder;
-
-import org.json.JSONException;
 
 import com.example.liftingstack.R;
 
@@ -87,12 +69,11 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         String customExerciseDescription = customExerciseDescriptionInput.getText().toString();
         Bitmap bitmapImage = displayImageView.getDrawingCache();
         System.out.println(customExerciseName);
-        if(bitmapImage == null){
+        if (bitmapImage == null) {
             System.out.println("No image selected");
             customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription);
-
         }
-        else{
+        else {
             System.out.println("Image selected");
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -100,7 +81,6 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
             imgString = Base64.encodeToString(imgByte, Base64.DEFAULT);
             customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription, imgString);
-
         }
         //String json = convertObjectToJson(customExercise);
         //System.out.println(getFilesDir());
@@ -119,10 +99,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
-
 
     public void loadExercise(View v) {
 
@@ -195,5 +172,4 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
                     }
                 }
             });
-
 }

@@ -12,21 +12,18 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
-import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<SelectedProgramRecyclerViewAdapter.ViewHolder>
-{
+public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<SelectedProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
     private List<ExerciseInstructions> exercises = new ArrayList<>();
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
 
-    public SelectedProgramRecyclerViewAdapter(Context context, List<ExerciseInstructions> exercises, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface)
-    {
+    public SelectedProgramRecyclerViewAdapter(Context context, List<ExerciseInstructions> exercises, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
         this.context = context;
         this.exercises = exercises;
         this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;
@@ -54,8 +51,7 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return exercises.size();
     }
 
@@ -71,22 +67,18 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
             exerciseDescriptionTextView = itemView.findViewById(R.id.exerciseDescriptionSelectedProgram);
             cardView = itemView.findViewById(R.id.selectedProgramCardView);
 
-            itemView.findViewById(R.id.deleteIconSelectedProgram).setOnClickListener(view ->
-            {
-                try
-                {
+            itemView.findViewById(R.id.deleteIconSelectedProgram).setOnClickListener(view -> {
+                try {
                     adapter.exercises.remove(getAdapterPosition());
                     adapter.notifyItemRemoved(getAdapterPosition());
                 }
-                catch (Exception e)
-                {
+                catch (Exception e) {
                     System.out.println("Tried deleting too fast" + e);
                 }
             });
         }
 
-        public ViewHolder linkAdapter(SelectedProgramRecyclerViewAdapter adapter)
-        {
+        public ViewHolder linkAdapter(SelectedProgramRecyclerViewAdapter adapter) {
             this.adapter = adapter;
             return this;
         }
