@@ -21,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ProgramActivity extends AppCompatActivity implements ProgramRecyclerViewInterface
-{
+public class ProgramActivity extends AppCompatActivity implements ProgramRecyclerViewInterface {
     private List<Program> programs = new ArrayList<>();
     private ProgramRecyclerViewAdapter programAdapter;
     private Program selectedProgram = null;
@@ -30,17 +29,13 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>()
-            {
+            new ActivityResultCallback<ActivityResult>() {
                 @Override
-                public void onActivityResult(ActivityResult result)
-                {
+                public void onActivityResult(ActivityResult result) {
                     Log.d(TAG, "onActivityResult: ");
-                    if (result.getResultCode() == 78)
-                    {
+                    if (result.getResultCode() == 78) {
                         Intent data = result.getData();
-                        if (data != null)
-                        {
+                        if (data != null) {
                             String programName = data.getStringExtra("programName");
                             String programDescription = data.getStringExtra("programDescription");
                             selectedProgram.setName(programName);
@@ -54,8 +49,7 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
     );
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
 
@@ -65,8 +59,7 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
         recyclerView.setAdapter(programAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        findViewById(R.id.addIcon).setOnClickListener(view ->
-        {
+        findViewById(R.id.addIcon).setOnClickListener(view -> {
             selectedProgram = new Program("New Program", "New Description");
             programs.add(selectedProgram);
 
@@ -78,17 +71,14 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
         });
     }
 
-    private void setUpProgramsList()
-    {
-        for (int i = 1; i <= 20; i++)
-        {
+    private void setUpProgramsList() {
+        for (int i = 1; i <= 20; i++) {
             programs.add(new Program("Program " + i , "Back and biceps"));
         }
     }
 
     @Override
-    public void onItemClick(Program program)
-    {
+    public void onItemClick(Program program) {
         selectedProgram = program;
         Intent intent = new Intent(this, SelectedProgramActivity.class);
         intent.putExtra("Program", program);
