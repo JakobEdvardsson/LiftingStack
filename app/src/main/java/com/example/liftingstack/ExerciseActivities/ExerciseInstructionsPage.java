@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.R;
@@ -28,7 +27,6 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
     }
 
     public void onSaveClick(View v) {
-
         EditText exerciseName = findViewById(R.id.selectedProgramName);
         EditText exerciseDescription = findViewById(R.id.ExerciseDescription);
 

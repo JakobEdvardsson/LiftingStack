@@ -1,7 +1,5 @@
 package com.example.liftingstack.ExerciseActivities;
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -9,12 +7,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.MainActivity;
@@ -24,7 +19,6 @@ import java.util.Objects;
 
 public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyclerViewInterface {
 
-    //private List<ExerciseInstructions> exerciseInstructions = new ArrayList<>();
     private AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions();
     private ExerciseInstructions currentExerciseInstructions = null;
     private RecyclerView recyclerView;
@@ -34,7 +28,6 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    Log.d(TAG, "onActivityResult: ");
                     if (result.getResultCode() == 78) {
                         Intent data = result.getData();
                         if (data != null) {
@@ -44,8 +37,8 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
                             currentExerciseInstructions.setExerciseName(exerciseName);
                             currentExerciseInstructions.setExerciseDescription(exerciseDescription);
 
-
-                            Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(allExerciseInstructions.getExercisesInstructionsList().indexOf(currentExerciseInstructions));
+                            Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(
+                                    allExerciseInstructions.getExercisesInstructionsList().indexOf(currentExerciseInstructions));
 
                         }
                     }
@@ -60,13 +53,12 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
         recyclerView = findViewById(R.id.listExercise);
         setUpExerciseList();
-        ExerciseRecyclerViewAdapter exerciseAdapter = new ExerciseRecyclerViewAdapter(this, allExerciseInstructions.getExercisesInstructionsList(), this);
+        ExerciseRecyclerViewAdapter exerciseAdapter = new ExerciseRecyclerViewAdapter(
+                this, allExerciseInstructions.getExercisesInstructionsList(), this);
         recyclerView.setAdapter(exerciseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        findViewById(R.id.addIcon).setOnClickListener(view ->
-        {
-
+        findViewById(R.id.addIcon).setOnClickListener(view -> {
             currentExerciseInstructions = new ExerciseInstructions("New Exercise", "New Description");
             allExerciseInstructions.addExerciseInstructions(currentExerciseInstructions);
 
@@ -92,14 +84,9 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
     @Override
     public void onExerciseClick(ExerciseInstructions exerciseInstructions) {
-
         currentExerciseInstructions = exerciseInstructions;
         Intent intent = new Intent(this, ExerciseInstructionsPage.class);
         intent.putExtra("Exercise", exerciseInstructions);
-
         activityResultLauncher.launch(intent);
-
     }
-
-
 }
