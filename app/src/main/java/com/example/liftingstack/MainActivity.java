@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         exerciseInstructionController = new ExerciseInstructionController();
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXX" + exerciseInstructionController);
     }
 
     public void launchSettings(View v) {
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
-
 
     public void launchPrograms(View v){
         Intent intent = new Intent(this, ProgramActivity.class);

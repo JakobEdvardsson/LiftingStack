@@ -16,8 +16,7 @@ import com.example.liftingstack.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder>
-{
+public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
     private List<Program> programs = new ArrayList<>();
     private final ProgramRecyclerViewInterface programRecyclerViewInterface;
