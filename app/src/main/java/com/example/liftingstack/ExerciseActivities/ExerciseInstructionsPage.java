@@ -26,7 +26,6 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
     }
 
     public void onSaveClick(View v) {
-
         EditText exerciseName = findViewById(R.id.selectedProgramName);
         EditText exerciseDescription = findViewById(R.id.ExerciseDescription);
 
