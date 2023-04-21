@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Build;
@@ -42,12 +43,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 
 import com.example.liftingstack.R;
+import com.google.gson.Gson;
 
 public class CreateCustomExerciseActivity extends AppCompatActivity {
     EditText customExerciseNameInput;
@@ -82,11 +84,14 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     }
 
     public void saveCustomExercise(View v) {
+        Bitmap bitmapImage = null;
         ExerciseInstructions customExercise;
         String customExerciseName = customExerciseNameInput.getText().toString();
         String customExerciseDescription = customExerciseDescriptionInput.getText().toString();
-        Bitmap bitmapImage = displayImageView.getDrawingCache();
+        // bitmapImage = displayImageView.getDrawingCache(); // always returns null
+        bitmapImage =((BitmapDrawable)displayImageView.getDrawable()).getBitmap(); // crashes if no image is selected
         System.out.println(customExerciseName);
+        System.out.println(bitmapImage);
         if(bitmapImage == null){
             System.out.println("No image selected");
             customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription);
@@ -102,8 +107,8 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription, imgString);
 
         }
-        //String json = convertObjectToJson(customExercise);
-        //System.out.println(getFilesDir());
+        String json = convertObjectToJson(customExercise);
+        System.out.println(getFilesDir());
 
         try {
             File file = new File(this.getFilesDir(), "Test");
@@ -113,7 +118,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            //bufferedWriter.write(json);
+            bufferedWriter.write(json);
             bufferedWriter.close();
             System.out.println("File saved");
         } catch (IOException e) {
@@ -145,20 +150,20 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
     }
 
- /*   public String convertObjectToJson(Object object) {
-        *//*Gson gson = new Gson();
+    public String convertObjectToJson(Object object) {
+        Gson gson = new Gson();
         String json = gson.toJson(object);
         System.out.println(json);
-        return json;*//*
-    }*/
+        return json;
+    }
 
     public void convertJsonToObject(String json) {
-        /*Gson gson = new Gson();
+        Gson gson = new Gson();
         ExerciseInstructions exerciseInstructions = gson.fromJson(json, ExerciseInstructions.class);
         System.out.println(json);
         //visa texten i gui -- ta bort senare
-        customExerciseNameInput.setText(exerciseInstructions.getName());
-        customExerciseDescriptionInput.setText(exerciseInstructions.getDescription());*/
+        customExerciseNameInput.setText(exerciseInstructions.getExerciseName());
+        customExerciseDescriptionInput.setText(exerciseInstructions.getExerciseDescription());
     }
 
     private void imageChooser() {
