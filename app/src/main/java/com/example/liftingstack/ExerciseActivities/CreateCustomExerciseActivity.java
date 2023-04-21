@@ -89,7 +89,11 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         String customExerciseName = customExerciseNameInput.getText().toString();
         String customExerciseDescription = customExerciseDescriptionInput.getText().toString();
         // bitmapImage = displayImageView.getDrawingCache(); // always returns null
-        bitmapImage =((BitmapDrawable)displayImageView.getDrawable()).getBitmap(); // crashes if no image is selected
+        // bitmapImage =((BitmapDrawable)displayImageView.getDrawable()).getBitmap(); // crashes if no image is selected
+
+        if (displayImageView.getDrawable() instanceof BitmapDrawable) {
+            bitmapImage = ((BitmapDrawable) displayImageView.getDrawable()).getBitmap();
+        }
         System.out.println(customExerciseName);
         System.out.println(bitmapImage);
         if(bitmapImage == null){
@@ -164,6 +168,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         //visa texten i gui -- ta bort senare
         customExerciseNameInput.setText(exerciseInstructions.getExerciseName());
         customExerciseDescriptionInput.setText(exerciseInstructions.getExerciseDescription());
+
     }
 
     private void imageChooser() {
