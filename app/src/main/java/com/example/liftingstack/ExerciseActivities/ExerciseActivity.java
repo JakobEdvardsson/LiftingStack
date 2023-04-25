@@ -89,4 +89,17 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
         intent.putExtra("Exercise", exerciseInstructions);
         activityResultLauncher.launch(intent);
     }
+
+
+    /**
+     * Temporary button just to show temporary way of saving and loading an exercise - BNI
+     * /
+     * @param
+     */
+
+    public void launchCreateCustomExercise(View v){
+        Intent intent = new Intent(this, CreateCustomExerciseActivity.class);
+        startActivity(intent);
+    }
+
 }
