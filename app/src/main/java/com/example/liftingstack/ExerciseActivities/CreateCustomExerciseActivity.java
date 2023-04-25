@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,7 +107,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             // if we want to append the saved file we can use ** new FileWriter(file, true); **
             //https://stackoverflow.com/questions/69582517/how-can-i-save-every-data-in-json-file-android-studio
 
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(json);
             bufferedWriter.close();
@@ -130,11 +131,12 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             }
             bufferedReader.close();
             String response = stringBuilder.toString();
+            System.out.println("response");
+            Log.i("load", response);
             convertJsonToObject(response);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public String convertObjectToJson(Object object) {
