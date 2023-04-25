@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 
@@ -148,9 +149,32 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         ExerciseInstructions exerciseInstructions = gson.fromJson(json, ExerciseInstructions.class);
         System.out.println(json);
         //visa texten i gui -- ta bort senare
-        customExerciseNameInput.setText(exerciseInstructions.getExerciseName());
-        customExerciseDescriptionInput.setText(exerciseInstructions.getExerciseDescription());
+        displayObjectOnScreen(exerciseInstructions);
 
+
+    }
+
+    public void displayObjectOnScreen(Object object) {
+        if(object instanceof ExerciseInstructions) {
+            ExerciseInstructions exerciseInstructions = ((ExerciseInstructions) object);
+
+            customExerciseNameInput.setText(exerciseInstructions.getExerciseName());
+            customExerciseDescriptionInput.setText(exerciseInstructions.getExerciseDescription());
+            String imageString = exerciseInstructions.getImage();
+            StringToBitMap(imageString);
+            displayImageView.setImageBitmap(StringToBitMap(imageString));
+        }
+    }
+    public Bitmap StringToBitMap(String encodedString){
+        try{
+            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 
     private void imageChooser() {
