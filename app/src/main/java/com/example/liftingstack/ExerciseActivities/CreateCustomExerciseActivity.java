@@ -159,15 +159,26 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     public ArrayList<ExerciseInstructions> convertJsonToObject(String json) {
         Gson gson = new Gson();
         Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
-        listAllExercises = gson.fromJson(json, userListType);
+        // listAllExercises = gson.fromJson(json, userListType);
+        ArrayList<ExerciseInstructions> testList = gson.fromJson(json, userListType);
         //visa texten i gui -- ta bort senare
-
-        displayObjectOnScreen(listAllExercises.get(listAllExercises.size()-1));
-        return listAllExercises;
+        // testa typecasta till ExerciseInstructions
+        Log.i("Testdisplay", "-3");
+        // raden nedan funkar ej, appen kraschar
+        ExerciseInstructions displayObj = testList.get(0);
+        Log.i("Testdisplay", "-2");
+        displayObjectOnScreen(displayObj);
+        Log.i("Testdisplay", "-1");
+        return testList;
     }
 
     public void displayObjectOnScreen(Object object) {
+        Log.i("Testdisplay", "1");
+        Log.i("Testdisplay", String.valueOf(object.getClass()));
         if(object instanceof ExerciseInstructions) {
+            Log.i("Testdisplay", "2");
+
+
             ExerciseInstructions exerciseInstructions = ((ExerciseInstructions) object);
 
             customExerciseNameInput.setText(exerciseInstructions.getExerciseName());
@@ -175,6 +186,8 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             String imageString = exerciseInstructions.getImage();
             StringToBitMap(imageString);
             displayImageView.setImageBitmap(StringToBitMap(imageString));
+            Log.i("Testdisplay", "3");
+
         }
     }
     public Bitmap StringToBitMap(String encodedString){
