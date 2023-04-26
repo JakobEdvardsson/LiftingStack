@@ -106,6 +106,12 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         listAllExercises.add(customExercise);
 
         String json = convertObjectToJson(listAllExercises);
+        // Test parse Json array enl: https://howtodoinjava.com/gson/gson-parse-json-array/
+        /*ExerciseInstructions[] userArray = new Gson().fromJson(json, ExerciseInstructions[].class);
+        Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
+
+        ArrayList<ExerciseInstructions> list = userArray.fromJson(json, listType);*/
+        // slut
         System.out.println(getFilesDir());
 
         try {
@@ -158,14 +164,14 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
     public ArrayList<ExerciseInstructions> convertJsonToObject(String json) {
         Gson gson = new Gson();
-        Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
+        Type userListType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
         // listAllExercises = gson.fromJson(json, userListType);
         ArrayList<ExerciseInstructions> testList = gson.fromJson(json, userListType);
         //visa texten i gui -- ta bort senare
         // testa typecasta till ExerciseInstructions
         Log.i("Testdisplay", "-3");
         // raden nedan funkar ej, appen kraschar
-        ExerciseInstructions displayObj = testList.get(0);
+        ExerciseInstructions displayObj = ((ExerciseInstructions)testList.get(0));
         Log.i("Testdisplay", "-2");
         displayObjectOnScreen(displayObj);
         Log.i("Testdisplay", "-1");
