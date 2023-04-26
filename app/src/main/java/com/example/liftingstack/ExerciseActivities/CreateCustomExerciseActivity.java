@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
 
@@ -31,23 +32,26 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
+import com.example.liftingstack.Entity.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.example.liftingstack.R;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class CreateCustomExerciseActivity extends AppCompatActivity {
     EditText customExerciseNameInput;
     EditText customExerciseDescriptionInput;
 
     ImageView displayImageView;
-
     Button selectImageButton, saveButton, loadButton;
-
     String imgString;
 
+    ArrayList<ExerciseInstructions> listAllExercises = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +60,6 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
         customExerciseNameInput = (EditText) findViewById(R.id.customExerciseNameInput);
         customExerciseDescriptionInput = (EditText) findViewById(R.id.customExerciseDescriptionInput);
-
 
         selectImageButton = findViewById(R.id.selectImageButton);
         displayImageView = findViewById(R.id.displayImageView);
@@ -98,7 +101,11 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             imgString = Base64.encodeToString(imgByte, Base64.DEFAULT);
             customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription, imgString);
         }
-        String json = convertObjectToJson(customExercise);
+        // TODO check if savefile already exists, if so, load the list from there.
+        listAllExercises = loadExercise(v);
+        listAllExercises.add(customExercise);
+
+        String json = convertObjectToJson(listAllExercises);
         System.out.println(getFilesDir());
 
         try {
@@ -111,13 +118,15 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(json);
             bufferedWriter.close();
+
             System.out.println("File saved");
+            Log.i("Savetest", json);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void loadExercise(View v) {
+    public ArrayList<ExerciseInstructions> loadExercise(View v) {
 
         File file = new File(this.getFilesDir(), "Test");
         try {
@@ -132,10 +141,11 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             bufferedReader.close();
             String response = stringBuilder.toString();
             System.out.println("response");
-            Log.i("load", response);
-            convertJsonToObject(response);
+            Log.i("loadtest", response);
+            return convertJsonToObject(response);
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -146,14 +156,14 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         return json;
     }
 
-    public void convertJsonToObject(String json) {
+    public ArrayList<ExerciseInstructions> convertJsonToObject(String json) {
         Gson gson = new Gson();
-        ExerciseInstructions exerciseInstructions = gson.fromJson(json, ExerciseInstructions.class);
-        System.out.println(json);
+        Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
+        listAllExercises = gson.fromJson(json, userListType);
         //visa texten i gui -- ta bort senare
-        displayObjectOnScreen(exerciseInstructions);
 
-
+        displayObjectOnScreen(listAllExercises.get(listAllExercises.size()-1));
+        return listAllExercises;
     }
 
     public void displayObjectOnScreen(Object object) {
