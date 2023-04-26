@@ -21,7 +21,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
 
@@ -37,10 +36,8 @@ import java.util.ArrayList;
 
 import com.example.liftingstack.Entity.User;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import com.example.liftingstack.R;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class CreateCustomExerciseActivity extends AppCompatActivity {
@@ -72,6 +69,62 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         });
 
     }
+
+
+    public void testWriteAndReadJson(View v){
+        //
+        ArrayList<ExerciseInstructions> allExerciseInstructions = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
+        }
+        //
+        String json = new Gson().toJson(allExerciseInstructions);
+        //
+
+        //
+        File file = new File(this.getFilesDir(), "Test");
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //
+        //
+        ArrayList<ExerciseInstructions> list;
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            // read the contents of the file as a string
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+
+            // close the reader
+            reader.close();
+
+
+            Gson g = new Gson();
+            Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
+            list = g.fromJson(String.valueOf(jsonString), listType);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < list.size(); i++){
+            System.out.println("xxxxxxxxxxxxxxxx" + list.get(i).getExerciseName());
+        }
+
+    }
+
+
 
     public void saveCustomExercise(View v) {
         Bitmap bitmapImage = null;
