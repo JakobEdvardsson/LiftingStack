@@ -107,7 +107,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             // if we want to append the saved file we can use ** new FileWriter(file, true); **
             //https://stackoverflow.com/questions/69582517/how-can-i-save-every-data-in-json-file-android-studio
 
-            FileWriter fileWriter = new FileWriter(file, true);
+            FileWriter fileWriter = new FileWriter(file);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(json);
             bufferedWriter.close();

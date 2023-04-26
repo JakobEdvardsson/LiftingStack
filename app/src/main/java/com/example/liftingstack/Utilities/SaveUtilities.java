@@ -16,6 +16,7 @@ import java.io.IOException;
 public class SaveUtilities extends AppCompatActivity {
 
     public void saveExerciseInstruction(ExerciseInstructions exerciseInstructions) {
+
         String json = convertObjectToJson(exerciseInstructions);
         try {
             File file = new File(this.getFilesDir(), "Exercises");
