@@ -51,7 +51,13 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     String imgString;
     ArrayList<ExerciseInstructions> listAllExercises = new ArrayList<>();
 
-
+    /**
+     * Use this method for the first time the app opens.
+     * Another method calls this for testing purposes since
+     * loadBuiltInExercisesFromAssets(View v) cannot be called without a View parameter.
+     * @return ArrayList<ExerciseInstructions>
+     * @param <T>
+     */
     public <T> ArrayList<T> testFirstTimeOpened() {
         ArrayList<T> list;
         String json = null;
