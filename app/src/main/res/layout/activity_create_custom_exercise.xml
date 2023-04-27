@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:onClick="loadJSONfromAssets"
+        android:onClick="loadBuiltInExercisesFromAssets"
         android:text="LoadAssets"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loadExercise" />

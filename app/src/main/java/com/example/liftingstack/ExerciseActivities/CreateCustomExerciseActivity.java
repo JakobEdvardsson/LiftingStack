@@ -57,7 +57,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
      * @return ArrayList<ExerciseInstructions>
      * @param <T>
      */
-    public <T> ArrayList<T> loadJSONfromAssets(View v) {
+    public <T> ArrayList<T> loadBuiltInExercisesFromAssets(View v) {
 
         ArrayList<T> list;
         String json = null;
@@ -86,8 +86,8 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
 
+            // displays object on screen for testing
             ExerciseInstructions displayObj = ((ExerciseInstructions) list.get(2));
-            Log.i("Testdisplay", "-2");
             displayObjectOnScreen(displayObj);
 
         } catch (IOException e) {
