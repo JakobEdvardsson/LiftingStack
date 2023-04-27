@@ -29,6 +29,9 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -49,16 +52,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     ArrayList<ExerciseInstructions> listAllExercises = new ArrayList<>();
 
 
-    /**
-     * Loads the built-in-exercises from assets file,
-     * converts it to an arraylist of objects,
-     * finally displays the [2] index on screen (only for testing)
-     * @param v
-     * @return ArrayList<ExerciseInstructions>
-     * @param <T>
-     */
-    public <T> ArrayList<T> loadBuiltInExercisesFromAssets(View v) {
-
+    public <T> ArrayList<T> testFirstTimeOpened() {
         ArrayList<T> list;
         String json = null;
 
@@ -97,6 +91,20 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         return list;
     }
 
+    /**
+     * Calls the method testFirstTimeOpened which
+     * Loads the built-in-exercises from assets file,
+     * converts it to an arraylist of objects,
+     * finally displays the [2] index on screen (only for testing)
+     * @param v
+     * @return ArrayList<ExerciseInstructions>
+     * @param <T>
+     */
+    public <T> ArrayList<T> loadBuiltInExercisesFromAssets(View v) {
+        testFirstTimeOpened();
+       return null;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +123,21 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             }
         });
 
+
+        // Check to see if it is first time app was opened (put in mainActivity)
+
+        SharedPreferences sharedPreferences;
+        SharedPreferences.Editor sharedEditor;
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        sharedEditor = sharedPreferences.edit();
+
+            if (sharedPreferences.getBoolean("firstTime", true)) {
+                // put code for reading from assets etc.
+                sharedEditor.putBoolean("firstTime", false);
+                sharedEditor.commit();
+                sharedEditor.apply();
+                testFirstTimeOpened();
+            }
     }
 
     public void testWriteAndReadJson(View v) {
