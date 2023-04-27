@@ -19,7 +19,7 @@ public class FirstTimeAppOpens {
     //imports:
     //import android.content.Context;
     //import android.content.SharedPreferences;
-    //Add below in onCreate method:
+    //Add below in onCreate method (still in mainActivity):
     /*
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor sharedEditor;
