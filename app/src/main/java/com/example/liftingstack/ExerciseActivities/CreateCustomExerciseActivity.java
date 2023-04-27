@@ -1,17 +1,10 @@
 package com.example.liftingstack.ExerciseActivities;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,7 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.liftingstack.Controller.LoadFromDevice;
+import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,12 +35,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import com.example.liftingstack.Entity.User;
-import com.google.gson.Gson;
-
-import com.example.liftingstack.R;
-import com.google.gson.reflect.TypeToken;
 
 public class CreateCustomExerciseActivity extends AppCompatActivity {
     EditText customExerciseNameInput;
@@ -69,9 +65,19 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         });
 
     }
-
-
     public void testWriteAndReadJson(View v){
+        ArrayList<ExerciseInstructions> allExerciseInstructions = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
+        }
+        new SaveToDevice().saveListToDevice(allExerciseInstructions,this, "Test");
+        ArrayList<ExerciseInstructions> list = new LoadFromDevice().loadListFromDevice(this,"Test");
+        for (int i = 0; i < list.size(); i++){
+            System.out.println("xxxxxxxxxxxxxxxx" + list.get(i).getExerciseName());
+        }
+    }
+
+    public void testWriteAndReadJson1(View v){
         //
         ArrayList<ExerciseInstructions> allExerciseInstructions = new ArrayList<>();
         for (int i = 0; i < 5; i++){
