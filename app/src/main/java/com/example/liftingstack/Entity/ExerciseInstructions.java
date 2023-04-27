@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import android.graphics.Bitmap;
 
 /**
  * The type Exercise.

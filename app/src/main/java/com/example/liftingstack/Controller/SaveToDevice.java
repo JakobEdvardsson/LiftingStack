@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * The type Save to device.
  * This class is used to save data to the device.
  */
-public class SaveToDevice extends AppCompatActivity {
+public class SaveToDevice {
 
 
     /**
@@ -26,7 +26,7 @@ public class SaveToDevice extends AppCompatActivity {
      * @param activity   the activity
      * @param fileName   the file name
      */
-    public <T> void saveListToDevice(ArrayList<T> listToSave,AppCompatActivity activity, String fileName){
+    public <T> void saveListToDevice(ArrayList<T> listToSave, AppCompatActivity activity, String fileName){
         String json = new Gson().toJson(listToSave);
         File file = new File(activity.getFilesDir(), fileName);
         FileWriter fileWriter;
@@ -38,6 +38,5 @@ public class SaveToDevice extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

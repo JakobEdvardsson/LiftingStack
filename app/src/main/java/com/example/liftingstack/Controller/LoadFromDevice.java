@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * The type Load from device.
  * This class is used to load data from the device.
  */
-public class LoadFromDevice extends AppCompatActivity {
+public class LoadFromDevice{
 
 
     /**

@@ -66,15 +66,21 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
     }
     public void testWriteAndReadJson(View v){
+        //
         ArrayList<ExerciseInstructions> allExerciseInstructions = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 50; i++){
             allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
         }
+        //
         new SaveToDevice().saveListToDevice(allExerciseInstructions,this, "Test");
+        //
+
         ArrayList<ExerciseInstructions> list = new LoadFromDevice().loadListFromDevice(this,"Test");
+
         for (int i = 0; i < list.size(); i++){
             System.out.println("xxxxxxxxxxxxxxxx" + list.get(i).getExerciseName());
         }
+        //
     }
 
     public void testWriteAndReadJson1(View v){
