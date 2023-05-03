@@ -1,16 +1,15 @@
 package com.example.liftingstack.Entity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AllExerciseInstructions {
-    private List<ExerciseInstructions> exercisesInstructionsList = new ArrayList<>();
+    private ArrayList<ExerciseInstructions> exercisesInstructionsList = new ArrayList<>();
 
-    public List<ExerciseInstructions> getExercisesInstructionsList() {
+    public ArrayList<ExerciseInstructions> getExercisesInstructionsList() {
         return exercisesInstructionsList;
     }
 
-    public void setExercisesInstructionsList(List<ExerciseInstructions> exercisesInstructionsList) {
+    public void setExercisesInstructionsList(ArrayList<ExerciseInstructions> exercisesInstructionsList) {
         this.exercisesInstructionsList = exercisesInstructionsList;
     }
     public void removeExerciseInstructions(ExerciseInstructions exerciseInstructions)

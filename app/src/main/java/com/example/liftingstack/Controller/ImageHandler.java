@@ -1,6 +1,7 @@
 package com.example.liftingstack.Controller;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -16,5 +17,10 @@ public class ImageHandler {
         byte[] imgByte = baos.toByteArray();
         //Convert byte array to Base64 string
         return Base64.encodeToString(imgByte, Base64.DEFAULT);
+    }
+
+    public Bitmap convertBase64ToBitmap(String base64String) {
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }

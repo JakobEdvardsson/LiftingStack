@@ -8,48 +8,62 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.liftingstack.Controller.ImageHandler;
+import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.R;
 
 import java.io.IOException;
 
 public class ExerciseInstructionsPage extends AppCompatActivity{
-    Intent resultIntent;
+    private ImageView imageView;
+    private ExerciseInstructions currentExerciseInstruction;
+    private String imageBase64;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_instructions_page);
 
+        currentExerciseInstruction = getIntent().getParcelableExtra("Exercise");
+        String image = getIntent().getStringExtra("image");
+
         TextView exerciseName = findViewById(R.id.selectedProgramName);
-        exerciseName.setText("Exercise Name");
+        exerciseName.setText(currentExerciseInstruction.getExerciseName());
 
         EditText exerciseDescription = findViewById(R.id.ExerciseDescription);
-        exerciseDescription.setText("Exercise Description");
+        exerciseDescription.setText(currentExerciseInstruction.getExerciseDescription());
+
+        imageView = findViewById(R.id.exerciseImage);
+        if (image != null) {
+            imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(image));
+        }
 
     }
 
     public void onSaveClick(View v) {
-        EditText exerciseName = findViewById(R.id.selectedProgramName);
-        EditText exerciseDescription = findViewById(R.id.ExerciseDescription);
+        currentExerciseInstruction.setExerciseName(((TextView) findViewById(R.id.selectedProgramName)).getText().toString());
+        currentExerciseInstruction.setExerciseDescription(((EditText) findViewById(R.id.ExerciseDescription)).getText().toString());
+        currentExerciseInstruction.setImage(imageBase64);
 
-        resultIntent = new Intent();
-        resultIntent.putExtra("exerciseName", exerciseName.getText().toString());
-        resultIntent.putExtra("exerciseDescription", exerciseDescription.getText().toString());
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("exercise", currentExerciseInstruction);
+        resultIntent.putExtra("image", currentExerciseInstruction.getImage());
 
         setResult(78, resultIntent);
         finish();
     }
 
-    private void imageChooser() {
+    public void imageChooser(View v) {
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
-
         launchSomeActivity.launch(i);
     }
 
@@ -71,7 +85,12 @@ public class ExerciseInstructionsPage extends AppCompatActivity{
                                     = MediaStore.Images.Media.getBitmap(
                                     this.getContentResolver(),
                                     selectedImageUri);
-                            //displayImageView.setImageBitmap(selectedImageBitmap);
+                            //Resizing the Bitmap to fit the ImageView
+                            Bitmap resizedBitmap = Bitmap.createScaledBitmap(
+                                    selectedImageBitmap, 100, 100, false);
+                            imageBase64= new ImageHandler().convertImageToBase64(resizedBitmap);
+                            imageView.setImageBitmap(resizedBitmap);
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

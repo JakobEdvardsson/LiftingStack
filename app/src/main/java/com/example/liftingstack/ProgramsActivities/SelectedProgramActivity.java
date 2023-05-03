@@ -2,6 +2,12 @@ package com.example.liftingstack.ProgramsActivities;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -9,12 +15,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.util.Log;
-import android.view.View;
-import android.os.Bundle;
-import android.widget.EditText;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.Entity.Program;
@@ -97,5 +97,10 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         intent.putExtra("Exercise", exerciseInstructions);
 
         activityResultLauncher.launch(intent);
+    }
+
+    @Override
+    public void saveAndUpdateList(int index) {
+
     }
 }

@@ -72,7 +72,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
         }
         //
-        new SaveToDevice().saveListToDevice(allExerciseInstructions,this, "Test");
+        new SaveToDevice().saveExerciseListToDevice(allExerciseInstructions,this, "Test");
         //
 
         ArrayList<ExerciseInstructions> list = new LoadFromDevice().loadListFromDevice(this,"Test");

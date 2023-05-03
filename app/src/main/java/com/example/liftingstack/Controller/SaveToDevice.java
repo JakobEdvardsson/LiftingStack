@@ -26,7 +26,7 @@ public class SaveToDevice {
      * @param activity   the activity
      * @param fileName   the file name
      */
-    public <T> void saveListToDevice(ArrayList<T> listToSave, AppCompatActivity activity, String fileName){
+    public <T> void saveExerciseListToDevice(ArrayList<T> listToSave, AppCompatActivity activity, String fileName){
         String json = new Gson().toJson(listToSave);
         File file = new File(activity.getFilesDir(), fileName);
         FileWriter fileWriter;
