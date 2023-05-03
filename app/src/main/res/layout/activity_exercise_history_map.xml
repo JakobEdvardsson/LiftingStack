@@ -53,11 +53,6 @@
         app:layout_constraintTop_toBottomOf="@+id/weightInputSet2" />
 
 
-
-
-
-
-
     <EditText
         android:id="@+id/ExerciseName"
         android:layout_width="246dp"
@@ -67,7 +62,7 @@
         android:text="Exercise Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="28dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/repsText"
@@ -77,7 +72,7 @@
         android:inputType="textPersonName"
         android:text="Reps"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="91dp" />
+        app:layout_constraintTop_toBottomOf="@+id/ExerciseName" />
 
     <EditText
         android:id="@+id/weightText"
@@ -87,7 +82,7 @@
         android:inputType="textPersonName"
         android:text="Weight"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="81dp" />
+        app:layout_constraintTop_toBottomOf="@+id/ExerciseName" />
 
     <Button
         android:id="@+id/saveButton"
@@ -97,4 +92,5 @@
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

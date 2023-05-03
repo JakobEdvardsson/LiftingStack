@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class ExerciseHistoryMap extends AppCompatActivity {
 
-    private TextView repsSet1;
+    private EditText repsSet1;
     private TextView repsSet2;
     private TextView repsSet3;
     private TextView weightSet1;
