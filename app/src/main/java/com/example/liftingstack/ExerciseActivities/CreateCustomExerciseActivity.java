@@ -26,6 +26,12 @@ import com.example.liftingstack.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -33,18 +39,78 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class CreateCustomExerciseActivity extends AppCompatActivity {
     EditText customExerciseNameInput;
     EditText customExerciseDescriptionInput;
-
     ImageView displayImageView;
     Button selectImageButton, saveButton, loadButton;
     String imgString;
-
     ArrayList<ExerciseInstructions> listAllExercises = new ArrayList<>();
+
+    /**
+     * Use this method for the first time the app opens.
+     * Another method calls this for testing purposes since
+     * loadBuiltInExercisesFromAssets(View v) cannot be called without a View parameter.
+     * @return ArrayList<ExerciseInstructions>
+     * @param <T>
+     */
+    public <T> ArrayList<T> testFirstTimeOpened() {
+        ArrayList<T> list;
+        String json = null;
+
+        try {
+            // reads data in assets file
+            InputStream inputStream = getAssets().open("built_in_exercises");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+
+            // converts to string
+            json = new String(buffer, "UTF-8");
+
+            // converts to StringBuilder
+            StringBuilder jsonString = new StringBuilder();
+            jsonString.append(json);
+
+            // Logs data for testing
+            Log.i("TestAssets", json);
+            Log.i("TestAssets2", String.valueOf(jsonString));
+
+            // Converts to ArrayList of ExerciseInstructions
+            Gson g = new Gson();
+            Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
+            list = g.fromJson(String.valueOf(jsonString), listType);
+
+            // displays object on screen for testing
+            ExerciseInstructions displayObj = ((ExerciseInstructions) list.get(2));
+            displayObjectOnScreen(displayObj);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return list;
+    }
+
+    /**
+     * Calls the method testFirstTimeOpened which
+     * Loads the built-in-exercises from assets file,
+     * converts it to an arraylist of objects,
+     * finally displays the [2] index on screen (only for testing).
+     * This method is needed for testing with the button "loadAssets"
+     * @param v
+     * @return ArrayList<ExerciseInstructions>
+     * @param <T>
+     */
+    public <T> ArrayList<T> loadBuiltInExercisesFromAssets(View v) {
+        testFirstTimeOpened();
+       return null;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,29 +130,47 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             }
         });
 
+
+        // Check to see if it is first time app was opened (put in mainActivity)
+        // if it is Dr Phil will show up, if it isnt, nothing will happen
+        // remove this code later
+
+        SharedPreferences sharedPreferences;
+        SharedPreferences.Editor sharedEditor;
+        sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        sharedEditor = sharedPreferences.edit();
+
+            if (sharedPreferences.getBoolean("firstTime", true)) {
+                // put code for reading from assets etc.
+                sharedEditor.putBoolean("firstTime", false);
+                sharedEditor.commit();
+                sharedEditor.apply();
+                testFirstTimeOpened();
+            }
     }
-    public void testWriteAndReadJson(View v){
+
+    public void testWriteAndReadJson(View v) {
         //
         ArrayList<ExerciseInstructions> allExerciseInstructions = new ArrayList<>();
-        for (int i = 0; i < 50; i++){
+        for (int i = 0; i < 2; i++) {
             allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
         }
         //
         new SaveToDevice().saveExerciseListToDevice(allExerciseInstructions,this, "Test");
         //
 
-        ArrayList<ExerciseInstructions> list = new LoadFromDevice().loadListFromDevice(this,"Test");
+        ArrayList<ExerciseInstructions> list = new LoadFromDevice().loadListFromDevice(this, "Test");
 
-        for (int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             System.out.println("xxxxxxxxxxxxxxxx" + list.get(i).getExerciseName());
         }
         //
     }
 
-    public void testWriteAndReadJson1(View v){
+    public void testWriteAndReadJson1(View v) {
         //
         ArrayList<ExerciseInstructions> allExerciseInstructions = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
         }
         //
@@ -123,22 +207,23 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
 
             Gson g = new Gson();
-            Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<ExerciseInstructions>>() {
+            }.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        for (int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             System.out.println("xxxxxxxxxxxxxxxx" + list.get(i).getExerciseName());
         }
 
     }
 
 
-
     public void saveCustomExercise(View v) {
+        Log.i("SAVETEST11", "OK");
         Bitmap bitmapImage = null;
         ExerciseInstructions customExercise;
         String customExerciseName = customExerciseNameInput.getText().toString();
@@ -152,22 +237,21 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         System.out.println(customExerciseName);
 
         System.out.println(bitmapImage);
-        if(bitmapImage == null){
+        if (bitmapImage == null) {
 
             System.out.println("No image selected");
             customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription);
-        }
-        else {
+        } else {
             System.out.println("Image selected");
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte []imgByte = baos.toByteArray();
+            byte[] imgByte = baos.toByteArray();
 
             imgString = Base64.encodeToString(imgByte, Base64.DEFAULT);
             customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription, imgString);
         }
         // TODO check if savefile already exists, if so, load the list from there.
-        listAllExercises = loadExercise(v);
+        //listAllExercises = loadExercise(v);
         listAllExercises.add(customExercise);
 
         String json = convertObjectToJson(listAllExercises);
@@ -229,14 +313,15 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
     public ArrayList<ExerciseInstructions> convertJsonToObject(String json) {
         Gson gson = new Gson();
-        Type userListType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
+        Type userListType = new TypeToken<ArrayList<ExerciseInstructions>>() {
+        }.getType();
         // listAllExercises = gson.fromJson(json, userListType);
         ArrayList<ExerciseInstructions> testList = gson.fromJson(json, userListType);
         //visa texten i gui -- ta bort senare
         // testa typecasta till ExerciseInstructions
         Log.i("Testdisplay", "-3");
         // raden nedan funkar ej, appen kraschar
-        ExerciseInstructions displayObj = ((ExerciseInstructions)testList.get(0));
+        ExerciseInstructions displayObj = ((ExerciseInstructions) testList.get(0));
         Log.i("Testdisplay", "-2");
         displayObjectOnScreen(displayObj);
         Log.i("Testdisplay", "-1");
@@ -246,7 +331,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     public void displayObjectOnScreen(Object object) {
         Log.i("Testdisplay", "1");
         Log.i("Testdisplay", String.valueOf(object.getClass()));
-        if(object instanceof ExerciseInstructions) {
+        if (object instanceof ExerciseInstructions) {
             Log.i("Testdisplay", "2");
 
 
@@ -261,13 +346,13 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
         }
     }
-    public Bitmap StringToBitMap(String encodedString){
-        try{
-            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             return bitmap;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.getMessage();
             return null;
         }

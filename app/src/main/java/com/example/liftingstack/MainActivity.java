@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.liftingstack.Controller.ExerciseInstructionController;
+import com.example.liftingstack.Controller.FirstTimeAppOpens;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 
@@ -17,7 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         exerciseInstructionController = new ExerciseInstructionController();
+
     }
+
 
     public void launchSettings(View v) {
         Intent intent = new Intent(this, SettingsActivity.class);
