@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ExerciseHistoryMap">
 
-    <TextView
+
+
+
+    <EditText
         android:id="@+id/repsInputSet1"
         android:layout_width="72dp"
         android:layout_height="37dp"
@@ -14,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repsText" />
 
-    <TextView
+    <EditText
         android:id="@+id/repsInputSet2"
         android:layout_width="72dp"
         android:layout_height="37dp"
@@ -22,14 +25,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repsInputSet1" />
 
-    <TextView
+    <EditText
         android:id="@+id/repsInputSet3"
         android:layout_width="72dp"
         android:layout_height="37dp"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/repsInputSet2" />
-    <TextView
+    <EditText
         android:id="@+id/weightInputSet1"
         android:layout_width="72dp"
         android:layout_height="37dp"
@@ -37,21 +40,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weightText" />
 
-    <TextView
+    <EditText
         android:id="@+id/weightInputSet2"
         android:layout_width="72dp"
         android:layout_height="37dp"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weightInputSet1" />
-    <TextView
+    <EditText
         android:id="@+id/weightInputSet3"
         android:layout_width="72dp"
         android:layout_height="37dp"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weightInputSet2" />
-
 
     <EditText
         android:id="@+id/ExerciseName"
@@ -88,9 +90,10 @@
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:onClick="saveExerciseHistory"
         android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightInputSet3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

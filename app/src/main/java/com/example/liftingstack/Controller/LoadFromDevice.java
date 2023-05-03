@@ -1,6 +1,8 @@
 package com.example.liftingstack.Controller;
 
 
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
@@ -13,6 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The type Load from device.
@@ -56,7 +59,33 @@ public class LoadFromDevice{
         return list;
     }
 
+    public HashMap<String, HashMap> loadHashMapFromDevice(AppCompatActivity activity, String fileName){
 
+        HashMap<String, HashMap> hashMap;
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(new File(activity.getFilesDir(), fileName)));
+
+            // read the contents of the file as a string
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+
+            // close the reader
+            reader.close();
+
+            Gson g = new Gson();
+            Type listType = new TypeToken<HashMap<String, Object>>(){}.getType();
+            hashMap = g.fromJson(String.valueOf(jsonString), listType);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Log.i("TestHistory loadhashmap", hashMap.toString());
+        return hashMap;
+    }
 
 
 

@@ -8,22 +8,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.liftingstack.Controller.LoadFromDevice;
+import com.example.liftingstack.Controller.SaveToDevice;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ExerciseHistoryMap extends AppCompatActivity {
 
     private EditText repsSet1;
-    private TextView repsSet2;
-    private TextView repsSet3;
-    private TextView weightSet1;
-    private TextView weightSet2;
-    private TextView weightSet3;
-    private HashMap<String, Object> setDataMap;
+    private EditText repsSet2;
+    private EditText repsSet3;
+    private EditText weightSet1;
+    private EditText weightSet2;
+    private EditText weightSet3;
+    private HashMap<String, int[]> setDataMap = new HashMap<>();
     // key = vilket set(parsed integer, value = array[reps, vikt]
-    private HashMap<LocalDate, Object> dateDataMap;
+    private HashMap dateDataMap = new HashMap<>();
     // key = datum, value = setDataMap
-    private HashMap<String, Object> exerciseHistoryMap;
+    private HashMap<String, HashMap> exerciseHistoryMap = new HashMap<>();
     // key = exersice id, value = dateDataMap
 
 
@@ -50,14 +54,18 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         // check if theres already a date for the specific date if so, add to the HashMap
         // else just create a new date HashMap
         // add as many sets as have been done in a for loop
+        //exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
 
         int repsInt1 = Integer.parseInt(repsSet1.getText().toString());
         int weightInt1 = Integer.parseInt(weightSet1.getText().toString());
+        int repsInt2 = Integer.parseInt(repsSet2.getText().toString());
+        int weightInt2 = Integer.parseInt(weightSet2.getText().toString());
 
-        for (int i = 0; i < 1; i++) {
-            setSetDataMap(i, repsInt1, weightInt1);
+        for (int i = 1; i < 2; i++) {
+            setSetDataMap(1, repsInt1, weightInt1);
+            setSetDataMap(2, repsInt2, weightInt2);
         }
-
+        setExerciseHistoryMap("1");
 
 
         // call setExerciseHistoryMap
@@ -66,13 +74,26 @@ public class ExerciseHistoryMap extends AppCompatActivity {
     public void setSetDataMap(int set, int reps, int weight) {
         int setArray[] = {reps, weight};
         String setString = Integer.toString(set);
+        Log.i("TestHistory TestSet1",setArray.toString());
+        Log.i("TestHistory TestSet2",setString);
         setDataMap.put(setString, setArray);
-        Log.i("TestSet1", " "+setDataMap.toString());
+        Log.i("TestHistory TestSet3", " "+setDataMap.toString());
+
     }
 
-    public void setExerciseHistoryMap(int exerciseId, int year, int month, int day) {
-        LocalDate date = LocalDate.of(year, month, day);
+    public void setExerciseHistoryMap(String exerciseId) {
+        LocalDate date = LocalDate.now();
         dateDataMap.put(date, setDataMap);
+        exerciseHistoryMap.put(exerciseId, dateDataMap);
+        new SaveToDevice().saveHashMapToDevice(exerciseHistoryMap, this, "exerciseHistory");
+        exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
+
+
+        dateDataMap = exerciseHistoryMap.get("1"); //funkar ej pga någon casting -- BNI
+
+
+        Log.i("TestHistory TestSet4", dateDataMap.toString());
+        //setDataMap = dateDataMap.get(1);
 
     }
 }
