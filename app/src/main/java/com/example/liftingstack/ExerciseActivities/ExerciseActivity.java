@@ -73,7 +73,12 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
         allExerciseInstructions = new AllExerciseInstructions();
-        allExerciseInstructions.setExercisesInstructionsList(new LoadFromDevice().loadListFromDevice(this, "exerciseList"));
+        //TODO Denna ska tas bort sen när bni har implementerat "FirstTimeAppOpens"
+        try {
+            allExerciseInstructions.setExercisesInstructionsList(new LoadFromDevice().loadListFromDevice(this, "exerciseList"));
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         // RecyclerView
         recyclerView = findViewById(R.id.listExercise);
         setupRecyclerView();
