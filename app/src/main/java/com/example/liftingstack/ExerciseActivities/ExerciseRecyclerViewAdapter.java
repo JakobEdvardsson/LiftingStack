@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.R;
 
@@ -20,14 +21,19 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
     private Context context;
     private List<ExerciseInstructions> exerciseInstructions;
+    private static AllExerciseInstructions allExerciseInstructions;
+
 
     public ExerciseRecyclerViewAdapter(
             Context context, List<ExerciseInstructions> exerciseInstructions,
-            ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
+            ExerciseRecyclerViewInterface exerciseRecyclerViewInterface,
+            AllExerciseInstructions allExerciseInstructions) {
         this.context = context;
         this.exerciseInstructions = exerciseInstructions;
         this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;
+        this.allExerciseInstructions = allExerciseInstructions;
     }
+
     @NonNull
     @Override
     public ExerciseRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -48,12 +54,13 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return exerciseInstructions.size();
     }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    //Denna klass var static innan, krånglar den så får vi göra den static igen.
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView programNameTextView;
         TextView programDescriptionTextView;
         ImageView imageView;
@@ -69,13 +76,13 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
 
             itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view -> {
                 try {
-                    adapter.exerciseInstructions.remove(getAdapterPosition());
-                    adapter.notifyItemRemoved(getAdapterPosition());
+                    exerciseRecyclerViewInterface.saveAndUpdateList(getAdapterPosition());
                 } catch (Exception e) {
                     System.out.println(e);
                 }
             });
         }
+
         public ViewHolder linkAdapter(ExerciseRecyclerViewAdapter adapter) {
             this.adapter = adapter;
             return this;

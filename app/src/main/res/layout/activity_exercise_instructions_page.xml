@@ -7,9 +7,9 @@
     tools:context=".ExerciseActivities.ExerciseInstructionsPage">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="98dp"
-        android:layout_height="96dp"
+        android:id="@+id/exerciseImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.051"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.025"
         app:srcCompat="@drawable/baseline_fitness_center_24"
-        tools:srcCompat="@drawable/baseline_fitness_center_24" />
+         />
 
     <EditText
         android:id="@+id/selectedProgramName"
@@ -29,24 +29,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toEndOf="@+id/exerciseImage"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintVertical_bias="0.069"
+        android:padding="8dp"
+        android:background="@drawable/edittext_border"/>
 
     <EditText
         android:id="@+id/ExerciseDescription"
         android:layout_width="285dp"
         android:layout_height="151dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/edittext_border"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:padding="8dp"
         android:text="Exercise Description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectedProgramName"
         app:layout_constraintVertical_bias="0.104" />
+
 
     <ImageView
         android:id="@+id/imageView5"
@@ -72,5 +77,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <Button
+        android:id="@+id/change_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="imageChooser"
+        android:text="Change Image"
+        app:layout_constraintBottom_toTopOf="@+id/ExerciseDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseImage"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
