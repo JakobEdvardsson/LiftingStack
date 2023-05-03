@@ -20,7 +20,7 @@ import java.util.List;
 public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder> {
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
     private Context context;
-    private List<ExerciseInstructions> exerciseInstructions;
+    //private List<ExerciseInstructions> exerciseInstructions;
     private static AllExerciseInstructions allExerciseInstructions;
 
 
@@ -29,7 +29,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             ExerciseRecyclerViewInterface exerciseRecyclerViewInterface,
             AllExerciseInstructions allExerciseInstructions) {
         this.context = context;
-        this.exerciseInstructions = exerciseInstructions;
+        //this.exerciseInstructions = exerciseInstructions;
         this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;
         this.allExerciseInstructions = allExerciseInstructions;
     }
@@ -44,20 +44,20 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseRecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.programNameTextView.setText(exerciseInstructions.get(position).getExerciseName());
-        holder.programDescriptionTextView.setText(exerciseInstructions.get(position).getExerciseDescription());
+        holder.programNameTextView.setText(allExerciseInstructions.getExercisesInstructionsList().get(position).getExerciseName());
+        holder.programDescriptionTextView.setText(allExerciseInstructions.getExercisesInstructionsList().get(position).getExerciseDescription());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                exerciseRecyclerViewInterface.onExerciseClick(exerciseInstructions.get(holder.getAdapterPosition()));
+                exerciseRecyclerViewInterface.onExerciseClick(allExerciseInstructions.getExercisesInstructionsList().get(holder.getAdapterPosition()));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return exerciseInstructions.size();
+        return allExerciseInstructions.getExercisesInstructionsList().size();
     }
     //Denna klass var static innan, krånglar den så får vi göra den static igen.
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -76,7 +76,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
 
             itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view -> {
                 try {
-                    exerciseRecyclerViewInterface.saveAndUpdateList(getAdapterPosition());
+                    exerciseRecyclerViewInterface.removeExerciseAndUpdateList(getAdapterPosition());
                 } catch (Exception e) {
                     System.out.println(e);
                 }

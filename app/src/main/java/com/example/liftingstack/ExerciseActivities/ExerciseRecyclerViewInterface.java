@@ -4,6 +4,6 @@ import com.example.liftingstack.Entity.ExerciseInstructions;
 
 public interface ExerciseRecyclerViewInterface {
     void onExerciseClick(ExerciseInstructions exerciseInstructions);
-    void saveAndUpdateList(int index);
+    void removeExerciseAndUpdateList(int index);
 
 }

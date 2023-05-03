@@ -10,7 +10,7 @@ public class ImageHandler {
 
     public String convertImageToBase64(Bitmap image) {
         //Make image smaller
-        Bitmap bitmap = Bitmap.createScaledBitmap(image, 100, 100, true);
+        Bitmap bitmap = Bitmap.createScaledBitmap(image, 300, 300, true);
         //Convert image to byte array as JPEG
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);

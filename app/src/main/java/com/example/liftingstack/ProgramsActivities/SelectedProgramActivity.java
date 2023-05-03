@@ -100,7 +100,7 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
     }
 
     @Override
-    public void saveAndUpdateList(int index) {
+    public void removeExerciseAndUpdateList(int index) {
 
     }
 }

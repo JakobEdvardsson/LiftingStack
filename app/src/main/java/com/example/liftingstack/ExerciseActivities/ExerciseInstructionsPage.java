@@ -3,6 +3,7 @@ package com.example.liftingstack.ExerciseActivities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,10 +22,9 @@ import com.example.liftingstack.R;
 
 import java.io.IOException;
 
-public class ExerciseInstructionsPage extends AppCompatActivity{
+public class ExerciseInstructionsPage extends AppCompatActivity {
     private ImageView imageView;
     private ExerciseInstructions currentExerciseInstruction;
-    private String imageBase64;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity{
 
         currentExerciseInstruction = getIntent().getParcelableExtra("Exercise");
         String image = getIntent().getStringExtra("image");
+        currentExerciseInstruction.setImage(image);
 
         TextView exerciseName = findViewById(R.id.selectedProgramName);
         exerciseName.setText(currentExerciseInstruction.getExerciseName());
@@ -47,10 +48,25 @@ public class ExerciseInstructionsPage extends AppCompatActivity{
 
     }
 
+    public void rotateImage(View v) {
+        try {
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            ImageHandler imageHandler = new ImageHandler();
+            Bitmap bitmap = imageHandler.convertBase64ToBitmap(currentExerciseInstruction.getImage());
+            // Rotate the bitmap
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            currentExerciseInstruction.setImage(imageHandler.convertImageToBase64(bitmap));
+            imageView.setImageBitmap(bitmap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void onSaveClick(View v) {
         currentExerciseInstruction.setExerciseName(((TextView) findViewById(R.id.selectedProgramName)).getText().toString());
         currentExerciseInstruction.setExerciseDescription(((EditText) findViewById(R.id.ExerciseDescription)).getText().toString());
-        currentExerciseInstruction.setImage(imageBase64);
+        //currentExerciseInstruction.setImage(imageBase64);
 
         Intent resultIntent = new Intent();
         resultIntent.putExtra("exercise", currentExerciseInstruction);
@@ -87,8 +103,9 @@ public class ExerciseInstructionsPage extends AppCompatActivity{
                                     selectedImageUri);
                             //Resizing the Bitmap to fit the ImageView
                             Bitmap resizedBitmap = Bitmap.createScaledBitmap(
-                                    selectedImageBitmap, 100, 100, false);
-                            imageBase64= new ImageHandler().convertImageToBase64(resizedBitmap);
+                                    selectedImageBitmap, 300, 300, false);
+                            //imageBase64 = new ImageHandler().convertImageToBase64(resizedBitmap);
+                            currentExerciseInstruction.setImage(new ImageHandler().convertImageToBase64(resizedBitmap));
                             imageView.setImageBitmap(resizedBitmap);
 
                         } catch (IOException e) {
