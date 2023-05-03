@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="375dp"
             android:layout_height="match_parent"
-            android:background="@drawable/list_buttons_style"
+            android:background="@drawable/exercise_list_buttons_style"
             android:textAlignment="center">
 
             <TextView
