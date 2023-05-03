@@ -32,8 +32,10 @@ public class ExerciseHistoryMap extends AppCompatActivity {
 
 
     // **BNI** Vi kan använda en datepicker som det finns färdig kod för om vi vill att
-    // man ska kunna välja vilket datum man loggar för, då behöver vi ha tre int som parametrar,
-    // just nu kör vi på dagens datum.
+    // man ska kunna välja vilket datum man loggar för, se https://www.youtube.com/watch?v=qCoidM98zNk
+    // då behöver vi ha tre int som parametrar.
+
+    // just nu kör vi att det automatiskt loggas som dagens datum.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
