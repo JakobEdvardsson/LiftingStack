@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 public class FirstTimeAppOpens {
 
-    // Check to see if it is first time app was opened (put this in mainActivity)
+    // Check to see if it is first time app was opened (put the code in this comment in mainActivity)
     //imports:
     //import android.content.Context;
     //import android.content.SharedPreferences;
-    //Add below in onCreate method (still in mainActivity):
+    //Add below in onCreate() method (still in mainActivity):
     /*
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor sharedEditor;
@@ -27,7 +27,8 @@ public class FirstTimeAppOpens {
     sharedEditor = sharedPreferences.edit();
 
             if (sharedPreferences.getBoolean("firstTime", true)) {
-        // put code here for first time opening, reading from assets etc.
+        // ***** put code here for first time opening, reading from assets etc ****
+            // call below method "testFirstTimeAppOpened" for example
 
         // set "firstTime to false so that this code doesnt run again
         sharedEditor.putBoolean("firstTime", false);

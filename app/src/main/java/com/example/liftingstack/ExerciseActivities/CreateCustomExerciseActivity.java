@@ -101,7 +101,8 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
      * Calls the method testFirstTimeOpened which
      * Loads the built-in-exercises from assets file,
      * converts it to an arraylist of objects,
-     * finally displays the [2] index on screen (only for testing)
+     * finally displays the [2] index on screen (only for testing).
+     * This method is needed for testing with the button "loadAssets"
      * @param v
      * @return ArrayList<ExerciseInstructions>
      * @param <T>
@@ -131,6 +132,8 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
 
         // Check to see if it is first time app was opened (put in mainActivity)
+        // if it is Dr Phil will show up, if it isnt, nothing will happen
+        // remove this code later
 
         SharedPreferences sharedPreferences;
         SharedPreferences.Editor sharedEditor;
