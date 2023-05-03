@@ -6,6 +6,95 @@
     android:layout_height="match_parent"
     tools:context=".ExerciseHistoryMap">
 
+    <TextView
+        android:id="@+id/repsInputSet1"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repsText" />
+
+    <TextView
+        android:id="@+id/repsInputSet2"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repsInputSet1" />
+
+    <TextView
+        android:id="@+id/repsInputSet3"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repsInputSet2" />
+    <TextView
+        android:id="@+id/weightInputSet1"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightText" />
+
+    <TextView
+        android:id="@+id/weightInputSet2"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightInputSet1" />
+    <TextView
+        android:id="@+id/weightInputSet3"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightInputSet2" />
 
 
+
+
+
+
+
+    <EditText
+        android:id="@+id/ExerciseName"
+        android:layout_width="246dp"
+        android:layout_height="57dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Exercise Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="28dp" />
+
+    <EditText
+        android:id="@+id/repsText"
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Reps"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="91dp" />
+
+    <EditText
+        android:id="@+id/weightText"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Weight"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saveExerciseHistory"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
