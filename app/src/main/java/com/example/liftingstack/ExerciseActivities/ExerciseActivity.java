@@ -48,7 +48,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
         // Create a new ExerciseRecyclerViewAdapter which will display all exercises
         ExerciseRecyclerViewAdapter exerciseAdapter = new ExerciseRecyclerViewAdapter(
-                this, new AllExerciseInstructions(this).getExercisesInstructionsList(), this, allExerciseInstructions);
+                this, allExerciseInstructions.getExercisesInstructionsList(), this, allExerciseInstructions);
         recyclerView.setAdapter(exerciseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -74,6 +74,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
     @Override
     public void removeExerciseAndUpdateList(int index) {
+        //TODO If in program, remove from program and save program and ask if user wants to remove anyways.
         allExerciseInstructions.getExercisesInstructionsList().remove(index);
         saveToFile();
         setupRecyclerView();

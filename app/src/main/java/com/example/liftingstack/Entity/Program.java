@@ -14,6 +14,7 @@ import java.util.List;
 public class Program implements Parcelable {
     private String name;
     private String description;
+    //TODO Change to String of exerciseInstructions ID
     private List<ExerciseInstructions> exerciseInstructions;
 
     /**
