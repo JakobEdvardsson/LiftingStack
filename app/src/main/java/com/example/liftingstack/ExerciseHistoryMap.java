@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -32,6 +33,8 @@ public class ExerciseHistoryMap extends AppCompatActivity {
     // key = exersice id (String), value = dateDataMap
 
 
+
+
     // **BNI** Vi kan använda en datepicker som det finns färdig kod för om vi vill att
     // man ska kunna välja vilket datum man loggar för, se https://www.youtube.com/watch?v=qCoidM98zNk
     // då behöver vi ha tre int som parametrar.
@@ -42,6 +45,8 @@ public class ExerciseHistoryMap extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_history_map);
+
+
         repsSet1 = findViewById(R.id.repsInputSet1);
         repsSet2 = findViewById(R.id.repsInputSet2);
         repsSet3 = findViewById(R.id.repsInputSet3);
@@ -65,6 +70,16 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         String weightString1 = weightSet1.getText().toString();
         String repsString2 = repsSet2.getText().toString();
         String weightString2 = weightSet2.getText().toString();
+
+
+        // ***********Test med loop för att hämta värden
+        /*for (int i = 0; i < 16; i++) {
+            int id = getResources().getIdentifier("button_"+i, "id", getPackageName());
+            button[i] = findViewById(id);
+        } */
+        // **********test för loop för att hämta värden
+
+
 
         // find some way to make a loop which checks how many sets have been enetered and call setSetDataMap as many times instead of below
 
@@ -106,19 +121,18 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         dateDataMap = exerciseHistoryMap.get("1");
         setDataMap = dateDataMap.get("2023-05-05");
 
-
         Log.i("TestHistory TestSet4", exerciseHistoryMap.toString());
         Log.i("TestHistory TestSet5", exerciseHistoryMap.get("1").toString());
         Log.i("TestHistory TestSet6", exerciseHistoryMap.get("1").get("2023-05-05").toString());
         Log.i("TestHistory TestSet7", " " + exerciseHistoryMap.get("1").get("2023-05-05").get("1"));
         Log.i("TestHistory getId", " " + exerciseHistoryMap.keySet());
         Log.i("TestHistory getDates", " " + exerciseHistoryMap.get("1").keySet());
+        if(exerciseHistoryMap.get("1").keySet().toString().equals("[2023-05-05]") ){
+            Log.i("TestHistory if test", "ok");
+        }
         Log.i("TestHistory getSets", " " + exerciseHistoryMap.get("1").get("2023-05-05").keySet());
 
-
         Log.i("TestHistory getReps", " " + exerciseHistoryMap.get("1").get("2023-05-05").get("1").get(1));
-
-
 
     }
 }
