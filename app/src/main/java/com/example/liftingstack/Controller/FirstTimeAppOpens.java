@@ -27,14 +27,16 @@ public class FirstTimeAppOpens {
     sharedEditor = sharedPreferences.edit();
 
             if (sharedPreferences.getBoolean("firstTime", true)) {
-        // ***** put code here for first time opening, reading from assets etc ****
+        // ***** put code here for first time opening,
+        // reading from assets etc, creating empty savefile for exercises,
+        // programs and history ****
             // call below method "testFirstTimeAppOpened" for example
 
         // set "firstTime to false so that this code doesnt run again
         sharedEditor.putBoolean("firstTime", false);
         sharedEditor.commit();
         sharedEditor.apply();
-    }
+            }
     */
 
 
@@ -73,6 +75,8 @@ public class FirstTimeAppOpens {
             Gson g = new Gson();
             Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
+
+            //TODO create "exerciseList" file and save the list in "exerciseList" file, do the same for programs
 
 
         } catch (IOException e) {

@@ -114,4 +114,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/testExerciseHistoryMap"
+        android:layout_width="219dp"
+        android:layout_height="65dp"
+        android:onClick="launchExerciseHistoryMap"
+        android:text="testStartWorkout"
+        app:layout_constraintBottom_toTopOf="@+id/button_graf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.679" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void launchExerciseHistoryMap(View v) {
+        Intent intent = new Intent(this, ExerciseHistoryMap.class);
+        startActivity(intent);
+    }
+
 
     public void launchSettings(View v) {
         Intent intent = new Intent(this, SettingsActivity.class);
