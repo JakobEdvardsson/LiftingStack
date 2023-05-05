@@ -4,101 +4,59 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.liftingstack.Controller.LoadFromDevice;
-import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.MainActivity;
 import com.example.liftingstack.R;
 
-import java.util.Objects;
-
 public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyclerViewInterface {
 
     private AllExerciseInstructions allExerciseInstructions;
-    private ExerciseInstructions currentExerciseInstructions = null;
     private RecyclerView recyclerView;
-
-    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+    private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == 78) {
-                        Intent data = result.getData();
-                        if (data != null) {
-                            ExerciseInstructions exercise = data.getParcelableExtra("exercise");
-                            String image = data.getStringExtra("image");
-                            exercise.setImage(image);
-
-
-                            int index = allExerciseInstructions.getExercisesInstructionsList().indexOf(currentExerciseInstructions);
-                            allExerciseInstructions.getExercisesInstructionsList().set(index, exercise);
-                            //Save the changes to the file
-                            saveToFile();
-                            setupRecyclerView();
-
-
-                            Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(
-                                    allExerciseInstructions.getExercisesInstructionsList().indexOf(currentExerciseInstructions));
-
-                        }
-                    }
-                }
-            }
+            result -> setupRecyclerView()
     );
 
-    private void saveToFile() {
-        new SaveToDevice().saveListToDevice(allExerciseInstructions.getExercisesInstructionsList(), this, "exerciseList");
-    }
-
-
-    public void setupRecyclerView() {
-        ExerciseRecyclerViewAdapter exerciseAdapter = new ExerciseRecyclerViewAdapter(
-                this, allExerciseInstructions.getExercisesInstructionsList(), this, allExerciseInstructions);
-        recyclerView.setAdapter(exerciseAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
-        allExerciseInstructions = new AllExerciseInstructions();
-
-        try {
-            allExerciseInstructions.setExercisesInstructionsList(new LoadFromDevice().loadListFromDevice(this, "exerciseList"));
-        }catch (Exception e){
-            System.out.println("No exercise list found");
-            e.printStackTrace();
-        }
 
         // RecyclerView
         recyclerView = findViewById(R.id.listExercise);
+        // Setup RecyclerView and creates allExerciseInstructions object
         setupRecyclerView();
 
+    }
 
-        //Create a new exercise
-        findViewById(R.id.addIcon).setOnClickListener(view -> {
-            // Add exercise
-            ExerciseInstructions exerciseInstruction = new ExerciseInstructions("Exercise Name", "Exercise Description");
-            currentExerciseInstructions = exerciseInstruction;
-            // Add exercise to the ArrayList
-            allExerciseInstructions.addExerciseInstructions(exerciseInstruction);
+    private void saveToFile() {
+        allExerciseInstructions.saveExercisesInstructionsList(this);
+    }
 
-            Intent intent = new Intent(this, ExerciseInstructionsPage.class);
-            intent.putExtra("Exercise", exerciseInstruction);
 
-            activityResultLauncher.launch(intent);
-        });
+    public void setupRecyclerView() {
+        // Create a new AllExerciseInstructions which will load all exercises from file
+        allExerciseInstructions = new AllExerciseInstructions(this);
+
+        // Create a new ExerciseRecyclerViewAdapter which will display all exercises
+        ExerciseRecyclerViewAdapter exerciseAdapter = new ExerciseRecyclerViewAdapter(
+                this, new AllExerciseInstructions(this).getExercisesInstructionsList(), this, allExerciseInstructions);
+        recyclerView.setAdapter(exerciseAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+
+    public void newExercise(View v) {
+        Intent intent = new Intent(this, ExerciseInstructionsPage.class);
+        activityResultLauncher.launch(intent);
     }
 
     public void goBack(View v) {
@@ -108,10 +66,8 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
     @Override
     public void onExerciseClick(ExerciseInstructions exerciseInstructions) {
-        currentExerciseInstructions = exerciseInstructions;
         Intent intent = new Intent(this, ExerciseInstructionsPage.class);
-        intent.putExtra("Exercise", currentExerciseInstructions);
-        intent.putExtra("image", currentExerciseInstructions.getImage());
+        intent.putExtra("ExerciseID", exerciseInstructions.getId());
 
         activityResultLauncher.launch(intent);
     }

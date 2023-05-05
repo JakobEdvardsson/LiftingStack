@@ -15,7 +15,7 @@ public class ExerciseInstructionController {
      * Creates a new list of exercises.
      */
     public ExerciseInstructionController() {
-        allExerciseInstructions = new AllExerciseInstructions();
+       // allExerciseInstructions = new AllExerciseInstructions();
     }
 
     /**

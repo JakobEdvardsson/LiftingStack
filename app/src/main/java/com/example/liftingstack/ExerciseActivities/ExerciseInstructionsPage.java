@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.ImageHandler;
+import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.R;
 
@@ -25,15 +26,32 @@ import java.io.IOException;
 public class ExerciseInstructionsPage extends AppCompatActivity {
     private ImageView imageView;
     private ExerciseInstructions currentExerciseInstruction;
+    private AllExerciseInstructions allExerciseInstructions;
+    private String idForExercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_instructions_page);
 
-        currentExerciseInstruction = getIntent().getParcelableExtra("Exercise");
-        String image = getIntent().getStringExtra("image");
-        currentExerciseInstruction.setImage(image);
+        allExerciseInstructions = new AllExerciseInstructions(this);
+        idForExercise = getIntent().getStringExtra("ExerciseID");
+
+
+        boolean exerciseFound = false;
+        //Get the exercise from the list
+        for (ExerciseInstructions exercise : allExerciseInstructions.getExercisesInstructionsList()) {
+            if (exercise.getId().equals(idForExercise)) {
+                currentExerciseInstruction = exercise;
+                exerciseFound = true;
+                break;
+            }
+        }
+
+        if (!exerciseFound) {
+            currentExerciseInstruction = new ExerciseInstructions("New Exercise", "New Description");
+        }
+
 
         TextView exerciseName = findViewById(R.id.selectedProgramName);
         exerciseName.setText(currentExerciseInstruction.getExerciseName());
@@ -41,9 +59,10 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         EditText exerciseDescription = findViewById(R.id.ExerciseDescription);
         exerciseDescription.setText(currentExerciseInstruction.getExerciseDescription());
 
+
         imageView = findViewById(R.id.exerciseImage);
-        if (image != null) {
-            imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(image));
+        if (currentExerciseInstruction.getImage() != null) {
+            imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(currentExerciseInstruction.getImage()));
         }
 
     }
@@ -64,15 +83,24 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
     }
 
     public void onSaveClick(View v) {
+
         currentExerciseInstruction.setExerciseName(((TextView) findViewById(R.id.selectedProgramName)).getText().toString());
         currentExerciseInstruction.setExerciseDescription(((EditText) findViewById(R.id.ExerciseDescription)).getText().toString());
-        //currentExerciseInstruction.setImage(imageBase64);
 
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("exercise", currentExerciseInstruction);
-        resultIntent.putExtra("image", currentExerciseInstruction.getImage());
+        if (!allExerciseInstructions.getExercisesInstructionsList().contains(currentExerciseInstruction)) {
+            allExerciseInstructions.addExerciseInstructions(currentExerciseInstruction);
+        } else {
+            for (ExerciseInstructions exercise : allExerciseInstructions.getExercisesInstructionsList()) {
+                if (exercise.getId().equals(idForExercise)) {
+                    exercise.setExerciseName(currentExerciseInstruction.getExerciseName());
+                    exercise.setExerciseDescription(currentExerciseInstruction.getExerciseDescription());
+                    exercise.setImage(currentExerciseInstruction.getImage());
+                    break;
+                }
+            }
+        }
+        allExerciseInstructions.saveExercisesInstructionsList(this);
 
-        setResult(78, resultIntent);
         finish();
     }
 
@@ -80,10 +108,10 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
-        launchSomeActivity.launch(i);
+        chooseImage.launch(i);
     }
 
-    ActivityResultLauncher<Intent> launchSomeActivity
+    ActivityResultLauncher<Intent> chooseImage
             = registerForActivityResult(
             new ActivityResultContracts
                     .StartActivityForResult(),
@@ -104,7 +132,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
                             //Resizing the Bitmap to fit the ImageView
                             Bitmap resizedBitmap = Bitmap.createScaledBitmap(
                                     selectedImageBitmap, 300, 300, false);
-                            //imageBase64 = new ImageHandler().convertImageToBase64(resizedBitmap);
+                            
                             currentExerciseInstruction.setImage(new ImageHandler().convertImageToBase64(resizedBitmap));
                             imageView.setImageBitmap(resizedBitmap);
 

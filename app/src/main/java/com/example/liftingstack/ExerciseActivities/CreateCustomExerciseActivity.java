@@ -1,7 +1,9 @@
 package com.example.liftingstack.ExerciseActivities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -25,9 +27,6 @@ import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import android.content.Context;
-import android.content.SharedPreferences;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

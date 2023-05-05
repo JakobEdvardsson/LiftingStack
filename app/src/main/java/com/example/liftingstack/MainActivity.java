@@ -3,9 +3,10 @@ package com.example.liftingstack;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.liftingstack.Controller.ExerciseInstructionController;
-import com.example.liftingstack.Controller.FirstTimeAppOpens;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        exerciseInstructionController = new ExerciseInstructionController();
+        //exerciseInstructionController = new ExerciseInstructionController();
 
     }
 

@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.UUID;
+
 /**
  * The type Exercise.
  * This class is a specific exercise such as Bench Press or Squats.
@@ -12,7 +14,7 @@ import androidx.annotation.NonNull;
 public class ExerciseInstructions implements Parcelable {
     private String name;
     private String description;
-
+    private String id;
     private String image;
     //Text / Video
 
@@ -23,10 +25,12 @@ public class ExerciseInstructions implements Parcelable {
      * @param description the description
      */
     public ExerciseInstructions(String name, String description) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
     }
     public ExerciseInstructions(String name, String description, String image) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
         this.image = image;
@@ -103,5 +107,13 @@ public class ExerciseInstructions implements Parcelable {
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeString(name);
         parcel.writeString(description);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
