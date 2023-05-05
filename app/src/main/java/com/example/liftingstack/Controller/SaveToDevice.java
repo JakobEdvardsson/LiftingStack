@@ -11,8 +11,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The type Save to device.
@@ -43,7 +45,7 @@ public class SaveToDevice {
         }
     }
 
-    public void saveHashMapToDevice(HashMap<String, HashMap> hashMap, AppCompatActivity activity, String fileName){
+    public void saveHashMapToDevice(Map<String, Map<String, Map<String, ArrayList<String>>>> hashMap, AppCompatActivity activity, String fileName){
         String json = new Gson().toJson(hashMap);
         File file = new File(activity.getFilesDir(), fileName);
         FileWriter fileWriter;

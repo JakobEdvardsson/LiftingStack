@@ -14,8 +14,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The type Load from device.
@@ -59,9 +61,9 @@ public class LoadFromDevice{
         return list;
     }
 
-    public HashMap<String, HashMap> loadHashMapFromDevice(AppCompatActivity activity, String fileName){
+    public Map<String, Map<String, Map<String, ArrayList<String>>>> loadHashMapFromDevice(AppCompatActivity activity, String fileName){
 
-        HashMap<String, HashMap> hashMap;
+        Map<String, Map<String, Map<String, ArrayList<String>>>> hashMap;
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader(new File(activity.getFilesDir(), fileName)));
@@ -77,7 +79,7 @@ public class LoadFromDevice{
             reader.close();
 
             Gson g = new Gson();
-            Type listType = new TypeToken<HashMap<String, Object>>(){}.getType();
+            Type listType = new TypeToken<Map<String, Object>>(){}.getType();
             hashMap = g.fromJson(String.valueOf(jsonString), listType);
 
         } catch (IOException e) {

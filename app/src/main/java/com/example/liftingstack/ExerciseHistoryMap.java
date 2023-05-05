@@ -14,6 +14,7 @@ import com.example.liftingstack.Controller.SaveToDevice;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ExerciseHistoryMap extends AppCompatActivity {
 
@@ -23,12 +24,12 @@ public class ExerciseHistoryMap extends AppCompatActivity {
     private EditText weightSet1;
     private EditText weightSet2;
     private EditText weightSet3;
-    private HashMap<String, int[]> setDataMap = new HashMap<>();
-    // key = vilket set(parsed integer, value = array[reps, vikt]
-    private HashMap dateDataMap = new HashMap<>();
-    // key = datum, value = setDataMap
-    private HashMap<String, HashMap> exerciseHistoryMap = new HashMap<>();
-    // key = exersice id, value = dateDataMap
+    private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
+    // key = which set, value list of reps and weight
+    private Map<String, Map<String, ArrayList<String>>> dateDataMap = new HashMap<>();
+    // key = date (String), value = setDataMap
+    private Map<String, Map<String, Map<String, ArrayList<String>>>> exerciseHistoryMap = new HashMap<>();
+    // key = exersice id (String), value = dateDataMap
 
 
     // **BNI** Vi kan använda en datepicker som det finns färdig kod för om vi vill att
@@ -56,46 +57,68 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         // check if theres already a date for the specific date if so, add to the HashMap
         // else just create a new date HashMap
         // add as many sets as have been done in a for loop
-        //exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
-
-        int repsInt1 = Integer.parseInt(repsSet1.getText().toString());
-        int weightInt1 = Integer.parseInt(weightSet1.getText().toString());
-        int repsInt2 = Integer.parseInt(repsSet2.getText().toString());
-        int weightInt2 = Integer.parseInt(weightSet2.getText().toString());
-
-        for (int i = 1; i < 2; i++) {
-            setSetDataMap(1, repsInt1, weightInt1);
-            setSetDataMap(2, repsInt2, weightInt2);
-        }
-        setExerciseHistoryMap("1");
+        exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
 
 
-        // call setExerciseHistoryMap
+        // find some way to make a loop which checks how many sets have been enetered and set as many variables
+        String repsString1 = repsSet1.getText().toString();
+        String weightString1 = weightSet1.getText().toString();
+        String repsString2 = repsSet2.getText().toString();
+        String weightString2 = weightSet2.getText().toString();
+
+        // find some way to make a loop which checks how many sets have been enetered and call setSetDataMap as many times instead of below
+
+            setSetDataMap("1", repsString1, weightString1);
+            setSetDataMap("2", repsString2, weightString2);
+
+        // get exercise id instead of hardcoding it
+        setExerciseHistoryMap("2");
+
     }
 
-    public void setSetDataMap(int set, int reps, int weight) {
-        int setArray[] = {reps, weight};
-        String setString = Integer.toString(set);
-        Log.i("TestHistory TestSet1",setArray.toString());
-        Log.i("TestHistory TestSet2",setString);
-        setDataMap.put(setString, setArray);
-        Log.i("TestHistory TestSet3", " "+setDataMap.toString());
+    public void setSetDataMap(String set, String reps, String weight) {
+        ArrayList<String> setStringArrayList = new ArrayList<>();
+        setStringArrayList.add(reps);
+        setStringArrayList.add(weight);
+
+        setDataMap.put(set, setStringArrayList);
 
     }
 
     public void setExerciseHistoryMap(String exerciseId) {
-        LocalDate date = LocalDate.now();
-        dateDataMap.put(date, setDataMap);
+        //sets the date to today and parses it to a string
+        LocalDate dateObject = LocalDate.now();
+        String dateString = dateObject.toString();
+
+        // puts the logged sets into hashmap with date as key
+        dateDataMap.put(dateString, setDataMap);
+        // puts above hashmap into hashmap with the exerciseId as key
         exerciseHistoryMap.put(exerciseId, dateDataMap);
+
+        // saves above hashmap as json to file
         new SaveToDevice().saveHashMapToDevice(exerciseHistoryMap, this, "exerciseHistory");
+
+        //loads the savefile and returns a hashmap which is saved in instancevariable hashmap
         exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
 
 
-        dateDataMap = exerciseHistoryMap.get("1"); //funkar ej pga någon casting -- BNI
+        // below only for testing purposes
+        dateDataMap = exerciseHistoryMap.get("1");
+        setDataMap = dateDataMap.get("2023-05-05");
 
 
-        Log.i("TestHistory TestSet4", dateDataMap.toString());
-        //setDataMap = dateDataMap.get(1);
+        Log.i("TestHistory TestSet4", exerciseHistoryMap.toString());
+        Log.i("TestHistory TestSet5", exerciseHistoryMap.get("1").toString());
+        Log.i("TestHistory TestSet6", exerciseHistoryMap.get("1").get("2023-05-05").toString());
+        Log.i("TestHistory TestSet7", " " + exerciseHistoryMap.get("1").get("2023-05-05").get("1"));
+        Log.i("TestHistory getId", " " + exerciseHistoryMap.keySet());
+        Log.i("TestHistory getDates", " " + exerciseHistoryMap.get("1").keySet());
+        Log.i("TestHistory getSets", " " + exerciseHistoryMap.get("1").get("2023-05-05").keySet());
+
+
+        Log.i("TestHistory getReps", " " + exerciseHistoryMap.get("1").get("2023-05-05").get("1").get(1));
+
+
 
     }
 }
