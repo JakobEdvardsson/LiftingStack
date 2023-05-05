@@ -72,7 +72,9 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         String weightString2 = weightSet2.getText().toString();
 
 
-        // ***********Test med loop för att hämta värden
+        // ***********Test med loop för att hämta värden + skapa textfält i java med en loop två länkar:
+        //https://stackoverflow.com/questions/42713464/looping-through-an-array-of-edittexts-and-getting-the-texts-of-each
+        //https://stackoverflow.com/questions/56880051/how-to-loop-through-all-controls-and-get-its-id-and-values-in-android
         /*for (int i = 0; i < 16; i++) {
             int id = getResources().getIdentifier("button_"+i, "id", getPackageName());
             button[i] = findViewById(id);

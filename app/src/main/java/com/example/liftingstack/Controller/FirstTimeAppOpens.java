@@ -21,6 +21,7 @@ public class FirstTimeAppOpens {
     //import android.content.SharedPreferences;
     //Add below in onCreate() method (still in mainActivity):
     /*
+
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor sharedEditor;
     sharedPreferences = getPreferences(Context.MODE_PRIVATE);
