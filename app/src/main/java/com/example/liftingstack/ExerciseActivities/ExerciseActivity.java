@@ -57,7 +57,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
     );
 
     private void saveToFile() {
-        new SaveToDevice().saveExerciseListToDevice(allExerciseInstructions.getExercisesInstructionsList(), this, "exerciseList");
+        new SaveToDevice().saveListToDevice(allExerciseInstructions.getExercisesInstructionsList(), this, "exerciseList");
     }
 
 

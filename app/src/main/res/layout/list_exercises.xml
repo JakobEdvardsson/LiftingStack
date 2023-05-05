@@ -22,26 +22,29 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="375dp"
             android:layout_height="match_parent"
-            android:background="#2196F3"
+            android:background="@drawable/exercise_list_buttons_style"
             android:textAlignment="center">
 
             <TextView
                 android:id="@+id/exerciseNameSelectedProgram"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="63dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:autoText="false"
+                android:fontFamily="sans-serif-medium"
                 android:gravity="center_vertical"
                 android:text="Program"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textStyle="bold"
+                android:textColor="#1a3170"
+                android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/programDescription"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
                 android:id="@+id/cardViewDeleteIcon"
@@ -54,22 +57,26 @@
                 app:layout_constraintStart_toEndOf="@+id/programDescription"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.482"
-                app:srcCompat="@drawable/baseline_delete_24" />
+                app:srcCompat="@drawable/delete_new_24"
+                app:tint="#1a3170"/>
+
 
             <TextView
                 android:id="@+id/programDescription"
                 android:layout_width="134dp"
                 android:layout_height="62dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"
                 android:gravity="center_vertical"
                 android:text="Passnamn"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#1a3170"
                 android:textSize="22sp"
-                android:textStyle="bold"
+                android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/programImage"
                 app:layout_constraintHorizontal_bias="1.0"

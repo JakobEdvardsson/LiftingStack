@@ -26,9 +26,6 @@ import com.example.liftingstack.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -156,7 +153,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
         }
         //
-        new SaveToDevice().saveExerciseListToDevice(allExerciseInstructions,this, "Test");
+        new SaveToDevice().saveListToDevice(allExerciseInstructions,this, "Test");
         //
 
         ArrayList<ExerciseInstructions> list = new LoadFromDevice().loadListFromDevice(this, "Test");
