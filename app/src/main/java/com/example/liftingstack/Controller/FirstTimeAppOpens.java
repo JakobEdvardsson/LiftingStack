@@ -74,6 +74,8 @@ public class FirstTimeAppOpens {
             Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
 
+            //TODO create "exerciseList" file and save the list in "exerciseList" file, do the same for programs
+
 
         } catch (IOException e) {
             e.printStackTrace();
