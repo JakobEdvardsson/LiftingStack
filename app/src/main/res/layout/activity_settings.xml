@@ -2,7 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/teal_700"
     android:orientation="vertical"
     >
 
@@ -17,9 +16,9 @@
             android:layout_gravity="left"
             android:gravity="center_horizontal"
             android:text="Settings"
-            android:textColor="#FFFFFF"
+            android:textColor="#b7b7b7"
             android:textSize="25dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
     </RelativeLayout>
 
@@ -41,7 +40,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             android:text="Dark Mode"
-            android:textColor="#FFFFFF"
+            android:textColor="#b7b7b7"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -75,7 +74,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
                 android:text="Notifications"
-                android:textColor="#FFFFFF"
+                android:textColor="#b7b7b7"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -106,32 +105,38 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="20dp"
                 android:text="Rewards"
-                android:textColor="#FFFFFF"
+                android:textColor="#b7b7b7"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
 
         <Button
             android:id="@+id/button10"
+            android:backgroundTint="#0000cd"
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginStart="45dp"
             android:text="Tree"
+            android:textColor="#00cc66"
             android:textSize="10dp"/>
 
         <Button
             android:id="@+id/button11"
+            android:backgroundTint="#0000cd"
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:text="BELT"
+            android:textColor="#00cc66"
             android:textSize="10dp"/>
 
         <Button
             android:id="@+id/button12"
+            android:backgroundTint="#0000cd"
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:text="ALT 3"
+            android:textColor="#00cc66"
             android:textSize="10dp"/>
 
     </LinearLayout>
