@@ -12,6 +12,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BarChartCount extends AppCompatActivity {
@@ -22,6 +23,8 @@ public class BarChartCount extends AppCompatActivity {
         setContentView(R.layout.activity_bar_chart);
 
         BarChart barChart = findViewById(R.id.barChart);
+
+        LocalDate.now();
 
         ArrayList<BarEntry> bar = new ArrayList<>();
         bar.add(new BarEntry(1, 10));

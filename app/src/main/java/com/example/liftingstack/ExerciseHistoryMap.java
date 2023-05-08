@@ -49,6 +49,7 @@ public class ExerciseHistoryMap extends AppCompatActivity {
 
         repsSet1 = findViewById(R.id.repsInputSet1);
         repsSet2 = findViewById(R.id.repsInputSet2);
+
         repsSet3 = findViewById(R.id.repsInputSet3);
         weightSet1 = findViewById(R.id.weightInputSet1);
         weightSet2 = findViewById(R.id.weightInputSet2);
@@ -62,7 +63,7 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         // check if theres already a date for the specific date if so, add to the HashMap
         // else just create a new date HashMap
         // add as many sets as have been done in a for loop
-        exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
+        //exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
 
 
         // find some way to make a loop which checks how many sets have been enetered and set as many variables
@@ -70,6 +71,7 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         String weightString1 = weightSet1.getText().toString();
         String repsString2 = repsSet2.getText().toString();
         String weightString2 = weightSet2.getText().toString();
+        Log.i("Testhistory repsset2", repsString2);
 
 
         // ***********Test med loop för att hämta värden + skapa textfält i java med en loop två länkar:
@@ -89,8 +91,7 @@ public class ExerciseHistoryMap extends AppCompatActivity {
             setSetDataMap("2", repsString2, weightString2);
 
         // get exercise id instead of hardcoding it
-        setExerciseHistoryMap("2");
-
+        setExerciseHistoryMap("1");
     }
 
     public void setSetDataMap(String set, String reps, String weight) {
@@ -99,7 +100,6 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         setStringArrayList.add(weight);
 
         setDataMap.put(set, setStringArrayList);
-
     }
 
     public void setExerciseHistoryMap(String exerciseId) {
@@ -121,20 +121,20 @@ public class ExerciseHistoryMap extends AppCompatActivity {
 
         // below only for testing purposes
         dateDataMap = exerciseHistoryMap.get("1");
-        setDataMap = dateDataMap.get("2023-05-05");
+        setDataMap = dateDataMap.get("2023-05-08");
 
         Log.i("TestHistory TestSet4", exerciseHistoryMap.toString());
         Log.i("TestHistory TestSet5", exerciseHistoryMap.get("1").toString());
-        Log.i("TestHistory TestSet6", exerciseHistoryMap.get("1").get("2023-05-05").toString());
-        Log.i("TestHistory TestSet7", " " + exerciseHistoryMap.get("1").get("2023-05-05").get("1"));
+        Log.i("TestHistory TestSet6", exerciseHistoryMap.get("1").get("2023-05-08").toString());
+        Log.i("TestHistory TestSet7", " " + exerciseHistoryMap.get("1").get("2023-05-08").get("1"));
         Log.i("TestHistory getId", " " + exerciseHistoryMap.keySet());
         Log.i("TestHistory getDates", " " + exerciseHistoryMap.get("1").keySet());
-        if(exerciseHistoryMap.get("1").keySet().toString().equals("[2023-05-05]") ){
+        if(exerciseHistoryMap.get("1").keySet().toString().equals("[2023-05-08]") ){
             Log.i("TestHistory if test", "ok");
         }
-        Log.i("TestHistory getSets", " " + exerciseHistoryMap.get("1").get("2023-05-05").keySet());
+        Log.i("TestHistory getSets", " " + exerciseHistoryMap.get("1").get("2023-05-08").keySet());
 
-        Log.i("TestHistory getReps", " " + exerciseHistoryMap.get("1").get("2023-05-05").get("1").get(1));
+        Log.i("TestHistory getReps", " " + exerciseHistoryMap.get("1").get("2023-05-08").get("1").get(1));
 
     }
 }
