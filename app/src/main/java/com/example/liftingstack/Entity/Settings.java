@@ -9,7 +9,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.example.liftingstack.R;
 
 public class Settings extends AppCompatActivity {
-/*
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,5 +31,5 @@ public class Settings extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
         }
-    } */
+    }
 }
