@@ -36,7 +36,7 @@ public class BarChartCount extends AppCompatActivity {
         bar.add(new BarEntry(10, 0));
         bar.add(new BarEntry(11, 0));
         bar.add(new BarEntry(12, 0));
-        //ändra ev x - axel (från 2023-1 till 2023.1 eller 1, eller skriv det på etta annat sätt)
+        //TODO ändra ev x - axel (från 2023-1 till 2023.1 eller 1, eller skriv det på ett annat sätt)
 
         BarDataSet barDataSet = new BarDataSet(bar, "Number of training sessions");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
