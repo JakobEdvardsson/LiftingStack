@@ -7,15 +7,26 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The type Program.
  */
 public class Program implements Parcelable {
+    private String id;
+
     private String name;
     private String description;
     //TODO Change to String of exerciseInstructions ID
-    private List<ExerciseInstructions> exerciseInstructions;
+    private List<String> exerciseInstructions;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * Instantiates a new Program.
@@ -24,6 +35,7 @@ public class Program implements Parcelable {
      * @param description the description
      */
     public Program(String name, String description) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
         exerciseInstructions = new ArrayList<>();
@@ -51,7 +63,7 @@ public class Program implements Parcelable {
      *
      * @return the exercises
      */
-    public List<ExerciseInstructions> getExercises() {
+    public List<String> getExercises() {
         return exerciseInstructions;
     }
 
@@ -60,7 +72,7 @@ public class Program implements Parcelable {
      *
      * @param exerciseInstructions the exercises
      */
-    public void setExercises(List<ExerciseInstructions> exerciseInstructions) {
+    public void setExercises(List<String> exerciseInstructions) {
         this.exerciseInstructions = exerciseInstructions;
     }
 
@@ -69,7 +81,7 @@ public class Program implements Parcelable {
      *
      * @param exerciseInstructions the exercise
      */
-    public void addExercise(ExerciseInstructions exerciseInstructions) {
+    public void addExercise(String exerciseInstructions) {
         this.exerciseInstructions.add(exerciseInstructions);
     }
 

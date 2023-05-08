@@ -1,4 +1,4 @@
-package com.example.liftingstack.ProgramsActivities;
+package com.example.liftingstack.ProgramsActivities.SelectedProgram;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,12 +15,11 @@ import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
 import com.example.liftingstack.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<SelectedProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private List<ExerciseInstructions> exercises = new ArrayList<>();
+    private List<ExerciseInstructions> exercises;
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
 
     public SelectedProgramRecyclerViewAdapter(Context context, List<ExerciseInstructions> exercises, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
@@ -55,7 +54,7 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
         return exercises.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public  class ViewHolder extends RecyclerView.ViewHolder {
         private TextView exerciseNameTextView;
         private TextView exerciseDescriptionTextView;
         private CardView cardView;
@@ -69,7 +68,8 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
 
             itemView.findViewById(R.id.deleteIconSelectedProgram).setOnClickListener(view -> {
                 try {
-                    adapter.exercises.remove(getAdapterPosition());
+
+                    exerciseRecyclerViewInterface.removeExerciseAndUpdateList(getAdapterPosition());
                     adapter.notifyItemRemoved(getAdapterPosition());
                 }
                 catch (Exception e) {
