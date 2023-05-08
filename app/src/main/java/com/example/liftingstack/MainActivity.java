@@ -6,20 +6,16 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.liftingstack.Controller.ExerciseInstructionController;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
+import com.example.liftingstack.Entity.BarChartCount;
 
 public class MainActivity extends AppCompatActivity {
-    private ExerciseInstructionController exerciseInstructionController;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //exerciseInstructionController = new ExerciseInstructionController();
-
     }
 
     public void launchExerciseHistoryMap(View v) {
@@ -38,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void launchPrograms(View v){
+    public void launchPrograms(View v) {
         Intent intent = new Intent(this, ProgramActivity.class);
         startActivity(intent);
     }
@@ -48,4 +44,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void launchStats(View v) {
+        Intent intent = new Intent(this, BarChartCount.class);
+        startActivity(intent);
+    }
 }
