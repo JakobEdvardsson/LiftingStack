@@ -32,7 +32,7 @@
             android:name=".TestReadWrite"
             android:exported="false" />
         <activity
-            android:name=".ProgramsActivities.SelectedProgramActivity"
+            android:name=".ProgramsActivities.SelectedProgram.SelectedProgramActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity

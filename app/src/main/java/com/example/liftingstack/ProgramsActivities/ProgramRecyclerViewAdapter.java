@@ -1,29 +1,27 @@
 package com.example.liftingstack.ProgramsActivities;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private List<Program> programs = new ArrayList<>();
+    //private List<Program> programs;
+    private  AllPrograms allPrograms;
     private final ProgramRecyclerViewInterface programRecyclerViewInterface;
 
-    public ProgramRecyclerViewAdapter(Context context, List<Program> programs, ProgramRecyclerViewInterface programRecyclerViewInterface) {
+    public ProgramRecyclerViewAdapter(Context context, ProgramRecyclerViewInterface programRecyclerViewInterface, AllPrograms allPrograms){
         this.context = context;
-        this.programs = programs;
+        this.allPrograms = allPrograms;
         this.programRecyclerViewInterface = programRecyclerViewInterface;
     }
 
@@ -36,14 +34,16 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProgramRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.programNameTextView.setText(programs.get(position).getName());
-        holder.programDescriptionTextView.setText(programs.get(position).getDescription());
+    public void onBindViewHolder(@NonNull ProgramRecyclerViewAdapter.ViewHolder holder, int position) {
+
+
+        holder.programNameTextView.setText(allPrograms.getProgramsList().get(position).getName());
+        holder.programDescriptionTextView.setText(allPrograms.getProgramsList().get(position).getDescription());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                programRecyclerViewInterface.onItemClick(programs.get(holder.getAdapterPosition()));
+                programRecyclerViewInterface.onItemClick(allPrograms.getProgramsList().get(holder.getAdapterPosition()));
             }
         });
     }
@@ -51,10 +51,10 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
     @Override
     public int getItemCount()
     {
-        return programs.size();
+        return allPrograms.getProgramsList().size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public  class ViewHolder extends RecyclerView.ViewHolder {
         private TextView programNameTextView;
         private TextView programDescriptionTextView;
         private CardView cardView;
@@ -68,7 +68,8 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
 
             itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view -> {
                 try {
-                    adapter.programs.remove(getAdapterPosition());
+                    adapter.allPrograms.getProgramsList().remove(getAdapterPosition());
+                    programRecyclerViewInterface.onProgramDelete(getAdapterPosition());
                     adapter.notifyItemRemoved(getAdapterPosition());
                 }
                 catch (Exception e) {

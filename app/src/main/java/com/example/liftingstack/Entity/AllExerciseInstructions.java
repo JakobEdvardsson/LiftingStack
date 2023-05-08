@@ -15,7 +15,7 @@ public class AllExerciseInstructions {
 
         //TODO Load the list from the device, here should be a check if the file exists if not load from the assets folder
         try {
-            exercisesInstructionsList = new LoadFromDevice().loadListFromDevice(appCompatActivity, "exerciseList");
+            exercisesInstructionsList = new LoadFromDevice().loadExerciseListFromDevice(appCompatActivity, "exerciseList");
         }catch (Exception e) {
             //TODO load from assets folder
             System.out.println("Error loading from device, file may not exist");

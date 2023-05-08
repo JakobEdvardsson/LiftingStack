@@ -48,7 +48,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
         // Create a new ExerciseRecyclerViewAdapter which will display all exercises
         ExerciseRecyclerViewAdapter exerciseAdapter = new ExerciseRecyclerViewAdapter(
-                this, allExerciseInstructions.getExercisesInstructionsList(), this, allExerciseInstructions);
+                this, this, allExerciseInstructions);
         recyclerView.setAdapter(exerciseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

@@ -1,4 +1,4 @@
-package com.example.liftingstack.ProgramsActivities;
+package com.example.liftingstack.ProgramsActivities.SelectedProgram;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

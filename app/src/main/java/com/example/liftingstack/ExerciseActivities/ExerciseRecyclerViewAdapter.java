@@ -12,20 +12,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.AllExerciseInstructions;
-import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.R;
-
-import java.util.List;
 
 public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRecyclerViewAdapter.ViewHolder> {
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
     private Context context;
     //private List<ExerciseInstructions> exerciseInstructions;
-    private static AllExerciseInstructions allExerciseInstructions;
+    private AllExerciseInstructions allExerciseInstructions;
 
 
     public ExerciseRecyclerViewAdapter(
-            Context context, List<ExerciseInstructions> exerciseInstructions,
+            Context context,
             ExerciseRecyclerViewInterface exerciseRecyclerViewInterface,
             AllExerciseInstructions allExerciseInstructions) {
         this.context = context;
