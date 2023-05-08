@@ -5,5 +5,5 @@ import com.example.liftingstack.Entity.Program;
 
 public interface ProgramRecyclerViewInterface {
     void onItemClick(Program program);
-    void onProgramDelete(int program);
+    void onProgramDelete(String program);
 }

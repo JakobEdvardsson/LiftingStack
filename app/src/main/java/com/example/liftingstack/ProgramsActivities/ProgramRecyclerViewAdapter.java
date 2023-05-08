@@ -68,9 +68,7 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
 
             itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view -> {
                 try {
-                    adapter.allPrograms.getProgramsList().remove(getAdapterPosition());
-                    programRecyclerViewInterface.onProgramDelete(getAdapterPosition());
-                    adapter.notifyItemRemoved(getAdapterPosition());
+                    programRecyclerViewInterface.onProgramDelete(allPrograms.getProgramsList().get(getAdapterPosition()).getId());
                 }
                 catch (Exception e) {
                     System.out.println("Tried deleting too fast" + e);

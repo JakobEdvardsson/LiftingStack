@@ -2,7 +2,6 @@ package com.example.liftingstack.ProgramsActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -54,7 +53,7 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
         Intent intent = new Intent(this, SelectedProgramActivity.class);
         activityResultLauncher.launch(intent);
 
-        recyclerView.scrollToPosition(programs.size() - 1);
+        //recyclerView.scrollToPosition(programs.size() - 1);
     }
 
 
@@ -68,9 +67,13 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
     }
 
     @Override
-    public void onProgramDelete(int program) {
-        Log.d("ÅÅÅÅÅÅÅÅÅÅ", program + "");
-        allPrograms.getProgramsList().remove(program);
+    public void onProgramDelete(String program) {
+        for (Program p : allPrograms.getProgramsList()) {
+            if (p.getId().equals(program)) {
+                allPrograms.getProgramsList().remove(p);
+                break;
+            }
+        }
         allPrograms.saveProgramList(this);
         setupRecyclerView();
     }
