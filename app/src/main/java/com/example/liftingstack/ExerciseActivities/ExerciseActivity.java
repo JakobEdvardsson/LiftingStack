@@ -57,6 +57,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
     public void newExercise(View v) {
         Intent intent = new Intent(this, ExerciseInstructionsPage.class);
         activityResultLauncher.launch(intent);
+
     }
 
     public void goBack(View v) {
@@ -76,8 +77,8 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
     public void removeExerciseAndUpdateList(int index) {
         //TODO If in program, remove from program and save program and ask if user wants to remove anyways.
         allExerciseInstructions.getExercisesInstructionsList().remove(index);
+
         saveToFile();
-        setupRecyclerView();
     }
 
     /**

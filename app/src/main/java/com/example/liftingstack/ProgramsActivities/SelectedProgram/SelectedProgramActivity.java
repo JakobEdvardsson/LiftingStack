@@ -66,16 +66,23 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
 
         AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions(this);
 
+
         for (String id : selectedProgram.getExercises()) {
+            //Used to remove exercises that are no longer in the list
+            boolean exerciseFound = false;
             for (ExerciseInstructions exerciseInstructions : allExerciseInstructions.getExercisesInstructionsList()) {
                 if (exerciseInstructions.getId().equals(id)) {
                     exercises.add(exerciseInstructions);
+                    exerciseFound = true;
                 }
+            }
+            if (!exerciseFound) {
+                //Remove exercise from program if the exercise has been removed.
+                selectedProgram.getExercises().remove(id);
             }
         }
 
         setupRecyclerView();
-
 
 
         EditText programName = findViewById(R.id.selectedProgramName);
@@ -122,8 +129,6 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
     }
 
     public void addExerciseOnClick(View v) {
-
-
         // Get the menu view from the layout
         //View menuButton = findViewById(R.id.menu_button);
         PopupMenu popupMenu = new PopupMenu(this, v);
@@ -141,6 +146,8 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
                 for (ExerciseInstructions exerciseInstructions : allExerciseInstructions.getExercisesInstructionsList()) {
                     if (exerciseInstructions.getExerciseName().equals(item.getTitle().toString())) {
                         selectedProgram.addExercise(exerciseInstructions.getId());
+                        exercises.add(exerciseInstructions);
+                        setupRecyclerView();
                         break;
                     }
                 }
@@ -157,7 +164,6 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
     @Override
     public void removeExerciseAndUpdateList(int index) {
         selectedProgram.getExercises().remove(index);
-        allPrograms.saveProgramList(this);
-        setupRecyclerView();
+        exercises.remove(index);
     }
 }

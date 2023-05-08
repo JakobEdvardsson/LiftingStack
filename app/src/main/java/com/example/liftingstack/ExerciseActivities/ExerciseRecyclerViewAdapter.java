@@ -26,7 +26,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             ExerciseRecyclerViewInterface exerciseRecyclerViewInterface,
             AllExerciseInstructions allExerciseInstructions) {
         this.context = context;
-        //this.exerciseInstructions = exerciseInstructions;
+
         this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;
         this.allExerciseInstructions = allExerciseInstructions;
     }
@@ -74,6 +74,8 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view -> {
                 try {
                     exerciseRecyclerViewInterface.removeExerciseAndUpdateList(getAdapterPosition());
+                    adapter.notifyItemRemoved(getAdapterPosition());
+
                 } catch (Exception e) {
                     System.out.println(e);
                 }

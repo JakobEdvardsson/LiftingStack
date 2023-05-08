@@ -38,4 +38,8 @@ public class AllPrograms {
     {
         programsList.add(program);
     }
+    public void removeProgram(Program program)
+    {
+        programsList.remove(program);
+    }
 }

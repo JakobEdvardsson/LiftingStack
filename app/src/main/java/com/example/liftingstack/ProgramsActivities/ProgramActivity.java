@@ -52,8 +52,6 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
     public void addProgram(View view) {
         Intent intent = new Intent(this, SelectedProgramActivity.class);
         activityResultLauncher.launch(intent);
-
-        //recyclerView.scrollToPosition(programs.size() - 1);
     }
 
 
@@ -67,14 +65,8 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
     }
 
     @Override
-    public void onProgramDelete(String program) {
-        for (Program p : allPrograms.getProgramsList()) {
-            if (p.getId().equals(program)) {
-                allPrograms.getProgramsList().remove(p);
-                break;
-            }
-        }
+    public void onProgramDelete(int program) {
+        allPrograms.getProgramsList().remove(program);
         allPrograms.saveProgramList(this);
-        setupRecyclerView();
     }
 }
