@@ -113,10 +113,10 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         exerciseHistoryMap.put(exerciseId, dateDataMap);
 
         // saves above hashmap as json to file
-        new SaveToDevice().saveHashMapToDevice(exerciseHistoryMap, this, "exerciseHistory");
+        new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, this, "exerciseHistory");
 
         //loads the savefile and returns a hashmap which is saved in instancevariable hashmap
-        exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
+        exerciseHistoryMap = new LoadFromDevice().loadExerciseHashMapFromDevice(this, "exerciseHistory");
 
 
         // below only for testing purposes
