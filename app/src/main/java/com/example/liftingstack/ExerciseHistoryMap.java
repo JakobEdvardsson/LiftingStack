@@ -108,7 +108,9 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         String dateString = dateObject.toString();
 
         // puts the logged sets into hashmap with date as key
-        dateDataMap.put(dateString, setDataMap);
+        //dateDataMap.put(dateString, setDataMap);
+
+        dateDataMap.put("2023-04-21", setDataMap);
         // puts above hashmap into hashmap with the exerciseId as key
         exerciseHistoryMap.put(exerciseId, dateDataMap);
 

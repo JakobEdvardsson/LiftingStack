@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Biceps Dumbell Curls", "Biceps"));
         allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Barbell Rows", "Back, Arms, Core"));
 
-        
+
 
         allExerciseInstructions.saveExercisesInstructionsList(this);
 
