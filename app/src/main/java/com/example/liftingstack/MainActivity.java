@@ -58,7 +58,11 @@ public class MainActivity extends AppCompatActivity {
         allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Deadlift", "Hamstrings, Butt, Back, Core"));
         allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Dumbbell Overhead Press", "Shoulders, Arms"));
         allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Lats Pulldowns", "Back, Shoulders"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Crunches", "Abdomen"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Triceps Pulldowns", "Triceps"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Biceps Dumbell Curls", "Biceps"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Barbell Rows", "Back, Arms, Core"));
+
+        
 
         allExerciseInstructions.saveExercisesInstructionsList(this);
 
