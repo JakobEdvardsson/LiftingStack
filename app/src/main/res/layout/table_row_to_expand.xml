@@ -1,0 +1,48 @@
+<TableRow android:id="@+id/tableRowToExpand"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:divider="@android:color/black"
+    android:dividerHeight="1dp"
+    android:showDividers="middle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <EditText
+        android:id="@+id/setsEditText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/table_cells"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/repsEditText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/table_cells"
+        android:editable="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/weightEditText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/table_cells"
+        android:editable="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@android:color/black" />
+</TableRow>
