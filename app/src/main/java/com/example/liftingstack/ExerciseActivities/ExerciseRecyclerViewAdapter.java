@@ -1,5 +1,6 @@
 package com.example.liftingstack.ExerciseActivities;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.MainActivity;
 import com.example.liftingstack.R;
 
 import java.util.List;
@@ -21,6 +23,7 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
     private Context context;
     //private List<ExerciseInstructions> exerciseInstructions;
+    private Dialog dialog;
     private static AllExerciseInstructions allExerciseInstructions;
 
 
