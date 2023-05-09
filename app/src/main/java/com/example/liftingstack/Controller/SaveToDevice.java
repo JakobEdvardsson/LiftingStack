@@ -31,7 +31,7 @@ public class SaveToDevice {
      * @param activity   the activity
      * @param fileName   the file name
      */
-    public <T> void saveListToDevice(ArrayList<T> listToSave, AppCompatActivity activity, String fileName){
+    public <T> void saveListToDevice(ArrayList<T> listToSave, AppCompatActivity activity, String fileName) {
         String json = new Gson().toJson(listToSave);
         File file = new File(activity.getFilesDir(), fileName);
         FileWriter fileWriter;
@@ -45,7 +45,9 @@ public class SaveToDevice {
         }
     }
 
-    public void saveHashMapToDevice(Map<String, Map<String, Map<String, ArrayList<String>>>> hashMap, AppCompatActivity activity, String fileName){
+
+
+    public void saveExerciseHashMapToDevice(Map<String, Map<String, Map<String, ArrayList<String>>>> hashMap, AppCompatActivity activity, String fileName) {
         String json = new Gson().toJson(hashMap);
         File file = new File(activity.getFilesDir(), fileName);
         FileWriter fileWriter;
@@ -57,6 +59,25 @@ public class SaveToDevice {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Log.i("TestHistory savehashmap", hashMap.toString());
+        if (hashMap != null) {
+            Log.i("TestHistory savehashmap", hashMap.toString());
+        }
+    }
+
+    public void saveProgramHashMapToDevice(Map<String, String> hashMap, AppCompatActivity activity, String fileName) {
+        String json = new Gson().toJson(hashMap);
+        File file = new File(activity.getFilesDir(), fileName);
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (hashMap != null) {
+            Log.i("TestHistory savehashmap", hashMap.toString());
+        }
     }
 }

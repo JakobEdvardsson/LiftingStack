@@ -108,15 +108,17 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         String dateString = dateObject.toString();
 
         // puts the logged sets into hashmap with date as key
-        dateDataMap.put(dateString, setDataMap);
+        //dateDataMap.put(dateString, setDataMap);
+
+        dateDataMap.put("2023-04-21", setDataMap);
         // puts above hashmap into hashmap with the exerciseId as key
         exerciseHistoryMap.put(exerciseId, dateDataMap);
 
         // saves above hashmap as json to file
-        new SaveToDevice().saveHashMapToDevice(exerciseHistoryMap, this, "exerciseHistory");
+        new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, this, "exerciseHistory");
 
         //loads the savefile and returns a hashmap which is saved in instancevariable hashmap
-        exerciseHistoryMap = new LoadFromDevice().loadHashMapFromDevice(this, "exerciseHistory");
+        exerciseHistoryMap = new LoadFromDevice().loadExerciseHashMapFromDevice(this, "exerciseHistory");
 
 
         // below only for testing purposes

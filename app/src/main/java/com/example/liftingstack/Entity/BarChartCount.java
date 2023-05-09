@@ -14,6 +14,9 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class BarChartCount extends AppCompatActivity {
 
@@ -24,9 +27,30 @@ public class BarChartCount extends AppCompatActivity {
 
         BarChart barChart = findViewById(R.id.barChart);
 
-        LocalDate.now();
+
+
+        ArrayList<Integer> pastTwelveMonths = new ArrayList<>();
+        pastTwelveMonths.add(Integer.valueOf("05"));
+
+        pastTwelveMonths.add(7);
+        pastTwelveMonths.add(6);
+        pastTwelveMonths.add(5);
+        pastTwelveMonths.add(4);
+        pastTwelveMonths.add(7);
+        pastTwelveMonths.add(8);
+
+        Collections.sort(pastTwelveMonths);
+
+        HashMap<Integer, Integer> timesPerMonth = new HashMap<>();
+        for (int i = 1; i <= 12; i++) {
+            timesPerMonth.put(i, Collections.frequency(pastTwelveMonths, i));
+
+        }
+        System.out.println(timesPerMonth.toString());
+
 
         ArrayList<BarEntry> bar = new ArrayList<>();
+
         bar.add(new BarEntry(1, 10));
         bar.add(new BarEntry(2, 2));
         bar.add(new BarEntry(3, 5));

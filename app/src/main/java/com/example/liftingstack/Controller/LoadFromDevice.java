@@ -1,6 +1,8 @@
 package com.example.liftingstack.Controller;
 
 
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
@@ -86,11 +88,7 @@ public class LoadFromDevice{
         return list;
     }
 
-
-
-
-
-    public Map<String, Map<String, Map<String, ArrayList<String>>>> loadHashMapFromDevice(AppCompatActivity activity, String fileName){
+    public Map<String, Map<String, Map<String, ArrayList<String>>>> loadExerciseHashMapFromDevice(AppCompatActivity activity, String fileName){
 
         Map<String, Map<String, Map<String, ArrayList<String>>>> hashMap;
         try {
@@ -114,10 +112,38 @@ public class LoadFromDevice{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        Log.i("TestProgram Loadmethod", hashMap.toString());
 
         return hashMap;
     }
 
+    public Map<String, String> loadProgramHashMapFromDevice(AppCompatActivity activity, String fileName){
+
+        Map<String, String> hashMap;
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(new File(activity.getFilesDir(), fileName)));
+
+            // read the contents of the file as a string
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+
+            // close the reader
+            reader.close();
+
+            Gson g = new Gson();
+            Type listType = new TypeToken<Map<String, String>>(){}.getType();
+            hashMap = g.fromJson(String.valueOf(jsonString), listType);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return hashMap;
+    }
 
 
 }
