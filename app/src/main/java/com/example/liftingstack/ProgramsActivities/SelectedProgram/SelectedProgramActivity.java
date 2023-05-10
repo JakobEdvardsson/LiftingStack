@@ -19,6 +19,7 @@ import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.ExerciseInstructions;
 import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
+import com.example.liftingstack.ProgramsActivities.StartedPrograms.StartedProgramActivity;
 import com.example.liftingstack.ProgramsActivities.StartedPrograms.test;
 import com.example.liftingstack.R;
 
@@ -85,7 +86,6 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
 
         setupRecyclerView();
 
-
         EditText programName = findViewById(R.id.selectedProgramName);
         programName.setText(selectedProgram.getName());
 
@@ -124,8 +124,9 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
     }
 
     public void startBtnClicked(View v) {
-        Intent intent = new Intent(this, test.class);
-        startActivity(intent);
+        Intent intent = new Intent(this, StartedProgramActivity.class);
+        intent.putExtra("ProgramId", selectedProgram.getId());
+        activityResultLauncher.launch(intent);
     }
 
 

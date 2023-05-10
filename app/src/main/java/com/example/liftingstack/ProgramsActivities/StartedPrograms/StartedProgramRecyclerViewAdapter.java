@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<StartedProgramRecyclerViewAdapter.ViewHolder> {
-    private Context context;
+    private static Context context;
     private List<ExerciseInstructions> exercises = new ArrayList<>();
     //private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
 
@@ -43,6 +44,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
     @Override
     public void onBindViewHolder(@NonNull StartedProgramRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.exerciseNameTextView.setText(exercises.get(position).getExerciseName());
+        System.out.println(exercises.get(position).getId());
 
         /*holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,55 +54,86 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
         });*/
     }
 
-
-
     @Override
     public int getItemCount() {
         return exercises.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView exerciseNameTextView;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
-        private ConstraintLayout constraintLayout;
         private TableLayout tableLayout;
-        private TableRow tableRow;
-        private EditText setsText, repsText, weightText;
         private StartedProgramRecyclerViewAdapter adapter;
+        private TextView exerciseNameTextView;
+        private int setCounter;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            exerciseNameTextView = itemView.findViewById(R.id.startedProgramExerciseName);
             cardView = itemView.findViewById(R.id.startedProgramCardView);
             tableLayout = itemView.findViewById(R.id.startedProgramTable);
-            tableRow = itemView.findViewById(R.id.tableRowToExpand);
-            constraintLayout = itemView.findViewById(R.id.constraintLayoutTable);
-            setsText = itemView.findViewById(R.id.setsEditText);
-            repsText = itemView.findViewById(R.id.repsEditText);
-            weightText = itemView.findViewById(R.id.weightEditText);
+            exerciseNameTextView = itemView.findViewById(R.id.startedProgramExerciseName);
 
             itemView.findViewById(R.id.addRowBtn).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    LayoutInflater layoutInflater = LayoutInflater.from(context);
+                    TableRow newRow = (TableRow) layoutInflater.inflate(R.layout.table_row_to_expand, null);
 
-                    ViewGroup.LayoutParams layoutParams = cardView.getLayoutParams();
-                    layoutParams.height += 200;
-                    cardView.setLayoutParams(layoutParams);
+                    setCounter = tableLayout.getChildCount();
+                    EditText setsText = newRow.findViewById(R.id.setsEditText);
+                    setsText.setText(String.valueOf(setCounter));
 
-                    if(tableRow.getParent() != null) {
-                        ((ViewGroup)tableRow.getParent()).removeView(tableRow); // <- fix
+                    tableLayout.addView(newRow);
+
+                    int tableHeight = 300;
+
+                    for (int i = 0; i < tableLayout.getChildCount(); i++) {
+                        View row = tableLayout.getChildAt(i);
+                        tableHeight += row.getHeight();
                     }
 
+                    // Set the new height for the TableLayout
+                    tableLayout.getLayoutParams().height = tableHeight;
+
+                    // Calculate the new height of the CardView
+                    int cardViewHeight = tableHeight;
+
+                    // Set the new height for the CardView
+                    try {
+                        cardView.getLayoutParams().height = cardViewHeight;
+                        cardView.requestLayout();
+                    } catch (Exception e) {
+                        System.out.println("Tried adding too fast " + e);
+                    }
+                }
+            });
+
+            itemView.findViewById(R.id.removeRowBtn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (tableLayout.getChildCount() > 2) {
+                        tableLayout.removeViewAt(tableLayout.getChildCount() - 1);
 
 
+                        int rowHeight = 140;
+                        try {
+                            cardView.getLayoutParams().height = cardView.getHeight() - rowHeight;
+                            cardView.requestLayout();
+                        } catch (Exception e) {
+                            System.out.println("Tried deleting too fast " + e);
+                        }
+                    }
+                }
+            });
 
+            itemView.findViewById(R.id.saveExerciserRepsWeighBtn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for (int i = 0; i < tableLayout.getChildCount(); i++) {
 
-
-                    cardView.addView(tableRow);
+                    }
                 }
             });
         }
-
 
         public ViewHolder linkAdapter(StartedProgramRecyclerViewAdapter adapter) {
             this.adapter = adapter;

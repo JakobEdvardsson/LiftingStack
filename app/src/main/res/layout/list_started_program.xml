@@ -93,33 +93,20 @@
                     android:showDividers="middle">
 
                     <EditText
-                        android:id="@+id/setsEditText"
+                        android:id="@+id/setsEditTextOriginal"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/table_cells"
                         android:editable="false"
                         android:ems="10"
-                        android:inputType="textPersonName"
+                        android:inputType="none"
+                        android:text="1"
                         android:padding="8dp"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/black"
-                        tools:text="1" />
-
-                    <EditText
-                        android:id="@+id/repsEditText"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/table_cells"
-                        android:editable="true"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:padding="8dp"
-                        android:text="5"
                         android:textAlignment="center"
                         android:textColor="@android:color/black" />
 
                     <EditText
-                        android:id="@+id/weightEditText"
+                        android:id="@+id/repsEditTextOriginal"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/table_cells"
@@ -127,7 +114,20 @@
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:padding="8dp"
-                        android:text="100 kg"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black" />
+
+                    <EditText
+                        android:id="@+id/weightEditTextOriginal"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/table_cells"
+                        android:editable="true"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:padding="8dp"
+                        android:text=""
                         android:textAlignment="center"
                         android:textColor="@android:color/black" />
                 </TableRow>
@@ -138,6 +138,7 @@
                 android:id="@+id/startedProgramExerciseName"
                 android:layout_width="300dp"
                 android:layout_height="31dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
                 android:text="Squats"
                 android:textAlignment="center"
@@ -145,6 +146,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.075"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,12 +154,11 @@
                 android:id="@+id/addRowBtn"
                 android:layout_width="37dp"
                 android:layout_height="42dp"
-                android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.555"
                 app:layout_constraintStart_toEndOf="@+id/startedProgramTable"
-                app:layout_constraintTop_toBottomOf="@+id/startedProgramExerciseName"
-                app:srcCompat="@drawable/baseline_add_circle_24" />
+                app:srcCompat="@drawable/baseline_add_circle_24"
+                tools:layout_editor_absoluteY="4dp" />
 
             <ImageView
                 android:id="@+id/removeRowBtn"
@@ -170,6 +171,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/addRowBtn"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/baseline_remove_24" />
+
+            <Button
+                android:id="@+id/saveExerciserRepsWeighBtn"
+                android:layout_width="60dp"
+                android:layout_height="45dp"
+                app:icon="@drawable/baseline_check_circle_24"
+                app:iconGravity="top"
+                app:iconPadding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/startedProgramTable"
+                app:layout_constraintTop_toBottomOf="@+id/removeRowBtn"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
