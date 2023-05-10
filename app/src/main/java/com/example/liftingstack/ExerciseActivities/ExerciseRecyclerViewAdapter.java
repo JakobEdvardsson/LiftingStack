@@ -58,11 +58,11 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
     }
     //Denna klass var static innan, krånglar den så får vi göra den static igen.
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView programNameTextView;
-        TextView programDescriptionTextView;
-        ImageView imageView;
-        CardView cardView;
-        ExerciseRecyclerViewAdapter adapter;
+        private TextView programNameTextView;
+        private TextView programDescriptionTextView;
+        private ImageView imageView;
+        private CardView cardView;
+        private ExerciseRecyclerViewAdapter adapter;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
