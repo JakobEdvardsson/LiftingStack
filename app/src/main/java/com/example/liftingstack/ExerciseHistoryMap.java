@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.liftingstack.Controller.LoadFromDevice;
 import com.example.liftingstack.Controller.SaveToDevice;
@@ -110,7 +111,7 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         // puts the logged sets into hashmap with date as key
         //dateDataMap.put(dateString, setDataMap);
 
-        dateDataMap.put("2023-04-21", setDataMap);
+        dateDataMap.put("2023-05-08", setDataMap);
         // puts above hashmap into hashmap with the exerciseId as key
         exerciseHistoryMap.put(exerciseId, dateDataMap);
 
@@ -124,6 +125,8 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         // below only for testing purposes
         dateDataMap = exerciseHistoryMap.get("1");
         setDataMap = dateDataMap.get("2023-05-08");
+
+
 
         Log.i("TestHistory TestSet4", exerciseHistoryMap.toString());
         Log.i("TestHistory TestSet5", exerciseHistoryMap.get("1").toString());

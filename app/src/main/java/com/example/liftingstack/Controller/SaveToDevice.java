@@ -61,6 +61,7 @@ public class SaveToDevice {
         }
         if (hashMap != null) {
             Log.i("TestHistory savehashmap", hashMap.toString());
+
         }
     }
 
