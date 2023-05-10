@@ -25,8 +25,7 @@ public class AllPrograms {
     public void saveProgramList(AppCompatActivity appCompatActivity) {
         new SaveToDevice().saveListToDevice(programsList, appCompatActivity, "programList");
     }
-
-
+    
     public ArrayList<Program> getProgramsList() {
         return programsList;
     }
@@ -34,12 +33,12 @@ public class AllPrograms {
     public void setProgramsList(ArrayList<Program> programsList) {
         this.programsList = programsList;
     }
-    public void addProgram(Program program)
-    {
+
+    public void addProgram(Program program) {
         programsList.add(program);
     }
-    public void removeProgram(Program program)
-    {
+
+    public void removeProgram(Program program) {
         programsList.remove(program);
     }
 }
