@@ -33,9 +33,9 @@
                 android:text="Exercise name"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#40ff9f"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#40ff9f"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,21 +47,19 @@
                 android:layout_marginLeft="6dp"
                 android:layout_marginBottom="6dp"
                 android:backgroundTint="@android:color/transparent"
-                app:cardCornerRadius="25dp"
+                app:cardCornerRadius="10dp"
                 app:cardElevation="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/deleteIconSelectedProgram"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/exerciseNameSelectedProgram"
                 app:layout_constraintVertical_bias="0.727">
 
                 <TextView
                     android:id="@+id/exerciseDescriptionSelectedProgram"
-                    android:layout_width="261dp"
-                    android:layout_height="91dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
                     android:text="Exercise description"
                     android:textColor="#e5e5e5" />
             </androidx.cardview.widget.CardView>

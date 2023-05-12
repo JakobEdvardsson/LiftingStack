@@ -13,6 +13,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Program name"
+
+        android:padding="8dp"
+        android:background="@drawable/edittext_border"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,13 +26,15 @@
 
     <EditText
         android:id="@+id/selectedProgramDescription"
-        android:layout_width="303dp"
-        android:layout_height="100dp"
+        android:layout_width="304dp"
+        android:layout_height="108dp"
+        android:background="@drawable/edittext_border"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:padding="8dp"
+
         android:text="Program Description"
-        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,12 +56,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/selectedProgramRecyclerView"
         android:layout_width="391dp"
-        android:layout_height="411dp"
+        android:layout_height="456dp"
         app:layout_constraintBottom_toBottomOf="@+id/selectedProgramSaveBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.753" />
+        app:layout_constraintVertical_bias="0.779" />
 
     <Button
         android:id="@+id/addExercise"
