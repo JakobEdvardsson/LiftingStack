@@ -18,6 +18,7 @@ public class AllExerciseInstructions {
             exercisesInstructionsList = new LoadFromDevice().loadExerciseListFromDevice(appCompatActivity, "exerciseList");
         }catch (Exception e) {
             //TODO load from assets folder
+            saveExercisesInstructionsList(appCompatActivity);
             System.out.println("Error loading from device, file may not exist");
             e.printStackTrace();
         }
