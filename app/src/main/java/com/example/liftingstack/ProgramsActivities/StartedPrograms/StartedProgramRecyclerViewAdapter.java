@@ -15,7 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ import java.util.List;
 
 public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<StartedProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private List<ExerciseInstructions> exercises = new ArrayList<>();
+    private List<ExerciseInstruction> exercises = new ArrayList<>();
     //private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
 
-    public StartedProgramRecyclerViewAdapter(Context context, List<ExerciseInstructions> exercises) {
+    public StartedProgramRecyclerViewAdapter(Context context, List<ExerciseInstruction> exercises) {
         this.context = context;
         this.exercises = exercises;
         //this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;

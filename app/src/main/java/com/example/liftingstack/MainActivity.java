@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 import com.example.liftingstack.Entity.BarChartCount;
@@ -53,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
         Log.i("TestFirstTime3" , "ok");
 
         AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions(this);
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Bench Press", "Chest, Shoulders, Arms"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Barbell Squat", "Legs, Butt, Core"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Deadlift", "Hamstrings, Butt, Back, Core"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Dumbbell Overhead Press", "Shoulders, Arms"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Lats Pulldowns", "Back, Shoulders"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Triceps Pulldowns", "Triceps"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Biceps Dumbell Curls", "Biceps"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstructions("Barbell Rows", "Back, Arms, Core"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Bench Press", "Chest, Shoulders, Arms"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Barbell Squat", "Legs, Butt, Core"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Deadlift", "Hamstrings, Butt, Back, Core"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Dumbbell Overhead Press", "Shoulders, Arms"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Lats Pulldowns", "Back, Shoulders"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Triceps Pulldowns", "Triceps"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Biceps Dumbell Curls", "Biceps"));
+        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Barbell Rows", "Back, Arms, Core"));
 
 
 

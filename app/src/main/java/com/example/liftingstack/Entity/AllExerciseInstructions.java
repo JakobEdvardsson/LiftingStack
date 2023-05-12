@@ -7,43 +7,54 @@ import com.example.liftingstack.Controller.SaveToDevice;
 
 import java.util.ArrayList;
 
+/**
+ * This class is used to store all ExerciseInstructions.
+ * It is used to save and load the programs from the device.
+ */
 public class AllExerciseInstructions {
-    private ArrayList<ExerciseInstructions> exercisesInstructionsList;
+    private ArrayList<ExerciseInstruction> exercisesInstructionsList;
 
+    /**
+     * Instantiates a new All exercise instructions.
+     * Loads the programs from the device.
+     * @param appCompatActivity the app compat activity
+     */
     public AllExerciseInstructions(AppCompatActivity appCompatActivity) {
         exercisesInstructionsList = new ArrayList<>();
-
-        //TODO Load the list from the device, here should be a check if the file exists if not load from the assets folder
         try {
             exercisesInstructionsList = new LoadFromDevice().loadExerciseListFromDevice(appCompatActivity, "exerciseList");
         }catch (Exception e) {
-            //TODO load from assets folder
             saveExercisesInstructionsList(appCompatActivity);
             System.out.println("Error loading from device, file may not exist");
             e.printStackTrace();
         }
     }
 
+    /**
+     * Save exercises instructions list.
+     *
+     * @param appCompatActivity the app compat activity
+     */
     public void saveExercisesInstructionsList(AppCompatActivity appCompatActivity) {
         new SaveToDevice().saveListToDevice(exercisesInstructionsList, appCompatActivity, "exerciseList");
     }
 
-    public ArrayList<ExerciseInstructions> getExercisesInstructionsList() {
+    /**
+     * Gets exercises instructions list.
+     *
+     * @return the exercises instructions list
+     */
+    public ArrayList<ExerciseInstruction> getExercisesInstructionsList() {
         return exercisesInstructionsList;
     }
-    public void setExercisesInstructionsList(ArrayList<ExerciseInstructions> exercisesInstructionsList) {
-        this.exercisesInstructionsList = exercisesInstructionsList;
-    }
-    public void removeExerciseInstructions(ExerciseInstructions exerciseInstructions) {
-        exercisesInstructionsList.remove(exerciseInstructions);
-    }
 
-    public void addExerciseInstructions(ExerciseInstructions exerciseInstructions) {
-     /*   for (ExerciseInstructions e : exercisesInstructionsList)
-        {
-            if (e.getExerciseName().equals(exerciseInstructions.getExerciseName()))
-                return;
-        }*/
-        exercisesInstructionsList.add(exerciseInstructions);
+
+    /**
+     * Add exercise instructions.
+     *
+     * @param exerciseInstruction the exercise instructions
+     */
+    public void addExerciseInstructions(ExerciseInstruction exerciseInstruction) {
+        exercisesInstructionsList.add(exerciseInstruction);
     }
 }

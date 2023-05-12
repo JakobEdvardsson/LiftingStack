@@ -18,6 +18,10 @@ import com.example.liftingstack.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Program activity.
+ * This activity is used to display all programs.
+ */
 public class ProgramActivity extends AppCompatActivity implements ProgramRecyclerViewInterface {
     private List<Program> programs = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -37,6 +41,9 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
         setupRecyclerView();
     }
 
+    /**
+     * Sets recycler view.
+     */
     public void setupRecyclerView() {
         // Create a new AllExerciseInstructions which will load all exercises from file
         allPrograms = new AllPrograms(this);
@@ -48,13 +55,22 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-
+    /**
+     * This method is used to add a new program, it will launch the SelectedProgramActivity
+     *
+     * @param view the view
+     */
     public void addProgram(View view) {
         Intent intent = new Intent(this, SelectedProgramActivity.class);
         activityResultLauncher.launch(intent);
     }
 
 
+    /**
+     * This method is used to edit a program, it will launch the SelectedProgramActivity
+     *
+     * @param program the program
+     */
     @Override
     public void onItemClick(Program program) {
 
@@ -64,6 +80,11 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
         activityResultLauncher.launch(intent);
     }
 
+    /**
+     * This method is used to delete a program
+     *
+     * @param program the program
+     */
     @Override
     public void onProgramDelete(int program) {
         allPrograms.getProgramsList().remove(program);

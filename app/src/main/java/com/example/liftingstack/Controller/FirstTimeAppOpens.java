@@ -1,10 +1,9 @@
 package com.example.liftingstack.Controller;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -74,7 +73,7 @@ public class FirstTimeAppOpens {
 
             // Converts to ArrayList of ExerciseInstructions
             Gson g = new Gson();
-            Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<ExerciseInstruction>>(){}.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
 
             //TODO create "exerciseList" file and save the list in "exerciseList" file, do the same for programs

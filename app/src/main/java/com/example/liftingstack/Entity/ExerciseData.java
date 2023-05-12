@@ -9,17 +9,17 @@ import java.util.List;
  * This class is data for the exercise object such as the number of reps and weight for each set.
  */
 public class ExerciseData {
-    private ExerciseInstructions exerciseInstructions;
+    private ExerciseInstruction exerciseInstruction;
     private HashMap<Integer, List<Double>> exerciseData;
     //key = set, List[0] = rep, List[1] = weigh
 
     /**
      * Instantiates a new Exercise data.
      *
-     * @param exerciseInstructions the exercise
+     * @param exerciseInstruction the exercise
      */
-    public ExerciseData(ExerciseInstructions exerciseInstructions) {
-        this.exerciseInstructions = exerciseInstructions;
+    public ExerciseData(ExerciseInstruction exerciseInstruction) {
+        this.exerciseInstruction = exerciseInstruction;
         exerciseData = new HashMap<>();
     }
 
@@ -51,17 +51,17 @@ public class ExerciseData {
      *
      * @return the exercise
      */
-    public ExerciseInstructions getExercise() {
-        return exerciseInstructions;
+    public ExerciseInstruction getExercise() {
+        return exerciseInstruction;
     }
 
     /**
      * Sets exercise.
      *
-     * @param exerciseInstructions the exercise
+     * @param exerciseInstruction the exercise
      */
-    public void setExercise(ExerciseInstructions exerciseInstructions) {
-        this.exerciseInstructions = exerciseInstructions;
+    public void setExercise(ExerciseInstruction exerciseInstruction) {
+        this.exerciseInstruction = exerciseInstruction;
     }
 
     /**

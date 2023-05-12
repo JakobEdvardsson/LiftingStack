@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
-import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class StartedProgramActivity extends AppCompatActivity{
 
-    private List<ExerciseInstructions> exercises = new ArrayList<>();
+    private List<ExerciseInstruction> exercises = new ArrayList<>();
     private RecyclerView recyclerView;
     private StartedProgramRecyclerViewAdapter startedProgramRecyclerViewAdapter;
 
@@ -33,7 +32,7 @@ public class StartedProgramActivity extends AppCompatActivity{
 
     private void setUpExerciseList() {
         for (int i = 1; i <= 20; i++) {
-            exercises.add(new ExerciseInstructions("Exercise " + i , "Dips"));
+            exercises.add(new ExerciseInstruction("Exercise " + i , "Dips"));
         }
     }
 }

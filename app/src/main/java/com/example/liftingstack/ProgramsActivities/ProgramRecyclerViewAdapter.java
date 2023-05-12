@@ -17,7 +17,6 @@ import com.example.liftingstack.R;
 
 public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    //private List<Program> programs;
     private  AllPrograms allPrograms;
     private final ProgramRecyclerViewInterface programRecyclerViewInterface;
 
@@ -37,8 +36,6 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
 
     @Override
     public void onBindViewHolder(@NonNull ProgramRecyclerViewAdapter.ViewHolder holder, int position) {
-
-
         holder.programNameTextView.setText(allPrograms.getProgramsList().get(position).getName());
         holder.programDescriptionTextView.setText(allPrograms.getProgramsList().get(position).getDescription());
 
@@ -80,17 +77,17 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
                 Button cancel = dialog.findViewById(R.id.btn_cancel);
                 dialog.show();
 
+                // Delete the program if the user clicks on the delete button
                 delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Toast.makeText(this, "Exercise deleted", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                         programRecyclerViewInterface.onProgramDelete(getAdapterPosition());
                         adapter.notifyItemRemoved(getAdapterPosition());
                     }
                 });
-
+                // Cancel the deletion if the user clicks on the cancel button
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

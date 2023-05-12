@@ -10,7 +10,7 @@ import java.util.Objects;
  * This class is used to store exerciseData for a specific exercise.
  */
 public class ExerciseHistory {
-    private HashMap<ExerciseInstructions, List<ExerciseData>> exerciseDataList = new HashMap<>();
+    private HashMap<ExerciseInstruction, List<ExerciseData>> exerciseDataList = new HashMap<>();
 
     /**
      * This method is used to add exerciseData to the exerciseDataList.
@@ -46,7 +46,7 @@ public class ExerciseHistory {
      *
      * @return the exercise data list
      */
-    public HashMap<ExerciseInstructions, List<ExerciseData>> getExerciseDataList() {
+    public HashMap<ExerciseInstruction, List<ExerciseData>> getExerciseDataList() {
         return exerciseDataList;
     }
 
@@ -55,7 +55,7 @@ public class ExerciseHistory {
      *
      * @param exerciseDataList the exercise data list
      */
-    public void setExerciseDataList(HashMap<ExerciseInstructions, List<ExerciseData>> exerciseDataList) {
+    public void setExerciseDataList(HashMap<ExerciseInstruction, List<ExerciseData>> exerciseDataList) {
         this.exerciseDataList = exerciseDataList;
     }
 }

@@ -7,38 +7,64 @@ import com.example.liftingstack.Controller.SaveToDevice;
 
 import java.util.ArrayList;
 
+/**
+ * This class is used to store all programs.
+ * It is used to save and load the programs from the device.
+ */
 public class AllPrograms {
     private ArrayList<Program> programsList;
 
+    /**
+     * Instantiates a new All programs.
+     * Loads the programs from the device.
+     *
+     * @param appCompatActivity the app compat activity
+     */
     public AllPrograms(AppCompatActivity appCompatActivity) {
         programsList = new ArrayList<>();
-        //TODO Load the list from the device, here should be a check if the file exists if not load from the assets folder
         try {
             programsList = new LoadFromDevice().loadProgramListFromDevice(appCompatActivity, "programList");
         } catch (Exception e) {
-            //TODO load from assets folder
+            saveProgramList(appCompatActivity);
             System.out.println("Error loading from device, file may not exist");
             e.printStackTrace();
         }
     }
 
+    /**
+     * Saves the programs to the device.
+     *
+     * @param appCompatActivity the app compat activity
+     */
     public void saveProgramList(AppCompatActivity appCompatActivity) {
         new SaveToDevice().saveListToDevice(programsList, appCompatActivity, "programList");
     }
-    
+
+    /**
+     * Gets programs list.
+     *
+     * @return the programs list
+     */
     public ArrayList<Program> getProgramsList() {
         return programsList;
     }
 
+    /**
+     * Sets programs list.
+     *
+     * @param programsList the programs list
+     */
     public void setProgramsList(ArrayList<Program> programsList) {
         this.programsList = programsList;
     }
 
+    /**
+     * Add program.
+     *
+     * @param program the program
+     */
     public void addProgram(Program program) {
         programsList.add(program);
     }
 
-    public void removeProgram(Program program) {
-        programsList.remove(program);
-    }
 }

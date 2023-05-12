@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -38,7 +38,7 @@ public class LoadUtilities extends AppCompatActivity {
     
     public void convertJsonToObject(String json) {
         Gson gson = new Gson();
-        ExerciseInstructions exerciseInstructions = gson.fromJson(json, ExerciseInstructions.class);
+        ExerciseInstruction exerciseInstruction = gson.fromJson(json, ExerciseInstruction.class);
         System.out.println(json);
         //visa texten i gui -- ta bort senare
         //displayObjectOnScreen(exerciseInstructions);
