@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -84,11 +83,11 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
         dialog.setContentView(R.layout.activity_pop_up_text);
         dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.pop_up_background));
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.setCancelable(false);
         dialog.getWindow().getAttributes().windowAnimations = R.style.pop_up_animation;
 
         Button delete = dialog.findViewById(R.id.btn_delete);
         Button cancel = dialog.findViewById(R.id.btn_cancel);
+        dialog.show();
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
