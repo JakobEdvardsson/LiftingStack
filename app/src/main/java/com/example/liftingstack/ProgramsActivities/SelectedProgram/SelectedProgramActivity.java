@@ -2,6 +2,7 @@ package com.example.liftingstack.ProgramsActivities.SelectedProgram;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -142,7 +143,12 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions(this);
 
         for (ExerciseInstructions option : allExerciseInstructions.getExercisesInstructionsList()) {
-            popupMenu.getMenu().add(option.getExerciseName());
+
+            if (!selectedProgram.getExercises().contains(option.getId())){
+                popupMenu.getMenu().add(option.getExerciseName());
+            }
+
+            Log.d("TAG123", "123");
         }
         // Set a listener to handle menu item clicks
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
