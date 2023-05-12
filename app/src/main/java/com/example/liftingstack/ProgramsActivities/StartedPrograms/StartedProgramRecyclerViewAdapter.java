@@ -2,6 +2,7 @@ package com.example.liftingstack.ProgramsActivities.StartedPrograms;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.ExerciseHistoryMap;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import kotlinx.coroutines.selects.WhileSelectKt;
 
 public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<StartedProgramRecyclerViewAdapter.ViewHolder> {
-    private static Context context;
+    private Context context;
     private List<ExerciseInstructions> exercises = new ArrayList<>();
     //private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
 
@@ -38,20 +45,15 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_started_program, parent, false);
+
         return new ViewHolder(view).linkAdapter(this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StartedProgramRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull StartedProgramRecyclerViewAdapter.ViewHolder holder, int position) {
         holder.exerciseNameTextView.setText(exercises.get(position).getExerciseName());
+        System.out.println(position);
         System.out.println(exercises.get(position).getId());
-
-        /*holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                exerciseRecyclerViewInterface.onExerciseClick(exercises.get(holder.getAdapterPosition()));
-            }
-        });*/
     }
 
     @Override
@@ -59,12 +61,18 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
         return exercises.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
         private TableLayout tableLayout;
+        //private Button saveButton;
         private StartedProgramRecyclerViewAdapter adapter;
         private TextView exerciseNameTextView;
+        private EditText setsEditText, repsEditText, weightEditText;
         private int setCounter;
+        private ExerciseHistoryMap exerciseHistoryMap = new ExerciseHistoryMap();
+        private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
+        private HashMap<String, ArrayList<EditText>> editTextsMap = new HashMap<>();
+        private ArrayList<EditText> repsAndWeight;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,32 +80,49 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
             tableLayout = itemView.findViewById(R.id.startedProgramTable);
             exerciseNameTextView = itemView.findViewById(R.id.startedProgramExerciseName);
 
+
             itemView.findViewById(R.id.addRowBtn).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     LayoutInflater layoutInflater = LayoutInflater.from(context);
+                    //NY TABLEROW
                     TableRow newRow = (TableRow) layoutInflater.inflate(R.layout.table_row_to_expand, null);
 
-                    setCounter = tableLayout.getChildCount();
-                    EditText setsText = newRow.findViewById(R.id.setsEditText);
-                    setsText.setText(String.valueOf(setCounter));
+                    //SKAPA NY ARRAYLIST VARJE GÅNG FÖR ATT FYLLA I REPS + WEIGHT FÖR JUST DENNA TABLEROW
+                    repsAndWeight = new ArrayList<>();
 
+                    setCounter = tableLayout.getChildCount();
+                    setsEditText = newRow.findViewById(R.id.setsEditText);
+                    setsEditText.setText(String.valueOf(setCounter));
+
+                    repsEditText = newRow.findViewById(R.id.repsEditText);
+                    weightEditText = newRow.findViewById(R.id.weightEditText);
+
+                    //LÄGG TILL REPS + WEIGHT I ARRAYLIST, SEDAN SETS + ARRAYLISTAN I HASHMAPPEN
+                    repsAndWeight.add(repsEditText);
+                    repsAndWeight.add(weightEditText);
+                    editTextsMap.put(setsEditText.getText().toString(), repsAndWeight);
+
+                    System.out.println("map efter add = " + editTextsMap.size());
+
+                    //LÄGG TILL NYA TABLEROW I TABLELAYOUTEN
                     tableLayout.addView(newRow);
 
                     int tableHeight = 300;
 
+                    //RÄKNA UT TABELLENS HÖJD BASERAT PÅ ANTAL RADER
                     for (int i = 0; i < tableLayout.getChildCount(); i++) {
                         View row = tableLayout.getChildAt(i);
                         tableHeight += row.getHeight();
                     }
 
-                    // Set the new height for the TableLayout
+                    //SÄTT DEN NYA TABELLHÖJDEN
                     tableLayout.getLayoutParams().height = tableHeight;
 
-                    // Calculate the new height of the CardView
+                    //RÄKNA UT HUR HÖG CARDVIEWEN SKA VARA
                     int cardViewHeight = tableHeight;
 
-                    // Set the new height for the CardView
+                    //SÄTT HÖJDEN PÅ CARDVIEWEN
                     try {
                         cardView.getLayoutParams().height = cardViewHeight;
                         cardView.requestLayout();
@@ -110,11 +135,28 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
             itemView.findViewById(R.id.removeRowBtn).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (tableLayout.getChildCount() > 2) {
+                    //TA ENDAST BORT SENASTE RADEN OM TABLELAYOUT HAR FLER ÄN 1 TABLEROW
+                    if (tableLayout.getChildCount() > 1) {
                         tableLayout.removeViewAt(tableLayout.getChildCount() - 1);
 
+                        //KOD FÖR ATT HITTA SISTA TILLAGDA ENTRY I HASHMAPPEN
+                        Iterator<Map.Entry<String, ArrayList<EditText>>> iterator = editTextsMap.entrySet().iterator();
+                        Map.Entry<String, ArrayList<EditText>> lastEntry = null;
+
+                        //GÅ IGENOM ALLA ENTRYS TILLS MAN KOMMER TILL SISTA ENTRYN
+                        while (iterator.hasNext()) {
+                            lastEntry = iterator.next();
+                        }
+
+                        //TA BORT SISTA ENTRYN
+                        if (lastEntry != null) {
+                            iterator.remove();
+                        }
+
+                        System.out.println("map efter remove = " + editTextsMap.size());
 
                         int rowHeight = 140;
+                        //JUSTERA CARDVIEW EFTER ATT HA TAGIT BORT TABLEROW
                         try {
                             cardView.getLayoutParams().height = cardView.getHeight() - rowHeight;
                             cardView.requestLayout();
@@ -128,11 +170,47 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
             itemView.findViewById(R.id.saveExerciserRepsWeighBtn).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    for (int i = 0; i < tableLayout.getChildCount(); i++) {
 
+                    // HÄMTA UT ID FRÅN ÖVNINGEN SOM SPARA-KNAPPEN TRYCKTES PÅ
+                    ExerciseInstructions exerciseInstructions = adapter.exercises.get(getAdapterPosition());
+                    System.out.println(exerciseInstructions.getExerciseName());
+                    String exerciseId = exerciseInstructions.getId();
+                    System.out.println(exerciseId);
+
+                    //GÅ IGENOM EDITTEXTSMAP'S LISTA OCH HÄMTA UT SET, REPS, WEIGHT
+                    for (Map.Entry<String, ArrayList<EditText>> entry : editTextsMap.entrySet()) {
+                        String set = entry.getKey();
+                        ArrayList<EditText> value = entry.getValue();
+                        System.out.println("Börjar om");
+                        int index = 0;
+
+                        String reps = value.get(index).getText().toString();
+                        String weight = value.get(index + 1).getText().toString();
+
+                        System.out.println("Sets = " + set);
+                        System.out.println("Reps = " + reps);
+                        System.out.println("Weight = " + weight);
+
+                        //SKICKA TILL SPARNINGS-FUNKTIONER (LÄGGA TILL "String exerciseId" I SETSETDATAMAP?)
+                        setSetDataMap(set, reps, weight, exerciseId);
+                        System.out.println("Skickat: " + set + ", " + reps + ", " + weight);
                     }
                 }
             });
+        }
+
+        //HÄMTAT FRÅN EXERCISEHISTORYMAP (SKA LIGGA HÄR ELLER STANNA I DEN KLASSEN?)
+        public void setSetDataMap(String set, String reps, String weight, String exerciseId) {
+            ArrayList<String> setStringArrayList = new ArrayList<>();
+            setStringArrayList.add(reps);
+            setStringArrayList.add(weight);
+
+            System.out.println("Skickar in data: set = " + set + ", reps = " + reps + ", weight = " + weight);
+
+            setDataMap.put(set, setStringArrayList);
+            //ANTINGEN LÄGGA TILL SETEXERCISEHISTORYMAP-METODEN HÄR OCKSÅ ELLER FLYTTA TILLBAKA
+            //SETSETDATAMAP-METODEN FÖR ATT KUNNA SKICKA MED ALLTING SOM BEHÖVS
+
         }
 
         public ViewHolder linkAdapter(StartedProgramRecyclerViewAdapter adapter) {
