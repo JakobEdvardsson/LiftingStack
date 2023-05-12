@@ -2,7 +2,6 @@ package com.example.liftingstack.ProgramsActivities.SelectedProgram;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
 import com.example.liftingstack.ProgramsActivities.StartedPrograms.test;
@@ -26,19 +25,27 @@ import com.example.liftingstack.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is used to display the selected program.
+ * It also allows the user to edit the program and start the program.
+ */
 public class SelectedProgramActivity extends AppCompatActivity implements ExerciseRecyclerViewInterface {
-    //private SelectedProgramRecyclerViewAdapter selectedProgramAdapter;
     private RecyclerView recyclerView;
     private AllPrograms allPrograms;
     private String idForProgram;
     private Program selectedProgram;
-    private List<ExerciseInstructions> exercises;
+    private List<ExerciseInstruction> exercises; //All exercises in the selected program
 
-    private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> setupRecyclerView()
     );
 
+    /**
+     * On create method.
+     * The purpose of this method is to create the activity and set the content view.
+     * It also gets the selected program and displays its content.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +53,58 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
 
         recyclerView = findViewById(R.id.selectedProgramRecyclerView);
 
+        //Get all programs from file
         allPrograms = new AllPrograms(this);
+        //Gets the id for the program that was selected
         idForProgram = getIntent().getStringExtra("ProgramID");
 
+        //Gets the selected program from allPrograms
+        getSelectedProgram();
 
+        //Gets all exercises from the selected program
+        getAllExercisesForProgram();
+
+        //Sets up the recycler view
+        setupRecyclerView();
+
+        EditText programName = findViewById(R.id.selectedProgramName);
+        programName.setText(selectedProgram.getName());
+
+        EditText programDescription = findViewById(R.id.selectedProgramDescription);
+        programDescription.setText(selectedProgram.getDescription());
+    }
+
+    /**
+     * Get all exercises for program.
+     * This method gets all exercises for the selected program.
+     * It also removes exercises that are no longer in the list.
+     */
+    public void getAllExercisesForProgram() {
+        exercises = new ArrayList<>();
+        AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions(this);
+        for (String id : selectedProgram.getExercises()) {
+            //Used to remove exercises that are no longer in the list
+            boolean exerciseFound = false;
+            for (ExerciseInstruction exerciseInstruction : allExerciseInstructions.getExercisesInstructionsList()) {
+                if (exerciseInstruction.getId().equals(id)) {
+                    exercises.add(exerciseInstruction);
+                    exerciseFound = true;
+                }
+            }
+            if (!exerciseFound) {
+                //Remove exercise from program if the exercise has been removed.
+                selectedProgram.getExercises().remove(id);
+            }
+        }
+    }
+
+    /**
+     * Get selected program.
+     * This method gets the selected program from allPrograms.
+     */
+    public void getSelectedProgram() {
         boolean programFound = false;
-        //Get the exercise from the list
+
         for (Program program : allPrograms.getProgramsList()) {
             if (program.getId().equals(idForProgram)) {
                 selectedProgram = program;
@@ -62,47 +115,21 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         if (!programFound) {
             selectedProgram = new Program("New Program", "Description");
         }
-
-
-        exercises = new ArrayList<>();
-
-        AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions(this);
-
-
-        for (String id : selectedProgram.getExercises()) {
-            //Used to remove exercises that are no longer in the list
-            boolean exerciseFound = false;
-            for (ExerciseInstructions exerciseInstructions : allExerciseInstructions.getExercisesInstructionsList()) {
-                if (exerciseInstructions.getId().equals(id)) {
-                    exercises.add(exerciseInstructions);
-                    exerciseFound = true;
-                }
-            }
-            if (!exerciseFound) {
-                //Remove exercise from program if the exercise has been removed.
-                selectedProgram.getExercises().remove(id);
-            }
-        }
-
-        setupRecyclerView();
-
-
-        EditText programName = findViewById(R.id.selectedProgramName);
-        programName.setText(selectedProgram.getName());
-
-        EditText programDescription = findViewById(R.id.selectedProgramDescription);
-        programDescription.setText(selectedProgram.getDescription());
     }
 
+    /**
+     * Sets up recycler view.
+     */
     public void setupRecyclerView() {
-        // Create a new AllExerciseInstructions which will load all exercises from file
-
-        // Create a new ExerciseRecyclerViewAdapter which will display all exercises
         SelectedProgramRecyclerViewAdapter exerciseAdapter = new SelectedProgramRecyclerViewAdapter(this, exercises, this);
         recyclerView.setAdapter(exerciseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Saves the program with all of it content to file.
+     * @param v the v
+     */
     public void saveOnClick(View v) {
 
         selectedProgram.setName(((TextView) findViewById(R.id.selectedProgramName)).getText().toString());
@@ -124,6 +151,7 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         finish();
     }
 
+    //TODO: Remove this method
     public void startBtnClicked(View v) {
         Intent intent = new Intent(this, test.class);
         startActivity(intent);
@@ -131,48 +159,51 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
 
 
     @Override
-    public void onExerciseClick(ExerciseInstructions exerciseInstructions) {
-        //Do nothing
+    public void onExerciseClick(ExerciseInstruction exerciseInstruction) {
+        //leave empty
     }
 
+    /**
+     * Creates a popup menu with all exercises that are not already in the program.
+     * When an exercise is selected it is added to the program.
+     * @param v the v
+     */
     public void addExerciseOnClick(View v) {
         // Get the menu view from the layout
-        //View menuButton = findViewById(R.id.menu_button);
         PopupMenu popupMenu = new PopupMenu(this, v);
         // Add a menu item for each option
         AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions(this);
 
-        for (ExerciseInstructions option : allExerciseInstructions.getExercisesInstructionsList()) {
-
-            if (!selectedProgram.getExercises().contains(option.getId())){
+        // Show only exercises that are not already in the program
+        for (ExerciseInstruction option : allExerciseInstructions.getExercisesInstructionsList()) {
+            if (!selectedProgram.getExercises().contains(option.getId())) {
                 popupMenu.getMenu().add(option.getExerciseName());
             }
-
-            Log.d("TAG123", "123");
         }
-        // Set a listener to handle menu item clicks
+        // Listener for the menu item clicks, will add the exercise to the exercises and selectedProgram on click
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                // Handle the menu item click
-                for (ExerciseInstructions exerciseInstructions : allExerciseInstructions.getExercisesInstructionsList()) {
-                    if (exerciseInstructions.getExerciseName().equals(item.getTitle().toString())) {
-                        selectedProgram.addExercise(exerciseInstructions.getId());
-                        exercises.add(exerciseInstructions);
+                for (ExerciseInstruction exerciseInstruction : allExerciseInstructions.getExercisesInstructionsList()) {
+                    if (exerciseInstruction.getExerciseName().equals(item.getTitle().toString())) {
+                        selectedProgram.addExercise(exerciseInstruction.getId());
+                        exercises.add(exerciseInstruction);
                         setupRecyclerView();
                         break;
                     }
                 }
-                // Do something with the selected option
                 return true;
             }
         });
         // Show the menu
         popupMenu.show();
-
-
     }
 
+
+    /**
+     * Removes the exercise from the program and updates the recycler view.
+     * @param index the index
+     */
     @Override
     public void removeExerciseAndUpdateList(int index) {
         selectedProgram.getExercises().remove(index);

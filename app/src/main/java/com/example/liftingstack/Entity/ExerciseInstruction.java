@@ -11,25 +11,25 @@ import java.util.UUID;
  * The type Exercise.
  * This class is a specific exercise such as Bench Press or Squats.
  */
-public class ExerciseInstructions implements Parcelable {
+public class ExerciseInstruction implements Parcelable {
     private String name;
     private String description;
     private String id;
     private String image;
-    //Text / Video
 
     /**
      * Instantiates a new Exercise.
+     * Gives the exercise a unique id.
      *
      * @param name        the name
      * @param description the description
      */
-    public ExerciseInstructions(String name, String description) {
+    public ExerciseInstruction(String name, String description) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
     }
-    public ExerciseInstructions(String name, String description, String image) {
+    public ExerciseInstruction(String name, String description, String image) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
@@ -37,20 +37,20 @@ public class ExerciseInstructions implements Parcelable {
     }
 
 
-    protected ExerciseInstructions(Parcel in) {
+    protected ExerciseInstruction(Parcel in) {
         name = in.readString();
         description = in.readString();
     }
 
-    public static final Creator<ExerciseInstructions> CREATOR = new Creator<ExerciseInstructions>() {
+    public static final Creator<ExerciseInstruction> CREATOR = new Creator<ExerciseInstruction>() {
         @Override
-        public ExerciseInstructions createFromParcel(Parcel in) {
-            return new ExerciseInstructions(in);
+        public ExerciseInstruction createFromParcel(Parcel in) {
+            return new ExerciseInstruction(in);
         }
 
         @Override
-        public ExerciseInstructions[] newArray(int size) {
-            return new ExerciseInstructions[size];
+        public ExerciseInstruction[] newArray(int size) {
+            return new ExerciseInstruction[size];
         }
     };
 

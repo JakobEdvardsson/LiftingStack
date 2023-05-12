@@ -17,7 +17,6 @@ public class Program implements Parcelable {
 
     private String name;
     private String description;
-    //TODO Change to String of exerciseInstructions ID
     private List<String> exerciseInstructions;
 
     public String getId() {
@@ -30,7 +29,7 @@ public class Program implements Parcelable {
 
     /**
      * Instantiates a new Program.
-     *
+     * Gives the program a unique id.
      * @param name        the name
      * @param description the description
      */
