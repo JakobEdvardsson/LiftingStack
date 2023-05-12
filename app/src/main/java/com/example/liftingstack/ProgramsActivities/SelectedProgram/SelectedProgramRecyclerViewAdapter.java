@@ -54,7 +54,7 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
         return exercises.size();
     }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView exerciseNameTextView;
         private TextView exerciseDescriptionTextView;
         private CardView cardView;
@@ -71,8 +71,7 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
 
                     exerciseRecyclerViewInterface.removeExerciseAndUpdateList(getAdapterPosition());
                     adapter.notifyItemRemoved(getAdapterPosition());
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.out.println("Tried deleting too fast" + e);
                 }
             });

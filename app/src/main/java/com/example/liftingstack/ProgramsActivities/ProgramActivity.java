@@ -23,7 +23,7 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
     private RecyclerView recyclerView;
     private AllPrograms allPrograms;
 
-    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+    private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> setupRecyclerView()
     );

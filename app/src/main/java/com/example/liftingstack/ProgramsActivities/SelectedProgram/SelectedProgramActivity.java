@@ -32,7 +32,7 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
     private AllPrograms allPrograms;
     private String idForProgram;
     private Program selectedProgram;
-    List<ExerciseInstructions> exercises;
+    private List<ExerciseInstructions> exercises;
 
     private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
