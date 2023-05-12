@@ -1,9 +1,11 @@
 package com.example.liftingstack.ProgramsActivities;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -67,13 +69,34 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
             cardView = itemView.findViewById(R.id.cardViewProgram);
 
             itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view -> {
-                try {
-                    programRecyclerViewInterface.onProgramDelete(getAdapterPosition());
-                    adapter.notifyItemRemoved(getAdapterPosition());
-                }
-                catch (Exception e) {
-                    System.out.println("Tried deleting too fast" + e);
-                }
+
+                Dialog dialog = new Dialog(adapter.context);
+                dialog.setContentView(R.layout.activity_pop_up_text);
+                dialog.getWindow().setBackgroundDrawable(adapter.context.getDrawable(R.drawable.pop_up_background));
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.getWindow().getAttributes().windowAnimations = R.style.pop_up_animation;
+
+                Button delete = dialog.findViewById(R.id.btn_delete);
+                Button cancel = dialog.findViewById(R.id.btn_cancel);
+                dialog.show();
+
+                delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Toast.makeText(this, "Exercise deleted", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+
+                        programRecyclerViewInterface.onProgramDelete(getAdapterPosition());
+                        adapter.notifyItemRemoved(getAdapterPosition());
+                    }
+                });
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
             });
         }
 

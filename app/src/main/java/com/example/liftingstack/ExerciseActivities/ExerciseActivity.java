@@ -1,8 +1,11 @@
 package com.example.liftingstack.ExerciseActivities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -19,6 +22,7 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
     private AllExerciseInstructions allExerciseInstructions;
     private RecyclerView recyclerView;
+    private Button button;
     private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> setupRecyclerView()
@@ -75,10 +79,35 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
     @Override
     public void removeExerciseAndUpdateList(int index) {
-        //TODO If in program, remove from program and save program and ask if user wants to remove anyways.
-        allExerciseInstructions.getExercisesInstructionsList().remove(index);
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.activity_pop_up_text);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.pop_up_background));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.pop_up_animation;
 
-        saveToFile();
+        Button delete = dialog.findViewById(R.id.btn_delete);
+        Button cancel = dialog.findViewById(R.id.btn_cancel);
+        dialog.show();
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(this, "Exercise deleted", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+
+                allExerciseInstructions.getExercisesInstructionsList().remove(index);
+                saveToFile();
+                setupRecyclerView();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
     }
 
     /**
