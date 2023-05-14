@@ -66,16 +66,26 @@ public class BarChartCount extends AppCompatActivity {
         //TODO ändra ev x - axel (från 2023-1 till 2023.1 eller 1, eller skriv det på ett annat sätt)
 
         BarDataSet barDataSet = new BarDataSet(bar, "Number of training sessions");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        //barDataSet.setFormSize(20);
+        //barDataSet.setBack
+        barDataSet.setColors(Color.rgb(64,255,159));
+        //barDataSet.setColors(Color.rgb(0,204,102));
+       // barDataSet.setColors(Color.rgb(0,0,205));
+        //00CC66
+        //D3D3D3
+       // barDataSet.setBarShadowColor();
         barDataSet.setValueTextColor((Color.BLACK));
         barDataSet.setValueTextSize(16f);
+      //  barDataSet.setBarBorderColor((Color.rgb(0,204,102)));
+       // barDataSet.text
 
         BarData barData = new BarData(barDataSet);
 
         barChart.setFitBars(true);
         barChart.setData(barData);
-        barChart.getDescription().setText("Number of training sessions");
+        barChart.getDescription().setText("");
         barChart.animateY(2000);
+
 
     }
 }
