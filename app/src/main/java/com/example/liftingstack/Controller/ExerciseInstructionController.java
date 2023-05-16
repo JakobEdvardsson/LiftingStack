@@ -1,7 +1,7 @@
 package com.example.liftingstack.Controller;
 
 import com.example.liftingstack.Entity.AllExerciseInstructions;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 
 /**
  * The type Exercise instruction controller.
@@ -26,17 +26,17 @@ public class ExerciseInstructionController {
      * @param description the description
      */
     public void createExercise(String name, String description) {
-        ExerciseInstructions exerciseInstructions = new ExerciseInstructions(name, description);
-        allExerciseInstructions.getExercisesInstructionsList().add(exerciseInstructions);
+        ExerciseInstruction exerciseInstruction = new ExerciseInstruction(name, description);
+        allExerciseInstructions.getExercisesInstructionsList().add(exerciseInstruction);
     }
 
     /**
      * Delete exercise.
      * Deletes an exercise from the list of exercises.
      *
-     * @param exerciseInstructions the exercise instructions
+     * @param exerciseInstruction the exercise instructions
      */
-    public void deleteExercise(ExerciseInstructions exerciseInstructions) {
-        allExerciseInstructions.getExercisesInstructionsList().remove(exerciseInstructions);
+    public void deleteExercise(ExerciseInstruction exerciseInstruction) {
+        allExerciseInstructions.getExercisesInstructionsList().remove(exerciseInstruction);
     }
 }

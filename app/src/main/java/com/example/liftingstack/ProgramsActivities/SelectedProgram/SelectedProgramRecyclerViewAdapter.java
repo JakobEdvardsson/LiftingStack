@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
 import com.example.liftingstack.R;
 
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<SelectedProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private List<ExerciseInstructions> exercises;
+    private List<ExerciseInstruction> exercises;
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
 
-    public SelectedProgramRecyclerViewAdapter(Context context, List<ExerciseInstructions> exercises, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
+    public SelectedProgramRecyclerViewAdapter(Context context, List<ExerciseInstruction> exercises, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
         this.context = context;
         this.exercises = exercises;
         this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;

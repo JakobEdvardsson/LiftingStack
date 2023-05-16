@@ -1,7 +1,7 @@
 package com.example.liftingstack.Controller;
 
 import com.example.liftingstack.Entity.ExerciseHistory;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.ExerciseData;
 import com.example.liftingstack.Entity.WorkoutData;
 import com.example.liftingstack.Entity.WorkoutHistory;
@@ -25,10 +25,10 @@ public class ExerciseDataController {
      * Create new exercise data.
      * This method is used to create a new exercise data object.
      *
-     * @param exerciseInstructions the exercise instructions
+     * @param exerciseInstruction the exercise instructions
      */
-    public void createNewExerciseData(ExerciseInstructions exerciseInstructions) {
-        exerciseDataList.add(new ExerciseData(exerciseInstructions));
+    public void createNewExerciseData(ExerciseInstruction exerciseInstruction) {
+        exerciseDataList.add(new ExerciseData(exerciseInstruction));
     }
 
     /**

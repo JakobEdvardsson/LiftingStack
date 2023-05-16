@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
 import com.google.gson.Gson;
 
@@ -15,9 +15,9 @@ import java.io.IOException;
 
 public class SaveUtilities extends AppCompatActivity {
 
-    public void saveExerciseInstruction(ExerciseInstructions exerciseInstructions) {
+    public void saveExerciseInstruction(ExerciseInstruction exerciseInstruction) {
 
-        String json = convertObjectToJson(exerciseInstructions);
+        String json = convertObjectToJson(exerciseInstruction);
         try {
             File file = new File(this.getFilesDir(), "Exercises");
 

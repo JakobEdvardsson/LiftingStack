@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.AllExerciseInstructions;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.MainActivity;
 import com.example.liftingstack.R;
 
@@ -66,9 +66,9 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
     }
 
     @Override
-    public void onExerciseClick(ExerciseInstructions exerciseInstructions) {
+    public void onExerciseClick(ExerciseInstruction exerciseInstruction) {
         Intent intent = new Intent(this, ExerciseInstructionsPage.class);
-        intent.putExtra("ExerciseID", exerciseInstructions.getId());
+        intent.putExtra("ExerciseID", exerciseInstruction.getId());
 
         activityResultLauncher.launch(intent);
     }

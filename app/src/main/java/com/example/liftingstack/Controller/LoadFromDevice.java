@@ -5,7 +5,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,7 +50,7 @@ public class LoadFromDevice{
             reader.close();
 
             Gson g = new Gson();
-            Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<ExerciseInstruction>>(){}.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
 
         } catch (IOException e) {

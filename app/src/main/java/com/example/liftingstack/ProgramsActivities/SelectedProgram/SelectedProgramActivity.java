@@ -16,11 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
 import com.example.liftingstack.ProgramsActivities.StartedPrograms.StartedProgramActivity;
-import com.example.liftingstack.ProgramsActivities.StartedPrograms.test;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
     private AllPrograms allPrograms;
     private String idForProgram;
     private Program selectedProgram;
-    List<ExerciseInstructions> exercises;
+    List<ExerciseInstruction> exercises;
 
     private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -72,9 +71,9 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         for (String id : selectedProgram.getExercises()) {
             //Used to remove exercises that are no longer in the list
             boolean exerciseFound = false;
-            for (ExerciseInstructions exerciseInstructions : allExerciseInstructions.getExercisesInstructionsList()) {
-                if (exerciseInstructions.getId().equals(id)) {
-                    exercises.add(exerciseInstructions);
+            for (ExerciseInstruction exerciseInstruction : allExerciseInstructions.getExercisesInstructionsList()) {
+                if (exerciseInstruction.getId().equals(id)) {
+                    exercises.add(exerciseInstruction);
                     exerciseFound = true;
                 }
             }
@@ -131,7 +130,7 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
 
 
     @Override
-    public void onExerciseClick(ExerciseInstructions exerciseInstructions) {
+    public void onExerciseClick(ExerciseInstruction exerciseInstruction) {
         //Do nothing
     }
 
@@ -142,7 +141,7 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         // Add a menu item for each option
         AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions(this);
 
-        for (ExerciseInstructions option : allExerciseInstructions.getExercisesInstructionsList()) {
+        for (ExerciseInstruction option : allExerciseInstructions.getExercisesInstructionsList()) {
             popupMenu.getMenu().add(option.getExerciseName());
         }
         // Set a listener to handle menu item clicks
@@ -150,10 +149,10 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 // Handle the menu item click
-                for (ExerciseInstructions exerciseInstructions : allExerciseInstructions.getExercisesInstructionsList()) {
-                    if (exerciseInstructions.getExerciseName().equals(item.getTitle().toString())) {
-                        selectedProgram.addExercise(exerciseInstructions.getId());
-                        exercises.add(exerciseInstructions);
+                for (ExerciseInstruction exerciseInstruction : allExerciseInstructions.getExercisesInstructionsList()) {
+                    if (exerciseInstruction.getExerciseName().equals(item.getTitle().toString())) {
+                        selectedProgram.addExercise(exerciseInstruction.getId());
+                        exercises.add(exerciseInstruction);
                         setupRecyclerView();
                         break;
                     }
