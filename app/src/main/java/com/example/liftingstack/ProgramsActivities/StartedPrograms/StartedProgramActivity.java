@@ -8,15 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
-import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
-import com.example.liftingstack.ProgramsActivities.SelectedProgram.SelectedProgramRecyclerViewAdapter;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
@@ -24,7 +21,7 @@ import java.util.List;
 
 public class StartedProgramActivity extends AppCompatActivity{
 
-    private List<ExerciseInstructions> exercises = new ArrayList<>();
+    private List<ExerciseInstruction> exercises = new ArrayList<>();
     private RecyclerView recyclerView;
     private Program selectedProgram;
     private AllPrograms allPrograms;
@@ -50,10 +47,10 @@ public class StartedProgramActivity extends AppCompatActivity{
         }
 
         for (String id : selectedProgram.getExercises()) {
-            for (ExerciseInstructions exerciseInstructions : allExerciseInstructions.getExercisesInstructionsList()) {
-                if (exerciseInstructions.getId().equals(id)) {
-                    exercises.add(exerciseInstructions);
-                    System.out.println("Exercise number id = " + exerciseInstructions.getId());
+            for (ExerciseInstruction exerciseInstruction : allExerciseInstructions.getExercisesInstructionsList()) {
+                if (exerciseInstruction.getId().equals(id)) {
+                    exercises.add(exerciseInstruction);
+                    System.out.println("Exercise number id = " + exerciseInstruction.getId());
                 }
             }
         }

@@ -23,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.LoadFromDevice;
 import com.example.liftingstack.Controller.SaveToDevice;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -45,7 +45,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     ImageView displayImageView;
     Button selectImageButton, saveButton, loadButton;
     String imgString;
-    ArrayList<ExerciseInstructions> listAllExercises = new ArrayList<>();
+    ArrayList<ExerciseInstruction> listAllExercises = new ArrayList<>();
 
     /**
      * Use this method for the first time the app opens.
@@ -79,11 +79,11 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
             // Converts to ArrayList of ExerciseInstructions
             Gson g = new Gson();
-            Type listType = new TypeToken<ArrayList<ExerciseInstructions>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<ExerciseInstruction>>(){}.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
 
             // displays object on screen for testing
-            ExerciseInstructions displayObj = ((ExerciseInstructions) list.get(2));
+            ExerciseInstruction displayObj = ((ExerciseInstruction) list.get(2));
             displayObjectOnScreen(displayObj);
 
         } catch (IOException e) {
@@ -147,15 +147,15 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
     public void testWriteAndReadJson(View v) {
         //
-        ArrayList<ExerciseInstructions> allExerciseInstructions = new ArrayList<>();
+        ArrayList<ExerciseInstruction> allExerciseInstructions = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
+            allExerciseInstructions.add(new ExerciseInstruction("test" + i, "test"));
         }
         //
         new SaveToDevice().saveListToDevice(allExerciseInstructions,this, "Test");
         //
 
-        ArrayList<ExerciseInstructions> list = new LoadFromDevice().loadExerciseListFromDevice(this, "Test");
+        ArrayList<ExerciseInstruction> list = new LoadFromDevice().loadExerciseListFromDevice(this, "Test");
 
         for (int i = 0; i < list.size(); i++) {
             System.out.println("xxxxxxxxxxxxxxxx" + list.get(i).getExerciseName());
@@ -165,9 +165,9 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
     public void testWriteAndReadJson1(View v) {
         //
-        ArrayList<ExerciseInstructions> allExerciseInstructions = new ArrayList<>();
+        ArrayList<ExerciseInstruction> allExerciseInstructions = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            allExerciseInstructions.add(new ExerciseInstructions("test" + i, "test"));
+            allExerciseInstructions.add(new ExerciseInstruction("test" + i, "test"));
         }
         //
         String json = new Gson().toJson(allExerciseInstructions);
@@ -186,7 +186,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         }
         //
         //
-        ArrayList<ExerciseInstructions> list;
+        ArrayList<ExerciseInstruction> list;
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -203,7 +203,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
 
 
             Gson g = new Gson();
-            Type listType = new TypeToken<ArrayList<ExerciseInstructions>>() {
+            Type listType = new TypeToken<ArrayList<ExerciseInstruction>>() {
             }.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
 
@@ -221,7 +221,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     public void saveCustomExercise(View v) {
         Log.i("SAVETEST11", "OK");
         Bitmap bitmapImage = null;
-        ExerciseInstructions customExercise;
+        ExerciseInstruction customExercise;
         String customExerciseName = customExerciseNameInput.getText().toString();
         String customExerciseDescription = customExerciseDescriptionInput.getText().toString();
         // bitmapImage = displayImageView.getDrawingCache(); // always returns null
@@ -236,7 +236,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         if (bitmapImage == null) {
 
             System.out.println("No image selected");
-            customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription);
+            customExercise = new ExerciseInstruction(customExerciseName, customExerciseDescription);
         } else {
             System.out.println("Image selected");
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -244,7 +244,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
             byte[] imgByte = baos.toByteArray();
 
             imgString = Base64.encodeToString(imgByte, Base64.DEFAULT);
-            customExercise = new ExerciseInstructions(customExerciseName, customExerciseDescription, imgString);
+            customExercise = new ExerciseInstruction(customExerciseName, customExerciseDescription, imgString);
         }
         // TODO check if savefile already exists, if so, load the list from there.
         //listAllExercises = loadExercise(v);
@@ -277,7 +277,7 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         }
     }
 
-    public ArrayList<ExerciseInstructions> loadExercise(View v) {
+    public ArrayList<ExerciseInstruction> loadExercise(View v) {
 
         File file = new File(this.getFilesDir(), "Test");
         try {
@@ -307,17 +307,17 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
         return json;
     }
 
-    public ArrayList<ExerciseInstructions> convertJsonToObject(String json) {
+    public ArrayList<ExerciseInstruction> convertJsonToObject(String json) {
         Gson gson = new Gson();
-        Type userListType = new TypeToken<ArrayList<ExerciseInstructions>>() {
+        Type userListType = new TypeToken<ArrayList<ExerciseInstruction>>() {
         }.getType();
         // listAllExercises = gson.fromJson(json, userListType);
-        ArrayList<ExerciseInstructions> testList = gson.fromJson(json, userListType);
+        ArrayList<ExerciseInstruction> testList = gson.fromJson(json, userListType);
         //visa texten i gui -- ta bort senare
         // testa typecasta till ExerciseInstructions
         Log.i("Testdisplay", "-3");
         // raden nedan funkar ej, appen kraschar
-        ExerciseInstructions displayObj = ((ExerciseInstructions) testList.get(0));
+        ExerciseInstruction displayObj = ((ExerciseInstruction) testList.get(0));
         Log.i("Testdisplay", "-2");
         displayObjectOnScreen(displayObj);
         Log.i("Testdisplay", "-1");
@@ -327,15 +327,15 @@ public class CreateCustomExerciseActivity extends AppCompatActivity {
     public void displayObjectOnScreen(Object object) {
         Log.i("Testdisplay", "1");
         Log.i("Testdisplay", String.valueOf(object.getClass()));
-        if (object instanceof ExerciseInstructions) {
+        if (object instanceof ExerciseInstruction) {
             Log.i("Testdisplay", "2");
 
 
-            ExerciseInstructions exerciseInstructions = ((ExerciseInstructions) object);
+            ExerciseInstruction exerciseInstruction = ((ExerciseInstruction) object);
 
-            customExerciseNameInput.setText(exerciseInstructions.getExerciseName());
-            customExerciseDescriptionInput.setText(exerciseInstructions.getExerciseDescription());
-            String imageString = exerciseInstructions.getImage();
+            customExerciseNameInput.setText(exerciseInstruction.getExerciseName());
+            customExerciseDescriptionInput.setText(exerciseInstruction.getExerciseDescription());
+            String imageString = exerciseInstruction.getImage();
             StringToBitMap(imageString);
             displayImageView.setImageBitmap(StringToBitMap(imageString));
             Log.i("Testdisplay", "3");

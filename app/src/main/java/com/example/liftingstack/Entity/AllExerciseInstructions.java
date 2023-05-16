@@ -8,7 +8,7 @@ import com.example.liftingstack.Controller.SaveToDevice;
 import java.util.ArrayList;
 
 public class AllExerciseInstructions {
-    private ArrayList<ExerciseInstructions> exercisesInstructionsList;
+    private ArrayList<ExerciseInstruction> exercisesInstructionsList;
 
     public AllExerciseInstructions(AppCompatActivity appCompatActivity) {
         exercisesInstructionsList = new ArrayList<>();
@@ -27,24 +27,24 @@ public class AllExerciseInstructions {
         new SaveToDevice().saveListToDevice(exercisesInstructionsList, appCompatActivity, "exerciseList");
     }
 
-    public ArrayList<ExerciseInstructions> getExercisesInstructionsList() {
+    public ArrayList<ExerciseInstruction> getExercisesInstructionsList() {
         return exercisesInstructionsList;
     }
-    public void setExercisesInstructionsList(ArrayList<ExerciseInstructions> exercisesInstructionsList) {
+    public void setExercisesInstructionsList(ArrayList<ExerciseInstruction> exercisesInstructionsList) {
         this.exercisesInstructionsList = exercisesInstructionsList;
     }
-    public void removeExerciseInstructions(ExerciseInstructions exerciseInstructions)
+    public void removeExerciseInstructions(ExerciseInstruction exerciseInstruction)
     {
-        exercisesInstructionsList.remove(exerciseInstructions);
+        exercisesInstructionsList.remove(exerciseInstruction);
     }
 
-    public void addExerciseInstructions(ExerciseInstructions exerciseInstructions)
+    public void addExerciseInstructions(ExerciseInstruction exerciseInstruction)
     {
      /*   for (ExerciseInstructions e : exercisesInstructionsList)
         {
             if (e.getExerciseName().equals(exerciseInstructions.getExerciseName()))
                 return;
         }*/
-        exercisesInstructionsList.add(exerciseInstructions);
+        exercisesInstructionsList.add(exerciseInstruction);
     }
 }

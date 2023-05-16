@@ -18,14 +18,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.ImageHandler;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.R;
 
 import java.io.IOException;
 
 public class ExerciseInstructionsPage extends AppCompatActivity {
     private ImageView imageView;
-    private ExerciseInstructions currentExerciseInstruction;
+    private ExerciseInstruction currentExerciseInstruction;
     private AllExerciseInstructions allExerciseInstructions;
     private String idForExercise;
 
@@ -40,7 +40,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
 
         boolean exerciseFound = false;
         //Get the exercise from the list
-        for (ExerciseInstructions exercise : allExerciseInstructions.getExercisesInstructionsList()) {
+        for (ExerciseInstruction exercise : allExerciseInstructions.getExercisesInstructionsList()) {
             if (exercise.getId().equals(idForExercise)) {
                 currentExerciseInstruction = exercise;
                 exerciseFound = true;
@@ -49,7 +49,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         }
 
         if (!exerciseFound) {
-            currentExerciseInstruction = new ExerciseInstructions("New Exercise", "New Description");
+            currentExerciseInstruction = new ExerciseInstruction("New Exercise", "New Description");
         }
 
 
@@ -90,7 +90,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         if (!allExerciseInstructions.getExercisesInstructionsList().contains(currentExerciseInstruction)) {
             allExerciseInstructions.addExerciseInstructions(currentExerciseInstruction);
         } else {
-            for (ExerciseInstructions exercise : allExerciseInstructions.getExercisesInstructionsList()) {
+            for (ExerciseInstruction exercise : allExerciseInstructions.getExercisesInstructionsList()) {
                 if (exercise.getId().equals(idForExercise)) {
                     exercise.setExerciseName(currentExerciseInstruction.getExerciseName());
                     exercise.setExerciseDescription(currentExerciseInstruction.getExerciseDescription());

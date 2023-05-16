@@ -1,12 +1,9 @@
 package com.example.liftingstack.ProgramsActivities.StartedPrograms;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -14,10 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.liftingstack.Entity.ExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.ExerciseHistoryMap;
 import com.example.liftingstack.R;
 
@@ -27,14 +23,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import kotlinx.coroutines.selects.WhileSelectKt;
-
 public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<StartedProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private List<ExerciseInstructions> exercises = new ArrayList<>();
+    private List<ExerciseInstruction> exercises = new ArrayList<>();
     //private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
 
-    public StartedProgramRecyclerViewAdapter(Context context, List<ExerciseInstructions> exercises) {
+    public StartedProgramRecyclerViewAdapter(Context context, List<ExerciseInstruction> exercises) {
         this.context = context;
         this.exercises = exercises;
         //this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;
@@ -172,8 +166,8 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                 public void onClick(View view) {
 
                     // HÄMTA UT ID FRÅN ÖVNINGEN SOM SPARA-KNAPPEN TRYCKTES PÅ
-                    ExerciseInstructions exerciseInstructions = adapter.exercises.get(getAdapterPosition());
-                    exerciseIdToSend = exerciseInstructions.getId();
+                    ExerciseInstruction exerciseInstruction = adapter.exercises.get(getAdapterPosition());
+                    exerciseIdToSend = exerciseInstruction.getId();
 
                     //GÅ IGENOM EDITTEXTSMAP'S LISTA OCH HÄMTA UT SET, REPS, WEIGHT
                     for (Map.Entry<String, ArrayList<EditText>> entry : editTextsMap.entrySet()) {
