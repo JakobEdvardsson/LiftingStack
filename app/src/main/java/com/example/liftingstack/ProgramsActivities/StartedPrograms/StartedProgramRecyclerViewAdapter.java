@@ -69,10 +69,14 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
         private TextView exerciseNameTextView;
         private EditText setsEditText, repsEditText, weightEditText;
         private int setCounter;
+        private String exerciseIdToSend;
         private ExerciseHistoryMap exerciseHistoryMap = new ExerciseHistoryMap();
         private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
         private HashMap<String, ArrayList<EditText>> editTextsMap = new HashMap<>();
         private ArrayList<EditText> repsAndWeight;
+        private List<String> exerciseSets;
+        private List<String> exerciseReps;
+        private List<String> exerciseWeights;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,9 +106,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                     repsAndWeight.add(repsEditText);
                     repsAndWeight.add(weightEditText);
                     editTextsMap.put(setsEditText.getText().toString(), repsAndWeight);
-
-                    System.out.println("map efter add = " + editTextsMap.size());
-
+                    
                     //LÄGG TILL NYA TABLEROW I TABLELAYOUTEN
                     tableLayout.addView(newRow);
 
@@ -153,8 +155,6 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                             iterator.remove();
                         }
 
-                        System.out.println("map efter remove = " + editTextsMap.size());
-
                         int rowHeight = 140;
                         //JUSTERA CARDVIEW EFTER ATT HA TAGIT BORT TABLEROW
                         try {
@@ -173,15 +173,12 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
 
                     // HÄMTA UT ID FRÅN ÖVNINGEN SOM SPARA-KNAPPEN TRYCKTES PÅ
                     ExerciseInstructions exerciseInstructions = adapter.exercises.get(getAdapterPosition());
-                    System.out.println(exerciseInstructions.getExerciseName());
-                    String exerciseId = exerciseInstructions.getId();
-                    System.out.println(exerciseId);
+                    exerciseIdToSend = exerciseInstructions.getId();
 
                     //GÅ IGENOM EDITTEXTSMAP'S LISTA OCH HÄMTA UT SET, REPS, WEIGHT
                     for (Map.Entry<String, ArrayList<EditText>> entry : editTextsMap.entrySet()) {
                         String set = entry.getKey();
                         ArrayList<EditText> value = entry.getValue();
-                        System.out.println("Börjar om");
                         int index = 0;
 
                         String reps = value.get(index).getText().toString();
@@ -191,26 +188,14 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                         System.out.println("Reps = " + reps);
                         System.out.println("Weight = " + weight);
 
-                        //SKICKA TILL SPARNINGS-FUNKTIONER (LÄGGA TILL "String exerciseId" I SETSETDATAMAP?)
-                        setSetDataMap(set, reps, weight, exerciseId);
-                        System.out.println("Skickat: " + set + ", " + reps + ", " + weight);
+                        //SKICKA TILL SPARNINGS-FUNKTIONER
+                        exerciseHistoryMap.setSetDataMap(set, reps, weight);
+                        //System.out.println("Skickat: " + set + ", " + reps + ", " + weight);
                     }
+
+                    exerciseHistoryMap.setExerciseId(exerciseIdToSend);
                 }
             });
-        }
-
-        //HÄMTAT FRÅN EXERCISEHISTORYMAP (SKA LIGGA HÄR ELLER STANNA I DEN KLASSEN?)
-        public void setSetDataMap(String set, String reps, String weight, String exerciseId) {
-            ArrayList<String> setStringArrayList = new ArrayList<>();
-            setStringArrayList.add(reps);
-            setStringArrayList.add(weight);
-
-            System.out.println("Skickar in data: set = " + set + ", reps = " + reps + ", weight = " + weight);
-
-            setDataMap.put(set, setStringArrayList);
-            //ANTINGEN LÄGGA TILL SETEXERCISEHISTORYMAP-METODEN HÄR OCKSÅ ELLER FLYTTA TILLBAKA
-            //SETSETDATAMAP-METODEN FÖR ATT KUNNA SKICKA MED ALLTING SOM BEHÖVS
-
         }
 
         public ViewHolder linkAdapter(StartedProgramRecyclerViewAdapter adapter) {
