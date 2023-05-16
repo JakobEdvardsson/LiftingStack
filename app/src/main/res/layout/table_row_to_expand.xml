@@ -14,7 +14,7 @@
         android:background="@drawable/table_cells"
         android:editable="false"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="none"
         android:padding="8dp"
         android:text=""
         android:textAlignment="center"

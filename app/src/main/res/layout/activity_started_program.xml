@@ -7,7 +7,7 @@
     tools:context=".ProgramsActivities.StartedPrograms.StartedProgramActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/startedProgramName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Program name"

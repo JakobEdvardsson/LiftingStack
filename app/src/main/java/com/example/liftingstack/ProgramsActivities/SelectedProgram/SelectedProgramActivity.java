@@ -19,7 +19,7 @@ import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
-import com.example.liftingstack.ProgramsActivities.StartedPrograms.test;
+import com.example.liftingstack.ProgramsActivities.StartedPrograms.StartedProgramActivity;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
@@ -35,6 +35,7 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
     private String idForProgram;
     private Program selectedProgram;
     private List<ExerciseInstruction> exercises; //All exercises in the selected program
+
 
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -115,6 +116,7 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         if (!programFound) {
             selectedProgram = new Program("New Program", "Description");
         }
+
     }
 
     /**
@@ -153,8 +155,9 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
 
     //TODO: Remove this method
     public void startBtnClicked(View v) {
-        Intent intent = new Intent(this, test.class);
-        startActivity(intent);
+        Intent intent = new Intent(this, StartedProgramActivity.class);
+        intent.putExtra("ProgramId", selectedProgram.getId());
+        activityResultLauncher.launch(intent);
     }
 
 
@@ -179,11 +182,13 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
             if (!selectedProgram.getExercises().contains(option.getId())) {
                 popupMenu.getMenu().add(option.getExerciseName());
             }
+
         }
         // Listener for the menu item clicks, will add the exercise to the exercises and selectedProgram on click
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                // Handle the menu item click
                 for (ExerciseInstruction exerciseInstruction : allExerciseInstructions.getExercisesInstructionsList()) {
                     if (exerciseInstruction.getExerciseName().equals(item.getTitle().toString())) {
                         selectedProgram.addExercise(exerciseInstruction.getId());

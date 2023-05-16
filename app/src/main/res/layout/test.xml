@@ -28,7 +28,7 @@
             android:textAlignment="center">
 
             <TableLayout
-                android:id="@+id/startedProgramTable"
+                android:id="@+id/testTable"
                 android:layout_width="300dp"
                 android:layout_height="84dp"
                 android:layout_marginStart="6dp"
@@ -93,20 +93,20 @@
                     android:showDividers="middle">
 
                     <EditText
-                        android:id="@+id/setsEditText"
+                        android:id="@+id/testSetsEditText"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/table_cells"
                         android:editable="false"
                         android:ems="10"
-                        android:inputType="textPersonName"
+                        android:inputType="none"
                         android:padding="8dp"
                         android:text="1"
                         android:textAlignment="center"
                         android:textColor="@android:color/black" />
 
                     <EditText
-                        android:id="@+id/repsEditText"
+                        android:id="@+id/testRepsEditText"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/table_cells"
@@ -119,7 +119,7 @@
                         android:textColor="@android:color/black" />
 
                     <EditText
-                        android:id="@+id/weightEditText"
+                        android:id="@+id/testWeightEditText"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/table_cells"
@@ -138,6 +138,7 @@
                 android:id="@+id/startedProgramExerciseName"
                 android:layout_width="300dp"
                 android:layout_height="31dp"
+                android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
                 android:text="Squats"
                 android:textAlignment="center"
@@ -145,6 +146,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.075"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

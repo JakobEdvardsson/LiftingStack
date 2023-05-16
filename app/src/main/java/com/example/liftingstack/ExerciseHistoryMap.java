@@ -25,6 +25,7 @@ public class ExerciseHistoryMap extends AppCompatActivity {
     private EditText weightSet1;
     private EditText weightSet2;
     private EditText weightSet3;
+    private String exerciseId;
     private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
     // key = which set, value list of reps and weight
     private Map<String, Map<String, ArrayList<String>>> dateDataMap = new HashMap<>();
@@ -91,7 +92,10 @@ public class ExerciseHistoryMap extends AppCompatActivity {
             setSetDataMap("2", repsString2, weightString2);
 
         // get exercise id instead of hardcoding it
-        setExerciseHistoryMap("1");
+    }
+
+    public void setExerciseId(String exerciseId) {
+        this.exerciseId = exerciseId;
     }
 
     public void setSetDataMap(String set, String reps, String weight) {
@@ -102,8 +106,9 @@ public class ExerciseHistoryMap extends AppCompatActivity {
         setDataMap.put(set, setStringArrayList);
     }
 
-    public void setExerciseHistoryMap(String exerciseId) {
+    public void setExerciseHistoryMap() {
         //sets the date to today and parses it to a string
+
         LocalDate dateObject = LocalDate.now();
         String dateString = dateObject.toString();
 

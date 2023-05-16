@@ -34,7 +34,6 @@ public class test extends AppCompatActivity {
                 TableRow newRow = (TableRow) layoutInflater.inflate(R.layout.table_row_to_expand, null);
 
                 EditText setsText = newRow.findViewById(R.id.setsEditText);
-                // ändra set till textView som inte kan editas istället?
                 setsText.setText(String.valueOf(setCounter));
                 setCounter++;
                 tableLayout.addView(newRow);
