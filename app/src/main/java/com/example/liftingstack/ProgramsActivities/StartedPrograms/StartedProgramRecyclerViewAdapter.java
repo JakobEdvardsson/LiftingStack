@@ -10,9 +10,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.ExerciseHistoryMap;
 import com.example.liftingstack.R;
@@ -164,7 +166,6 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
             itemView.findViewById(R.id.saveExerciserRepsWeighBtn).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     // HÄMTA UT ID FRÅN ÖVNINGEN SOM SPARA-KNAPPEN TRYCKTES PÅ
                     ExerciseInstruction exerciseInstruction = adapter.exercises.get(getAdapterPosition());
                     exerciseIdToSend = exerciseInstruction.getId();
@@ -178,16 +179,17 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                         String reps = value.get(index).getText().toString();
                         String weight = value.get(index + 1).getText().toString();
 
-                        System.out.println("Sets = " + set);
-                        System.out.println("Reps = " + reps);
-                        System.out.println("Weight = " + weight);
-
-                        //SKICKA TILL SPARNINGS-FUNKTIONER
-                        exerciseHistoryMap.setSetDataMap(set, reps, weight);
-                        //System.out.println("Skickat: " + set + ", " + reps + ", " + weight);
+                        //SKAPA NY ARRAYLIST FÖR REPS + WEIGHT
+                        ArrayList<String> repsAndWeight = new ArrayList<>();
+                        repsAndWeight.add(reps);
+                        repsAndWeight.add(weight);
+                        //LÄGG TILL SET + REPS + WEIGHT I HASHMAPPEN
+                        setDataMap.put(set, repsAndWeight);
                     }
 
-                    exerciseHistoryMap.setExerciseId(exerciseIdToSend);
+                    //SKICKA HASHMAPPEN TILL SPARNINGS-FUNKTIONER
+                    new ExerciseHistoryDataMap((AppCompatActivity) context).saveExerciseHistoryMap((AppCompatActivity) context, exerciseIdToSend, setDataMap);
+
                 }
             });
         }
