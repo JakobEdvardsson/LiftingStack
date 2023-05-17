@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SelectedProgramActivity extends AppCompatActivity implements ExerciseRecyclerViewInterface {
-    //private SelectedProgramRecyclerViewAdapter selectedProgramAdapter;
+
     private RecyclerView recyclerView;
     private AllPrograms allPrograms;
     private String idForProgram;

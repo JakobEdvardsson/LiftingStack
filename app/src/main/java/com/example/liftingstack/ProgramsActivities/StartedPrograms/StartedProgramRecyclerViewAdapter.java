@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -180,10 +181,10 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
 
                         //SKICKA TILL SPARNINGS-FUNKTIONER
                         exerciseHistoryMap.setSetDataMap(set, reps, weight);
-                        //System.out.println("Skickat: " + set + ", " + reps + ", " + weight);
                     }
 
                     exerciseHistoryMap.setExerciseId(exerciseIdToSend);
+                    Toast.makeText(context, "Exercise saved", Toast.LENGTH_SHORT).show();
                 }
             });
         }
