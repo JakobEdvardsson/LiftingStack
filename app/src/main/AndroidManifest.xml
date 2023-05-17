@@ -18,6 +18,9 @@
             android:name=".ExerciseHistoryMap"
             android:exported="false" />
         <activity
+            android:name=".Entity.ExerciseGraph"
+            android:exported="false" />
+        <activity
             android:name=".ExerciseActivities.ExerciseInstructionsPage"
             android:exported="false"
             android:label="@string/title_activity_settings" />
