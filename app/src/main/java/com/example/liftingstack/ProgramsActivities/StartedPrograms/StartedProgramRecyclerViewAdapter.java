@@ -58,19 +58,14 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
         private TableLayout tableLayout;
-        //private Button saveButton;
         private StartedProgramRecyclerViewAdapter adapter;
         private TextView exerciseNameTextView;
         private EditText setsEditText, repsEditText, weightEditText;
         private int setCounter;
         private String exerciseIdToSend;
-        private ExerciseHistoryMap exerciseHistoryMap = new ExerciseHistoryMap();
-        private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
+        private ExerciseHistoryMap exerciseHistoryMap;
         private HashMap<String, ArrayList<EditText>> editTextsMap = new HashMap<>();
         private ArrayList<EditText> repsAndWeight;
-        private List<String> exerciseSets;
-        private List<String> exerciseReps;
-        private List<String> exerciseWeights;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -167,6 +162,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
 
                     // HÄMTA UT ID FRÅN ÖVNINGEN SOM SPARA-KNAPPEN TRYCKTES PÅ
                     ExerciseInstruction exerciseInstruction = adapter.exercises.get(getAdapterPosition());
+                    exerciseHistoryMap = new ExerciseHistoryMap();
                     exerciseIdToSend = exerciseInstruction.getId();
 
                     //GÅ IGENOM EDITTEXTSMAP'S LISTA OCH HÄMTA UT SET, REPS, WEIGHT
