@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.liftingstack.Entity.ExerciseInstruction;
@@ -15,6 +16,7 @@ import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.MainActivity;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
@@ -67,6 +69,11 @@ public class StartedProgramActivity extends AppCompatActivity{
         StartedProgramRecyclerViewAdapter startedProgramRecyclerViewAdapter = new StartedProgramRecyclerViewAdapter(this, exercises);
         recyclerView.setAdapter(startedProgramRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    public void finishProgram(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
