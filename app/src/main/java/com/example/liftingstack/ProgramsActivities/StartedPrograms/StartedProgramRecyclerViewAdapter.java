@@ -68,24 +68,11 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
         private int setCounter;
         private String exerciseIdToSend;
 
-
-
-
-
-
-
-
-
-
-
-        
         private ExerciseHistoryMap exerciseHistoryMap = new ExerciseHistoryMap();
         private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
         private HashMap<String, ArrayList<EditText>> editTextsMap = new HashMap<>();
         private ArrayList<EditText> repsAndWeight;
-        private List<String> exerciseSets;
-        private List<String> exerciseReps;
-        private List<String> exerciseWeights;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
