@@ -26,7 +26,7 @@ public class AllPrograms {
             programsList = new LoadFromDevice().loadProgramListFromDevice(appCompatActivity, "programList");
         } catch (Exception e) {
             saveProgramList(appCompatActivity);
-            System.out.println("Error loading from device, file may not exist");
+            System.out.println("Error loading from device, file may not exist - Printed from AllPrograms");
             e.printStackTrace();
         }
     }

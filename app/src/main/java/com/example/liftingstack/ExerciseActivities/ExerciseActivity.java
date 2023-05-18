@@ -3,6 +3,7 @@ package com.example.liftingstack.ExerciseActivities;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,10 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
+import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.ExerciseInstruction;
+import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.MainActivity;
 import com.example.liftingstack.R;
+
+import java.util.ArrayList;
 
 /**
  * This class is used to display all exercises.
@@ -124,9 +130,28 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
 
 
                 dialog.dismiss();
-
-                allExerciseInstructions.getExercisesInstructionsList().remove(index);
                 //TODO Ta bort övningen från alla program den är med i
+
+
+                String exerciseIDToRemove = allExerciseInstructions.getExercisesInstructionsList().get(index).getId();
+                AllPrograms allPrograms = new AllPrograms(ExerciseActivity.this);
+                ArrayList<Program> programsList = allPrograms.getProgramsList();
+
+                for (int i = 0; i < programsList.size(); i++) {
+
+                    Log.i("Remove exer","Size of programs - before deleted exercise" + Integer.toString(programsList.get(i).getExercises().size()));
+                }
+                for (int i = 0; i < programsList.size(); i++) {
+                    programsList.get(i).removeExercise(exerciseIDToRemove);
+                    Log.i("Remove exer","Size of programs - before deleted exercise" + Integer.toString(programsList.get(i).getExercises().size()));
+                }
+                Log.i("Remove exer", " xx ");
+                new SaveToDevice().saveListToDevice(programsList, ExerciseActivity.this, "programList");
+
+                // TODO End
+                allExerciseInstructions.getExercisesInstructionsList().remove(index);
+
+
                 Toast.makeText(ExerciseActivity.this, "Exercise and data deleted", Toast.LENGTH_SHORT).show();
                 saveToFile();
                 setupRecyclerView();

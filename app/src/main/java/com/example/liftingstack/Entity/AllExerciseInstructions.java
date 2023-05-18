@@ -25,7 +25,7 @@ public class AllExerciseInstructions {
             exercisesInstructionsList = new LoadFromDevice().loadExerciseListFromDevice(appCompatActivity, "exerciseList");
         }catch (Exception e) {
             saveExercisesInstructionsList(appCompatActivity);
-            System.out.println("Error loading from device, file may not exist");
+            System.out.println("Error loading from device, file may not exist - printed from AllExerciseInstructions");
             e.printStackTrace();
         }
     }

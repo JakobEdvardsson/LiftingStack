@@ -38,16 +38,14 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor sharedEditor;
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         sharedEditor = sharedPreferences.edit();
-        Log.i("TestFirstTime1", "ok");
-
 
         if (sharedPreferences.getBoolean("firstTime", true)) {
             // code for first time opening,
-            Log.i("TestFirstTime2", "ok");
+
             firstTimeAppOpens();
 
-
             // set "firstTime" to false so that this code doesnt run again
+
             sharedEditor.putBoolean("firstTime", false);
             sharedEditor.commit();
             sharedEditor.apply();
@@ -73,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Creates and adds program ARMS
         Program arms = new Program("Arms", "Biceps, Triceps");
-        big_3.addExercise(builtInExercisesList.get(6).getId());
-        big_3.addExercise(builtInExercisesList.get(5).getId());
+        arms.addExercise(builtInExercisesList.get(6).getId());
+        arms.addExercise(builtInExercisesList.get(5).getId());
 
         builtInProgramList.addProgram(arms);
 

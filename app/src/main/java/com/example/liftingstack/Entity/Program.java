@@ -84,6 +84,10 @@ public class Program implements Parcelable {
         this.exerciseInstructions.add(exerciseInstructions);
     }
 
+    public void removeExercise(String exerciseID) {
+        this.exerciseInstructions.remove(exerciseID);
+    }
+
     /**
      * Gets name.
      *
