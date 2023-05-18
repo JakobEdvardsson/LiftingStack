@@ -96,40 +96,7 @@ public class LoadFromDevice{
         }
         return list;
     }
-    public <T> ArrayList<T> loadProgramListFromAssets(Context context, String fileName){
 
-        ArrayList<T> list;
-        String json = null;
-
-        try {
-            // reads data in assets file
-
-            // needs a context to work, pass from mainActivity
-            InputStream inputStream = context.getAssets().open(fileName); // needs a context to work
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-
-            // converts to string
-            json = new String(buffer, "UTF-8");
-
-            // converts to StringBuilder
-            StringBuilder jsonString = new StringBuilder();
-            jsonString.append(json);
-
-            // Converts to ArrayList of ExerciseInstructions
-            Gson g = new Gson();
-            Type listType = new TypeToken<ArrayList<Program>>(){}.getType();
-            list = g.fromJson(String.valueOf(jsonString), listType);
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return list;
-    }
 
     public <T> ArrayList<T> loadProgramListFromDevice(AppCompatActivity activity, String fileName){
 
