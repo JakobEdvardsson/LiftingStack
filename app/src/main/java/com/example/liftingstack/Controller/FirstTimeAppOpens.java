@@ -41,10 +41,7 @@ public class FirstTimeAppOpens {
 
 
 
-    public FirstTimeAppOpens(Context context) {
-        // pass a context from main
-        testFirstTimeOpened(context);
-    }
+
 
     public <T> ArrayList<T> testFirstTimeOpened(Context context) {
         ArrayList<T> list;

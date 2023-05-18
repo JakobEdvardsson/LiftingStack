@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.liftingstack.Controller.FirstTimeAppOpens;
 import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.ExerciseGraph;
@@ -18,6 +19,8 @@ import com.example.liftingstack.Entity.BarChartCount;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     
@@ -50,33 +53,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void firstTimeAppOpens(){
-        // Creates all built in exercises
-        Log.i("TestFirstTime3" , "ok");
-
-        AllExerciseInstructions allExerciseInstructions = new AllExerciseInstructions(this);
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Bench Press", "Chest, Shoulders, Arms"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Barbell Squat", "Legs, Butt, Core"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Deadlift", "Hamstrings, Butt, Back, Core"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Dumbbell Overhead Press", "Shoulders, Arms"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Lats Pulldowns", "Back, Shoulders"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Triceps Pulldowns", "Triceps"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Biceps Dumbell Curls", "Biceps"));
-        allExerciseInstructions.addExerciseInstructions(new ExerciseInstruction("Barbell Rows", "Back, Arms, Core"));
-
-
-
-        allExerciseInstructions.saveExercisesInstructionsList(this);
-
-        //Create all built in programs from above exercises
-        Log.i("TestFirstTime4" , "ok");
-
-        //Create empty save files for logged exercises and for logged programs
-        new SaveToDevice().saveExerciseHashMapToDevice(null, this, "exerciseHistory");
-        new SaveToDevice().saveProgramHashMapToDevice(null, this, "programHistory");
-        Log.i("TestFirstTime5" , "ok");
-
-
-        Toast.makeText(this, "Created savefiles", Toast.LENGTH_LONG);
+        // Creates all built in exercises from assets folder
+        ArrayList<ExerciseInstruction> builtInExercisesList = new FirstTimeAppOpens().testFirstTimeOpened(this);
+        new SaveToDevice().saveListToDevice(builtInExercisesList, this, "exerciseList");
 
     }
 

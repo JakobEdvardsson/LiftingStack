@@ -60,6 +60,34 @@ public class LoadFromDevice{
         return list;
     }
 
+    public <T> ArrayList<T> loadExerciseListFromAssets(AppCompatActivity activity, String fileName){
+
+        ArrayList<T> list;
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(new File(activity.getFilesDir(), fileName)));
+
+            // read the contents of the file as a string
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+
+            // close the reader
+            reader.close();
+
+            Gson g = new Gson();
+            Type listType = new TypeToken<ArrayList<ExerciseInstruction>>(){}.getType();
+            list = g.fromJson(String.valueOf(jsonString), listType);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return list;
+    }
+
     public <T> ArrayList<T> loadProgramListFromDevice(AppCompatActivity activity, String fileName){
 
         ArrayList<T> list;
