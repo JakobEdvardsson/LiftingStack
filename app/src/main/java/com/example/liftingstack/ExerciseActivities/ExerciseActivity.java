@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -120,10 +121,13 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(this, "Exercise deleted", Toast.LENGTH_SHORT).show();
+
+
                 dialog.dismiss();
 
                 allExerciseInstructions.getExercisesInstructionsList().remove(index);
+                //TODO Ta bort övningen från alla program den är med i
+                Toast.makeText(ExerciseActivity.this, "Exercise and data deleted", Toast.LENGTH_SHORT).show();
                 saveToFile();
                 setupRecyclerView();
             }
@@ -133,6 +137,8 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(ExerciseActivity.this, "Exercise saved", Toast.LENGTH_SHORT).show();
+                setupRecyclerView();
                 dialog.dismiss();
             }
         });

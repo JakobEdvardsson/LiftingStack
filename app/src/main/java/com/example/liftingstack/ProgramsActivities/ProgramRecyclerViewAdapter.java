@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.AllPrograms;
+import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.R;
 
 public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecyclerViewAdapter.ViewHolder> {
@@ -85,6 +87,8 @@ public class ProgramRecyclerViewAdapter extends RecyclerView.Adapter<ProgramRecy
 
                         programRecyclerViewInterface.onProgramDelete(getAdapterPosition());
                         adapter.notifyItemRemoved(getAdapterPosition());
+
+
                     }
                 });
                 // Cancel the deletion if the user clicks on the cancel button

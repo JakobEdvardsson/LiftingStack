@@ -3,6 +3,7 @@ package com.example.liftingstack.ProgramsActivities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.SelectedProgram.SelectedProgramActivity;
 import com.example.liftingstack.R;
 
