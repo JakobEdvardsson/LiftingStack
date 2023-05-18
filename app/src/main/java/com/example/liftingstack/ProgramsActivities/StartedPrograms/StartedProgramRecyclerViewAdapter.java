@@ -188,7 +188,8 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                     }
 
                     //SKICKA HASHMAPPEN TILL SPARNINGS-FUNKTIONER
-                    new ExerciseHistoryDataMap((AppCompatActivity) context).saveExerciseHistoryMap((AppCompatActivity) context, exerciseIdToSend, setDataMap);
+                    new ExerciseHistoryDataMap((AppCompatActivity) context).
+                            saveExerciseHistoryMap((AppCompatActivity) context, exerciseIdToSend, setDataMap);
 
                 }
             });

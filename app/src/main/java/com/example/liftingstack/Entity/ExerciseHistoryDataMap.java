@@ -25,6 +25,11 @@ public class ExerciseHistoryDataMap {
 
     public ExerciseHistoryDataMap(AppCompatActivity activity) {
         exerciseHistoryMap = new LoadFromDevice().loadExerciseHashMapFromDevice(activity, "exerciseHistory");
+        if(exerciseHistoryMap != null) {
+            Log.i("TestHistory TestLoad000", exerciseHistoryMap.toString());
+        } else {
+            exerciseHistoryMap = new HashMap<>();
+        }
     }
 
     public Map<String, Map<String, Map<String, ArrayList<String>>>> getExerciseHistoryMap() {
@@ -59,7 +64,7 @@ public class ExerciseHistoryDataMap {
 
     public void saveExerciseHistoryMap(AppCompatActivity activity, String exerciseId, Map<String, ArrayList<String>> setDataMap) {
         //loads the savefile and returns a hashmap which is saved in instancevariable hashmap
-        Log.i("TestHistory TestLoad111", exerciseHistoryMap.toString());
+
 
 
         //sets the date to today and parses it to a string
@@ -79,14 +84,16 @@ public class ExerciseHistoryDataMap {
 
 
 
+ /*
+
         // below only for testing purposes
         dateDataMap = exerciseHistoryMap.get("1");
-        setDataMap = dateDataMap.get("2023-05-17");
+        setDataMap = dateDataMap.get("2023-05-18");
         exerciseHistoryMap = new LoadFromDevice().loadExerciseHashMapFromDevice(activity, "exerciseHistory");
 
         Log.i("TestHistory TestSet4", exerciseHistoryMap.toString());
         Log.i("TestHistory TestSet5", exerciseHistoryMap.get(exerciseId).toString());
 
-
+*/
     }
 }
