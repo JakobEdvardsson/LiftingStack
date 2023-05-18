@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -60,6 +63,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
+        private Button saveBtn;
         private TableLayout tableLayout;
         //private Button saveButton;
         private StartedProgramRecyclerViewAdapter adapter;
@@ -79,6 +83,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
             cardView = itemView.findViewById(R.id.startedProgramCardView);
             tableLayout = itemView.findViewById(R.id.startedProgramTable);
             exerciseNameTextView = itemView.findViewById(R.id.startedProgramExerciseName);
+            saveBtn = itemView.findViewById(R.id.saveExerciserRepsWeighBtn);
 
 
             itemView.findViewById(R.id.addRowBtn).setOnClickListener(new View.OnClickListener() {
@@ -186,12 +191,12 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                         //LÄGG TILL SET + REPS + WEIGHT I HASHMAPPEN
                         setDataMap.put(set, repsAndWeight);
                     }
-
+                    
                     //SKICKA HASHMAPPEN TILL SPARNINGS-FUNKTIONER
                     new ExerciseHistoryDataMap((AppCompatActivity) context).
                             saveExerciseHistoryMap((AppCompatActivity) context, exerciseIdToSend, setDataMap);
                     Toast.makeText(context, "Exercise saved", Toast.LENGTH_SHORT).show();
-
+                    setsEditText.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 }
             });
         }
