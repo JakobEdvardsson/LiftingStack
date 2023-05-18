@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -190,6 +191,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                     //SKICKA HASHMAPPEN TILL SPARNINGS-FUNKTIONER
                     new ExerciseHistoryDataMap((AppCompatActivity) context).
                             saveExerciseHistoryMap((AppCompatActivity) context, exerciseIdToSend, setDataMap);
+                    Toast.makeText(context, "Exercise saved", Toast.LENGTH_SHORT).show();
 
                 }
             });
