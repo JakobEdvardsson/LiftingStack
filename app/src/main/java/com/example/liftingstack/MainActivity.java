@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseGraph;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
@@ -81,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchExerciseHistoryMap(View v) {
         Intent intent = new Intent(this, ExerciseHistoryMap.class);
+        startActivity(intent);
+    }
+
+    public void launchExerciseGraph(View v) {
+        Intent intent = new Intent(this, ExerciseGraph.class);
         startActivity(intent);
     }
 

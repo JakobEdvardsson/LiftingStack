@@ -75,6 +75,7 @@
         android:id="@+id/button_graf"
         android:layout_width="80dp"
         android:layout_height="65dp"
+        android:onClick="launchExerciseGraph"
         android:text="Graf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_add"
