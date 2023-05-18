@@ -22,6 +22,7 @@ import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.R;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -81,35 +82,49 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         // lineChart.setOnChartValueSelectedListener(ExerciseGraph.this);
 
         lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(false);
+        lineChart.setScaleEnabled(true);
 
         ArrayList<Entry> yValues = new ArrayList<>();
 
         // test values below
-        yValues.add(new Entry(0, 60f));
-        yValues.add(new Entry(1, 50f));
-        yValues.add(new Entry(2, 70f));
-        yValues.add(new Entry(3, 30f));
-        yValues.add(new Entry(4, 50f));
-        yValues.add(new Entry(5, 60f));
+        yValues.add(new Entry(1, 60f));
+        yValues.add(new Entry(10, 50f));
+        yValues.add(new Entry(100, 70f));
+        yValues.add(new Entry(150, 30f));
+        yValues.add(new Entry(200, 50f));
+        yValues.add(new Entry(250, 60f));
 
-        LineDataSet set1 = new LineDataSet(yValues, "Weight / Reps"); // change name later
+        LineDataSet dataSet = new LineDataSet(yValues, "Weight / Reps"); // change name later
 
-        set1.setFillAlpha(110);
+        dataSet.setFillAlpha(110);
 
-        set1.setColor(Color.rgb(2, 206, 104)); // change to a nice blue/green shade later
-        set1.setLineWidth(3f); // makes the lines a bit thicker
-        set1.setValueTextSize(10f); // size of the text showing values in chart
-        set1.setValueTextColor(Color.rgb(160,160,160));
-        set1.setCircleColor(Color.rgb(127,255,212)); // might need to change later
-        set1.setCircleRadius(5f); // might need to change later
+        dataSet.setColor(Color.rgb(2, 206, 104)); // change to a nice blue/green shade later
+        dataSet.setLineWidth(3f); // makes the lines a bit thicker
+        dataSet.setValueTextSize(10f); // size of the text showing values in chart
+        dataSet.setValueTextColor(Color.rgb(160,160,160));
+        dataSet.setCircleColor(Color.rgb(2, 206, 104)); // might need to change later
+        dataSet.setCircleRadius(5f); // might need to change later
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
+        dataSets.add(dataSet);
 
         LineData data = new LineData(dataSets);
 
         lineChart.setData(data);
+
+        Description description = new Description();
+        description.setText(currentExerciseInstruction.getExerciseName());
+        lineChart.setDescription(description);
+
+        int colorForText = Color.rgb(255,20,147);
+
+        lineChart.getAxisLeft().setTextColor(colorForText);
+        lineChart.getAxisRight().setTextColor(colorForText);
+        lineChart.getXAxis().setTextColor(colorForText);
+        lineChart.getLegend().setTextColor(colorForText);
+        lineChart.getDescription().setTextColor(colorForText);
+
+
     }
 
 
