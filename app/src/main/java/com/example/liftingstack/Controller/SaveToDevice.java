@@ -63,6 +63,23 @@ public class SaveToDevice {
         }
     }
 
+    public void saveExerciseHashMapToDeviceTest(Object object, AppCompatActivity activity, String fileName) {
+        String json = new Gson().toJson(object);
+        File file = new File(activity.getFilesDir(), fileName);
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (object != null) {
+            Log.i("TestHistory savehashmap", object.toString());
+        }
+    }
+
     public void saveProgramHashMapToDevice(Map<String, String> hashMap, AppCompatActivity activity, String fileName) {
         String json = new Gson().toJson(hashMap);
         File file = new File(activity.getFilesDir(), fileName);

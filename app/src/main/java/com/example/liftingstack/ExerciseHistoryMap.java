@@ -58,7 +58,7 @@ public class ExerciseHistoryMap extends AppCompatActivity {
 
     }
 
-    public void saveExerciseHistory(View v) {
+    public void saveExerciseHistory() {
         // **skapa en exerciseHistoryMap i savefilen när övningen skapas
         //load exerciseHistoryFile
         // check if theres already a date for the specific date if so, add to the HashMap

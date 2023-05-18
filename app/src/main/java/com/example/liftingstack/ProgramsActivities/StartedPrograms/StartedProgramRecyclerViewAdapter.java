@@ -11,9 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.ExerciseHistoryMap;
 import com.example.liftingstack.R;
@@ -59,14 +61,18 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
         private TableLayout tableLayout;
+        //private Button saveButton;
         private StartedProgramRecyclerViewAdapter adapter;
         private TextView exerciseNameTextView;
         private EditText setsEditText, repsEditText, weightEditText;
         private int setCounter;
         private String exerciseIdToSend;
-        private ExerciseHistoryMap exerciseHistoryMap;
+
+        private ExerciseHistoryMap exerciseHistoryMap = new ExerciseHistoryMap();
+        private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
         private HashMap<String, ArrayList<EditText>> editTextsMap = new HashMap<>();
         private ArrayList<EditText> repsAndWeight;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,7 +102,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                     repsAndWeight.add(repsEditText);
                     repsAndWeight.add(weightEditText);
                     editTextsMap.put(setsEditText.getText().toString(), repsAndWeight);
-                    
+
                     //LÄGG TILL NYA TABLEROW I TABLELAYOUTEN
                     tableLayout.addView(newRow);
 
@@ -160,10 +166,8 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
             itemView.findViewById(R.id.saveExerciserRepsWeighBtn).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     // HÄMTA UT ID FRÅN ÖVNINGEN SOM SPARA-KNAPPEN TRYCKTES PÅ
                     ExerciseInstruction exerciseInstruction = adapter.exercises.get(getAdapterPosition());
-                    exerciseHistoryMap = new ExerciseHistoryMap();
                     exerciseIdToSend = exerciseInstruction.getId();
 
                     //GÅ IGENOM EDITTEXTSMAP'S LISTA OCH HÄMTA UT SET, REPS, WEIGHT
@@ -175,16 +179,19 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                         String reps = value.get(index).getText().toString();
                         String weight = value.get(index + 1).getText().toString();
 
-                        System.out.println("Sets = " + set);
-                        System.out.println("Reps = " + reps);
-                        System.out.println("Weight = " + weight);
-
-                        //SKICKA TILL SPARNINGS-FUNKTIONER
-                        exerciseHistoryMap.setSetDataMap(set, reps, weight);
+                        //SKAPA NY ARRAYLIST FÖR REPS + WEIGHT
+                        ArrayList<String> repsAndWeight = new ArrayList<>();
+                        repsAndWeight.add(reps);
+                        repsAndWeight.add(weight);
+                        //LÄGG TILL SET + REPS + WEIGHT I HASHMAPPEN
+                        setDataMap.put(set, repsAndWeight);
                     }
 
-                    exerciseHistoryMap.setExerciseId(exerciseIdToSend);
+                    //SKICKA HASHMAPPEN TILL SPARNINGS-FUNKTIONER
+                    new ExerciseHistoryDataMap((AppCompatActivity) context).
+                            saveExerciseHistoryMap((AppCompatActivity) context, exerciseIdToSend, setDataMap);
                     Toast.makeText(context, "Exercise saved", Toast.LENGTH_SHORT).show();
+
                 }
             });
         }

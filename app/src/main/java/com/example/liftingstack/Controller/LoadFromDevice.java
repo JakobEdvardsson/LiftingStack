@@ -112,7 +112,8 @@ public class LoadFromDevice{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Log.i("TestProgram Loadmethod", hashMap.toString());
+
+        //Log.i("TestHistory TestLoad111", hashMap.toString());
 
         return hashMap;
     }
