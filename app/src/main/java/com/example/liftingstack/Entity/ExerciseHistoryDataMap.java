@@ -17,7 +17,7 @@ public class ExerciseHistoryDataMap {
     private String exerciseId;
     private Map<String, ArrayList<String>> setMap = new HashMap<>();
     // key = which set, value list of reps and weight
-    private Map<String, Map<String, ArrayList<String>>> dateSessionMap = new HashMap<>();
+    private Map<String, Map<String, ArrayList<String>>> sessionMap = new HashMap<>();
     // key = training session per specific date, value = setMap
 
     private Map<String, Map<String, Map<String, ArrayList<String>>>> dateMap = new HashMap<>();
@@ -28,7 +28,7 @@ public class ExerciseHistoryDataMap {
 
     public ExerciseHistoryDataMap(AppCompatActivity activity) {
         exerciseHistoryMap = new LoadFromDevice().loadExerciseHashMapFromDevice(activity, "exerciseHistory");
-        if(exerciseHistoryMap != null) {
+        if (exerciseHistoryMap != null) {
             Log.i("TestHistory TestLoad000", exerciseHistoryMap.toString());
         } else {
             exerciseHistoryMap = new HashMap<>();
@@ -42,20 +42,21 @@ public class ExerciseHistoryDataMap {
     public String getExerciseId() {
         return exerciseId;
     }
+
     public Map<String, Map<String, Map<String, ArrayList<String>>>> getDateMap(String exerciseId) {
         return exerciseHistoryMap.get(exerciseId);
     }
+
     public Map<String, ArrayList<String>> getSetMap(String exerciseId, String dateString, String session) {
         return exerciseHistoryMap.get(exerciseId).get(dateString).get(session);
     }
 
 
-
-
     public void setExerciseId(String exerciseId) {
         this.exerciseId = exerciseId;
     }
-//TODO kolla ifall man tränat tidigare samma dag
+
+    //TODO kolla ifall man tränat tidigare samma dag
     public void setSetMap(String set, String reps, String weight) {
         ArrayList<String> setStringArrayList = new ArrayList<>();
         setStringArrayList.add(reps);
@@ -66,16 +67,30 @@ public class ExerciseHistoryDataMap {
 
 
     public void saveExerciseHistoryMap(AppCompatActivity activity, String exerciseId, Map<String, ArrayList<String>> setMap) {
-        //loads the savefile and returns a hashmap which is saved in instancevariable hashmap
+        //loads the savefile in the constructor, which returns a hashmap which is saved in instancevariable hashmap
 
-        // TODO kolla ifall man tränat tidigare samma dag
+        //kolla ifall man tränat tidigare samma dag
+        if (exerciseHistoryMap.get(dateMap) != null){
+
+            int nbrOfSessions = exerciseHistoryMap.get(dateMap).get(sessionMap).size();
+            int sessionKey = nbrOfSessions + 1;
+            String sessionString = Integer.toString(sessionKey);
+            sessionMap.put(sessionString, setMap);
+        } else {
+            sessionMap.put("1", setMap);
+        }
+
+
+
+
 
         //sets the date to today and parses it to a string
         LocalDate dateObject = LocalDate.now();
         String dateString = dateObject.toString();
 
+
         // puts the logged sets into hashmap with date as key
-        dateMap.put(dateString, dateSessionMap);
+        dateMap.put(dateString, sessionMap);
 
         // puts above hashmap into hashmap with the exerciseId as key
         exerciseHistoryMap.put(exerciseId, dateMap);
