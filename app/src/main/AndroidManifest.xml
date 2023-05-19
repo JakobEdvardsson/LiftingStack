@@ -14,9 +14,7 @@
         <activity
             android:name=".Entity.BarChartCount"
             android:exported="false" />
-        <activity
-            android:name=".ExerciseHistoryMap"
-            android:exported="false" />
+
         <activity
             android:name=".Entity.ExerciseGraph"
             android:exported="false" />
@@ -28,9 +26,6 @@
             android:name=".SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".TestReadWrite"
-            android:exported="false" />
         <activity
             android:name=".ProgramsActivities.SelectedProgram.SelectedProgramActivity"
             android:exported="false"
@@ -45,15 +40,11 @@
         <activity
             android:name=".ExerciseActivities.ExerciseActivity"
             android:exported="false" />
-        <activity
-            android:name=".ExerciseActivities.CreateCustomExerciseActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ProgramsActivities.ProgramActivity"
             android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true" >

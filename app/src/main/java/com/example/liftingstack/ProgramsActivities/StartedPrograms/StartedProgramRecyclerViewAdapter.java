@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -20,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
 import com.example.liftingstack.Entity.ExerciseInstruction;
-import com.example.liftingstack.ExerciseHistoryMap;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
@@ -72,7 +70,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
         private int setCounter;
         private String exerciseIdToSend;
 
-        private ExerciseHistoryMap exerciseHistoryMap = new ExerciseHistoryMap();
+
         private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
         private HashMap<String, ArrayList<EditText>> editTextsMap = new HashMap<>();
         private ArrayList<EditText> repsAndWeight;

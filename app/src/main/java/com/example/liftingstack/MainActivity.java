@@ -90,10 +90,7 @@ public class MainActivity extends AppCompatActivity {
                         getProgramsList(), this, "programList");
     }
 
-    public void launchExerciseHistoryMap(View v) {
-        Intent intent = new Intent(this, ExerciseHistoryMap.class);
-        startActivity(intent);
-    }
+
 
     public void launchExerciseGraph(View v) {
         Intent intent = new Intent(this, ExerciseGraph.class);
@@ -106,10 +103,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void launchProfile(View v) {
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
+
 
     public void launchPrograms(View v) {
         Intent intent = new Intent(this, ProgramActivity.class);
