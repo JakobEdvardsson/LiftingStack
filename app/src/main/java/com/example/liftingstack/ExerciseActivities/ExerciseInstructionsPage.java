@@ -80,10 +80,8 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
 
 
     public ArrayList<Entry> setupGraphData() {
-
-        ExerciseHistoryDataMap exerciseHistoryDataMap = new ExerciseHistoryDataMap(this);
-        Map<String, Map<String, Map<String, ArrayList<String>>>> exerciseHistoryMap = exerciseHistoryDataMap.getExerciseHistoryMap();
-        Map<String, Map<String, ArrayList<String>>> dateDataMap = exerciseHistoryMap.get(idForExercise);
+        Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> exerciseHistoryMap = new ExerciseHistoryDataMap(this).getExerciseHistoryMap();
+        Map<String, Map<String, Map<String, ArrayList<String>>>> dateDataMap = exerciseHistoryMap.get(idForExercise);
 
         ArrayList<Entry> yValues = new ArrayList<>();
 
@@ -92,10 +90,12 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
 
 
         if (dateDataMap != null){
-            for (Map<String, ArrayList<String>> date : dateDataMap.values()) {
-                for (ArrayList<String> value : date.values()) {
-                    yValues.add(new Entry(counter, Float.parseFloat(value.get(0)) + (Float.parseFloat(value.get(1)) * 2)));
-                    counter++;
+            for (Map<String, Map<String, ArrayList<String>>> date : dateDataMap.values()) {
+                for (Map<String, ArrayList<String>> time : date.values()) {
+                    for (ArrayList<String> value: time.values()){
+                        yValues.add(new Entry(counter, Float.parseFloat(value.get(0)) + (Float.parseFloat(value.get(1)) * 2)));
+                        counter++;
+                    }
                 }
             }
         }
