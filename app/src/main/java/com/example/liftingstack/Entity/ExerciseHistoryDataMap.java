@@ -15,11 +15,14 @@ import java.util.Map;
 
 public class ExerciseHistoryDataMap {
     private String exerciseId;
-    private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
+    private Map<String, ArrayList<String>> setMap = new HashMap<>();
     // key = which set, value list of reps and weight
-    private Map<String, Map<String, ArrayList<String>>> dateDataMap = new HashMap<>();
-    // key = date (String), value = setDataMap
-    private Map<String, Map<String, Map<String, ArrayList<String>>>> exerciseHistoryMap = new HashMap<>();
+    private Map<String, Map<String, ArrayList<String>>> dateSessionMap = new HashMap<>();
+    // key = training session per specific date, value = setMap
+
+    private Map<String, Map<String, Map<String, ArrayList<String>>>> dateMap = new HashMap<>();
+    // key = date (String), value = dateSessionMap
+    private Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> exerciseHistoryMap = new HashMap<>();
     // key = exersice id (String), value = dateDataMap
 
 
