@@ -148,7 +148,8 @@ public class LoadFromDevice{
             hashMap = g.fromJson(String.valueOf(jsonString), listType);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return null;
         }
 
         //Log.i("TestHistory TestLoad111", hashMap.toString());

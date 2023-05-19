@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.ImageHandler;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
+import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.R;
 import com.github.mikephil.charting.charts.LineChart;
@@ -31,6 +32,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ExerciseInstructionsPage extends AppCompatActivity {
     private ImageView imageView;
@@ -76,8 +78,31 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         setupGraph();
     }
 
-    public void setupGraph(){
-        LineChart lineChart = (LineChart) findViewById(R.id.linechart);
+
+    public ArrayList<Entry> setupGraphData() {
+
+        ExerciseHistoryDataMap exerciseHistoryDataMap = new ExerciseHistoryDataMap(this);
+        Map<String, Map<String, Map<String, ArrayList<String>>>> exerciseHistoryMap = exerciseHistoryDataMap.getExerciseHistoryMap();
+        Map<String, Map<String, ArrayList<String>>> dateDataMap = exerciseHistoryMap.get(idForExercise);
+
+        ArrayList<Entry> yValues = new ArrayList<>();
+
+        // test values below
+        int counter = 1;
+
+        for (Map<String, ArrayList<String>> date : dateDataMap.values()) {
+            for (ArrayList<String> value : date.values()) {
+                yValues.add(new Entry(counter, Float.parseFloat(value.get(0)) + (Float.parseFloat(value.get(1)) * 2)));
+                counter++;
+            }
+        }
+
+        return yValues;
+
+    }
+
+    public void setupGraph() {
+        LineChart lineChart = findViewById(R.id.linechart);
 
         // lineChart.setOnChartGestureListener(ExerciseGraph.this);
         // lineChart.setOnChartValueSelectedListener(ExerciseGraph.this);
@@ -85,15 +110,10 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(true);
 
-        ArrayList<Entry> yValues = new ArrayList<>();
+        ArrayList<Entry> yValues = setupGraphData();
 
         // test values below
-        yValues.add(new Entry(1, 60f));
-        yValues.add(new Entry(10, 50f));
-        yValues.add(new Entry(100, 70f));
-        yValues.add(new Entry(150, 30f));
-        yValues.add(new Entry(200, 50f));
-        yValues.add(new Entry(250, 60f));
+
 
         LineDataSet dataSet = new LineDataSet(yValues, "Weight / Reps"); // change name later
 
@@ -102,7 +122,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         dataSet.setColor(Color.rgb(2, 206, 104)); // change to a nice blue/green shade later
         dataSet.setLineWidth(3f); // makes the lines a bit thicker
         dataSet.setValueTextSize(10f); // size of the text showing values in chart
-        dataSet.setValueTextColor(Color.rgb(160,160,160));
+        dataSet.setValueTextColor(Color.rgb(160, 160, 160));
         dataSet.setCircleColor(Color.rgb(2, 206, 104)); // might need to change later
         dataSet.setCircleRadius(5f); // might need to change later
 
@@ -117,7 +137,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         description.setText(currentExerciseInstruction.getExerciseName());
         lineChart.setDescription(description);
 
-        int colorForText = Color.rgb(255,20,147);
+        int colorForText = Color.rgb(255, 20, 147);
 
         lineChart.getAxisLeft().setTextColor(colorForText);
         lineChart.getAxisRight().setTextColor(colorForText);
@@ -196,7 +216,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
                             //Resizing the Bitmap to fit the ImageView
                             Bitmap resizedBitmap = Bitmap.createScaledBitmap(
                                     selectedImageBitmap, 300, 300, false);
-                            
+
                             currentExerciseInstruction.setImage(new ImageHandler().convertImageToBase64(resizedBitmap));
                             imageView.setImageBitmap(resizedBitmap);
 
