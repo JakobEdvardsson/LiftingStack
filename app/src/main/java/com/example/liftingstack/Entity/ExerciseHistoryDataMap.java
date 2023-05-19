@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExerciseHistoryDataMap {
-    private String exerciseId;
     private Map<String, ArrayList<String>> setMap = new HashMap<>();
     // key = which set, value list of reps and weight
     private Map<String, Map<String, ArrayList<String>>> sessionMap = new HashMap<>();
@@ -22,14 +21,14 @@ public class ExerciseHistoryDataMap {
 
     private Map<String, Map<String, Map<String, ArrayList<String>>>> dateMap = new HashMap<>();
     // key = date (String), value = sessionMap
-    private Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> exerciseHistoryMap = new HashMap<>();
+    private Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> exerciseHistoryMap;
     // key = exersice id (String), value = dateMap
 
 
     public ExerciseHistoryDataMap(AppCompatActivity activity) {
         exerciseHistoryMap = new LoadFromDevice().loadExerciseHashMapFromDevice(activity, "exerciseHistory");
         if (exerciseHistoryMap != null) {
-            Log.i("TestHistory TestLoad000", exerciseHistoryMap.toString());
+            Log.i("TestHistory Loaded:", exerciseHistoryMap.toString());
         } else {
             exerciseHistoryMap = new HashMap<>();
         }
@@ -38,7 +37,6 @@ public class ExerciseHistoryDataMap {
     public Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> getExerciseHistoryMap() {
         return exerciseHistoryMap;
     }
-
 
     public Map<String, Map<String, Map<String, ArrayList<String>>>> getDateMap(String exerciseId) {
         return exerciseHistoryMap.get(exerciseId);
@@ -52,18 +50,6 @@ public class ExerciseHistoryDataMap {
         return exerciseHistoryMap.get(exerciseId).get(dateString).get(session);
     }
 
-
-    //TODO kolla ifall man tränat tidigare samma dag
-
-    /* public void setSetMap(String set, String reps, String weight) {
-        ArrayList<String> setStringArrayList = new ArrayList<>();
-        setStringArrayList.add(reps);
-        setStringArrayList.add(weight);
-
-        setMap.put(set, setStringArrayList);
-    } */
-
-
     public void saveExerciseHistoryMap(AppCompatActivity activity, String exerciseId, Map<String, ArrayList<String>> setMap) {
         //class loads the savefile in the constructor, which returns a hashmap which is saved in instancevariable exerciseHistoryMap
 
@@ -71,51 +57,30 @@ public class ExerciseHistoryDataMap {
         LocalDate dateObject = LocalDate.now();
         String dateString = dateObject.toString();
 
-
-
         this.setMap = setMap;
 
-        //kolla ifall man tränat tidigare samma dag
+        //kolla ifall man tränat övningen tidigare aktuell dag
         if (exerciseHistoryMap.get(exerciseId) != null) {
+            //om man har tränat samma dag:
             dateMap = exerciseHistoryMap.get(exerciseId);
             sessionMap = dateMap.get(dateString);
 
             int nbrOfSessions = sessionMap.size();
-            Log.i("TestHistory size", Integer.toString(nbrOfSessions));
             int sessionKey = nbrOfSessions + 1;
             String sessionString = Integer.toString(sessionKey);
 
             sessionMap.put(sessionString, setMap);
-            Log.i("TestHistory after", setMap.toString());
         } else {
-
+            // om man inte tränat övningen tidigare aktuell dag
             sessionMap.put("1", setMap);
-            Log.i("TestHistory else", setMap.toString());
-
         }
+        // uppdatera exerciseHistoryMap med den nya datan
         dateMap.put(dateString, sessionMap);
         exerciseHistoryMap.put(exerciseId, dateMap);
 
-        // puts above hashmap into hashmap with the exerciseId as key
-
-        Log.i("TestHistory TestLoad222", exerciseHistoryMap.toString());
+        Log.i("TestHistory saved:", exerciseHistoryMap.toString());
 
         // saves above hashmap as json to file
         new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, activity, "exerciseHistory");
-
-
-
-
- /*
-
-        // below only for testing purposes
-        dateDataMap = exerciseHistoryMap.get("1");
-        setDataMap = dateDataMap.get("2023-05-18");
-        exerciseHistoryMap = new LoadFromDevice().loadExerciseHashMapFromDevice(activity, "exerciseHistory");
-
-        Log.i("TestHistory TestSet4", exerciseHistoryMap.toString());
-        Log.i("TestHistory TestSet5", exerciseHistoryMap.get(exerciseId).toString());
-
-*/
     }
 }
