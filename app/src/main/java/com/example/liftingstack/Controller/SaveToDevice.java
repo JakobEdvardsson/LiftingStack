@@ -46,7 +46,7 @@ public class SaveToDevice {
     }
 
 
-    public void saveExerciseHashMapToDevice(Map<String, Map<String, Map<String, ArrayList<String>>>> hashMap, AppCompatActivity activity, String fileName) {
+    public void saveExerciseHashMapToDevice(Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> hashMap, AppCompatActivity activity, String fileName) {
         String json = new Gson().toJson(hashMap);
         File file = new File(activity.getFilesDir(), fileName);
         FileWriter fileWriter;

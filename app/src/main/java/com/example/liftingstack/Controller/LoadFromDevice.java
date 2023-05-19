@@ -126,9 +126,9 @@ public class LoadFromDevice{
         return list;
     }
 
-    public Map<String, Map<String, Map<String, ArrayList<String>>>> loadExerciseHashMapFromDevice(AppCompatActivity activity, String fileName){
+    public Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> loadExerciseHashMapFromDevice(AppCompatActivity activity, String fileName){
 
-        Map<String, Map<String, Map<String, ArrayList<String>>>> hashMap;
+        Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> hashMap;
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader(new File(activity.getFilesDir(), fileName)));

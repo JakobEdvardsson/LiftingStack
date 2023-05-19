@@ -35,18 +35,18 @@ public class ExerciseHistoryDataMap {
         }
     }
 
-    public Map<String, Map<String, Map<String, ArrayList<String>>>> getExerciseHistoryMap() {
+    public Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> getExerciseHistoryMap() {
         return exerciseHistoryMap;
     }
 
     public String getExerciseId() {
         return exerciseId;
     }
-    public Map<String, Map<String, ArrayList<String>>> getDateDataMap(String exerciseId) {
+    public Map<String, Map<String, Map<String, ArrayList<String>>>> getDateMap(String exerciseId) {
         return exerciseHistoryMap.get(exerciseId);
     }
-    public Map<String, ArrayList<String>> getSetDataMap(String exerciseId, String dateString) {
-        return exerciseHistoryMap.get(exerciseId).get(dateString);
+    public Map<String, ArrayList<String>> getSetMap(String exerciseId, String dateString, String session) {
+        return exerciseHistoryMap.get(exerciseId).get(dateString).get(session);
     }
 
 
@@ -55,30 +55,30 @@ public class ExerciseHistoryDataMap {
     public void setExerciseId(String exerciseId) {
         this.exerciseId = exerciseId;
     }
-
-    public void setSetDataMap(String set, String reps, String weight) {
+//TODO kolla ifall man tränat tidigare samma dag
+    public void setSetMap(String set, String reps, String weight) {
         ArrayList<String> setStringArrayList = new ArrayList<>();
         setStringArrayList.add(reps);
         setStringArrayList.add(weight);
 
-        setDataMap.put(set, setStringArrayList);
+        setMap.put(set, setStringArrayList);
     }
 
 
-    public void saveExerciseHistoryMap(AppCompatActivity activity, String exerciseId, Map<String, ArrayList<String>> setDataMap) {
+    public void saveExerciseHistoryMap(AppCompatActivity activity, String exerciseId, Map<String, ArrayList<String>> setMap) {
         //loads the savefile and returns a hashmap which is saved in instancevariable hashmap
 
-
+        // TODO kolla ifall man tränat tidigare samma dag
 
         //sets the date to today and parses it to a string
         LocalDate dateObject = LocalDate.now();
         String dateString = dateObject.toString();
 
         // puts the logged sets into hashmap with date as key
-        dateDataMap.put(dateString, setDataMap);
+        dateMap.put(dateString, dateSessionMap);
 
         // puts above hashmap into hashmap with the exerciseId as key
-        exerciseHistoryMap.put(exerciseId, dateDataMap);
+        exerciseHistoryMap.put(exerciseId, dateMap);
         Log.i("TestHistory TestLoad222", exerciseHistoryMap.toString());
 
         // saves above hashmap as json to file
