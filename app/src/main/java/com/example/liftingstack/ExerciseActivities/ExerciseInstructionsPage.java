@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -90,12 +91,20 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
 
 
         if (dateDataMap != null){
-            for (Map<String, Map<String, ArrayList<String>>> date : dateDataMap.values()) {
-                for (Map<String, ArrayList<String>> time : date.values()) {
-                    for (ArrayList<String> value: time.values()){
-                        yValues.add(new Entry(counter, Float.parseFloat(value.get(0)) + (Float.parseFloat(value.get(1)) * 2)));
-                        counter++;
+            for (Map<String, Map<String, ArrayList<String>>> dateMap : dateDataMap.values()) {
+                for (Map<String, ArrayList<String>> sessionMap : dateMap.values()) {
+                    float reps = 0;
+                    float weight = 0;
+                    float sets = 0;
+                    for (ArrayList<String> setMap: sessionMap.values()){
+                        sets++;
+                        reps += Integer.parseInt(setMap.get(0));
+                        weight += Integer.parseInt(setMap.get(1));
                     }
+                    float aveRep = reps / sets;
+                    float aveWeight = (weight / sets) * 2;
+                    yValues.add(new Entry(counter, aveRep*aveWeight));
+                    counter++;
                 }
             }
         }
@@ -118,7 +127,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         // test values below
 
         if (yValues.size() > 0){
-            LineDataSet dataSet = new LineDataSet(yValues, "Weight / Reps"); // change name later
+            LineDataSet dataSet = new LineDataSet(yValues, "Reps * (Weight * 2)"); // change name later
 
             dataSet.setFillAlpha(110);
 
