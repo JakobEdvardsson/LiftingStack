@@ -90,10 +90,13 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         // test values below
         int counter = 1;
 
-        for (Map<String, ArrayList<String>> date : dateDataMap.values()) {
-            for (ArrayList<String> value : date.values()) {
-                yValues.add(new Entry(counter, Float.parseFloat(value.get(0)) + (Float.parseFloat(value.get(1)) * 2)));
-                counter++;
+
+        if (dateDataMap != null){
+            for (Map<String, ArrayList<String>> date : dateDataMap.values()) {
+                for (ArrayList<String> value : date.values()) {
+                    yValues.add(new Entry(counter, Float.parseFloat(value.get(0)) + (Float.parseFloat(value.get(1)) * 2)));
+                    counter++;
+                }
             }
         }
 
@@ -114,36 +117,37 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
 
         // test values below
 
+        if (yValues.size() > 0){
+            LineDataSet dataSet = new LineDataSet(yValues, "Weight / Reps"); // change name later
 
-        LineDataSet dataSet = new LineDataSet(yValues, "Weight / Reps"); // change name later
+            dataSet.setFillAlpha(110);
 
-        dataSet.setFillAlpha(110);
+            dataSet.setColor(Color.rgb(2, 206, 104)); // change to a nice blue/green shade later
+            dataSet.setLineWidth(3f); // makes the lines a bit thicker
+            dataSet.setValueTextSize(10f); // size of the text showing values in chart
+            dataSet.setValueTextColor(Color.rgb(160, 160, 160));
+            dataSet.setCircleColor(Color.rgb(2, 206, 104)); // might need to change later
+            dataSet.setCircleRadius(5f); // might need to change later
 
-        dataSet.setColor(Color.rgb(2, 206, 104)); // change to a nice blue/green shade later
-        dataSet.setLineWidth(3f); // makes the lines a bit thicker
-        dataSet.setValueTextSize(10f); // size of the text showing values in chart
-        dataSet.setValueTextColor(Color.rgb(160, 160, 160));
-        dataSet.setCircleColor(Color.rgb(2, 206, 104)); // might need to change later
-        dataSet.setCircleRadius(5f); // might need to change later
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(dataSet);
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(dataSet);
+            LineData data = new LineData(dataSets);
 
-        LineData data = new LineData(dataSets);
+            lineChart.setData(data);
 
-        lineChart.setData(data);
+            Description description = new Description();
+            description.setText(currentExerciseInstruction.getExerciseName());
+            lineChart.setDescription(description);
 
-        Description description = new Description();
-        description.setText(currentExerciseInstruction.getExerciseName());
-        lineChart.setDescription(description);
+            int colorForText = Color.rgb(255, 20, 147);
 
-        int colorForText = Color.rgb(255, 20, 147);
-
-        lineChart.getAxisLeft().setTextColor(colorForText);
-        lineChart.getAxisRight().setTextColor(colorForText);
-        lineChart.getXAxis().setTextColor(colorForText);
-        lineChart.getLegend().setTextColor(colorForText);
-        lineChart.getDescription().setTextColor(colorForText);
+            lineChart.getAxisLeft().setTextColor(colorForText);
+            lineChart.getAxisRight().setTextColor(colorForText);
+            lineChart.getXAxis().setTextColor(colorForText);
+            lineChart.getLegend().setTextColor(colorForText);
+            lineChart.getDescription().setTextColor(colorForText);
+        }
 
 
     }
