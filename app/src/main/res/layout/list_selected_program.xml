@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,17 +21,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintClick"
             android:layout_width="375dp"
-            android:layout_height="150dp"
+            android:layout_height="80dp"
             android:background="@drawable/list_selected_program"
             android:textAlignment="center">
 
             <TextView
                 android:id="@+id/exerciseNameSelectedProgram"
-                android:layout_width="300dp"
+                android:layout_width="wrap_content"
                 android:layout_height="31dp"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:text="Exercise name"
-                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="#40ff9f"
                 android:textSize="18sp"
@@ -43,7 +42,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="287dp"
-                android:layout_height="110dp"
+                android:layout_height="60dp"
                 android:layout_marginLeft="6dp"
                 android:layout_marginBottom="6dp"
                 android:backgroundTint="@android:color/transparent"
@@ -66,13 +65,13 @@
 
             <ImageView
                 android:id="@+id/deleteIconSelectedProgram"
-                android:layout_width="68dp"
-                android:layout_height="84dp"
-                android:layout_marginBottom="24dp"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
                 android:tint="#40ff9f"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/delete_new_24"
                 tools:ignore="UseAppTint" />
 
