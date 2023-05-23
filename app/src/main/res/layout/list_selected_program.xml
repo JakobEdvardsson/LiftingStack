@@ -21,47 +21,31 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintClick"
             android:layout_width="375dp"
-            android:layout_height="80dp"
+            android:layout_height="90dp"
             android:background="@drawable/list_selected_program"
+            android:padding="4dp"
             android:textAlignment="center">
 
             <TextView
                 android:id="@+id/exerciseNameSelectedProgram"
-                android:layout_width="wrap_content"
-                android:layout_height="31dp"
+                android:layout_width="150dp"
+                android:layout_height="0dp"
                 android:gravity="center"
                 android:text="Exercise name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="#40ff9f"
-                android:textSize="18sp"
+                app:layout_constraintHorizontal_bias="0.6"
+
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="22sp"
+                android:autoSizeStepGranularity="2sp"
+
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="287dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginBottom="6dp"
-                android:backgroundTint="@android:color/transparent"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/deleteIconSelectedProgram"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/exerciseNameSelectedProgram"
-                app:layout_constraintVertical_bias="0.727">
-
-                <TextView
-                    android:id="@+id/exerciseDescriptionSelectedProgram"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="15dp"
-                    android:text="Exercise description"
-                    android:textColor="#e5e5e5" />
-            </androidx.cardview.widget.CardView>
 
             <ImageView
                 android:id="@+id/deleteIconSelectedProgram"
@@ -70,10 +54,26 @@
                 android:tint="#40ff9f"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/exerciseNameSelectedProgram"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/delete_new_24"
                 tools:ignore="UseAppTint" />
+
+
+            <ImageView
+                android:id="@+id/workoutImage"
+                app:circularflow_radiusInDP="10dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/exerciseNameSelectedProgram"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+
+                app:layout_constraintDimensionRatio="1:1"
+                app:srcCompat="@drawable/icons8_picture"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

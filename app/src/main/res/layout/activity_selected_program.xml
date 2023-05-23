@@ -9,15 +9,17 @@
     <EditText
         android:id="@+id/selectedProgramName"
         android:layout_width="297dp"
-        android:layout_height="65dp"
+        android:layout_height="60dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Program name"
 
+
+
         android:padding="8dp"
         android:background="@drawable/edittext_border"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/selectedProgramDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +36,10 @@
         android:inputType="textMultiLine"
         android:padding="8dp"
 
+
+
         android:text="Program Description"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectedProgramName"
@@ -43,51 +47,56 @@
 
     <Button
         android:id="@+id/selectedProgramSaveBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:onClick="saveOnClick"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineBottom" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/selectedProgramRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guidelineTop"
         app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/addExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:onClick="addExerciseOnClick"
         android:text="Add Exercise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toEndOf="@+id/selectedProgramSaveBtn" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/selectedProgramSaveBtn"
+        app:layout_constraintTop_toTopOf="@id/guidelineBottom"
+        app:layout_constraintVertical_bias="0.5"
+        android:textSize="13sp"
+        />
+
 
     <Button
         android:id="@+id/startProgramBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:onClick="startBtnClicked"
         android:text="Start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/selectedProgramSaveBtn"
-        app:layout_constraintHorizontal_bias="0.838"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
+        app:layout_constraintVertical_bias="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
