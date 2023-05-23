@@ -42,8 +42,10 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
     public void onBindViewHolder(@NonNull SelectedProgramRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.exerciseNameTextView.setText(exercises.get(position).getExerciseName());
         //holder.exerciseDescriptionTextView.setText(exercises.get(position).getExerciseDescription());
-        ImageHandler imageHandler = new ImageHandler();
-        holder.exerciseImage.setImageBitmap(imageHandler.convertBase64ToBitmap(exercises.get(position).getImage()));
+        if (exercises.get(position).getImage() != null){
+            ImageHandler imageHandler = new ImageHandler();
+            holder.exerciseImage.setImageBitmap(imageHandler.convertBase64ToBitmap(exercises.get(position).getImage()));
+        }
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
