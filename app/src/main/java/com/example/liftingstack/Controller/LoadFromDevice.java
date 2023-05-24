@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.Entity.TreeIcons;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -62,6 +63,34 @@ public class LoadFromDevice{
         return list;
     }
 
+    public <T> ArrayList<T> loadDatesLoggedFromDevice(AppCompatActivity activity, String fileName){
+
+        ArrayList<T> list;
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(new File(activity.getFilesDir(), fileName)));
+
+            // read the contents of the file as a string
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+
+            // close the reader
+            reader.close();
+
+            Gson g = new Gson();
+            Type listType = new TypeToken<ArrayList<Integer>>(){}.getType();
+            list = g.fromJson(String.valueOf(jsonString), listType);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return list;
+    }
+
     public <T> ArrayList<T> loadExerciseListFromAssets(Context context, String fileName){
 
         ArrayList<T> list;
@@ -87,6 +116,41 @@ public class LoadFromDevice{
             // Converts to ArrayList of ExerciseInstructions
             Gson g = new Gson();
             Type listType = new TypeToken<ArrayList<ExerciseInstruction>>(){}.getType();
+            list = g.fromJson(String.valueOf(jsonString), listType);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return list;
+    }
+
+    public <T> ArrayList<T> loadTreeIconsFromAssets(Context context, String fileName){
+
+        ArrayList<T> list;
+        String json = null;
+
+        try {
+            // reads data in assets file
+
+            // needs a context to work, pass from mainActivity
+            InputStream inputStream = context.getAssets().open(fileName); // needs a context to work
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+
+            // converts to string
+            json = new String(buffer, "UTF-8");
+
+            // converts to StringBuilder
+            StringBuilder jsonString = new StringBuilder();
+            jsonString.append(json);
+
+            // Converts to ArrayList of ExerciseInstructions
+            Gson g = new Gson();
+            Type listType = new TypeToken<ArrayList<TreeIcons>>(){}.getType();
             list = g.fromJson(String.valueOf(jsonString), listType);
 
 
