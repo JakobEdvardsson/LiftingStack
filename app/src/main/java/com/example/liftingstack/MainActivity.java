@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.FirstTimeAppOpens;
+import com.example.liftingstack.Controller.ImageHandler;
 import com.example.liftingstack.Controller.LoadFromDevice;
 import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
@@ -15,22 +16,63 @@ import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.ExerciseGraph;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.Entity.TreeIcons;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 import com.example.liftingstack.Entity.BarChartCount;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // To get today minus 1 month
+        // create a LocalDate object
+        LocalDate dateToday = LocalDate.now();
+
+        // subtract 15 months
+
+        LocalDate dateOneMonthBack = dateToday.minusMonths(1);
+
+        Integer dateIntegerToday = Integer.valueOf(dateToday.toString().replace("-", ""));
+        Integer dateIntegerOneMonthBack = Integer.valueOf(dateOneMonthBack.toString().replace("-", ""));
+
+        // print result
+        System.out.println("LocalDate after "
+                + " subtracting months: " + dateOneMonthBack);
+
+        Integer datesLoggedPast30Days = 0;
+        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
+        for (int i = 0; i < datesLogged.size(); i++) {
+            if(datesLogged.get(i) > dateIntegerOneMonthBack) {
+                datesLoggedPast30Days ++;
+            }
+        }
+        Log.i("onCreateTest", datesLoggedPast30Days.toString());
+
+        // To show tree icon on main
+        ArrayList<TreeIcons> treeIcons = new LoadFromDevice().loadTreeIconsFromAssets(this, "tree_icons");
+
+        for (int i = 0; i < treeIcons.size(); i++) {
+            Log.i("onCreateTest: "+i, treeIcons.get(i).getName());
+        }
+        imageView = findViewById(R.id.tree);
+            imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(treeIcons.get(4).getImage()));
+
+
 
 
         // Check if its the first time app opens
@@ -52,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    public void showProgressIcon() {
+
+
+
+
+    }
     public void firstTimeAppOpens() {
         // Creates all built in exercises from assets folder
         ArrayList<ExerciseInstruction> builtInExercisesList = new LoadFromDevice().loadExerciseListFromAssets(this, "built_in_exercises");
@@ -88,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
         new SaveToDevice().saveListToDevice(
                 builtInProgramList.
                         getProgramsList(), this, "programList");
+
+        // Creates new save file for dates logged
+        new SaveToDevice().saveListToDevice(new ArrayList<>(), this, "datesLogged");
     }
 
 

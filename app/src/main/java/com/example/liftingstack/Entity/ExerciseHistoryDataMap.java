@@ -95,7 +95,19 @@ public class ExerciseHistoryDataMap {
             dateMap.put(dateString, sessionMap);
             exerciseHistoryMap.put(exerciseId, dateMap);
             new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, activity, "exerciseHistory");
-
         }
+
+        // saves the date to loggedDate file
+        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(activity, "datesLogged");
+        Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+
+        datesLogged.add(dateInteger);
+        datesLogged.add(20230521);
+        datesLogged.add(20230420);
+        datesLogged.add(20230430);
+        datesLogged.add(20230424);
+
+        new SaveToDevice().saveListToDevice(datesLogged, activity, "datesLogged");
+        Log.i( "dateslogged: ", datesLogged.toString());
     }
 }

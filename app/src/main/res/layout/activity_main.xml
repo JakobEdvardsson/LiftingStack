@@ -127,4 +127,13 @@
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.679" />
 
+    <ImageView
+        android:id="@+id/tree"
+        android:layout_width="115dp"
+        android:layout_height="119dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_stats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:srcCompat="@drawable/baseline_fitness_center_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
