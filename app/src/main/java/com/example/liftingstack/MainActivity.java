@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             sharedEditor.apply();
         }
     }
-    public void onStart() {
+    /*public void onStart() {
         super.onStart();
         // To get todays date plus todays date minus 1 month
 
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    }
+    }*/
     public void firstTimeAppOpens() {
         // Creates all built in exercises from assets folder
         ArrayList<ExerciseInstruction> builtInExercisesList = new LoadFromDevice().loadExerciseListFromAssets(this, "built_in_exercises");

@@ -116,19 +116,28 @@ public class StartedProgramActivity extends AppCompatActivity {
             Toast.makeText(this, "Program saved", Toast.LENGTH_SHORT).show();
 
 
-
             finish();
         }
-            // Logga programmet på dagens datum i filen datesLogged
-            LocalDate dateObject = LocalDate.now();
+        // Logga programmet på dagens datum i filen datesLogged
+        LocalDate dateObject = LocalDate.now();
 
-            String dateString = dateObject.toString();
+        String dateString = dateObject.toString();
 
-            ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
-            Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
-            datesLogged.add(dateInteger);
+        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
+        Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+        datesLogged.add(dateInteger);
+/*
+        // TODO testing, remove when done
+        datesLogged.add(20230401);
+        datesLogged.add(20230401);
+        datesLogged.add(20230401);
+        datesLogged.add(20230302);
+        datesLogged.add(20230302);
+*/
+        datesLogged.add(20220602);
 
-            new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
-            Log.i( "dateslogged: ", datesLogged.toString());
+
+        new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
+        Log.i("dateslogged: ", datesLogged.toString());
     }
 }

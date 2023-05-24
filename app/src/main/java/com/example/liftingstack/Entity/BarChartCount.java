@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.liftingstack.Controller.LoadFromDevice;
 import com.example.liftingstack.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -24,46 +26,53 @@ public class BarChartCount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_chart);
+    }
 
-        BarChart barChart = findViewById(R.id.barChart);
+    public void onStart() {
+        super.onStart();
+        updateGraph();
+    }
+
+    public void updateGraph() {
+
+        // get todays date, convert to int and remove last two digits (the days from the date)
+
+        LocalDate dateToday = LocalDate.now();
+
+        String stringDateToday = dateToday.toString().replace("-", "");
+        int dateIntegerToday = Integer.parseInt(stringDateToday) / 100;
 
 
+        // get todays date minus one year, convert to int and remove last two digits (the days from the date)
 
-        ArrayList<Integer> pastTwelveMonths = new ArrayList<>();
-        pastTwelveMonths.add(Integer.valueOf("05"));
+        LocalDate dateOneYearBack = dateToday.minusMonths(12);
+        String stringOneYearBack = dateOneYearBack.toString().replace("-", "");
+        int dateIntegerOneYearBack = Integer.parseInt(stringOneYearBack) / 100;
 
-        pastTwelveMonths.add(7);
-        pastTwelveMonths.add(6);
-        pastTwelveMonths.add(5);
-        pastTwelveMonths.add(4);
-        pastTwelveMonths.add(7);
-        pastTwelveMonths.add(8);
 
-        Collections.sort(pastTwelveMonths);
+        //Load datesLogged and check how many times logged each month for the last 12 months
+        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
 
-        HashMap<Integer, Integer> timesPerMonth = new HashMap<>();
-        for (int i = 1; i <= 12; i++) {
-            timesPerMonth.put(i, Collections.frequency(pastTwelveMonths, i));
 
+        // create a list with the days stripped away from the date
+        ArrayList<Integer> monthsLogged = new ArrayList<>();
+        for (int i = 0; i < datesLogged.size(); i++) {
+            //strip away the days from the logged entries in savefile loggedDates
+            monthsLogged.add(datesLogged.get(i)/100);
         }
-        System.out.println(timesPerMonth.toString());
 
-
+        // create a BarEntry list which holds the data for the chart
         ArrayList<BarEntry> bar = new ArrayList<>();
 
-        bar.add(new BarEntry(1, 10));
-        bar.add(new BarEntry(2, 2));
-        bar.add(new BarEntry(3, 5));
-        bar.add(new BarEntry(4, 13));
-        bar.add(new BarEntry(5, 0));
-        bar.add(new BarEntry(6, 0));
-        bar.add(new BarEntry(7, 0));
-        bar.add(new BarEntry(8, 0));
-        bar.add(new BarEntry(9, 0));
-        bar.add(new BarEntry(10, 0));
-        bar.add(new BarEntry(11, 0));
-        bar.add(new BarEntry(12, 0));
-        //TODO ändra ev x - axel (från 2023-1 till 2023.1 eller 1, eller skriv det på ett annat sätt)
+
+        // check how many months has been logged for each of the past twelve months and set the value into BarEntry list
+        for (int i = 0; i < 12; i++) {
+            int timesThisMonth = Collections.frequency(monthsLogged, Integer.parseInt(dateToday.minusMonths(i).toString().replace("-",""))/100);
+            bar.add(new BarEntry(12-i, timesThisMonth));
+        }
+
+        // set the bars to the graph and display in GUI
+        BarChart barChart = findViewById(R.id.barChart);
 
         BarDataSet barDataSet = new BarDataSet(bar, "Number of training sessions");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
@@ -76,6 +85,5 @@ public class BarChartCount extends AppCompatActivity {
         barChart.setData(barData);
         barChart.getDescription().setText("Number of training sessions");
         barChart.animateY(2000);
-
     }
 }
