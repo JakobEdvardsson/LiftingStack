@@ -66,11 +66,15 @@ public class MainActivity extends AppCompatActivity {
         // To show tree icon on main
         ArrayList<TreeIcons> treeIcons = new LoadFromDevice().loadTreeIconsFromAssets(this, "tree_icons");
 
-        for (int i = 0; i < treeIcons.size(); i++) {
-            Log.i("onCreateTest: "+i, treeIcons.get(i).getName());
+        int currentTreeIcon = Math.round(datesLoggedPast30Days/2)-2;
+        if(currentTreeIcon > 4) {
+            currentTreeIcon = 4;
+        } else if (currentTreeIcon < 0) {
+            currentTreeIcon = 0;
         }
+
         imageView = findViewById(R.id.tree);
-            imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(treeIcons.get(4).getImage()));
+            imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(treeIcons.get(currentTreeIcon).getImage()));
 
 
 
