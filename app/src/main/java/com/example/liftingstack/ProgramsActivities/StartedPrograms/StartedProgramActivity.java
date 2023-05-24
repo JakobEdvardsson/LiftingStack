@@ -8,21 +8,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
-import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
-import com.example.liftingstack.MainActivity;
 import com.example.liftingstack.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class StartedProgramActivity extends AppCompatActivity{
+public class StartedProgramActivity extends AppCompatActivity {
 
     private List<ExerciseInstruction> exercises = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -71,8 +74,48 @@ public class StartedProgramActivity extends AppCompatActivity{
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void finishProgram(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    public void finishProgramAndSave(View v) {
+        StartedProgramRecyclerViewAdapter startedProgramRecyclerViewAdapter = (StartedProgramRecyclerViewAdapter) recyclerView.getAdapter();
+        assert startedProgramRecyclerViewAdapter != null;
+
+
+        for (int i = 0; i < ((StartedProgramRecyclerViewAdapter) recyclerView.getAdapter()).getExercises().size(); i++) {
+            StartedProgramRecyclerViewAdapter.ViewHolder test = (StartedProgramRecyclerViewAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
+
+
+            assert test != null;
+            Map<String, ArrayList<EditText>> editTextsMap = test.getEditTextsMap();
+            Map<String, ArrayList<String>> setDataMap = test.getSetDataMap();
+
+
+            String exerciseIdToSend = ((StartedProgramRecyclerViewAdapter) recyclerView.getAdapter()).getExercises().get(i).getId();
+
+            //GÅ IGENOM EDITTEXTSMAP'S LISTA OCH HÄMTA UT SET, REPS, WEIGHT
+            for (Map.Entry<String, ArrayList<EditText>> entry : editTextsMap.entrySet()) {
+                String set = entry.getKey();
+                ArrayList<EditText> value = entry.getValue();
+                int index = 0;
+
+                String reps = value.get(index).getText().toString();
+                String weight = value.get(index + 1).getText().toString();
+
+                //SKAPA NY ARRAYLIST FÖR REPS + WEIGHT
+                ArrayList<String> repsAndWeight = new ArrayList<>();
+                repsAndWeight.add(reps);
+                repsAndWeight.add(weight);
+                //LÄGG TILL SET + REPS + WEIGHT I HASHMAPPEN
+                setDataMap.put(set, repsAndWeight);
+            }
+
+            //SKICKA HASHMAPPEN TILL SPARNINGS-FUNKTIONER
+            new ExerciseHistoryDataMap(this).
+                    saveExerciseHistoryMap(this, exerciseIdToSend, setDataMap);
+            Toast.makeText(this, "Program saved", Toast.LENGTH_SHORT).show();
+
+
+            finish();
+
+
+        }
     }
 }
