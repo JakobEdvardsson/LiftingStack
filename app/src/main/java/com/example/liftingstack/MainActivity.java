@@ -39,42 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // To get today minus 1 month
-        // create a LocalDate object
-        LocalDate dateToday = LocalDate.now();
 
-        // subtract 15 months
-
-        LocalDate dateOneMonthBack = dateToday.minusMonths(1);
-
-        Integer dateIntegerToday = Integer.valueOf(dateToday.toString().replace("-", ""));
-        Integer dateIntegerOneMonthBack = Integer.valueOf(dateOneMonthBack.toString().replace("-", ""));
-
-        // print result
-        System.out.println("LocalDate after "
-                + " subtracting months: " + dateOneMonthBack);
-
-        Integer datesLoggedPast30Days = 0;
-        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
-        for (int i = 0; i < datesLogged.size(); i++) {
-            if(datesLogged.get(i) > dateIntegerOneMonthBack) {
-                datesLoggedPast30Days ++;
-            }
-        }
-        Log.i("onCreateTest", datesLoggedPast30Days.toString());
-
-        // To show tree icon on main
-        ArrayList<TreeIcons> treeIcons = new LoadFromDevice().loadTreeIconsFromAssets(this, "tree_icons");
-
-        int currentTreeIcon = Math.round(datesLoggedPast30Days/2)-2;
-        if(currentTreeIcon > 4) {
-            currentTreeIcon = 4;
-        } else if (currentTreeIcon < 0) {
-            currentTreeIcon = 0;
-        }
-
-        imageView = findViewById(R.id.tree);
-            imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(treeIcons.get(currentTreeIcon).getImage()));
 
 
 
@@ -97,7 +62,47 @@ public class MainActivity extends AppCompatActivity {
             sharedEditor.apply();
         }
     }
+    public void onStart() {
+        super.onStart();
+        // To get todays date plus todays date minus 1 month
 
+        LocalDate dateToday = LocalDate.now();
+        Integer dateIntegerToday = Integer.valueOf(dateToday.toString().replace("-", ""));
+        LocalDate dateOneMonthBack = dateToday.minusMonths(1);
+        Integer dateIntegerOneMonthBack = Integer.valueOf(dateOneMonthBack.toString().replace("-", ""));
+
+        // get number of logged programs last 30 days from dateLogged save file
+        Integer datesLoggedPast30Days = 0;
+        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
+        for (int i = 0; i < datesLogged.size(); i++) {
+            if(datesLogged.get(i) > dateIntegerOneMonthBack && datesLogged.get(i) <= dateIntegerToday) {
+                datesLoggedPast30Days ++;
+            }
+        }
+
+        // To determine which tree-icon is shown
+        ArrayList<TreeIcons> treeIcons = new LoadFromDevice().loadTreeIconsFromAssets(this, "tree_icons");
+
+        int currentTreeIcon;
+        if(datesLoggedPast30Days == 0) {
+            currentTreeIcon = 0;
+        } else if (datesLoggedPast30Days < 2) {
+            currentTreeIcon = 1;
+        }else if (datesLoggedPast30Days < 5) {
+            currentTreeIcon = 2;
+        }else if (datesLoggedPast30Days < 8) {
+            currentTreeIcon = 3;
+        }else {
+            currentTreeIcon = 4;
+        }
+
+        Log.i("onCreateTest Dates", datesLoggedPast30Days.toString());
+        Log.i("onCreateTest Tree", currentTreeIcon + "");
+
+        // display tree-icon
+        imageView = findViewById(R.id.tree);
+        imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(treeIcons.get(currentTreeIcon).getImage()));
+    }
 
     public void showProgressIcon() {
 
