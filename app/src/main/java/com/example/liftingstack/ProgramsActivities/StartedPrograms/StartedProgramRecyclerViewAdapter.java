@@ -1,6 +1,7 @@
 package com.example.liftingstack.ProgramsActivities.StartedPrograms;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +30,13 @@ import java.util.Map;
 
 public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<StartedProgramRecyclerViewAdapter.ViewHolder> {
     private Context context;
-    private List<ExerciseInstruction> exercises = new ArrayList<>();
-    //private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
+    private List<ExerciseInstruction> exercises;
+    private ViewHolder viewHolder;
+
 
     public StartedProgramRecyclerViewAdapter(Context context, List<ExerciseInstruction> exercises) {
         this.context = context;
         this.exercises = exercises;
-        //this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;
     }
 
     @NonNull
@@ -43,8 +44,8 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.list_started_program, parent, false);
-
-        return new ViewHolder(view).linkAdapter(this);
+        viewHolder = new ViewHolder(view).linkAdapter(this);
+        return viewHolder;
     }
 
     @Override
@@ -59,13 +60,26 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
         return exercises.size();
     }
 
+    public List<ExerciseInstruction> getExercises() {
+        return exercises;
+    }
+
+    public Map<String, ArrayList<EditText>> getEditTextsMap() {
+        return viewHolder.getEditTextsMap();
+    }
+
+    public Map<String, ArrayList<String>> getSetDataMap() {
+        return viewHolder.getSetDataMap();
+    }
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
         private Button saveBtn;
         private TableLayout tableLayout;
         //private Button saveButton;
         private StartedProgramRecyclerViewAdapter adapter;
-        private TextView exerciseNameTextView;
+        public TextView exerciseNameTextView;
         private EditText setsEditText, repsEditText, weightEditText;
         private int setCounter;
         private String exerciseIdToSend;
@@ -75,13 +89,19 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
         private HashMap<String, ArrayList<EditText>> editTextsMap = new HashMap<>();
         private ArrayList<EditText> repsAndWeight;
 
+        public HashMap<String, ArrayList<EditText>> getEditTextsMap() {
+            return editTextsMap;
+        }
+
+        public Map<String, ArrayList<String>> getSetDataMap() {
+            return setDataMap;
+        }
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.startedProgramCardView);
             tableLayout = itemView.findViewById(R.id.startedProgramTable);
             exerciseNameTextView = itemView.findViewById(R.id.startedProgramExerciseName);
-            saveBtn = itemView.findViewById(R.id.saveExerciserRepsWeighBtn);
 
 
             itemView.findViewById(R.id.addRowBtn).setOnClickListener(new View.OnClickListener() {
@@ -163,38 +183,6 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                             System.out.println("Tried deleting too fast " + e);
                         }
                     }
-                }
-            });
-
-            itemView.findViewById(R.id.saveExerciserRepsWeighBtn).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // HÄMTA UT ID FRÅN ÖVNINGEN SOM SPARA-KNAPPEN TRYCKTES PÅ
-                    ExerciseInstruction exerciseInstruction = adapter.exercises.get(getAdapterPosition());
-                    exerciseIdToSend = exerciseInstruction.getId();
-
-                    //GÅ IGENOM EDITTEXTSMAP'S LISTA OCH HÄMTA UT SET, REPS, WEIGHT
-                    for (Map.Entry<String, ArrayList<EditText>> entry : editTextsMap.entrySet()) {
-                        String set = entry.getKey();
-                        ArrayList<EditText> value = entry.getValue();
-                        int index = 0;
-
-                        String reps = value.get(index).getText().toString();
-                        String weight = value.get(index + 1).getText().toString();
-
-                        //SKAPA NY ARRAYLIST FÖR REPS + WEIGHT
-                        ArrayList<String> repsAndWeight = new ArrayList<>();
-                        repsAndWeight.add(reps);
-                        repsAndWeight.add(weight);
-                        //LÄGG TILL SET + REPS + WEIGHT I HASHMAPPEN
-                        setDataMap.put(set, repsAndWeight);
-                    }
-                    
-                    //SKICKA HASHMAPPEN TILL SPARNINGS-FUNKTIONER
-                    new ExerciseHistoryDataMap((AppCompatActivity) context).
-                            saveExerciseHistoryMap((AppCompatActivity) context, exerciseIdToSend, setDataMap);
-                    Toast.makeText(context, "Exercise saved", Toast.LENGTH_SHORT).show();
-                    setsEditText.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 }
             });
         }

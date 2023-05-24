@@ -68,7 +68,6 @@ public class ExerciseRecyclerViewAdapter extends RecyclerView.Adapter<ExerciseRe
             super(itemView);
             programNameTextView = itemView.findViewById(R.id.exerciseNameSelectedProgram);
             programDescriptionTextView = itemView.findViewById(R.id.programDescription);
-            imageView = itemView.findViewById(R.id.programImage);
             cardView = itemView.findViewById(R.id.cardViewExercise);
 
             itemView.findViewById(R.id.cardViewDeleteIcon).setOnClickListener(view -> {

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,60 +29,67 @@
                 android:id="@+id/exerciseNameSelectedProgram"
                 android:layout_width="100dp"
                 android:layout_height="63dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:autoText="false"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center_vertical"
                 android:text="Program"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="#1a3170"
                 android:textStyle="normal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="24sp"
+                android:autoSizeStepGranularity="2sp"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/programDescription"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.5" />
 
             <ImageView
                 android:id="@+id/cardViewDeleteIcon"
                 android:layout_width="58dp"
                 android:layout_height="50dp"
                 android:visibility="visible"
+                android:tint="#1a3170"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.675"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/programDescription"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.482"
+                app:layout_constraintVertical_bias="0.5"
                 app:srcCompat="@drawable/delete_new_24"
-                app:tint="#1a3170"/>
+                tools:ignore="UseAppTint" />
 
 
             <TextView
                 android:id="@+id/programDescription"
                 android:layout_width="134dp"
                 android:layout_height="62dp"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-medium"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:text="Passnamn"
-                android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="#1a3170"
-                android:textSize="22sp"
+
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="22sp"
+                android:autoSizeStepGranularity="2sp"
+
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/programImage"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/exerciseNameSelectedProgram"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

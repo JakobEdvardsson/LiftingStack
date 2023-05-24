@@ -5,12 +5,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.liftingstack.Controller.ImageHandler;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
 import com.example.liftingstack.R;
@@ -39,7 +41,11 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
     @Override
     public void onBindViewHolder(@NonNull SelectedProgramRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.exerciseNameTextView.setText(exercises.get(position).getExerciseName());
-        holder.exerciseDescriptionTextView.setText(exercises.get(position).getExerciseDescription());
+        //holder.exerciseDescriptionTextView.setText(exercises.get(position).getExerciseDescription());
+        if (exercises.get(position).getImage() != null){
+            ImageHandler imageHandler = new ImageHandler();
+            holder.exerciseImage.setImageBitmap(imageHandler.convertBase64ToBitmap(exercises.get(position).getImage()));
+        }
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,14 +63,16 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView exerciseNameTextView;
         private TextView exerciseDescriptionTextView;
+        private ImageView exerciseImage;
         private CardView cardView;
         private SelectedProgramRecyclerViewAdapter adapter;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             exerciseNameTextView = itemView.findViewById(R.id.exerciseNameSelectedProgram);
-            exerciseDescriptionTextView = itemView.findViewById(R.id.exerciseDescriptionSelectedProgram);
+            //exerciseDescriptionTextView = itemView.findViewById(R.id.exerciseDescriptionSelectedProgram);
             cardView = itemView.findViewById(R.id.selectedProgramCardView);
+            exerciseImage = itemView.findViewById(R.id.workoutImage);
 
             itemView.findViewById(R.id.deleteIconSelectedProgram).setOnClickListener(view -> {
                 try {
