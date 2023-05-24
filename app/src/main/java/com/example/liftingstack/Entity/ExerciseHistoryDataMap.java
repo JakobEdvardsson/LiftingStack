@@ -29,6 +29,7 @@ public class ExerciseHistoryDataMap {
         exerciseHistoryMap = new LoadFromDevice().loadExerciseHashMapFromDevice(activity, "exerciseHistory");
         if (exerciseHistoryMap != null) {
             Log.i("TestHistory Loaded:", exerciseHistoryMap.toString());
+
         } else {
             exerciseHistoryMap = new HashMap<>();
         }
@@ -55,32 +56,43 @@ public class ExerciseHistoryDataMap {
 
         //sets the date to today and parses it to a string
         LocalDate dateObject = LocalDate.now();
+
         String dateString = dateObject.toString();
 
         this.setMap = setMap;
+        if (exerciseHistoryMap.containsKey(exerciseId)) {
 
-        //kolla ifall man tränat övningen tidigare aktuell dag
-        if (exerciseHistoryMap.get(exerciseId) != null) {
-            //om man har tränat samma dag:
-            dateMap = exerciseHistoryMap.get(exerciseId);
-            sessionMap = dateMap.get(dateString);
+            //kolla ifall man tränat övningen tidigare aktuell dag
+            if (exerciseHistoryMap.get(exerciseId).containsKey(dateString)) {
+                //om man har tränat samma dag:
+                dateMap = exerciseHistoryMap.get(exerciseId);
+                sessionMap = dateMap.get(dateString);
 
-            int nbrOfSessions = sessionMap.size();
-            int sessionKey = nbrOfSessions + 1;
-            String sessionString = Integer.toString(sessionKey);
+                int nbrOfSessions = sessionMap.size();
+                int sessionKey = nbrOfSessions + 1;
+                String sessionString = Integer.toString(sessionKey);
 
-            sessionMap.put(sessionString, setMap);
-        } else {
-            // om man inte tränat övningen tidigare aktuell dag
-            sessionMap.put("1", setMap);
+                sessionMap.put(sessionString, setMap);
+            } else {
+                // om man inte tränat övningen tidigare aktuell dag
+                dateMap = exerciseHistoryMap.get(exerciseId);
+                sessionMap.put("1", setMap);
+            }
+            // uppdatera exerciseHistoryMap med den nya datan
+            dateMap.put(dateString, sessionMap);
+            exerciseHistoryMap.put(exerciseId, dateMap);
+
+            Log.i("TestHistory saved:", exerciseHistoryMap.toString());
+
+            // saves above hashmap as json to file
+            new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, activity, "exerciseHistory");
         }
-        // uppdatera exerciseHistoryMap med den nya datan
-        dateMap.put(dateString, sessionMap);
-        exerciseHistoryMap.put(exerciseId, dateMap);
+        else {
+            sessionMap.put("1", setMap);
+            dateMap.put(dateString, sessionMap);
+            exerciseHistoryMap.put(exerciseId, dateMap);
+            new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, activity, "exerciseHistory");
 
-        Log.i("TestHistory saved:", exerciseHistoryMap.toString());
-
-        // saves above hashmap as json to file
-        new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, activity, "exerciseHistory");
+        }
     }
 }
