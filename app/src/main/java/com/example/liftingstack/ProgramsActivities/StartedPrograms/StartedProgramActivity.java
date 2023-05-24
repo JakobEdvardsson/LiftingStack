@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.liftingstack.Controller.LoadFromDevice;
+import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
@@ -21,6 +23,7 @@ import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.R;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -113,9 +116,19 @@ public class StartedProgramActivity extends AppCompatActivity {
             Toast.makeText(this, "Program saved", Toast.LENGTH_SHORT).show();
 
 
+
             finish();
-
-
         }
+            // Logga programmet på dagens datum i filen datesLogged
+            LocalDate dateObject = LocalDate.now();
+
+            String dateString = dateObject.toString();
+
+            ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
+            Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+            datesLogged.add(dateInteger);
+
+            new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
+            Log.i( "dateslogged: ", datesLogged.toString());
     }
 }

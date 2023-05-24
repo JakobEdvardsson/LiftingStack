@@ -96,13 +96,5 @@ public class ExerciseHistoryDataMap {
             exerciseHistoryMap.put(exerciseId, dateMap);
             new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, activity, "exerciseHistory");
         }
-
-        // saves the date to loggedDate file
-        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(activity, "datesLogged");
-        Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
-
-
-        new SaveToDevice().saveListToDevice(datesLogged, activity, "datesLogged");
-        Log.i( "dateslogged: ", datesLogged.toString());
     }
 }
