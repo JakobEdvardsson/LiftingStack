@@ -60,6 +60,7 @@ public class ExerciseHistoryDataMap {
         String dateString = dateObject.toString();
 
         this.setMap = setMap;
+        // kolla ifall övningen finns sparad sedan tidigare
         if (exerciseHistoryMap.containsKey(exerciseId)) {
 
             //kolla ifall man tränat övningen tidigare aktuell dag
@@ -87,6 +88,8 @@ public class ExerciseHistoryDataMap {
             // saves above hashmap as json to file
             new SaveToDevice().saveExerciseHashMapToDevice(exerciseHistoryMap, activity, "exerciseHistory");
         }
+        
+        // ifall man inte sparat någon data för övningen tidigare
         else {
             sessionMap.put("1", setMap);
             dateMap.put(dateString, sessionMap);
