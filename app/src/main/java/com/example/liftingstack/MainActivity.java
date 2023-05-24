@@ -95,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
         }else {
             currentTreeIcon = 4;
         }
-
-        Log.i("onCreateTest Dates", datesLoggedPast30Days.toString());
+        Log.i("onCreateTest AllDates", datesLogged.toString());
+        Log.i("onCreateTest DatesLastMonth", datesLoggedPast30Days.toString());
         Log.i("onCreateTest Tree", currentTreeIcon + "");
 
         // display tree-icon
@@ -147,8 +147,63 @@ public class MainActivity extends AppCompatActivity {
                 builtInProgramList.
                         getProgramsList(), this, "programList");
 
-        // Creates new save file for dates logged
-        new SaveToDevice().saveListToDevice(new ArrayList<>(), this, "datesLogged");
+        // list to save in datesLogges file, first time app opens
+        ArrayList<Integer> datesLogged = new ArrayList<>();
+
+
+        // TODO Creates a list of fake logged data just for showcasing the barchart
+        datesLogged.add(20230101);
+        datesLogged.add(20230201);
+        datesLogged.add(20230301);
+
+        datesLogged.add(20230402);
+
+        datesLogged.add(20230601);
+
+        datesLogged.add(20230701);
+        datesLogged.add(20230802);
+        datesLogged.add(20230902);
+
+        datesLogged.add(20231002);
+        datesLogged.add(20231101);
+        datesLogged.add(20231201);
+
+        datesLogged.add(20220401);
+        datesLogged.add(20220502);
+        datesLogged.add(20220602);
+        datesLogged.add(20220702);
+        datesLogged.add(20220801);
+        datesLogged.add(20220902);
+        datesLogged.add(20221002);
+        datesLogged.add(20221102);
+        datesLogged.add(20221201);
+
+
+        datesLogged.add(20230902);
+        datesLogged.add(20230102);
+        datesLogged.add(20221102);
+        datesLogged.add(20221201);
+
+        datesLogged.add(20230602);
+        datesLogged.add(20220702);
+        datesLogged.add(20220702);
+        datesLogged.add(20220801);
+        datesLogged.add(20221102);
+        datesLogged.add(20221201);
+        datesLogged.add(20220401);
+
+        datesLogged.add(20230602);
+
+        datesLogged.add(20230602);
+        datesLogged.add(20220702);
+        datesLogged.add(20220401);
+
+        datesLogged.add(20230602);
+        datesLogged.add(20220702);
+        datesLogged.add(20220801);
+
+        // Creats a new savefile for datesLogged first time app opens
+        new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
     }
 
 
