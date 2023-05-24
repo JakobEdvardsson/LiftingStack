@@ -76,12 +76,20 @@ public class StartedProgramActivity extends AppCompatActivity {
         recyclerView.setAdapter(startedProgramRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
+    public static boolean isNumeric(String str) {
+        try {
+            Float.parseFloat(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     public void finishProgramAndSave(View v) {
         StartedProgramRecyclerViewAdapter startedProgramRecyclerViewAdapter = (StartedProgramRecyclerViewAdapter) recyclerView.getAdapter();
         assert startedProgramRecyclerViewAdapter != null;
-
-
+        boolean saved = false;
+    //todo Kolla så att det är en siffra som användaren har skrivit in.
         for (int i = 0; i < ((StartedProgramRecyclerViewAdapter) recyclerView.getAdapter()).getExercises().size(); i++) {
             StartedProgramRecyclerViewAdapter.ViewHolder test = (StartedProgramRecyclerViewAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
 
@@ -102,30 +110,37 @@ public class StartedProgramActivity extends AppCompatActivity {
                 String reps = value.get(index).getText().toString();
                 String weight = value.get(index + 1).getText().toString();
 
+                if (!(reps.equals("") || reps.equals("0")  || reps.equals(" ") || !isNumeric(reps))) {
+                    if (weight.equals("") || weight.equals(" ") || weight.equals("0") || weight.equals("0.0") || !isNumeric(weight)) {
+                        weight = "0";
+                    }
+                    ArrayList<String> repsAndWeight = new ArrayList<>();
+                    repsAndWeight.add(reps);
+                    repsAndWeight.add(weight);
+                    //LÄGG TILL SET + REPS + WEIGHT I HASHMAPPEN
+                    setDataMap.put(set, repsAndWeight);
+                }
                 //SKAPA NY ARRAYLIST FÖR REPS + WEIGHT
-                ArrayList<String> repsAndWeight = new ArrayList<>();
-                repsAndWeight.add(reps);
-                repsAndWeight.add(weight);
-                //LÄGG TILL SET + REPS + WEIGHT I HASHMAPPEN
-                setDataMap.put(set, repsAndWeight);
             }
 
             //SKICKA HASHMAPPEN TILL SPARNINGS-FUNKTIONER
-            new ExerciseHistoryDataMap(this).
-                    saveExerciseHistoryMap(this, exerciseIdToSend, setDataMap);
-            Toast.makeText(this, "Program saved", Toast.LENGTH_SHORT).show();
-
-
-            finish();
+            if (!setDataMap.isEmpty()) {
+                new ExerciseHistoryDataMap(this).saveExerciseHistoryMap(this, exerciseIdToSend, setDataMap);
+                saved = true;
+            }
         }
-        // Logga programmet på dagens datum i filen datesLogged
-        LocalDate dateObject = LocalDate.now();
 
-        String dateString = dateObject.toString();
+        if (saved) {
+            Toast.makeText(this, "Program saved", Toast.LENGTH_SHORT).show();
+            finish();
+            // Logga programmet på dagens datum i filen datesLogged
+            LocalDate dateObject = LocalDate.now();
 
-        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
-        Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
-        datesLogged.add(dateInteger);
+            String dateString = dateObject.toString();
+
+            ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
+            Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+            datesLogged.add(dateInteger);
 /*
         // TODO testing, remove when done
         datesLogged.add(20230401);
@@ -134,10 +149,16 @@ public class StartedProgramActivity extends AppCompatActivity {
         datesLogged.add(20230302);
         datesLogged.add(20230302);
 */
-        datesLogged.add(20220602);
+            datesLogged.add(20220602);
 
 
-        new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
-        Log.i("dateslogged: ", datesLogged.toString());
+            new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
+            Log.i("dateslogged: ", datesLogged.toString());
+        } else {
+            Toast.makeText(this, "No program saved", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 }

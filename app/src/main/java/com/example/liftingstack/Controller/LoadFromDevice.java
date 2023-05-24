@@ -85,7 +85,8 @@ public class LoadFromDevice{
             list = g.fromJson(String.valueOf(jsonString), listType);
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return null;
         }
 
         return list;

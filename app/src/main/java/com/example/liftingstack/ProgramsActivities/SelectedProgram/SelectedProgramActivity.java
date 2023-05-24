@@ -18,6 +18,7 @@ import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.ExerciseActivities.ExerciseInstructionsPage;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
 import com.example.liftingstack.ProgramsActivities.StartedPrograms.StartedProgramActivity;
 import com.example.liftingstack.R;
@@ -62,10 +63,10 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         //Gets the selected program from allPrograms
         getSelectedProgram();
 
-        //Gets all exercises from the selected program
-        getAllExercisesForProgram();
+
 
         //Sets up the recycler view
+        //And gets all exercises from the selected program
         setupRecyclerView();
 
         EditText programName = findViewById(R.id.selectedProgramName);
@@ -123,6 +124,9 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
      * Sets up recycler view.
      */
     public void setupRecyclerView() {
+        //Gets all exercises from the selected program
+        getAllExercisesForProgram();
+        
         SelectedProgramRecyclerViewAdapter exerciseAdapter = new SelectedProgramRecyclerViewAdapter(this, exercises, this);
         recyclerView.setAdapter(exerciseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -163,7 +167,10 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
 
     @Override
     public void onExerciseClick(ExerciseInstruction exerciseInstruction) {
-        //leave empty
+
+        Intent intent = new Intent(this, ExerciseInstructionsPage.class);
+        intent.putExtra("ExerciseID", exerciseInstruction.getId());
+        activityResultLauncher.launch(intent);
     }
 
     /**

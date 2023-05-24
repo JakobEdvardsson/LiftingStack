@@ -110,7 +110,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                     LayoutInflater layoutInflater = LayoutInflater.from(context);
                     //NY TABLEROW
                     TableRow newRow = (TableRow) layoutInflater.inflate(R.layout.table_row_to_expand, null);
-
+                    
                     //SKAPA NY ARRAYLIST VARJE GÅNG FÖR ATT FYLLA I REPS + WEIGHT FÖR JUST DENNA TABLEROW
                     repsAndWeight = new ArrayList<>();
 

@@ -2,18 +2,26 @@ package com.example.liftingstack.ProgramsActivities.SelectedProgram;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Controller.ImageHandler;
+import com.example.liftingstack.Entity.AllExerciseInstructions;
+import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.ExerciseInstruction;
+import com.example.liftingstack.ExerciseActivities.ExerciseInstructionsPage;
 import com.example.liftingstack.ExerciseActivities.ExerciseRecyclerViewInterface;
 import com.example.liftingstack.R;
 
@@ -23,12 +31,15 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
     private Context context;
     private List<ExerciseInstruction> exercises;
     private final ExerciseRecyclerViewInterface exerciseRecyclerViewInterface;
+    private AppCompatActivity appCompatActivity;
 
     public SelectedProgramRecyclerViewAdapter(Context context, List<ExerciseInstruction> exercises, ExerciseRecyclerViewInterface exerciseRecyclerViewInterface) {
         this.context = context;
         this.exercises = exercises;
         this.exerciseRecyclerViewInterface = exerciseRecyclerViewInterface;
+        this.appCompatActivity = appCompatActivity;
     }
+
 
     @NonNull
     @Override
@@ -42,7 +53,7 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
     public void onBindViewHolder(@NonNull SelectedProgramRecyclerViewAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.exerciseNameTextView.setText(exercises.get(position).getExerciseName());
         //holder.exerciseDescriptionTextView.setText(exercises.get(position).getExerciseDescription());
-        if (exercises.get(position).getImage() != null){
+        if (exercises.get(position).getImage() != null) {
             ImageHandler imageHandler = new ImageHandler();
             holder.exerciseImage.setImageBitmap(imageHandler.convertBase64ToBitmap(exercises.get(position).getImage()));
         }
@@ -54,6 +65,7 @@ public class SelectedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Sel
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
