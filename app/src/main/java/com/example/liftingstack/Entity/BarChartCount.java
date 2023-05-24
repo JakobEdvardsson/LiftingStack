@@ -83,7 +83,9 @@ public class BarChartCount extends AppCompatActivity {
 
         barChart.setFitBars(true);
         barChart.setData(barData);
-        barChart.getDescription().setText("Number of training sessions");
+        barChart.getDescription().setText("Number of logged sessions past twelve months");
+        barChart.getDescription().setTextSize(16f);
         barChart.animateY(2000);
+        barChart.setNoDataText("No sessions logged past twelve months");
     }
 }
