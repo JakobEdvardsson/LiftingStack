@@ -11,8 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toTopOf="@id/change_image"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
@@ -25,24 +25,25 @@
         android:id="@+id/selectedProgramName"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/edittext_border"
-        android:layout_margin="20dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:padding="8dp"
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/guidelineUpper"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/exerciseImage"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintVertical_bias="0.094" />
 
     <EditText
         android:id="@+id/ExerciseDescription"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/edittext_border"
         android:ems="10"
@@ -50,11 +51,21 @@
         android:inputType="textMultiLine"
         android:padding="8dp"
         android:text="Exercise Description"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineMiddle"
-        app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-        app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineUpper"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintBottom_toTopOf="@+id/guidelineUpper"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.605"
+        app:layout_constraintStart_toEndOf="@+id/exerciseImage"
+        app:layout_constraintTop_toBottomOf="@+id/selectedProgramName"
+        app:layout_constraintVertical_bias="0.202" />
+
+    <Spinner
+        android:id="@+id/typeOfExerciseGraphSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/linechart"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guidelineUpper" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/linechart"
@@ -63,7 +74,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guidelineMiddle">
+        app:layout_constraintTop_toBottomOf="@id/typeOfExerciseGraphSpinner">
 
 
     </com.github.mikephil.charting.charts.LineChart>
@@ -84,37 +95,32 @@
 
     <Button
         android:id="@+id/change_image"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="imageChooser"
-        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="10dp"
+        android:onClick="imageChooser"
         android:text="Change Image"
         app:layout_constraintBottom_toTopOf="@+id/guidelineUpper"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ExerciseDescription"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/exerciseImage"
         app:layout_constraintVertical_bias="0.5" />
 
+
     <ImageView
         android:id="@+id/rotate"
-        android:layout_width="70dp"
-        android:layout_height="49dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:onClick="rotateImage"
         app:layout_constraintEnd_toStartOf="@+id/selectedProgramName"
-        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/exerciseImage"
         app:layout_constraintTop_toTopOf="@+id/exerciseImage"
         app:srcCompat="@android:drawable/ic_menu_rotate" />
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMiddle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineUpper"
@@ -135,14 +141,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06"/>
+        app:layout_constraintGuide_percent="0.06" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.94"/>
+        app:layout_constraintGuide_percent="0.94" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,9 +8,13 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +29,16 @@ import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -39,6 +47,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
     private ExerciseInstruction currentExerciseInstruction;
     private AllExerciseInstructions allExerciseInstructions;
     private String idForExercise;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,152 +84,121 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         if (currentExerciseInstruction.getImage() != null) {
             imageView.setImageBitmap(new ImageHandler().convertBase64ToBitmap(currentExerciseInstruction.getImage()));
         }
-        setupGraph();
+
+        //LineChart
+        //TODO Going to get changed so that we can have different graphs
+        //setupGraph(getTotalLoadData());
+        setupSpinner();
     }
 
 
-    public ArrayList<Entry> getTotalLoadData() {
-        Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> exerciseHistoryMap = new ExerciseHistoryDataMap(this).getExerciseHistoryMap();
-        Map<String, Map<String, Map<String, ArrayList<String>>>> dateDataMap = exerciseHistoryMap.get(idForExercise);
+    public void setupSpinner() {
+        Spinner spinner = findViewById(R.id.typeOfExerciseGraphSpinner);
 
-        ArrayList<Entry> totalLoadYValues = new ArrayList<>();
+        String[] items = {"Total Weight Lifted", "One Rep Max", "Average Weight lifted Per Set", "Max Weight" , "Averate sets", "Average Reps"};
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+        
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-        // test values below
-        int counter = 1;
-
-
-        if (dateDataMap != null) {
-            for (Map<String, Map<String, ArrayList<String>>> dateMap : dateDataMap.values()) {
-                for (Map<String, ArrayList<String>> sessionMap : dateMap.values()) {
-                    int totalReps = 0;
-                    float totalWeight = 0;
-                    int sets = 0;
-                    for (ArrayList<String> setMap : sessionMap.values()) {
-                        sets++;
-                        totalReps += Integer.parseInt(setMap.get(0));
-                        totalWeight += Float.parseFloat(setMap.get(1));
-                    }
-
-                    float totalLoad = totalWeight * totalReps;
-
-
-                    totalLoadYValues.add(new Entry(counter, totalLoad));
-
-                    counter++;
-                }
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Handle item selection
+                setupGraph(new GraphAlgorithm().getGraphData(position,ExerciseInstructionsPage.this, idForExercise));
+                // Perform actions based on the selected item
             }
-        }
 
-        return totalLoadYValues;
-
-    }
-
-    public ArrayList<Entry> getOneRepMaxData() {
-        Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> exerciseHistoryMap = new ExerciseHistoryDataMap(this).getExerciseHistoryMap();
-        Map<String, Map<String, Map<String, ArrayList<String>>>> dateDataMap = exerciseHistoryMap.get(idForExercise);
-
-
-        ArrayList<Entry> oneRepMaxYValues = new ArrayList<>();
-
-        // test values below
-        int counter = 1;
-
-
-        if (dateDataMap != null) {
-            for (Map<String, Map<String, ArrayList<String>>> dateMap : dateDataMap.values()) {
-                for (Map<String, ArrayList<String>> sessionMap : dateMap.values()) {
-                    int totalReps = 0;
-                    float totalWeight = 0;
-                    int sets = 0;
-                    for (ArrayList<String> setMap : sessionMap.values()) {
-                        sets++;
-                        totalReps += Integer.parseInt(setMap.get(0));
-                        totalWeight += Float.parseFloat(setMap.get(1));
-                    }
-
-                    float aveWeight = totalWeight / 2;
-
-
-                    float oneRepMax = (float) (aveWeight / (1.0278 - (0.0278 * totalReps)));
-                    oneRepMaxYValues.add(new Entry(counter, oneRepMax));
-                    counter++;
-                }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle empty selection
             }
-        }
-
-        return oneRepMaxYValues;
+        });
 
     }
 
-    public void setupGraph() {
+
+    public void setupGraph(ArrayList<Entry> loadData) {
+        //LineChart
         LineChart lineChart = findViewById(R.id.linechart);
 
 
-
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-
-        ArrayList<Entry> totalLoadYValues = getTotalLoadData();
-        LineData lines = new LineData();
+        //The line
+        LineData line = new LineData();
 
 
+        if (loadData.size() > 0) {
+            //TODO Change "Total load" to something relevant to the graph
+            LineDataSet dataSet = new LineDataSet(loadData, "Calculated Per Workout");
 
-        if (totalLoadYValues.size() > 0) {
-            LineDataSet dataSet = new LineDataSet(totalLoadYValues, "Total load");
+            //Styling for the line
+            dataSet.setLineWidth(3f); // makes the lines a bit thicker
+            dataSet.setValueTextSize(15f); // size of the text showing values in chart
+            dataSet.setCircleRadius(5f);
 
-            dataSet.setFillAlpha(110);
 
             dataSet.setColor(Color.rgb(0, 204, 102));
-            dataSet.setLineWidth(3f); // makes the lines a bit thicker
-            dataSet.setValueTextSize(10f); // size of the text showing values in chart
             dataSet.setValueTextColor(Color.rgb(0, 204, 102));
             dataSet.setCircleColor(Color.rgb(0, 204, 102));
-            dataSet.setCircleRadius(5f);
-
-            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-            dataSets.add(dataSet);
-            lines.addDataSet(dataSet);
 
 
+            line.addDataSet(dataSet);
+            lineChart.setData(line);
         }
-        ArrayList<Entry> oneRepMaxYValues = getOneRepMaxData();
 
 
-        if (oneRepMaxYValues.size() > 0) {
-            LineDataSet dataSet = new LineDataSet(oneRepMaxYValues, "Calculated One Rep Max");
-
-            dataSet.setFillAlpha(110);
-
-            dataSet.setColor(Color.rgb(0, 0, 205));
-            dataSet.setLineWidth(3f);
-            dataSet.setValueTextSize(10f);
-            dataSet.setValueTextColor(Color.rgb(0, 0, 205));
-            dataSet.setCircleColor(Color.rgb(0, 0, 205));
-            dataSet.setCircleRadius(5f);
-
-            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-            dataSets.add(dataSet);
-
-            lines.addDataSet(dataSet);
-
-
-        }
-        lineChart.setData(lines);
-
+        //Description
         Description description = new Description();
         description.setText(currentExerciseInstruction.getExerciseName());
         lineChart.setDescription(description);
 
         int colorForText = Color.rgb(255, 20, 147);
 
-        lineChart.getAxisLeft().setTextColor(colorForText);
-        lineChart.getAxisRight().setTextColor(colorForText);
-        lineChart.getXAxis().setTextColor(colorForText);
+        //Styling for the chart
+
+        XAxis xAxis = lineChart.getXAxis();
+        YAxis yAxisLeft = lineChart.getAxisLeft();
+        YAxis yAxisRight = lineChart.getAxisRight();
+
+
+        //xAxis
+        xAxis.setTextColor(colorForText);
+        xAxis.setTextSize(15f);
+        xAxis.setValueFormatter(new MyValueFormatter());
+        xAxis.setLabelCount(2, true);
+
+        //AxisRight
+        yAxisRight.setTextColor(colorForText);
+        //yAxisRight.setXOffset(15f);
+        yAxisRight.setTextSize(15f);
+
+        //AxisLeft
+        yAxisLeft.setTextColor(colorForText);
+        //yAxisLeft.setXOffset(15f);
+        yAxisLeft.setTextSize(15f);
+
+
+        yAxisRight.setGranularity(1.0f);
+        yAxisRight.setGranularityEnabled(true);
+
+        yAxisLeft.setGranularity(1.0f);
+        yAxisLeft.setGranularityEnabled(true);
+
+
+        lineChart.setExtraOffsets(5, 10,5,10);
+
         lineChart.getLegend().setTextColor(colorForText);
+        lineChart.getLegend().setTextSize(15f);
+
+
         lineChart.getDescription().setTextColor(colorForText);
+        lineChart.getDescription().setTextSize(15f);
 
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
 
+        lineChart.invalidate(); // refresh
     }
 
 
@@ -301,4 +279,21 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
                     }
                 }
             });
+
+    private class MyValueFormatter extends ValueFormatter {
+
+        private DecimalFormat mFormat;
+
+        public MyValueFormatter() {
+            //mFormat = new DecimalFormat("###,###,###.0"); // use one decimal
+            mFormat = new DecimalFormat("###,###,###"); // use one decimal
+        }
+
+        @Override
+        public String getFormattedValue(float value) {
+            return  mFormat.format(value);
+        }
+    }
+
+
 }
