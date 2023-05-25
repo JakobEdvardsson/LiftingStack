@@ -119,6 +119,7 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                     setsEditText.setText(String.valueOf(setCounter));
 
                     repsEditText = newRow.findViewById(R.id.repsEditText);
+                    repsEditText.requestFocus();
                     weightEditText = newRow.findViewById(R.id.weightEditText);
 
                     //LÄGG TILL REPS + WEIGHT I ARRAYLIST, SEDAN SETS + ARRAYLISTAN I HASHMAPPEN
