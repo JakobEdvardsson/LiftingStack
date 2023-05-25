@@ -33,7 +33,6 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
     private List<ExerciseInstruction> exercises;
     private ViewHolder viewHolder;
 
-
     public StartedProgramRecyclerViewAdapter(Context context, List<ExerciseInstruction> exercises) {
         this.context = context;
         this.exercises = exercises;
@@ -64,26 +63,13 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
         return exercises;
     }
 
-    public Map<String, ArrayList<EditText>> getEditTextsMap() {
-        return viewHolder.getEditTextsMap();
-    }
-
-    public Map<String, ArrayList<String>> getSetDataMap() {
-        return viewHolder.getSetDataMap();
-    }
-
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;
-        private Button saveBtn;
         private TableLayout tableLayout;
-        //private Button saveButton;
         private StartedProgramRecyclerViewAdapter adapter;
         public TextView exerciseNameTextView;
         private EditText setsEditText, repsEditText, weightEditText;
         private int setCounter;
-        private String exerciseIdToSend;
-
 
         private Map<String, ArrayList<String>> setDataMap = new HashMap<>();
         private HashMap<String, ArrayList<EditText>> editTextsMap = new HashMap<>();
