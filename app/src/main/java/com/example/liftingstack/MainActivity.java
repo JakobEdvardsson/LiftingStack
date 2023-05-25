@@ -7,11 +7,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.liftingstack.Controller.FirstTimeAppOpens;
 import com.example.liftingstack.Controller.ImageHandler;
 import com.example.liftingstack.Controller.LoadFromDevice;
 import com.example.liftingstack.Controller.SaveToDevice;
-import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.ExerciseGraph;
 import com.example.liftingstack.Entity.ExerciseInstruction;
@@ -20,16 +18,14 @@ import com.example.liftingstack.Entity.TreeIcons;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
 import com.example.liftingstack.Entity.BarChartCount;
+import com.example.liftingstack.ProgramsActivities.SelectedProgram.SelectedProgramActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -38,10 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-
 
 
         // Check if its the first time app opens
@@ -207,19 +199,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    public void launchExerciseGraph(View v) {
-        Intent intent = new Intent(this, ExerciseGraph.class);
-        startActivity(intent);
-    }
-
-
     public void launchSettings(View v) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
-
+    public void launchAddProgram(View view) {
+        Intent intent = new Intent(this, SelectedProgramActivity.class);
+        startActivity(intent);
+    }
 
     public void launchPrograms(View v) {
         Intent intent = new Intent(this, ProgramActivity.class);
