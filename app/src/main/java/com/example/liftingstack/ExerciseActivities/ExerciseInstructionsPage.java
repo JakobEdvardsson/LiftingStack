@@ -8,7 +8,6 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -80,83 +79,146 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
     }
 
 
-    public ArrayList<Entry> setupGraphData() {
+    public ArrayList<Entry> getTotalLoadData() {
         Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> exerciseHistoryMap = new ExerciseHistoryDataMap(this).getExerciseHistoryMap();
         Map<String, Map<String, Map<String, ArrayList<String>>>> dateDataMap = exerciseHistoryMap.get(idForExercise);
 
-        ArrayList<Entry> yValues = new ArrayList<>();
+        ArrayList<Entry> totalLoadYValues = new ArrayList<>();
+
 
         // test values below
         int counter = 1;
 
 
-        if (dateDataMap != null){
+        if (dateDataMap != null) {
             for (Map<String, Map<String, ArrayList<String>>> dateMap : dateDataMap.values()) {
                 for (Map<String, ArrayList<String>> sessionMap : dateMap.values()) {
-                    int reps = 0;
-                    float weight = 0;
+                    int totalReps = 0;
+                    float totalWeight = 0;
                     int sets = 0;
-                    for (ArrayList<String> setMap: sessionMap.values()){
+                    for (ArrayList<String> setMap : sessionMap.values()) {
                         sets++;
-                        reps += Integer.parseInt(setMap.get(0));
-                        weight += Float.parseFloat(setMap.get(1));
+                        totalReps += Integer.parseInt(setMap.get(0));
+                        totalWeight += Float.parseFloat(setMap.get(1));
                     }
-                    float aveRep = (float) reps / sets;
-                    float aveWeight = (weight / sets) * 2;
-                    yValues.add(new Entry(counter, aveRep*aveWeight));
+
+                    float totalLoad = totalWeight * totalReps;
+
+
+                    totalLoadYValues.add(new Entry(counter, totalLoad));
+
                     counter++;
                 }
             }
         }
 
-        return yValues;
+        return totalLoadYValues;
+
+    }
+
+    public ArrayList<Entry> getOneRepMaxData() {
+        Map<String, Map<String, Map<String, Map<String, ArrayList<String>>>>> exerciseHistoryMap = new ExerciseHistoryDataMap(this).getExerciseHistoryMap();
+        Map<String, Map<String, Map<String, ArrayList<String>>>> dateDataMap = exerciseHistoryMap.get(idForExercise);
+
+
+        ArrayList<Entry> oneRepMaxYValues = new ArrayList<>();
+
+        // test values below
+        int counter = 1;
+
+
+        if (dateDataMap != null) {
+            for (Map<String, Map<String, ArrayList<String>>> dateMap : dateDataMap.values()) {
+                for (Map<String, ArrayList<String>> sessionMap : dateMap.values()) {
+                    int totalReps = 0;
+                    float totalWeight = 0;
+                    int sets = 0;
+                    for (ArrayList<String> setMap : sessionMap.values()) {
+                        sets++;
+                        totalReps += Integer.parseInt(setMap.get(0));
+                        totalWeight += Float.parseFloat(setMap.get(1));
+                    }
+
+                    float aveWeight = totalWeight / 2;
+
+
+                    float oneRepMax = (float) (aveWeight / (1.0278 - (0.0278 * totalReps)));
+                    oneRepMaxYValues.add(new Entry(counter, oneRepMax));
+                    counter++;
+                }
+            }
+        }
+
+        return oneRepMaxYValues;
 
     }
 
     public void setupGraph() {
         LineChart lineChart = findViewById(R.id.linechart);
 
-        // lineChart.setOnChartGestureListener(ExerciseGraph.this);
-        // lineChart.setOnChartValueSelectedListener(ExerciseGraph.this);
+
 
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(true);
 
-        ArrayList<Entry> yValues = setupGraphData();
+        ArrayList<Entry> totalLoadYValues = getTotalLoadData();
+        LineData lines = new LineData();
 
-        // test values below
 
-        if (yValues.size() > 0){
-            LineDataSet dataSet = new LineDataSet(yValues, "Reps * (Weight * 2)"); // change name later
+
+        if (totalLoadYValues.size() > 0) {
+            LineDataSet dataSet = new LineDataSet(totalLoadYValues, "Total load");
 
             dataSet.setFillAlpha(110);
 
-            dataSet.setColor(Color.rgb(2, 206, 104)); // change to a nice blue/green shade later
+            dataSet.setColor(Color.rgb(0, 204, 102));
             dataSet.setLineWidth(3f); // makes the lines a bit thicker
             dataSet.setValueTextSize(10f); // size of the text showing values in chart
-            dataSet.setValueTextColor(Color.rgb(160, 160, 160));
-            dataSet.setCircleColor(Color.rgb(2, 206, 104)); // might need to change later
-            dataSet.setCircleRadius(5f); // might need to change later
+            dataSet.setValueTextColor(Color.rgb(0, 204, 102));
+            dataSet.setCircleColor(Color.rgb(0, 204, 102));
+            dataSet.setCircleRadius(5f);
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets.add(dataSet);
+            lines.addDataSet(dataSet);
+
+
+        }
+        ArrayList<Entry> oneRepMaxYValues = getOneRepMaxData();
+
+
+        if (oneRepMaxYValues.size() > 0) {
+            LineDataSet dataSet = new LineDataSet(oneRepMaxYValues, "Calculated One Rep Max");
+
+            dataSet.setFillAlpha(110);
+
+            dataSet.setColor(Color.rgb(0, 0, 205));
+            dataSet.setLineWidth(3f);
+            dataSet.setValueTextSize(10f);
+            dataSet.setValueTextColor(Color.rgb(0, 0, 205));
+            dataSet.setCircleColor(Color.rgb(0, 0, 205));
+            dataSet.setCircleRadius(5f);
 
             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(dataSet);
 
-            LineData data = new LineData(dataSets);
+            lines.addDataSet(dataSet);
 
-            lineChart.setData(data);
 
-            Description description = new Description();
-            description.setText(currentExerciseInstruction.getExerciseName());
-            lineChart.setDescription(description);
-
-            int colorForText = Color.rgb(255, 20, 147);
-
-            lineChart.getAxisLeft().setTextColor(colorForText);
-            lineChart.getAxisRight().setTextColor(colorForText);
-            lineChart.getXAxis().setTextColor(colorForText);
-            lineChart.getLegend().setTextColor(colorForText);
-            lineChart.getDescription().setTextColor(colorForText);
         }
+        lineChart.setData(lines);
+
+        Description description = new Description();
+        description.setText(currentExerciseInstruction.getExerciseName());
+        lineChart.setDescription(description);
+
+        int colorForText = Color.rgb(255, 20, 147);
+
+        lineChart.getAxisLeft().setTextColor(colorForText);
+        lineChart.getAxisRight().setTextColor(colorForText);
+        lineChart.getXAxis().setTextColor(colorForText);
+        lineChart.getLegend().setTextColor(colorForText);
+        lineChart.getDescription().setTextColor(colorForText);
 
 
     }
