@@ -14,7 +14,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="15dp"
         android:visibility="visible"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
             android:id="@+id/constraintClick"
             android:layout_width="375dp"
             android:layout_height="match_parent"
-            android:background="#009688"
+            android:background="@drawable/list_started_program"
             android:textAlignment="center">
 
             <TableLayout
@@ -94,6 +94,7 @@
                 android:gravity="center"
                 android:text="Squats"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#40ff9f"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
