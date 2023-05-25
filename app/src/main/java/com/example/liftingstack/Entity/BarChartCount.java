@@ -73,19 +73,21 @@ public class BarChartCount extends AppCompatActivity {
 
         // set the bars to the graph and display in GUI
         BarChart barChart = findViewById(R.id.barChart);
-
-        BarDataSet barDataSet = new BarDataSet(bar, "Number of training sessions");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        BarDataSet barDataSet = new BarDataSet(bar, "");
+        barDataSet.setColors(Color.rgb(64,255,159));
         barDataSet.setValueTextColor((Color.BLACK));
         barDataSet.setValueTextSize(16f);
 
-        BarData barData = new BarData(barDataSet);
-
-        barChart.setFitBars(true);
-        barChart.setData(barData);
         barChart.getDescription().setText("Number of logged sessions past twelve months");
         barChart.getDescription().setTextSize(16f);
         barChart.animateY(2000);
         barChart.setNoDataText("No sessions logged past twelve months");
+        BarData barData = new BarData(barDataSet);
+
+        barChart.setFitBars(true);
+        barChart.setData(barData);
+
+
+
     }
 }

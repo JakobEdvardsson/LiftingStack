@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/table_cells"
         android:ems="10"
-        android:inputType="none"
+        android:enabled="false"
         android:padding="8dp"
         android:text=""
         android:textAlignment="center"
