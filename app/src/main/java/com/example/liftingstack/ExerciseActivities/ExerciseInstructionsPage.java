@@ -37,6 +37,10 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_instructions_page);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         allExerciseInstructions = new AllExerciseInstructions(this);
         idForExercise = getIntent().getStringExtra("ExerciseID");
 
@@ -149,9 +153,14 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
                 }
             });
 
+    public void finishActivity(View v) {
+        finish();
+    }
 
     public void launchExerciseGraphFromExercisePage(View v) {
         Intent intent = new Intent(this, ExerciseGraph.class);
+        intent.putExtra("ExerciseName", currentExerciseInstruction.getExerciseName());
+
         startActivity(intent);
     }
 

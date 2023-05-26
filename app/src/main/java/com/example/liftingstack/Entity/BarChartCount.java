@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.liftingstack.Controller.LoadFromDevice;
+import com.example.liftingstack.ProgramsActivities.StartedPrograms.StartedProgramActivity;
 import com.example.liftingstack.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.*;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.components.*;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class BarChartCount extends AppCompatActivity {
 
@@ -99,15 +102,7 @@ public class BarChartCount extends AppCompatActivity {
 */
         barChart.setFitBars(true);
         barChart.setData(barData);
-
-        /*
-        barChart.getAxisLeft().setLabelCount((int) (barData.getXMax() + 2), true);
-        barChart.getAxisLeft().setAxisMinimum(0f);
-        barChart.getAxisLeft().setAxisMaximum(barData.getXMax() + 1);
-        */
-
-
-        //android:background="#B7B7B7"
-
     }
+
+
 }
