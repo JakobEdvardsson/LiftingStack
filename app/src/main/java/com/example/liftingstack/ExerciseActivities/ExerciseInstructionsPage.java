@@ -95,7 +95,7 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
     public void setupSpinner() {
         Spinner spinner = findViewById(R.id.typeOfExerciseGraphSpinner);
 
-        String[] items = {"Total Weight Lifted", "One Rep Max", "Average Weight lifted Per Set", "Max Weight" , "Averate sets", "Average Reps"};
+        String[] items = {"Total Weight Lifted", "One Rep Max", "Average Weight lifted Per Set", "Max Weight"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
         
