@@ -1,9 +1,12 @@
 package com.example.liftingstack;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,18 +14,14 @@ import com.example.liftingstack.Controller.ImageHandler;
 import com.example.liftingstack.Controller.LoadFromDevice;
 import com.example.liftingstack.Controller.SaveToDevice;
 import com.example.liftingstack.Entity.AllPrograms;
+import com.example.liftingstack.Entity.BarChartCount;
 import com.example.liftingstack.Entity.ExerciseGraph;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.Entity.TreeIcons;
 import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.ProgramActivity;
-import com.example.liftingstack.Entity.BarChartCount;
 import com.example.liftingstack.ProgramsActivities.SelectedProgram.SelectedProgramActivity;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.widget.ImageView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -221,6 +220,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchStats(View v) {
         Intent intent = new Intent(this, BarChartCount.class);
+        startActivity(intent);
+    }
+    public void launchExerciseGraph(View v) {
+        Intent intent = new Intent(this, ExerciseGraph.class);
         startActivity(intent);
     }
 }
