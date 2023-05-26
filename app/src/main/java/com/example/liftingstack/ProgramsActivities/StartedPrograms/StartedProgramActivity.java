@@ -152,6 +152,40 @@ public class StartedProgramActivity extends AppCompatActivity {
 
     }
 
+
+    public void saveEffort(int effort) {
+        LocalDate dateObject = LocalDate.now();
+
+        String dateString = dateObject.toString();
+
+        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(StartedProgramActivity.this, "datesLogged");
+        Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+        datesLogged.add(dateInteger);
+        new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
+
+
+
+        ArrayList<Integer> sessionAndEffort = new ArrayList<>();
+        loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
+
+        if(loggedEffort.containsKey(dateInteger)) {
+            sessionAndEffort = loggedEffort.get(dateInteger);
+            int sessionKey = loggedEffort.get(dateInteger).size();
+            sessionAndEffort.add(sessionKey);
+            sessionAndEffort.add(effort);
+            loggedEffort.put(dateInteger, sessionAndEffort);
+        } else {
+            int sessionKey = 1;
+            sessionAndEffort.add(sessionKey);
+            sessionAndEffort.add(effort);
+            loggedEffort.put(dateInteger, sessionAndEffort);
+        }
+
+
+        new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
+
+    }
+
     public void showFeelingDialogAndSave() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.activity_pop_up_feeling);
@@ -167,139 +201,28 @@ public class StartedProgramActivity extends AppCompatActivity {
 
         dialog.show();
 
-
         low.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 dialog.dismiss();
-                effort = 1;
-
-                /*
-                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
-                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
-                if(loggedEffort.containsKey(dateInteger)) {
-                    int nbrOfSessions = loggedEffort.get(dateInteger).size();
-                    int sessionKey = nbrOfSessions + 1;
-                    sessionAndEffort.add(sessionKey, effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                } else {
-                    sessionAndEffort.add(1, effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                }
-
-
-                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
-                Log.i("testFeeling dialog", datesLogged.toString());
-*/
-                LocalDate dateObject = LocalDate.now();
-
-                String dateString = dateObject.toString();
-
-                ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(StartedProgramActivity.this, "datesLogged");
-                Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
-                datesLogged.add(dateInteger);
-
-                new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
-                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
-                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
-                if(loggedEffort.containsKey(dateInteger)) {
-                    sessionAndEffort = loggedEffort.get(dateInteger);
-                    int sessionKey = loggedEffort.get(dateInteger).size();
-                    sessionAndEffort.add(sessionKey);
-                    sessionAndEffort.add(effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                } else {
-                    int sessionKey = 1;
-                    sessionAndEffort.add(sessionKey);
-                    sessionAndEffort.add(effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                }
-
-
-                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
-                Log.i("testFeeling dialog", sessionAndEffort.toString());
+                saveEffort(1);
                 finish();
-
-
             }
         });
-
-
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 dialog.dismiss();
 
-                effort=2;
-                LocalDate dateObject = LocalDate.now();
-
-                String dateString = dateObject.toString();
-
-                ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(StartedProgramActivity.this, "datesLogged");
-                Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
-                datesLogged.add(dateInteger);
-
-                new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
-                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
-                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
-                if(loggedEffort.containsKey(dateInteger)) {
-                    sessionAndEffort = loggedEffort.get(dateInteger);
-                    int sessionKey = loggedEffort.get(dateInteger).size();
-                    sessionAndEffort.add(sessionKey);
-                    sessionAndEffort.add(effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                } else {
-                    int sessionKey = 1;
-                    sessionAndEffort.add(sessionKey);
-                    sessionAndEffort.add(effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                }
-
-
-                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
-                Log.i("testFeeling dialog", datesLogged.toString());
+                saveEffort(2);
                 finish();
             }
         });
-
         high.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 dialog.dismiss();
-                effort=3;
-                LocalDate dateObject = LocalDate.now();
-
-                String dateString = dateObject.toString();
-
-                ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(StartedProgramActivity.this, "datesLogged");
-                Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
-                datesLogged.add(dateInteger);
-
-                new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
-                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
-                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
-                if(loggedEffort.containsKey(dateInteger)) {
-                    sessionAndEffort = loggedEffort.get(dateInteger);
-                    int sessionKey = loggedEffort.get(dateInteger).size();
-                    sessionAndEffort.add(sessionKey);
-                    sessionAndEffort.add(effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                } else {
-                    int sessionKey = 1;
-                    sessionAndEffort.add(sessionKey);
-                    sessionAndEffort.add(effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                }
-
-
-                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
-                Log.i("testFeeling dialog", datesLogged.toString());
+                saveEffort(3);
                 finish();
             }
         });
@@ -307,42 +230,10 @@ public class StartedProgramActivity extends AppCompatActivity {
         max.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 dialog.dismiss();
-                effort=4;
-                LocalDate dateObject = LocalDate.now();
-
-                String dateString = dateObject.toString();
-
-                ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(StartedProgramActivity.this, "datesLogged");
-                Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
-                datesLogged.add(dateInteger);
-
-                new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
-                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
-                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
-
-                if(loggedEffort.containsKey(dateInteger)) {
-                    sessionAndEffort = loggedEffort.get(dateInteger);
-                    int sessionKey = loggedEffort.get(dateInteger).size();
-                    sessionAndEffort.add(sessionKey);
-                    sessionAndEffort.add(effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                } else {
-                    int sessionKey = 1;
-                    sessionAndEffort.add(sessionKey);
-                    sessionAndEffort.add(effort);
-                    loggedEffort.put(dateInteger, sessionAndEffort);
-                }
-
-
-                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
-                Log.i("testFeeling dialog", datesLogged.toString());
+                saveEffort(4);
                 finish();
-
             }
         });
-
     }
 }
