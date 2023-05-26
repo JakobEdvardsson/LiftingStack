@@ -230,4 +230,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ExerciseGraph.class);
         startActivity(intent);
     }
+
+    public void launchTimer(View v) {
+        Intent intent = new Intent(this, TimerActivity.class);
+        startActivity(intent);
+    }
+
+
 }
