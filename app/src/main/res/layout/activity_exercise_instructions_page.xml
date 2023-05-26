@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="@id/guidelineRight"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/ExerciseTextLabel"
+        app:layout_constraintTop_toBottomOf="@+id/programTextLabel"
         app:layout_constraintVertical_bias="0.833" />
 
 
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/ExerciseDescriptionLabel"
+        app:layout_constraintTop_toBottomOf="@+id/programDescriptionLabel"
         app:layout_constraintVertical_bias="1" />
 
     <androidx.cardview.widget.CardView
@@ -312,7 +312,7 @@
         app:srcCompat="@drawable/back_arrow_navigation" />
 
     <TextView
-        android:id="@+id/ExerciseTextLabel"
+        android:id="@+id/programTextLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
@@ -328,7 +328,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/ExerciseDescriptionLabel"
+        android:id="@+id/programDescriptionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"

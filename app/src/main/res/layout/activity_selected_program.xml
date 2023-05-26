@@ -6,44 +6,81 @@
     android:layout_height="match_parent"
     tools:context=".ProgramsActivities.SelectedProgram.SelectedProgramActivity">
 
+    <TextView
+        android:id="@+id/programTextLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Program Name:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/selectedProgramName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/selectedProgramName"
         android:layout_width="297dp"
         android:layout_height="60dp"
+        android:background="@drawable/edittext_border"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Program name"
-
-
-
         android:padding="8dp"
-        android:background="@drawable/edittext_border"
+        android:text=""
+        app:layout_constraintBottom_toTopOf="@id/programDescriptionLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/programTextLabel"
+        app:layout_constraintVertical_bias="0.04" />
 
+    <TextView
+        android:id="@+id/programDescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Program Description:"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/selectedProgramDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.295"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintTop_toBottomOf="@+id/selectedProgramName" />
 
     <EditText
         android:id="@+id/selectedProgramDescription"
         android:layout_width="304dp"
-        android:layout_height="108dp"
+        android:layout_height="90dp"
         android:background="@drawable/edittext_border"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:padding="8dp"
-
-
-
-        android:text="Program Description"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@id/guidelineTop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.532"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectedProgramName"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintTop_toBottomOf="@+id/programDescriptionLabel"
+        app:layout_constraintVertical_bias="0.759" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.06" />
 
     <Button
         android:id="@+id/selectedProgramSaveBtn"
@@ -81,15 +118,10 @@
         app:layout_constraintStart_toEndOf="@+id/selectedProgramSaveBtn"
         app:layout_constraintTop_toTopOf="@id/guidelineBottom"
         app:layout_constraintVertical_bias="0.5"
-
         android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="6sp"
         android:autoSizeMaxTextSize="22sp"
-        android:autoSizeStepGranularity="1sp"
-
-
-
-        />
+        android:autoSizeStepGranularity="1sp" />
 
 
     <Button
@@ -110,7 +142,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottom"
