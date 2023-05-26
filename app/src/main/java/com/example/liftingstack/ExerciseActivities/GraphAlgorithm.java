@@ -1,5 +1,6 @@
 package com.example.liftingstack.ExerciseActivities;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,16 +78,18 @@ public class GraphAlgorithm {
         int totalReps = 0;
         float totalWeight = 0;
         int sets = 0;
+
         for (ArrayList<String> setMap : sessionMap.values()) {
             sets++;
             totalReps += Integer.parseInt(setMap.get(0));
             totalWeight += Float.parseFloat(setMap.get(1));
+
         }
+        float avgWeightPerSet = totalWeight/sets;
+        float aveWeight = totalWeight/totalReps;
 
-        float aveWeight = totalWeight / 2;
 
-
-        return (float) (aveWeight / (1.0278 - (0.0278 * totalReps)));
+        return (float) (avgWeightPerSet / (1.0278 - (0.0278 * totalReps)));
     }
 
     public float calculateAverageWeightPerSet(Map<String, ArrayList<String>> sessionMap) {
