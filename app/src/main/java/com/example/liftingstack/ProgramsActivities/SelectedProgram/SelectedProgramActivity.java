@@ -53,6 +53,10 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selected_program);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         recyclerView = findViewById(R.id.selectedProgramRecyclerView);
 
         //Get all programs from file
