@@ -27,7 +27,7 @@
         android:layout_marginTop="15dp"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="NUMBER OF LOGGED TRAINING SESSIONS FOR EACH MONTH \n\nDISPLAYING THE 12 PAST MONTHS"
+        android:text="NUMBER OF LOGGED TRAINING SESSIONS FOR EACH MONTH \n\nDISPLAYING THE PAST 12 MONTHS"
         android:textAlignment="center"
         android:textColor="#00cc66"
         android:textSize="16sp"
