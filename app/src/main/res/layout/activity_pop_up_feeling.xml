@@ -6,6 +6,18 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white">
 
+    <View
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/main_page_background_color"
+        app:layout_constraintBottom_toBottomOf="@id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -13,9 +25,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="132dp"
         android:layout_marginEnd="8dp"
-        android:text="How would you rate the  \n effort level for this workout?"
+        android:text="    How would you rate the  \n effort level for this workout? \n"
         android:textColor="#00cc66"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
-
+        android:
         android:layout_marginEnd="8dp"
         android:background="#0000cd"
 
@@ -44,6 +57,7 @@
         android:textAllCaps="false"
         android:textColor="#00cc66"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toStartOf="@+id/divider"
         app:layout_constraintHorizontal_bias="0.0"
@@ -86,6 +100,7 @@
         android:textAllCaps="false"
         android:textColor="#00cc66"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:backgroundTint="@null"
         app:layout_constraintEnd_toStartOf="@+id/divider"
         app:layout_constraintHorizontal_bias="0.0"
