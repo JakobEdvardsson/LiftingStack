@@ -3,7 +3,6 @@ package com.example.liftingstack.ProgramsActivities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.Program;
-import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.ProgramsActivities.SelectedProgram.SelectedProgramActivity;
 import com.example.liftingstack.R;
 
@@ -29,6 +27,7 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
     private RecyclerView recyclerView;
     private AllPrograms allPrograms;
 
+
     private ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> setupRecyclerView()
@@ -38,6 +37,10 @@ public class ProgramActivity extends AppCompatActivity implements ProgramRecycle
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         recyclerView = findViewById(R.id.listPrograms);
         setupRecyclerView();
