@@ -2,6 +2,7 @@ package com.example.liftingstack.Entity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,9 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.*;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.components.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -78,39 +81,28 @@ public class BarChartCount extends AppCompatActivity {
         BarChart barChart = findViewById(R.id.barChart);
         BarDataSet barDataSet = new BarDataSet(bar, "");
         barDataSet.setColors(Color.rgb(64,255,159));
-        barDataSet.setValueTextColor((Color.BLACK));
+        barDataSet.setValueTextColor((Color.rgb(0,204,102)));
         barDataSet.setValueTextSize(16f);
 
-        barChart.getDescription().setText("Number of logged sessions past twelve months");
-        barChart.getDescription().setTextSize(16f);
+       barChart.getDescription().setText("");
+       // barChart.getDescription().setTextSize(16f);
         barChart.animateY(2000);
         barChart.setNoDataText("No sessions logged past twelve months");
         BarData barData = new BarData(barDataSet);
+/*
+        barChart.getAxisLeft().setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf((int) Math.floor(value));
+            }
+        });
 
+        int max = (int) barChart.getData().getYMax();
+        barChart.getAxisLeft().setLabelCount(max);
+*/
         barChart.setFitBars(true);
         barChart.setData(barData);
     }
 
 
-    public ArrayList<Entry> getEffortGraphData(AppCompatActivity activity) {
-        Map<Integer, ArrayList<Integer>> loggedEffort = new LoadFromDevice().loadEffortFromDevice(activity, "effortLogged");
-
-
-        ArrayList<Entry> totalLoadYValues = new ArrayList<>();
-
-
-        // test values below
-        int counter = 1;
-
-
-        if (loggedEffort != null) {
-            for (ArrayList<Integer> sessionAndEffort : loggedEffort.values()) {
-                {
-                            totalLoadYValues.add(new Entry(counter, sessionAndEffort.get(1)));
-                    counter++;
-                }
-            }
-        }
-        return totalLoadYValues;
-    }
 }
