@@ -63,6 +63,23 @@ public class SaveToDevice {
         }
     }
 
+    public void saveFeelingHashMapToDevice(Map<Integer, ArrayList<Integer>> hashMap, AppCompatActivity activity, String fileName) {
+        String json = new Gson().toJson(hashMap);
+        File file = new File(activity.getFilesDir(), fileName);
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(json);
+            bufferedWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (hashMap != null) {
+            Log.i("TestFeeling savemethod:", hashMap.toString());
+        }
+    }
+
 
     public void saveProgramHashMapToDevice(Map<String, String> hashMap, AppCompatActivity activity, String fileName) {
         String json = new Gson().toJson(hashMap);

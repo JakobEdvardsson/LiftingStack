@@ -7,11 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.liftingstack.Controller.LoadFromDevice;
+import com.example.liftingstack.ProgramsActivities.StartedPrograms.StartedProgramActivity;
 import com.example.liftingstack.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.time.LocalDate;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class BarChartCount extends AppCompatActivity {
 
@@ -86,8 +89,28 @@ public class BarChartCount extends AppCompatActivity {
 
         barChart.setFitBars(true);
         barChart.setData(barData);
+    }
 
 
+    public ArrayList<Entry> getEffortGraphData(AppCompatActivity activity) {
+        Map<Integer, ArrayList<Integer>> loggedEffort = new LoadFromDevice().loadEffortFromDevice(activity, "effortLogged");
 
+
+        ArrayList<Entry> totalLoadYValues = new ArrayList<>();
+
+
+        // test values below
+        int counter = 1;
+
+
+        if (loggedEffort != null) {
+            for (ArrayList<Integer> sessionAndEffort : loggedEffort.values()) {
+                {
+                            totalLoadYValues.add(new Entry(counter, sessionAndEffort.get(1)));
+                    counter++;
+                }
+            }
+        }
+        return totalLoadYValues;
     }
 }

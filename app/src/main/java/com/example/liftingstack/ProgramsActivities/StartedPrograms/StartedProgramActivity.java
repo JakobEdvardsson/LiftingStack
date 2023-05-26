@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,10 +25,12 @@ import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
 import com.example.liftingstack.Entity.Program;
+import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.R;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +41,12 @@ public class StartedProgramActivity extends AppCompatActivity {
     private Program selectedProgram;
     private AllPrograms allPrograms;
     private String idForProgram;
+
+    // key = dateInteger, value
+    private Map<Integer, ArrayList<Integer>> loggedEffort;
+
+    private Integer effort;
+
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> setupRecyclerView()
@@ -131,18 +143,7 @@ public class StartedProgramActivity extends AppCompatActivity {
         }
 
         if (saved) {
-            Toast.makeText(this, "Program saved", Toast.LENGTH_SHORT).show();
-            finish();
-            // Logga programmet på dagens datum i filen datesLogged
-            LocalDate dateObject = LocalDate.now();
-
-            String dateString = dateObject.toString();
-
-            ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
-            Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
-            datesLogged.add(dateInteger);
-
-            new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
+            showFeelingDialogAndSave();
 
         } else {
             Toast.makeText(this, "No program saved", Toast.LENGTH_SHORT).show();
@@ -150,5 +151,99 @@ public class StartedProgramActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void saveDate() {
+        LocalDate dateObject = LocalDate.now();
+
+        String dateString = dateObject.toString();
+
+        ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(StartedProgramActivity.this, "datesLogged");
+        Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+        datesLogged.add(dateInteger);
+        new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
+    }
+    public void saveEffort(int effort) {
+        LocalDate dateObject = LocalDate.now();
+
+        String dateString = dateObject.toString();
+
+
+        Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+
+        ArrayList<Integer> sessionAndEffort = new ArrayList<>();
+        loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
+
+        if(loggedEffort.containsKey(dateInteger)) {
+            sessionAndEffort = loggedEffort.get(dateInteger);
+            int sessionKey = loggedEffort.get(dateInteger).size();
+            sessionAndEffort.add(sessionKey);
+            sessionAndEffort.add(effort);
+            loggedEffort.put(dateInteger, sessionAndEffort);
+        } else {
+            int sessionKey = 1;
+            sessionAndEffort.add(sessionKey);
+            sessionAndEffort.add(effort);
+            loggedEffort.put(dateInteger, sessionAndEffort);
+        }
+
+        Log.i("effort saved",loggedEffort.toString());
+        new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
+
+    }
+
+    public void showFeelingDialogAndSave() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.activity_pop_up_feeling);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.pop_up_background));
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.pop_up_animation;
+
+        Button low = dialog.findViewById(R.id.btn_low);
+        Button medium = dialog.findViewById(R.id.btn_medium);
+        Button high = dialog.findViewById(R.id.btn_high);
+        Button max = dialog.findViewById(R.id.btn_max);
+
+        dialog.show();
+
+        low.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                saveDate();
+                saveEffort(1);
+                finish();
+            }
+        });
+        medium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+                saveDate();
+                saveEffort(2);
+                finish();
+            }
+        });
+        high.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                saveDate();
+                saveEffort(3);
+
+                finish();
+            }
+        });
+        // If cancel button is clicked, close the custom dialog
+        max.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                saveDate();
+                saveEffort(4);
+                finish();
+            }
+        });
     }
 }
