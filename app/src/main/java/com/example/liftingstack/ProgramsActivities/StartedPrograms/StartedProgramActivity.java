@@ -141,19 +141,9 @@ public class StartedProgramActivity extends AppCompatActivity {
             ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(this, "datesLogged");
             Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
             datesLogged.add(dateInteger);
-/*
-        // TODO testing, remove when done
-        datesLogged.add(20230401);
-        datesLogged.add(20230401);
-        datesLogged.add(20230401);
-        datesLogged.add(20230302);
-        datesLogged.add(20230302);
-*/
-            datesLogged.add(20220602);
-
 
             new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
-            Log.i("dateslogged: ", datesLogged.toString());
+
         } else {
             Toast.makeText(this, "No program saved", Toast.LENGTH_SHORT).show();
         }
