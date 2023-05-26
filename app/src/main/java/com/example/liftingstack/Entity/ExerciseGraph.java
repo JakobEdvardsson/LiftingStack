@@ -15,6 +15,7 @@ import com.example.liftingstack.ExerciseActivities.GraphAlgorithm;
 import com.example.liftingstack.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -39,7 +40,7 @@ public class ExerciseGraph extends AppCompatActivity {
         setContentView(R.layout.activity_exercise_graph);
 
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Exercise Graph");
+            getSupportActionBar().hide();
         }
 
         allExerciseInstructions = new AllExerciseInstructions(this);
@@ -141,7 +142,7 @@ public class ExerciseGraph extends AppCompatActivity {
 
         if (loadData.size() > 0) {
             //TODO Change "Total load" to something relevant to the graph
-            LineDataSet dataSet = new LineDataSet(loadData, "Calculated Per Workout");
+            LineDataSet dataSet = new LineDataSet(loadData, null);
 
             //Styling for the line
             dataSet.setLineWidth(3f); // makes the lines a bit thicker
@@ -179,7 +180,21 @@ public class ExerciseGraph extends AppCompatActivity {
         xAxis.setTextColor(colorForText);
         xAxis.setTextSize(15f);
         xAxis.setValueFormatter(new ExerciseGraph.MyValueFormatter());
-        xAxis.setLabelCount(2, true);
+
+        line.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###,##0.0");
+                return decimalFormat.format(value);
+            }});
+
+        if (loadData.size() < 5) {
+            xAxis.setLabelCount(loadData.size(), false);
+        }else {
+            xAxis.setLabelCount(5, false);
+        }
+        xAxis.setGranularity(1f);
+
 
         //AxisRight
         yAxisRight.setTextColor(colorForText);
@@ -192,21 +207,23 @@ public class ExerciseGraph extends AppCompatActivity {
         yAxisLeft.setTextSize(15f);
 
 
-        yAxisRight.setGranularity(1.0f);
+        yAxisRight.setGranularity(3f);
         yAxisRight.setGranularityEnabled(true);
 
-        yAxisLeft.setGranularity(1.0f);
+        yAxisLeft.setGranularity(1f);
         yAxisLeft.setGranularityEnabled(true);
 
 
         lineChart.setExtraOffsets(5, 10, 5, 10);
 
-        lineChart.getLegend().setTextColor(colorForText);
-        lineChart.getLegend().setTextSize(15f);
+        Legend legend = lineChart.getLegend();
+        legend.setEnabled(false);
 
 
-        lineChart.getDescription().setTextColor(colorForText);
-        lineChart.getDescription().setTextSize(15f);
+
+        description.setTextColor(colorForText);
+        description.setTextSize(15f);
+        description.setXOffset(15f);
 
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(true);
