@@ -89,7 +89,7 @@ public class ExerciseGraph extends AppCompatActivity {
     public void setupGraphSpinner() {
         Spinner spinner = findViewById(R.id.typeOfExerciseGraphSpinner1);
 
-        String[] items = {"Total Weight Lifted", "One Rep Max", "Average Weight lifted Per Set", "Max Weight"};
+        String[] items = {"Total Weight Lifted", "One Rep Max", "Average Weight lifted Per Set", "Max Weight", "Effort"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
 
@@ -99,8 +99,12 @@ public class ExerciseGraph extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //TODO just for testing, remove later, and remove else below (else if -> if)
+                if(position == 4) {
+                    setupGraph(new GraphAlgorithm().getEffortGraphData(ExerciseGraph.this));
+                }
                 // Handle item selection
-                if (currentExerciseInstruction != null) {
+                else if (currentExerciseInstruction != null) {
                     setupGraph(new GraphAlgorithm().getGraphData(position, ExerciseGraph.this, idForExercise));
                 }
                 // Perform actions based on the selected item

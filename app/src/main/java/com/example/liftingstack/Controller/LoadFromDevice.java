@@ -239,7 +239,7 @@ public class LoadFromDevice{
             reader.close();
 
             Gson g = new Gson();
-            Type listType = new TypeToken<Map<Integer, Object>>(){}.getType();
+            Type listType = new TypeToken<Map<Integer, ArrayList<Integer>>>(){}.getType();
             hashMap = g.fromJson(String.valueOf(jsonString), listType);
 
         } catch (IOException e) {

@@ -42,6 +42,7 @@ public class StartedProgramActivity extends AppCompatActivity {
     private AllPrograms allPrograms;
     private String idForProgram;
 
+    // key = dateInteger, value
     private Map<Integer, ArrayList<Integer>> loggedEffort;
 
     private Integer effort;
@@ -152,8 +153,7 @@ public class StartedProgramActivity extends AppCompatActivity {
 
     }
 
-
-    public void saveEffort(int effort) {
+    public void saveDate() {
         LocalDate dateObject = LocalDate.now();
 
         String dateString = dateObject.toString();
@@ -162,8 +162,14 @@ public class StartedProgramActivity extends AppCompatActivity {
         Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
         datesLogged.add(dateInteger);
         new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
+    }
+    public void saveEffort(int effort) {
+        LocalDate dateObject = LocalDate.now();
+
+        String dateString = dateObject.toString();
 
 
+        Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
 
         ArrayList<Integer> sessionAndEffort = new ArrayList<>();
         loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
@@ -181,7 +187,7 @@ public class StartedProgramActivity extends AppCompatActivity {
             loggedEffort.put(dateInteger, sessionAndEffort);
         }
 
-
+        Log.i("effort saved",loggedEffort.toString());
         new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
 
     }
@@ -198,13 +204,13 @@ public class StartedProgramActivity extends AppCompatActivity {
         Button high = dialog.findViewById(R.id.btn_high);
         Button max = dialog.findViewById(R.id.btn_max);
 
-
         dialog.show();
 
         low.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                saveDate();
                 saveEffort(1);
                 finish();
             }
@@ -214,6 +220,7 @@ public class StartedProgramActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dialog.dismiss();
 
+                saveDate();
                 saveEffort(2);
                 finish();
             }
@@ -222,7 +229,9 @@ public class StartedProgramActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                saveDate();
                 saveEffort(3);
+
                 finish();
             }
         });
@@ -231,6 +240,7 @@ public class StartedProgramActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                saveDate();
                 saveEffort(4);
                 finish();
             }
