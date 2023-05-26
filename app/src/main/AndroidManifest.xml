@@ -23,10 +23,6 @@
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_settings" />
-        <activity
             android:name=".ProgramsActivities.SelectedProgram.SelectedProgramActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />

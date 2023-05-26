@@ -201,12 +201,6 @@ public class MainActivity extends AppCompatActivity {
         new SaveToDevice().saveListToDevice(datesLogged, this, "datesLogged");
     }
 
-
-    public void launchSettings(View v) {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
-    }
-
     public void launchAddProgram(View view) {
         Intent intent = new Intent(this, SelectedProgramActivity.class);
         startActivity(intent);
