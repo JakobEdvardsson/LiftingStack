@@ -37,6 +37,8 @@
                 android:textStyle="normal"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:breakStrategy="simple"
+
 
                 android:autoSizeTextType="uniform"
                 android:autoSizeMinTextSize="12sp"
@@ -77,6 +79,8 @@
                 android:text="Passnamn"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="#1a3170"
+                android:breakStrategy="simple"
+
 
                 android:autoSizeTextType="uniform"
                 android:autoSizeMinTextSize="12sp"

@@ -21,7 +21,7 @@
         <activity
             android:name=".ExerciseActivities.ExerciseInstructionsPage"
             android:exported="false"
-            android:label="@string/title_activity_settings" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ProgramsActivities.SelectedProgram.SelectedProgramActivity"
             android:exported="false"
