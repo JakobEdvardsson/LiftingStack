@@ -221,9 +221,9 @@ public class LoadFromDevice{
 
         return hashMap;
     }
-    public Map<Integer, Integer> loadEffortFromDevice(AppCompatActivity activity, String fileName){
+    public Map<Integer, ArrayList<Integer>> loadEffortFromDevice(AppCompatActivity activity, String fileName){
 
-        Map<Integer, Integer> hashMap;
+        Map<Integer, ArrayList<Integer>> hashMap;
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader(new File(activity.getFilesDir(), fileName)));
@@ -239,7 +239,7 @@ public class LoadFromDevice{
             reader.close();
 
             Gson g = new Gson();
-            Type listType = new TypeToken<Map<Integer, Integer>>(){}.getType();
+            Type listType = new TypeToken<Map<Integer, Object>>(){}.getType();
             hashMap = g.fromJson(String.valueOf(jsonString), listType);
 
         } catch (IOException e) {

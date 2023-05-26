@@ -144,7 +144,9 @@ public class MainActivity extends AppCompatActivity {
                         getProgramsList(), this, "programList");
 
         //Creates file for LoggedEffort
-        new SaveToDevice().saveFeelingHashMapToDevice(new HashMap<Integer, Integer>(), this, "effortLogged");
+
+        HashMap<Integer, ArrayList<Integer>> emptyMap = new HashMap<>();
+        new SaveToDevice().saveFeelingHashMapToDevice(emptyMap, this, "effortLogged");
 
         // list to save in datesLogges file, first time app opens
         ArrayList<Integer> datesLogged = new ArrayList<>();

@@ -63,7 +63,7 @@ public class SaveToDevice {
         }
     }
 
-    public void saveFeelingHashMapToDevice(Map<Integer, Integer> hashMap, AppCompatActivity activity, String fileName) {
+    public void saveFeelingHashMapToDevice(Map<Integer, ArrayList<Integer>> hashMap, AppCompatActivity activity, String fileName) {
         String json = new Gson().toJson(hashMap);
         File file = new File(activity.getFilesDir(), fileName);
         FileWriter fileWriter;

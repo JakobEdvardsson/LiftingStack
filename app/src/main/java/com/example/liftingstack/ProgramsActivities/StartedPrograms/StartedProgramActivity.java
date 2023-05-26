@@ -42,7 +42,9 @@ public class StartedProgramActivity extends AppCompatActivity {
     private AllPrograms allPrograms;
     private String idForProgram;
 
-    private Map<Integer, Integer> loggedEffort;
+    private Map<Integer, ArrayList<Integer>> loggedEffort;
+
+    private Integer effort;
 
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -157,20 +159,40 @@ public class StartedProgramActivity extends AppCompatActivity {
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().getAttributes().windowAnimations = R.style.pop_up_animation;
 
-        Button delete = dialog.findViewById(R.id.btn_delete);
-        Button cancel = dialog.findViewById(R.id.btn_cancel);
+        Button low = dialog.findViewById(R.id.btn_low);
+        Button medium = dialog.findViewById(R.id.btn_medium);
+        Button high = dialog.findViewById(R.id.btn_high);
+        Button max = dialog.findViewById(R.id.btn_max);
+
+
         dialog.show();
 
-        // If delete button is clicked, delete the exercise and close the custom dialog
-        delete.setOnClickListener(new View.OnClickListener() {
+
+        low.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
                 dialog.dismiss();
+                effort = 1;
+
+                /*
+                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
+                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
+                if(loggedEffort.containsKey(dateInteger)) {
+                    int nbrOfSessions = loggedEffort.get(dateInteger).size();
+                    int sessionKey = nbrOfSessions + 1;
+                    sessionAndEffort.add(sessionKey, effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                } else {
+                    sessionAndEffort.add(1, effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                }
 
 
-                // Logga programmet på dagens datum i filen datesLogged
+                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
+                Log.i("testFeeling dialog", datesLogged.toString());
+*/
                 LocalDate dateObject = LocalDate.now();
 
                 String dateString = dateObject.toString();
@@ -180,27 +202,39 @@ public class StartedProgramActivity extends AppCompatActivity {
                 datesLogged.add(dateInteger);
 
                 new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
-                Integer effort = 1;
+                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
                 loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
-                loggedEffort.put(dateInteger, effort);
-                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
-                Log.i("testFeeling dialog", datesLogged.toString());
+                if(loggedEffort.containsKey(dateInteger)) {
+                    sessionAndEffort = loggedEffort.get(dateInteger);
+                    int sessionKey = loggedEffort.get(dateInteger).size();
+                    sessionAndEffort.add(sessionKey);
+                    sessionAndEffort.add(effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                } else {
+                    int sessionKey = 1;
+                    sessionAndEffort.add(sessionKey);
+                    sessionAndEffort.add(effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                }
 
+
+                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
+                Log.i("testFeeling dialog", sessionAndEffort.toString());
                 finish();
 
 
             }
         });
 
-        // If cancel button is clicked, close the custom dialog
-        cancel.setOnClickListener(new View.OnClickListener() {
+
+        medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
                 dialog.dismiss();
 
-
-                // Logga programmet på dagens datum i filen datesLogged
+                effort=2;
                 LocalDate dateObject = LocalDate.now();
 
                 String dateString = dateObject.toString();
@@ -210,8 +244,103 @@ public class StartedProgramActivity extends AppCompatActivity {
                 datesLogged.add(dateInteger);
 
                 new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
-                Log.i("test Feeling", datesLogged.toString());
+                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
+                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
+                if(loggedEffort.containsKey(dateInteger)) {
+                    sessionAndEffort = loggedEffort.get(dateInteger);
+                    int sessionKey = loggedEffort.get(dateInteger).size();
+                    sessionAndEffort.add(sessionKey);
+                    sessionAndEffort.add(effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                } else {
+                    int sessionKey = 1;
+                    sessionAndEffort.add(sessionKey);
+                    sessionAndEffort.add(effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                }
+
+
+                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
+                Log.i("testFeeling dialog", datesLogged.toString());
                 finish();
+            }
+        });
+
+        high.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                dialog.dismiss();
+                effort=3;
+                LocalDate dateObject = LocalDate.now();
+
+                String dateString = dateObject.toString();
+
+                ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(StartedProgramActivity.this, "datesLogged");
+                Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+                datesLogged.add(dateInteger);
+
+                new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
+                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
+                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
+                if(loggedEffort.containsKey(dateInteger)) {
+                    sessionAndEffort = loggedEffort.get(dateInteger);
+                    int sessionKey = loggedEffort.get(dateInteger).size();
+                    sessionAndEffort.add(sessionKey);
+                    sessionAndEffort.add(effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                } else {
+                    int sessionKey = 1;
+                    sessionAndEffort.add(sessionKey);
+                    sessionAndEffort.add(effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                }
+
+
+                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
+                Log.i("testFeeling dialog", datesLogged.toString());
+                finish();
+            }
+        });
+        // If cancel button is clicked, close the custom dialog
+        max.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                dialog.dismiss();
+                effort=4;
+                LocalDate dateObject = LocalDate.now();
+
+                String dateString = dateObject.toString();
+
+                ArrayList<Integer> datesLogged = new LoadFromDevice().loadDatesLoggedFromDevice(StartedProgramActivity.this, "datesLogged");
+                Integer dateInteger = Integer.valueOf(dateString.replace("-", ""));
+                datesLogged.add(dateInteger);
+
+                new SaveToDevice().saveListToDevice(datesLogged, StartedProgramActivity.this, "datesLogged");
+                ArrayList<Integer> sessionAndEffort = new ArrayList<>();
+                loggedEffort = new LoadFromDevice().loadEffortFromDevice(StartedProgramActivity.this, "effortLogged");
+
+                if(loggedEffort.containsKey(dateInteger)) {
+                    sessionAndEffort = loggedEffort.get(dateInteger);
+                    int sessionKey = loggedEffort.get(dateInteger).size();
+                    sessionAndEffort.add(sessionKey);
+                    sessionAndEffort.add(effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                } else {
+                    int sessionKey = 1;
+                    sessionAndEffort.add(sessionKey);
+                    sessionAndEffort.add(effort);
+                    loggedEffort.put(dateInteger, sessionAndEffort);
+                }
+
+
+                new SaveToDevice().saveFeelingHashMapToDevice(loggedEffort, StartedProgramActivity.this, "effortLogged");
+                Log.i("testFeeling dialog", datesLogged.toString());
+                finish();
+
             }
         });
 
