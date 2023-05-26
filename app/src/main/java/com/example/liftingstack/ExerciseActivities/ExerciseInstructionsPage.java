@@ -152,6 +152,8 @@ public class ExerciseInstructionsPage extends AppCompatActivity {
 
     public void launchExerciseGraphFromExercisePage(View v) {
         Intent intent = new Intent(this, ExerciseGraph.class);
+        intent.putExtra("ExerciseName", currentExerciseInstruction.getExerciseName());
+
         startActivity(intent);
     }
 

@@ -49,6 +49,19 @@ public class ExerciseGraph extends AppCompatActivity {
         }
         setupExerciseSpinner();
         setupGraphSpinner();
+
+
+        if(getIntent().getStringExtra("ExerciseName") != null) {
+            String exerciseName = getIntent().getStringExtra("ExerciseName");
+            for (int i = 0; i < exerciseInstructionsNames.size(); i++) {
+                if (exerciseInstructionsNames.get(i).equals(exerciseName)) {
+                    Spinner spinner = findViewById(R.id.chooseExerciseSpinner);
+                    spinner.setSelection(i);
+                    break;
+                }
+            }
+        }
+
     }
 
 
