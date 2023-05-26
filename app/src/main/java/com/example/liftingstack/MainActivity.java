@@ -25,6 +25,7 @@ import com.example.liftingstack.ProgramsActivities.SelectedProgram.SelectedProgr
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -141,6 +142,9 @@ public class MainActivity extends AppCompatActivity {
         new SaveToDevice().saveListToDevice(
                 builtInProgramList.
                         getProgramsList(), this, "programList");
+
+        //Creates file for LoggedEffort
+        new SaveToDevice().saveFeelingHashMapToDevice(new HashMap<Integer, Integer>(), this, "effortLogged");
 
         // list to save in datesLogges file, first time app opens
         ArrayList<Integer> datesLogged = new ArrayList<>();

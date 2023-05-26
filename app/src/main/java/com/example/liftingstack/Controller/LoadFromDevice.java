@@ -217,7 +217,37 @@ public class LoadFromDevice{
             return null;
         }
 
-        //Log.i("TestHistory TestLoad111", hashMap.toString());
+
+
+        return hashMap;
+    }
+    public Map<Integer, Integer> loadEffortFromDevice(AppCompatActivity activity, String fileName){
+
+        Map<Integer, Integer> hashMap;
+        try {
+
+            BufferedReader reader = new BufferedReader(new FileReader(new File(activity.getFilesDir(), fileName)));
+
+            // read the contents of the file as a string
+            StringBuilder jsonString = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonString.append(line);
+            }
+
+            // close the reader
+            reader.close();
+
+            Gson g = new Gson();
+            Type listType = new TypeToken<Map<Integer, Integer>>(){}.getType();
+            hashMap = g.fromJson(String.valueOf(jsonString), listType);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+
 
         return hashMap;
     }
