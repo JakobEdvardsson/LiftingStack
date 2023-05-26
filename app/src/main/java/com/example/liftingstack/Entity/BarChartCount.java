@@ -19,6 +19,7 @@ import com.github.mikephil.charting.formatter.*;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.components.*;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -89,20 +90,16 @@ public class BarChartCount extends AppCompatActivity {
         barChart.animateY(2000);
         barChart.setNoDataText("No sessions logged past twelve months");
         BarData barData = new BarData(barDataSet);
-/*
-        barChart.getAxisLeft().setValueFormatter(new ValueFormatter() {
-            @Override
-            public String getFormattedValue(float value) {
-                return String.valueOf((int) Math.floor(value));
-            }
-        });
 
-        int max = (int) barChart.getData().getYMax();
-        barChart.getAxisLeft().setLabelCount(max);
-*/
+        barData.addDataSet(barDataSet);
         barChart.setFitBars(true);
         barChart.setData(barData);
+        barData.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###,##0");
+                return decimalFormat.format(value);
+            }});
     }
-
 
 }
