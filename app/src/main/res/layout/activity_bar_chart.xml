@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="0dp"
     tools:context=".Entity.BarChartCount">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id= "@+id/barChart"
+    <View
+        android:id="@+id/top_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#B7B7B7"
-        />
+        android:layout_height="0dp"
+        android:background="@drawable/bar_chart_top"
+        app:layout_constraintBottom_toTopOf="@+id/barChart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textChartDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="NUMBER OF LOGGED TRAINING SESSIONS FOR EACH MONTH \n\nDISPLAYING THE PAST 12 MONTHS"
+        android:textAlignment="center"
+        android:textColor="#00cc66"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/barChart"
+        app:layout_constraintStart_toStartOf="@+id/top_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/barChart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textChartDescription" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
