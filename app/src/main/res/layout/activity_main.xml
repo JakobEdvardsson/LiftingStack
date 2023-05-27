@@ -16,7 +16,21 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        />
+
+    <ImageView
+        android:id="@+id/logo_panda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/panda"
+        app:layout_constraintBottom_toTopOf="@+id/textHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/top_view"
+        app:layout_constraintVertical_bias="0.5"
+        />
 
 
     <TextView
@@ -32,7 +46,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/top_view"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.5"
+        />
 
 
     <TextView
@@ -48,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textHeader"
-        app:layout_constraintVertical_bias="0.36" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <ImageView
         android:id="@+id/tree"
