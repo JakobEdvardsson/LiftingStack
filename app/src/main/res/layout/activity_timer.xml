@@ -5,51 +5,170 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <View
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/timer_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center_horizontal"
+        android:text="Timer"
+        android:textColor="#00cc66"
+        android:textSize="70sp"
+        android:textStyle="bold"
+
+
+        app:layout_constraintBottom_toBottomOf="@+id/top_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        ></TextView>
+
+
     <TextView
         android:id="@+id/timer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="0:00:00"
-        android:textSize="60dp"
+        android:layout_height="80dp"
         android:gravity="center_horizontal"
-        android:layout_marginTop="200dp"
+        android:text="00:00:00"
+        android:textSize="70dp"
 
-    ></TextView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        ></TextView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/stopTimerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="72dp"
-        android:onClick="onStop"
-        android:src="@drawable/baseline_stop_24"
-        app:layout_constraintEnd_toStartOf="@+id/playTimerButton"
-        app:layout_constraintStart_toStartOf="@+id/timer"
-        tools:layout_editor_absoluteY="455dp"
-        tools:ignore="MissingConstraints" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/playTimerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="72dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView4"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:onClick="onReset"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardView5"
+        app:layout_constraintTop_toBottomOf="@+id/timer"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintStop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/exercise_list_buttons_style"
+            android:textAlignment="center">
+
+            <ImageView
+                android:id="@+id/stopTimerImage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:tint="@color/black"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/baseline_stop_24"
+                tools:ignore="UseAppTint" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
         android:onClick="onPlay"
-        android:src="@drawable/baseline_play_arrow_24"
-        tools:layout_editor_absoluteX="168dp"
-        tools:layout_editor_absoluteY="455dp"
-        tools:ignore="MissingConstraints" />
+        app:cardCornerRadius="50dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cardView5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/timer"
+        app:layout_constraintTop_toBottomOf="@+id/timer"
+        app:layout_constraintVertical_bias="0.3">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/pauseTimerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="72dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintStart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/exercise_list_buttons_style"
+            android:textAlignment="center">
+
+            <ImageView
+                android:id="@+id/playTimerButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:tint="@color/black"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/baseline_play_arrow_24"
+                tools:ignore="UseAppTint" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
         android:onClick="onPause"
-        android:src="@drawable/baseline_pause_24"
-        app:layout_constraintEnd_toEndOf="@+id/timer"
-        app:layout_constraintStart_toEndOf="@+id/playTimerButton"
-        tools:layout_editor_absoluteY="455dp"
-        tools:ignore="MissingConstraints" />
+        app:cardCornerRadius="50dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer"
+        app:layout_constraintVertical_bias="0.3">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintPause"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/exercise_list_buttons_style"
+            android:textAlignment="center">
+
+
+            <ImageView
+                android:id="@+id/pauseTimerButton"
+                android:layout_width="44dp"
+                android:layout_height="46dp"
+                android:tint="@color/black"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/baseline_pause_24"
+                tools:ignore="UseAppTint" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
