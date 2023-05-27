@@ -1,12 +1,11 @@
 package com.example.liftingstack;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
@@ -16,7 +15,6 @@ public class TimerActivity extends AppCompatActivity {
 
     private int seconds;
     private boolean running;
-    private boolean wasRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -30,11 +28,12 @@ public class TimerActivity extends AppCompatActivity {
         running = true;
     }
 
-    public void onStop(View view){
+    public void onPause(View view){
         running = false;
     }
-    protected void onReset(){
-        super.onResume();
+
+    public void onReset(View view) {
+        running = false;
         seconds = 0;
     }
 
