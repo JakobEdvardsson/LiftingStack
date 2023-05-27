@@ -334,6 +334,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
+        android:onClick="launchTimer"
         app:cardCornerRadius="8dp"
         app:cardBackgroundColor="@color/white"
         app:cardElevation="10dp"
