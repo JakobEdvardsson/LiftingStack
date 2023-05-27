@@ -25,6 +25,7 @@ import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
 import com.example.liftingstack.R;
+import com.example.liftingstack.TimerActivity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -252,5 +253,10 @@ public class StartedProgramActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void launchWorkoutTimer(View v) {
+        Intent intent = new Intent(this, TimerActivity.class);
+        startActivity(intent);
     }
 }

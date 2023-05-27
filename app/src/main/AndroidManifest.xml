@@ -27,9 +27,6 @@
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".ProgramsActivities.StartedPrograms.test"
-            android:exported="false" />
-        <activity
             android:name=".ProgramsActivities.StartedPrograms.StartedProgramActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"/>
