@@ -22,15 +22,9 @@ public class TimerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
-
-        if(savedInstanceState != null){
-            savedInstanceState.getInt("seconds");
-            savedInstanceState.getBoolean("running");
-            savedInstanceState.getBoolean("wasRunning");
-        }
-        
-        runTimer();
+        startTimer();
     }
+
 
     public void onPlay(View view){
         running = true;
@@ -38,58 +32,33 @@ public class TimerActivity extends AppCompatActivity {
 
     public void onStop(View view){
         running = false;
+    }
+    protected void onReset(){
+        super.onResume();
         seconds = 0;
     }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
-        wasRunning = running;
-        running = false;
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        if(wasRunning){
-            running = true;
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putInt("seconds", seconds);
-        outState.putBoolean("running", running);
-        outState.putBoolean("wasRunning", wasRunning);
-    }
-
-    private void runTimer() {
-
-        TextView timeView = findViewById(R.id.textView);
-        Handler handler = new Handler();
-
+    private void startTimer(){
+        final TextView timer = findViewById(R.id.timer);
+        final Handler handler = new Handler();
         handler.post(new Runnable() {
             @Override
             public void run() {
+
                 int hours = seconds / 3600;
-                int minutes = (seconds % 3600) / 60;
+                int mins = (seconds % 3600) / 60;
                 int secs = seconds % 60;
 
                 String time = String.format(Locale.getDefault(),
                                             "%d:%02d:%02d",
-                                             hours, minutes, secs);
+                                             hours, mins, secs);
 
-                timeView.setText(time);
-
+                timer.setText(time);
                 if(running){
                     seconds++;
                 }
-                handler.postDelayed(this, 1000);
+                handler.postDelayed(this, 0);
             }
         });
     }
-
-
 }
