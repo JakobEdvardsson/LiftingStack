@@ -107,11 +107,18 @@
 
     <TextView
         android:id="@+id/typeOfGraphLabel3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fontFamily="sans-serif-black"
-        android:text="Data Per Completed Workout:"
-        android:textSize="18sp"
+        android:gravity="start"
+        android:layout_marginTop="8dp"
+        android:text="Data Per Completed Workout:\n(W = Workout)"
+
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="24sp"
+        android:autoSizeStepGranularity="1sp"
+
         app:layout_constraintBottom_toTopOf="@+id/guidelineSpinnerLower"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintHorizontal_bias="0"

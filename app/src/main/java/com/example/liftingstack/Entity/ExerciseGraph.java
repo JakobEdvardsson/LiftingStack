@@ -244,7 +244,7 @@ public class ExerciseGraph extends AppCompatActivity {
 
         @Override
         public String getFormattedValue(float value) {
-            return mFormat.format(value);
+            return "W: " + mFormat.format(value);
         }
     }
 }
