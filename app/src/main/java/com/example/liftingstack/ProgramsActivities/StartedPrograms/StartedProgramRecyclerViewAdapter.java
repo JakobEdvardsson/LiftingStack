@@ -1,24 +1,18 @@
 package com.example.liftingstack.ProgramsActivities.StartedPrograms;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
 import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.R;
 
@@ -116,27 +110,6 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                     //LÄGG TILL NYA TABLEROW I TABLELAYOUTEN
                     tableLayout.addView(newRow);
 
-                    int tableHeight = 300;
-
-                    //RÄKNA UT TABELLENS HÖJD BASERAT PÅ ANTAL RADER
-                    for (int i = 0; i < tableLayout.getChildCount(); i++) {
-                        View row = tableLayout.getChildAt(i);
-                        tableHeight += row.getHeight();
-                    }
-
-                    //SÄTT DEN NYA TABELLHÖJDEN
-                    tableLayout.getLayoutParams().height = tableHeight;
-
-                    //RÄKNA UT HUR HÖG CARDVIEWEN SKA VARA
-                    int cardViewHeight = tableHeight;
-
-                    //SÄTT HÖJDEN PÅ CARDVIEWEN
-                    try {
-                        cardView.getLayoutParams().height = cardViewHeight;
-                        cardView.requestLayout();
-                    } catch (Exception e) {
-                        System.out.println("Tried adding too fast " + e);
-                    }
                 }
             });
 
@@ -161,17 +134,11 @@ public class StartedProgramRecyclerViewAdapter extends RecyclerView.Adapter<Star
                             iterator.remove();
                         }
 
-                        int rowHeight = 140;
-                        //JUSTERA CARDVIEW EFTER ATT HA TAGIT BORT TABLEROW
-                        try {
-                            cardView.getLayoutParams().height = cardView.getHeight() - rowHeight;
-                            cardView.requestLayout();
-                        } catch (Exception e) {
-                            System.out.println("Tried deleting too fast " + e);
-                        }
                     }
                 }
             });
+            // Adds a row when the view is created
+            itemView.findViewById(R.id.addRowBtn).performClick();
         }
 
         public ViewHolder linkAdapter(StartedProgramRecyclerViewAdapter adapter) {

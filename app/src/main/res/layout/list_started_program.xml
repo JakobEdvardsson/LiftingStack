@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/startedProgramCardView"
         android:layout_width="376dp"
-        android:layout_height="88dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="15dp"
@@ -24,13 +24,15 @@
             android:id="@+id/constraintClick"
             android:layout_width="375dp"
             android:layout_height="match_parent"
+            android:paddingBottom="8dp"
+
             android:background="@drawable/list_started_program"
             android:textAlignment="center">
 
             <TableLayout
                 android:id="@+id/startedProgramTable"
                 android:layout_width="301dp"
-                android:layout_height="42dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="6dp"
                 android:background="#051EC0"

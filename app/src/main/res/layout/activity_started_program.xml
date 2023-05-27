@@ -6,10 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ProgramsActivities.StartedPrograms.StartedProgramActivity">
 
+    <!--<TextView
+        android:id="@+id/programDescriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Exercise Description:"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/ExerciseDescription"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guideline45"
+        app:layout_constraintVertical_bias="0.3" />-->
+
+
     <TextView
         android:id="@+id/startedProgramName"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
         android:autoSizeMaxTextSize="26sp"
         android:autoSizeMinTextSize="16sp"
@@ -17,7 +34,6 @@
         android:autoSizeTextType="uniform"
 
         android:text="Program name"
-        android:textColor="@color/black"
         android:textStyle="bold"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
@@ -29,6 +45,8 @@
         app:layout_constraintVertical_bias="0.5" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:id="@+id/startedProgramRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -38,18 +56,111 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineTop"
         app:layout_constraintVertical_bias="0.497" />
 
-    <Button
-        android:id="@+id/finishProgramBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Finish Program"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSaveWorkout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:onClick="finishProgramAndSave"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="9dp"
+
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineMiddle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_border"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/save_item"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:autoSizeTextType="uniform"
+
+                android:breakStrategy="simple"
+                android:text="Save Workout"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewTimer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="9dp"
+
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startedProgramRecyclerView"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintStart_toStartOf="@+id/guidelineMiddle"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_border"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/timer_logo"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
+                android:autoSizeTextType="uniform"
+
+                android:breakStrategy="simple"
+                android:text="Timer"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
         android:layout_width="wrap_content"
@@ -58,11 +169,19 @@
         app:layout_constraintGuide_percent="0.075"
         />
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.925" />
+        app:layout_constraintGuide_percent="0.85" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

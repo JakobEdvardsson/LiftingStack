@@ -1,13 +1,6 @@
 package com.example.liftingstack.ProgramsActivities.StartedPrograms;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,19 +11,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.liftingstack.Controller.LoadFromDevice;
 import com.example.liftingstack.Controller.SaveToDevice;
-import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
-import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.AllExerciseInstructions;
 import com.example.liftingstack.Entity.AllPrograms;
+import com.example.liftingstack.Entity.ExerciseHistoryDataMap;
+import com.example.liftingstack.Entity.ExerciseInstruction;
 import com.example.liftingstack.Entity.Program;
-import com.example.liftingstack.ExerciseActivities.ExerciseActivity;
 import com.example.liftingstack.R;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +53,10 @@ public class StartedProgramActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_started_program);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         idForProgram = getIntent().getStringExtra("ProgramId");
         allPrograms = new AllPrograms(this);
@@ -146,7 +147,7 @@ public class StartedProgramActivity extends AppCompatActivity {
             showFeelingDialogAndSave();
 
         } else {
-            Toast.makeText(this, "No program saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No data entered", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -213,16 +214,19 @@ public class StartedProgramActivity extends AppCompatActivity {
                 saveDate();
                 saveEffort(1);
                 finish();
+                Toast.makeText(StartedProgramActivity.this, "Workout Saved", Toast.LENGTH_SHORT).show();
+
             }
         });
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
                 saveDate();
                 saveEffort(2);
                 finish();
+                Toast.makeText(StartedProgramActivity.this, "Workout Saved", Toast.LENGTH_SHORT).show();
+
             }
         });
         high.setOnClickListener(new View.OnClickListener() {
@@ -231,8 +235,9 @@ public class StartedProgramActivity extends AppCompatActivity {
                 dialog.dismiss();
                 saveDate();
                 saveEffort(3);
-
                 finish();
+                Toast.makeText(StartedProgramActivity.this, "Workout Saved", Toast.LENGTH_SHORT).show();
+
             }
         });
         // If cancel button is clicked, close the custom dialog
@@ -243,6 +248,8 @@ public class StartedProgramActivity extends AppCompatActivity {
                 saveDate();
                 saveEffort(4);
                 finish();
+                Toast.makeText(StartedProgramActivity.this, "Workout Saved", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
