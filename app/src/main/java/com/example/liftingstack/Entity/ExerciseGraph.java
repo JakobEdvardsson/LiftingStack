@@ -138,6 +138,8 @@ public class ExerciseGraph extends AppCompatActivity {
 
         //The line
         LineData line = new LineData();
+        int greenColor = Color.rgb(0, 204, 102);
+        int blueColor = Color.rgb(0, 0, 205);
 
 
         if (loadData.size() > 0) {
@@ -150,9 +152,9 @@ public class ExerciseGraph extends AppCompatActivity {
             dataSet.setCircleRadius(5f);
 
 
-            dataSet.setColor(Color.rgb(0, 204, 102));
-            dataSet.setValueTextColor(Color.rgb(0, 204, 102));
-            dataSet.setCircleColor(Color.rgb(0, 204, 102));
+            dataSet.setColor(blueColor);
+            dataSet.setCircleColor(greenColor);
+            dataSet.setValueTextColor(greenColor);
 
 
             line.addDataSet(dataSet);
@@ -167,7 +169,7 @@ public class ExerciseGraph extends AppCompatActivity {
         description.setText(currentExerciseInstruction.getExerciseName());
         lineChart.setDescription(description);
 
-        int colorForText = Color.rgb(255, 20, 147);
+
 
         //Styling for the chart
 
@@ -177,7 +179,7 @@ public class ExerciseGraph extends AppCompatActivity {
 
 
         //xAxis
-        xAxis.setTextColor(colorForText);
+        xAxis.setTextColor(greenColor);
         xAxis.setTextSize(15f);
         xAxis.setValueFormatter(new ExerciseGraph.MyValueFormatter());
 
@@ -185,7 +187,7 @@ public class ExerciseGraph extends AppCompatActivity {
             @Override
             public String getFormattedValue(float value) {
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###,##0.0");
-                return decimalFormat.format(value);
+                return decimalFormat.format(value) + " kg";
             }});
 
         if (loadData.size() < 5) {
@@ -197,17 +199,17 @@ public class ExerciseGraph extends AppCompatActivity {
 
 
         //AxisRight
-        yAxisRight.setTextColor(colorForText);
+        yAxisRight.setTextColor(greenColor);
         //yAxisRight.setXOffset(15f);
         yAxisRight.setTextSize(15f);
 
         //AxisLeft
-        yAxisLeft.setTextColor(colorForText);
+        yAxisLeft.setTextColor(greenColor);
         //yAxisLeft.setXOffset(15f);
         yAxisLeft.setTextSize(15f);
 
 
-        yAxisRight.setGranularity(3f);
+        yAxisRight.setGranularity(1f);
         yAxisRight.setGranularityEnabled(true);
 
         yAxisLeft.setGranularity(1f);
@@ -221,7 +223,7 @@ public class ExerciseGraph extends AppCompatActivity {
 
 
 
-        description.setTextColor(colorForText);
+        description.setTextColor(greenColor);
         description.setTextSize(15f);
         description.setXOffset(15f);
 
