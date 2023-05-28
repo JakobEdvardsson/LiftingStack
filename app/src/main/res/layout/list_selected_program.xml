@@ -73,7 +73,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
 
                 app:layout_constraintDimensionRatio="1:1"
-                app:srcCompat="@drawable/icons8_picture"/>
+                app:srcCompat="@drawable/icons8_picture" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
