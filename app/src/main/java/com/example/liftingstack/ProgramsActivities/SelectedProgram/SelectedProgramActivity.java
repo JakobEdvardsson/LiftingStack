@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -159,6 +160,12 @@ public class SelectedProgramActivity extends AppCompatActivity implements Exerci
         allPrograms.saveProgramList(this);
 
         finish();
+
+        CharSequence text = "Program has been saved!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(this.recyclerView.getContext(), text, duration);
+        toast.show();
     }
 
     //TODO: Remove this method
