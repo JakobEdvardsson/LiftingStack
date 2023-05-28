@@ -44,6 +44,9 @@ public class ExerciseActivity extends AppCompatActivity implements ExerciseRecyc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         // Setup RecyclerView and creates allExerciseInstructions object
         setupRecyclerView();
 
