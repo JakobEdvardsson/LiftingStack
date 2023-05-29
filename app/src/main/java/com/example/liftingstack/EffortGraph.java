@@ -64,7 +64,7 @@ public class EffortGraph extends AppCompatActivity {
 
         //Description
         Description description = new Description();
-        description.setText("Description text");
+        description.setText("");
         lineChart.setDescription(description);
 
 
@@ -85,7 +85,7 @@ public class EffortGraph extends AppCompatActivity {
             @Override
             public String getFormattedValue(float value) {
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###,##0.0");
-                return decimalFormat.format(value) + " kg";
+                return decimalFormat.format(value);
             }});
 
         if (loadData.size() < 5) {
@@ -138,11 +138,12 @@ public class EffortGraph extends AppCompatActivity {
         public MyValueFormatter() {
             //mFormat = new DecimalFormat("###,###,###.0"); // use one decimal
             mFormat = new DecimalFormat("###,###,###"); // use one decimal
+
         }
 
         @Override
         public String getFormattedValue(float value) {
-            return "W: " + mFormat.format(value);
+            return "" + mFormat.format(value);
         }
     }
 }
