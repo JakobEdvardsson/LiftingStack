@@ -6,6 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".EffortGraph">
 
+    <View
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bar_chart_top"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineUpper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textChartDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="NUMBER OF LOGGED TRAINING SESSIONS FOR EACH MONTH \n\nDISPLAYING THE PAST 12 MONTHS"
+        android:textAlignment="center"
+        android:textColor="#00cc66"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/guidelineUpper"
+        app:layout_constraintStart_toStartOf="@+id/top_view"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/linechart"
@@ -27,7 +54,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.25" />
 
-    
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
         android:layout_width="wrap_content"
