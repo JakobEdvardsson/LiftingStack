@@ -222,6 +222,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void launchEffortGraph(View v) {
+        Intent intent = new Intent(this, EffortGraph.class);
+        startActivity(intent);
+    }
+
     public void launchStats(View v) {
         Intent intent = new Intent(this, BarChartCount.class);
         startActivity(intent);
