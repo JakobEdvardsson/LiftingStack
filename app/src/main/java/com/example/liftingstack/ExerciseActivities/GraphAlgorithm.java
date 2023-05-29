@@ -21,7 +21,7 @@ public class GraphAlgorithm {
         ArrayList<Entry> totalLoadYValues = new ArrayList<>();
 
 
-        // test values below
+
         int counter = 1;
 
 
@@ -64,7 +64,7 @@ public class GraphAlgorithm {
 
 
         int effort;
-        // test values below
+
         int counter = 1;
 
 
