@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import com.example.liftingstack.Entity.ExerciseGraph;
+import com.example.liftingstack.ExerciseActivities.GraphAlgorithm;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
@@ -25,11 +26,12 @@ public class EffortGraph extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_effort_graph);
+        setupGraph(new GraphAlgorithm().getEffortGraphData(this));
     }
 
     public void setupGraph(ArrayList<Entry> loadData) {
         //LineChart
-        LineChart lineChart = findViewById(R.id.linechart);
+        LineChart lineChart = findViewById(R.id.effortLinechart);
 
 
         //The line
@@ -62,7 +64,7 @@ public class EffortGraph extends AppCompatActivity {
 
         //Description
         Description description = new Description();
-        description.setText(currentExerciseInstruction.getExerciseName());
+        description.setText("Description text");
         lineChart.setDescription(description);
 
 
@@ -77,7 +79,7 @@ public class EffortGraph extends AppCompatActivity {
         //xAxis
         xAxis.setTextColor(greenColor);
         xAxis.setTextSize(15f);
-        xAxis.setValueFormatter(new ExerciseGraph.MyValueFormatter());
+        xAxis.setValueFormatter(new EffortGraph.MyValueFormatter());
 
         line.setValueFormatter(new ValueFormatter() {
             @Override
