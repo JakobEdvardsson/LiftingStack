@@ -1,5 +1,7 @@
 package com.example.liftingstack.ExerciseActivities;
 
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.LoadFromDevice;
@@ -128,10 +130,11 @@ public class GraphAlgorithm {
                 totalWeight += Float.parseFloat(setMap.get(1));
 
             }
-            float avgWeightPerSet = totalWeight / sets;
-            float aveWeight = totalWeight / totalReps;
+            float avgRepsPerSet = totalReps / sets;
+            float avgWeight = totalWeight / sets;
 
-            float oneRepMax = (float) (avgWeightPerSet / (1.0278 - (0.0278 * totalReps)));
+
+            float oneRepMax = (float) (avgWeight / (1.0278 - (0.0278 * avgRepsPerSet)));
 
             if(oneRepMax > 0)
                 return oneRepMax;
