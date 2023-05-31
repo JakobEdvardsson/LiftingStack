@@ -118,14 +118,19 @@ public class ExerciseGraph extends AppCompatActivity {
                     setupGraph(new GraphAlgorithm().getGraphData(position, ExerciseGraph.this, idForExercise));
                 }
 
-                if(position == 4){
-                    LineChart lineChart = findViewById(R.id.linechart);
-                    lineChart.getLineData().setValueFormatter(new ValueFormatter() {
-                        @Override
-                        public String getFormattedValue(float value) {
-                            DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
-                            return decimalFormat.format(value);
-                        }});
+                if(position == 4) {
+                    try {
+                        LineChart lineChart = findViewById(R.id.linechart);
+                        lineChart.getLineData().setValueFormatter(new ValueFormatter() {
+                            @Override
+                            public String getFormattedValue(float value) {
+                                DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
+                                return decimalFormat.format(value);
+                            }
+                        });
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 // Perform actions based on the selected item
