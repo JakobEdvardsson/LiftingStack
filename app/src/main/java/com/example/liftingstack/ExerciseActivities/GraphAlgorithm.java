@@ -1,8 +1,5 @@
 package com.example.liftingstack.ExerciseActivities;
 
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.liftingstack.Controller.LoadFromDevice;
@@ -46,6 +43,10 @@ public class GraphAlgorithm {
                             //Max Weight
                             totalLoadYValues.add(new Entry(counter, calculateMaxWeight(sessionMap)));
                             break;
+                        case 4:
+                            //Total Reps
+                            totalLoadYValues.add(new Entry(counter, calculateTotalReps(sessionMap)));
+                            break;
 
                     }
                     counter++;
@@ -54,6 +55,19 @@ public class GraphAlgorithm {
         }
 
         return totalLoadYValues;
+    }
+
+    private float calculateTotalReps(Map<String, ArrayList<String>> sessionMap) {
+
+        int totalReps = 0;
+
+        for (ArrayList<String> setMap : sessionMap.values()) {
+            totalReps += Integer.parseInt(setMap.get(0));
+
+        }
+
+
+        return totalReps;
     }
 
     public ArrayList<Entry> getEffortGraphData(AppCompatActivity activity) {

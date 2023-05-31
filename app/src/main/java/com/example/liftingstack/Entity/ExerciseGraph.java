@@ -101,7 +101,7 @@ public class ExerciseGraph extends AppCompatActivity {
     public void setupGraphSpinner() {
         Spinner spinner = findViewById(R.id.typeOfExerciseGraphSpinner1);
 
-        String[] items = {"Total Weight Lifted", "One Rep Max", "Average Weight lifted Per Set", "Max Weight"};
+        String[] items = {"Total Weight Lifted", "One Rep Max", "Average Weight lifted Per Set", "Max Weight", "Average Reps"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
 
@@ -117,6 +117,17 @@ public class ExerciseGraph extends AppCompatActivity {
                 if (currentExerciseInstruction != null) {
                     setupGraph(new GraphAlgorithm().getGraphData(position, ExerciseGraph.this, idForExercise));
                 }
+
+                if(position == 4){
+                    LineChart lineChart = findViewById(R.id.linechart);
+                    lineChart.getLineData().setValueFormatter(new ValueFormatter() {
+                        @Override
+                        public String getFormattedValue(float value) {
+                            DecimalFormat decimalFormat = new DecimalFormat("###,###,###,###");
+                            return decimalFormat.format(value);
+                        }});
+                }
+
                 // Perform actions based on the selected item
             }
 
