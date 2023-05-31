@@ -131,8 +131,14 @@ public class GraphAlgorithm {
             float avgWeightPerSet = totalWeight / sets;
             float aveWeight = totalWeight / totalReps;
 
+            float oneRepMax = (float) (avgWeightPerSet / (1.0278 - (0.0278 * totalReps)));
 
-            return (float) (avgWeightPerSet / (1.0278 - (0.0278 * totalReps)));
+            if(oneRepMax > 0)
+                return oneRepMax;
+            else
+                return 0;
+
+
         }
 
         public float calculateAverageWeightPerSet (Map < String, ArrayList < String >> sessionMap){
